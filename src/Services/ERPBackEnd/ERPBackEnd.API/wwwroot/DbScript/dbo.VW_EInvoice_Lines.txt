@@ -1,0 +1,46 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('VW_EInvoice_Lines') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P',N'V')) DROP View [dbo].[VW_EInvoice_Lines];
+
+
+
+
+exec('CREATE VIEW [dbo].[VW_EInvoice_Lines]
+AS
+select bi.BillId as BillId, bi.ItemId as ItemId , item.Description as Description , item.ItemCodeType as ItemCodeType , 
+item.ItemCode as ItemCode
+,CASE WHEN un.UnitType IS NOT NULL AND un.UnitType <> '''' THEN un.UnitType ELSE defaultUnit.UnitType END AS UnitTypeCode,
+(ISNULL(bi.AddedQuantity,0) + ISNULL(bi.IssuedQuantity,0)) AS Quantity,cur.CurrencyCode as CurrencySold,
+case when cur.CurrencyCode = ''EGP'' then bi.Price * b.CurrencyValue else 0 END AS AmountEGP,
+CASE WHEN cur.CurrencyCode <> ''EGP'' THEN bi.Price ELSE 0 END AS AmountSold,
+b.CurrencyValue AS CurrencyExchangeRate,
+(ISNULL(bi.AddedQuantity,0) + ISNULL(bi.IssuedQuantity,0)) * bi.Price * b.CurrencyValue AS SalesTotal, 
+
+ ISNULL((bi.Price * (ISNULL(bi.AddedQuantity,0) + ISNULL(bi.IssuedQuantity,0)) * b.CurrencyValue - bi.DiscountValue + bi.AdditionValue)
+						 + (bi.Price * (ISNULL(bi.AddedQuantity,0) + ISNULL(bi.IssuedQuantity,0)) * b.CurrencyValue - bi.DiscountValue + bi.AdditionValue) * SUM(ISNull(bitax.TaxRatio,0)) / 100, 0)
+						 AS Total, 0.0 AS ValueDifference,
+						 ISNULL(bi.AdditionValue, 0) 
+                         AS TotalTaxableFees, bi.Price * (ISNULL(bi.AddedQuantity,0) + ISNULL(bi.IssuedQuantity,0)) * b.CurrencyValue - bi.DiscountValue AS NetTotal,
+						 CASE WHEN SUM(ISNull(bitax.TaxRatio,0)) = 0 THEN bi.DiscountValue ELSE 0.0 END AS ItemsDiscount,
+						 CASE WHEN ((ISNULL(bi.AddedQuantity,0) + ISNULL(bi.IssuedQuantity,0)) * bi.Price * b.CurrencyValue) 
+                         = 0 THEN 0.0 ELSE (100 * bi.DiscountValue / ((ISNULL(bi.AddedQuantity,0) + ISNULL(bi.IssuedQuantity,0)) * bi.Price * b.CurrencyValue)) END AS DiscRate,
+						 bi.DiscountValue AS DiscAmount, item.Code AS InternalCode,
+						 ISNULL((bi.Price * (ISNULL(bi.AddedQuantity,0) + ISNULL(bi.IssuedQuantity,0)) * b.CurrencyValue - bi.DiscountValue + bi.AdditionValue) 
+                         * SUM(ISNull(bitax.TaxRatio,0)) / 100, 0) AS AddTax, SUM(ISNull(bitax.TaxRatio,0)) AS TaxPercent,ISNULL(bi.CostPrice * ((ISNULL(bi.AddedQuantity,0) + ISNULL(bi.IssuedQuantity,0))),0) as UnitPrice
+
+
+from BillItems as bi 
+INNER JOIN ItemCards  as item on bi.ItemId = item.Id
+left join BillItemTaxes as bitax on bi.Id = bitax.BillItemId
+INNER JOIN ItemGroupsCards  as itemGroup on item.ItemGroupId = itemGroup.Id
+INNER join Units as un on bi.UnitId = un.Id
+INNER JOIN Bills as b on bi.BillId = b.Id
+INNER JOIN BillTypes as bt on b.BillTypeId = bt.Id 
+INNER JOIN  Currencies AS cur ON b.CurrencyId = cur.Id
+left join Units as defaultUnit on itemGroup.UnitId = defaultUnit.Id
+
+where bi.IsDeleted <> 1
+Group by bi.BillId,bi.ItemId,item.Description,item.ItemCodeType,item.ItemCode,un.UnitType,defaultUnit.UnitType,bi.AddedQuantity,bi.IssuedQuantity,
+cur.CurrencyCode,bi.Price,b.CurrencyValue,bi.DiscountValue,bi.AdditionValue,item.Code,bi.CostPrice
+
+
+
+')

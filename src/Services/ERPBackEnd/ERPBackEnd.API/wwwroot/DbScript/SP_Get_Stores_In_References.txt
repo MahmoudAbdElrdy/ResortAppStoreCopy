@@ -1,0 +1,68 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('SP_Get_Stores_In_References') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_Stores_In_References];
+
+exec('
+
+Create PROCEDURE [dbo].[SP_Get_Stores_In_References]
+    @branchId BIGINT = NULL,
+    @companyId BIGINT=null,
+    @userId NVARCHAR(50)=null
+
+
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+
+
+
+
+BEGIN
+
+
+
+SELECT
+      refSt.Id,
+      refSt.NameAr,
+      refSt.NameEn,
+      refSt.Code,
+      refSt.IsActive
+ FROM Bills AS b1
+JOIN Bills AS RefBill ON b1.ReferenceNo = RefBill.Id AND b1.ReferenceNo IS NOT NULL AND b1.IsDeleted <> 1
+JOIN BillTypes AS refBt ON refBt.Id = RefBill.BillTypeId
+JOIN BillItems AS refBi ON refBi.BillId = RefBill.Id
+JOIN BillTypes AS docBt ON docBt.Id = b1.BillTypeId
+JOIN BillItems AS docBi ON docBi.BillId = b1.Id
+JOIN ItemCards AS refBillIc ON refBillIc.Id = refBi.ItemId and refBillIc.id = docBi.itemId
+JOIN ItemCards AS DocIc ON DocIc.Id = docBi.ItemId and DocIc.id = refBi.itemid
+join StoreCards as  refSt on refSt.id = RefBill.StoreId
+
+
+
+where
+RefBill.IsDeleted<>1
+   AND (RefBill.CompanyId = @companyId)
+    AND RefBill.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			And (UsersCompanies.IsDeleted=0)
+        )
+    )
+
+END
+
+
+
+
+
+
+')

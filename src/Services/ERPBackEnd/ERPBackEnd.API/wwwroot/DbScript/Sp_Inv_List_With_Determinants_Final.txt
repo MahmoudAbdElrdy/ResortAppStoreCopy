@@ -1,0 +1,227 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.Sp_Inv_List_With_Determinants_Final') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[Sp_Inv_List_With_Determinants_Final];
+
+
+exec('
+
+Create PROCEDURE [dbo].[Sp_Inv_List_With_Determinants_Final]
+    @fromDate DateTime,
+    @toDate DateTime,
+    @branchId bigint,
+    @companyId bigint,
+    @storeId bigint,
+    @itemGroupId bigint,
+    @itemId bigint,
+    @warehouseEffect nvarchar(255),
+    @currencyId bigint,
+    @userId nvarchar(255),
+    @lang nvarchar(255)
+AS
+BEGIN
+    Select f.ItemId,
+           f.ItemName,
+           f.StoreId,
+           f.StoreName,
+           f.MainUnitId,
+           f.UnitName,
+           f.CostPrice,
+		   f.billItemId,
+		CASE 
+			WHEN determainant.DeterminantData IS NOT NULL AND determainant.DeterminantData <> '''' THEN
+				dbo.fn_Get_Bill_Item_Determinants(determainant.DeterminantData, @lang)
+			ELSE 
+				''-''
+		END AS Determainants,
+           sum(PreviousInQty) as PreviousInQty,
+           Sum(f.PreviousOutQty) as PreviousOutQty,
+           sum(PreviousInQty) - Sum(f.PreviousOutQty) as PreviousBalance,
+           Sum(f.InQty) as InQty,
+           Sum(f.OutQty) as OutQty,
+           Sum(f.InQty) - Sum(f.OutQty) as Balance,
+           sum(PreviousInQty) - Sum(f.PreviousOutQty) + Sum(f.InQty) - Sum(f.OutQty) as CurrentBalance
+    from
+    (
+        Select case
+                   when c.ItemId is Null then
+                       p.PreviousItemId
+                   else
+                       c.ItemId
+               end as ItemId,
+               case
+                   when c.ItemName is Null then
+                       p.PreviousItemName
+                   else
+                       c.ItemName
+               end as ItemName,
+               case
+                   when c.StoreId is Null then
+                       p.PreviousStoreId
+                   else
+                       c.StoreId
+               end as StoreId,
+               case
+                   when c.StoreName is Null then
+                       p.PreviousStoreName
+                   else
+                       c.StoreName
+               end as StoreName,
+               case
+                   when c.MainUnitId is Null then
+                       p.PreviousUnitId
+                   else
+                       c.MainUnitId
+               end as MainUnitId,
+               case
+                   when c.UnitName is Null then
+                       p.PreviousUnitName
+                   else
+                       c.UnitName
+               end as UnitName,
+               case
+                   when c.CostPrice is Null then
+                       p.PreviousCostPrice
+                   else
+                       c.CostPrice
+               end as CostPrice,
+               isNull(c.InQty, 0) as InQty,
+               isNull(c.OutQty, 0) as OutQty,
+               isNull(p.PreviousInQty, 0) as PreviousInQty,
+               ISNULL(p.PreviousOutQty, 0) as PreviousOutQty,
+			 	c.billItemId
+        From
+        (
+            Select *
+            From
+            (
+                Select b.[Date],
+                       b.BillTypeId,
+                       bt.WarehouseEffect,
+                       isNull(m.CostPrice, 0) as CostPrice,
+                       case
+                           when @lang = ''ar'' then
+                               m.NameAr
+                           else
+                               m.NameEn
+                       end as ItemName,
+                       Case
+                           When @lang = ''ar'' then
+                               st.NameAr
+                           else
+                               st.NameEn
+                       end as StoreName,
+                       Case
+                           When @lang = ''ar'' then
+                               u.NameAr
+                           else
+                               u.NameEn
+                       end as UnitName,
+                       m.MainUnitId,
+					   bi.Id as billItemId,
+                       bi.BillId,
+                       bi.ItemId,
+                       bi.ConvertedIssuedQuantity as OutQty,
+                       bi.ConvertedAddedQuantity as InQty,
+                       bi.StoreId
+                From BillItems as bi
+                    join Bills as b
+                        on bi.BillId = b.Id
+                    join ItemCards as m
+                        on bi.ItemId = m.Id
+                    join StoreCards as st
+                        on bi.StoreId = st.Id
+                    join Units as u
+                        on m.MainUnitId = u.Id
+                    join BillTypes bt
+                        on b.BillTypeId = bt.Id
+                Where bt.WarehouseEffect in (
+                                                Select * from fnSplitString(@warehouseEffect, '','')
+                                            )
+            ) m
+            Where m.Date >= @fromDate
+                  and m.Date < @ToDate
+        ) c
+            full join
+            (
+                Select o.OutQty as PreviousOutQty,
+                       o.InQty as PreviousInQty,
+                       o.ItemId as PreviousItemId,
+                       o.ItemName as PreviousItemName,
+                       o.StoreId as PreviousStoreId,
+                       o.StoreName as PreviousStoreName,
+                       o.MainUnitId as PreviousUnitId,
+                       o.UnitName as PreviousUnitName,
+                       o.CostPrice as PreviousCostPrice,
+					   o.billItemId
+                From
+                (
+                    Select b.[Date],
+                           b.BillTypeId,
+                           bt.WarehouseEffect,
+                           isNull(m.CostPrice, 0) as CostPrice,
+                           case
+                               when @lang = ''ar'' then
+                                   m.NameAr
+                               else
+                                   m.NameEn
+                           end as ItemName,
+                           Case
+                               When @lang = ''ar'' then
+                                   st.NameAr
+                               else
+                                   st.NameEn
+                           end as StoreName,
+                           Case
+                               When @lang = ''ar'' then
+                                   u.NameAr
+                               else
+                                   u.NameEn
+                           end as UnitName,
+                           m.MainUnitId,
+                           bi.BillId,
+                           bi.ItemId,
+						   bi.id as billItemId,
+                           bi.ConvertedIssuedQuantity as OutQty,
+                           bi.ConvertedAddedQuantity as InQty,
+                           bi.StoreId
+                    From BillItems as bi
+                        join Bills as b
+                            on bi.BillId = b.Id
+                        join ItemCards as m
+                            on bi.ItemId = m.Id
+                        join StoreCards as st
+                            on bi.StoreId = st.Id
+                        join Units as u
+                            on m.MainUnitId = u.Id
+                        join BillTypes bt
+                            on b.BillTypeId = bt.Id
+                    Where bt.WarehouseEffect in (
+                                                    Select * from fnSplitString(@warehouseEffect, '','')
+                                                )
+                ) o
+                Where o.Date < @fromDate
+            ) p
+                on c.ItemId = p.PreviousItemId
+                   and c.StoreId = p.PreviousStoreId
+    ) f
+	LEFT JOIN BillDynamicDeterminants AS determainant ON f.billItemId = determainant.BillItemId
+
+    Where (
+              f.StoreId = @storeId
+              or IsNull(@storeId, 0) = 0
+          )
+          and (
+                  f.ItemId = @itemId
+                  or IsNull(@itemId, 0) = 0
+              )
+    Group By f.ItemId,
+             f.ItemName,
+             f.StoreId,
+             f.StoreName,
+             f.MainUnitId,
+             f.UnitName,
+             f.CostPrice,
+			 f.billItemId,
+			 determainant.DeterminantData
+
+END
+
+')

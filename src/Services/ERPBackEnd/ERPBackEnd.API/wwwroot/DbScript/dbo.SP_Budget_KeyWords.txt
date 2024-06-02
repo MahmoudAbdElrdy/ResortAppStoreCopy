@@ -1,0 +1,38 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Budget_KeyWords') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Budget_KeyWords];
+
+exec('Create  procedure [dbo].[SP_Budget_KeyWords]
+@lang as VARCHAR(10)
+as
+begin 
+select 
+
+case when @lang =''en-us'' then ''Budget''
+else N''الميزانية'' end
+as Budget,
+case when @lang =''en-us'' then ''Assets''
+else N''الأصول'' end
+as Assets,
+
+case when @lang =''en-us'' then ''Liabilities''
+else N''الخصوم'' end
+as Liabilities,
+
+case when @lang =''en-us'' then ''Assets Total''
+else N''اجمالى الأصول'' end
+as AssetsTotal,
+
+case when @lang =''en-us'' then ''Liabilities Total''
+else N''اجمالى الخصوم'' end
+as LiabilitiesTotal,
+
+case when @lang=''en-us'' then ''Account Name''
+else N''أسم الحساب'' end as AccountName,
+
+case when @lang=''en-us'' then ''Path''
+else N''المسار'' end as Path,
+case when @lang=''en-us'' then ''Net Profit Or Loss''
+else N''صافى الربح أو الخسارة'' end as NetProfitOrLoss
+
+
+
+end')

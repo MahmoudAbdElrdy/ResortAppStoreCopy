@@ -1,0 +1,102 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Calculate_Cost_Price') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_Calculate_Cost_Price];
+
+
+exec('Create function [dbo].[fn_Calculate_Cost_Price]
+(
+    @itemCardId BIGINT,
+    @storeId BIGINT = NULL,
+    @companyId BIGINT,
+    @costCalculateMethod INT
+)
+
+RETURNS FLOAT
+AS
+BEGIN
+    DECLARE @CostPrice FLOAT = 0;
+
+    IF (@costCalculateMethod = 3)
+    BEGIN
+        SELECT @CostPrice = (SUM(PurchasePrice) - SUM(PurchaseReturnPrice)) / (SUM(ConvertedAddedQuantity) - SUM(ConvertedIssuedQuantity))
+        FROM
+        (
+            SELECT
+                CASE WHEN bt.Kind = 2 or bt.Kind = 7 or bt.Kind = 5 THEN ISNULL(bi.TotalCostPrice * b.CurrencyValue, 0) ELSE 0 END AS PurchasePrice,
+                CASE WHEN bt.Kind = 4 or bt.Kind = 8 THEN ISNULL(bi.TotalCostPrice * b.CurrencyValue, 0) ELSE 0 END AS PurchaseReturnPrice,
+                CASE WHEN bt.Kind = 2 or bt.Kind = 7 or bt.Kind = 5 THEN ISNULL(bi.ConvertedAddedQuantity, 0) ELSE 0 END AS ConvertedAddedQuantity,
+                CASE WHEN bt.Kind = 4 or bt.Kind = 8 THEN ISNULL(bi.ConvertedIssuedQuantity, 0) ELSE 0 END AS ConvertedIssuedQuantity
+            FROM
+                BillItems AS bi
+            JOIN
+                Bills AS b ON bi.BillId = b.Id
+            JOIN
+                BillTypes AS bt ON b.BillTypeId = bt.Id
+            WHERE
+                 b.IsDeleted != 1 and bi.IsDeleted != 1
+                AND (bt.Kind = 2 OR bt.Kind = 4 OR bt.Kind = 7 or bt.Kind = 8 or bt.Kind = 5)
+                AND bt.AffectOnCostPrice = 1
+                AND bi.ItemId = @itemCardId
+                AND b.CompanyId = @companyId
+                AND (bi.StoreId = @storeId OR @storeId IS NULL)
+
+            UNION ALL
+
+            SELECT
+                ISNULL(bi.TotalCostPrice * b.CurrencyValue, 0) as PurchasePrice,
+                0 as PurchaseReturnPrice,
+                ISNULL(bi.ConvertedAddedQuantity, 0)  AS ConvertedAddedQuantity,
+                0 as ConvertedIssuedQuantity
+            FROM
+                BillItems AS bi
+            JOIN
+                Bills AS b ON bi.BillId = b.Id
+            JOIN
+                BillTypes AS bt ON b.BillTypeId = bt.Id
+            WHERE
+                 b.IsDeleted != 1 and bi.IsDeleted != 1
+                AND (bt.Kind = 6)
+                AND bt.AffectOnCostPrice = 1
+                AND bi.ItemId = @itemCardId
+                AND b.CompanyId = @companyId
+                AND (bi.SecondStoreId = @storeId OR @storeId IS NULL)
+        ) AS f;
+    END
+
+    IF (@costCalculateMethod = 4)
+    BEGIN
+        SELECT @CostPrice = MAX(MaxCostPrice)
+        FROM
+        (
+            SELECT MAX(bi.TotalCostPrice * b.CurrencyValue) AS MaxCostPrice 
+            FROM BillItems AS bi 
+            JOIN Bills AS b ON bi.BillId = b.Id 
+            JOIN BillTypes AS bt ON b.BillTypeId = bt.Id 
+            WHERE  b.IsDeleted != 1 and bi.IsDeleted != 1 
+                AND (bt.Kind = 2 ) 
+                AND bt.AffectOnCostPrice = 1
+                AND (bi.ItemId = @itemCardId OR @itemCardId IS NULL)
+                AND (bi.StoreId = @storeId OR @storeId IS NULL)
+                AND b.CompanyId = @companyId
+
+            UNION ALL
+
+            SELECT MAX(bi.TotalCostPrice * b.CurrencyValue) AS MaxCostPrice 
+            FROM BillItems AS bi 
+            JOIN Bills AS b ON bi.BillId = b.Id 
+            JOIN BillTypes AS bt ON b.BillTypeId = bt.Id 
+            WHERE  b.IsDeleted != 1 and bi.IsDeleted != 1 
+                AND (bt.Kind = 6) 
+                AND bt.AffectOnCostPrice = 1
+                AND (bi.ItemId = @itemCardId OR @itemCardId IS NULL)
+                AND (bi.SecondStoreId = @storeId OR @storeId IS NULL)
+                AND b.CompanyId = @companyId
+        ) AS f;
+    END
+
+    RETURN @CostPrice;
+
+ 
+
+end'
+
+)
+

@@ -1,0 +1,40 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Issuing_Cheque_Master') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Issuing_Cheque_Master];
+
+
+
+
+exec('Create procedure [dbo].[SP_Issuing_Cheque_Master]
+@id bigint,
+@lang as VARCHAR(10) 
+as
+begin
+select chequemaster.Id as Id,chequemaster.Code as Code,
+chequemaster.Date as Date, chequemaster.DueDate as DueDate,
+chequemaster.Amount as Amount,chequemaster.AmountLocal as AmountLocal,chequemaster.CurrencyFactor as CurrencyFactor,
+case when @lang =''en-us'' then curr.NameEn else curr.NameAr end as CurrencyName,
+case when @lang =''en-us'' then com.NameEn else com.NameAr end as CompanyName,
+case when @lang =''en-us'' then bran.NameEn else bran.NameAr end as BranchName,
+case when @lang =''en-us'' then bankaccount.NameEn else bankaccount.NameAr end as BankAccountName,chequemaster.Notes as Notes,
+case when @lang =''en-us'' then fis.NameEn else fis.NameAr end as FiscalPeriodName,
+case 
+when @lang=''en-us'' and chequemaster.Status = 0 then ''registered'' 
+when @lang=''ar'' and chequemaster.Status = 0 then N''تم التسجيل'' 
+when @lang=''en-us'' and chequemaster.Status = 1 then ''edited register'' 
+when @lang=''ar'' and chequemaster.Status = 1 then N''تم تعديل التسجيل'' 
+when @lang=''en-us'' and chequemaster.Status = 2 then ''Collected'' 
+when @lang=''ar'' and chequemaster.Status = 2 then N''تم التحصيل'' 
+when @lang=''en-us'' and chequemaster.Status = 3 then ''Rejected'' 
+when @lang=''ar'' and chequemaster.Status = 3 then N''تم الرفض'' 
+else ''''
+end as Status
+from IssuingChequeMasters as chequemaster
+join Currencies as curr on chequemaster.CurrencyId = curr.Id
+join Companies as com on chequemaster.CompanyId = com.Id
+join Branches as bran on chequemaster.BranchId=bran.Id
+join Accounts as bankaccount on chequemaster.BankAccountId=bankaccount.Id
+join FiscalPeriods as fis on chequemaster.FiscalPeriodId=fis.Id
+
+where chequemaster.Id=@id and chequemaster.IsDeleted !=1
+
+
+end')

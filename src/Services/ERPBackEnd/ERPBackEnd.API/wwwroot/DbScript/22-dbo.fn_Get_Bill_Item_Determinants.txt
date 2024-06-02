@@ -1,0 +1,38 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Get_Bill_Item_Determinants') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_Get_Bill_Item_Determinants];
+
+
+exec('Create function [dbo].[fn_Get_Bill_Item_Determinants]
+ (@json NVARCHAR(MAX),@lang VARCHAR(10) = ''en-us'')
+
+RETURNS NVARCHAR(MAX)
+begin
+  DECLARE @result NVARCHAR(MAX);
+    SET @result = '''';
+
+    SELECT @result = @result +  
+       
+        (SELECT TOP 1 case when @lang=''en-us'' then NameEn else NameAr END 
+         FROM DeterminantsMaster 
+         WHERE id = CONVERT(NVARCHAR(MAX), JSON_VALUE([value], ''$.DeterminantId''))
+        ) +'':''+
+        
+	
+        CASE 
+            WHEN CONVERT(NVARCHAR(MAX), JSON_VALUE([value], ''$.ValueType'')) = 1 THEN
+                (SELECT TOP 1 case when @lang=''en-us'' then NameEn else NameAr END
+                 FROM DeterminantsDetails 
+                 WHERE DeterminantsMasterId = CONVERT(NVARCHAR(MAX), JSON_VALUE([value], ''$.DeterminantId'')))
+            ELSE  
+                CONVERT(NVARCHAR(MAX), JSON_VALUE([value], ''$.Value''))
+        END 
+		+ ''-''
+    FROM OPENJSON(@json)
+
+    IF LEN(@result) > 0 
+    BEGIN
+        SET @result = LEFT(@result, LEN(@result) - 1); -- Remove the trailing comma
+    END
+
+    RETURN @result;         
+end')
+

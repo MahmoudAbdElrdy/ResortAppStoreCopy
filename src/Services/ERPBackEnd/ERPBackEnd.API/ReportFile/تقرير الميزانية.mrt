@@ -1,0 +1,1180 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <MS_x0020_SQL Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>MS SQL</Alias>
+        <ConnectionStringEncrypted>9HT7yUYI+oVsW7WAZ1zr58RgZctNA1q8aWPV+GTsoH+NVNXLT0yTvHoI6ITxAaQ/w3zNKdxdewVFE/HMThgi/5BYs4pbd5Nt7H4ppWEVKCqBWtmDYUpz3WJE3QDqgOgb0XDdKd9ZIlX8XM2JY1wlF+/Iv8/GGPIda1romHB4rRPjGpfJaV1CrWlaLcxjGOEvxHiBCcZb</ConnectionStringEncrypted>
+        <Name>MS SQL</Name>
+      </MS_x0020_SQL>
+    </Databases>
+    <DataSources isList="true" count="5">
+      <Company_Info Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Company_Info</Alias>
+        <Columns isList="true" count="23">
+          <value>Address,System.String</value>
+          <value>Code,System.String</value>
+          <value>CountryId,System.Int64</value>
+          <value>CreatedAt,System.DateTime</value>
+          <value>CreatedBy,System.String</value>
+          <value>CurrencyId,System.Int64</value>
+          <value>DeletedAt,System.DateTime</value>
+          <value>DeletedBy,System.String</value>
+          <value>Email,System.String</value>
+          <value>Id,System.Int64</value>
+          <value>IsActive,System.Boolean</value>
+          <value>IsDeleted,System.Boolean</value>
+          <value>Logo,System.String</value>
+          <value>MotherCompany,System.Boolean</value>
+          <value>NameAr,System.String</value>
+          <value>NameEn,System.String</value>
+          <value>Notes,System.String</value>
+          <value>PhoneNumber,System.String</value>
+          <value>UpdateBy,System.String</value>
+          <value>UpdatedAt,System.DateTime</value>
+          <value>UseHijri,System.Boolean</value>
+          <value>WebSite,System.String</value>
+          <value>CompanyName,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>02c368b47d1941009ce86b904e9fb99e</Key>
+        <Name>Company_Info</Name>
+        <NameInSource>MS SQL</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>_x0040_companyId,,0,0</value>
+          <value>_x0040_lang,,22,10</value>
+        </Parameters>
+        <SqlCommand>exec SP_Get_Company_Info  @companyId,@lang</SqlCommand>
+      </Company_Info>
+      <Profit_Loss_Net Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Profit_Loss_Net</Alias>
+        <Columns isList="true" count="1">
+          <value>ProfitLossNet,System.Decimal</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>17b44caae1cf427f93e84b5da8c3e855</Key>
+        <Name>Profit_Loss_Net</Name>
+        <NameInSource>MS SQL</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>_x0040_fromDate,,4,0</value>
+          <value>_x0040_toDate,,4,0</value>
+        </Parameters>
+        <SqlCommand>exec SP_Get_Profit_Loss_Net @fromDate,@toDate</SqlCommand>
+      </Profit_Loss_Net>
+      <Common_Keywords Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Common_Keywords</Alias>
+        <Columns isList="true" count="54">
+          <value>Balance,System.String</value>
+          <value>CompanyName,System.String</value>
+          <value>Credit,System.String</value>
+          <value>Debit,System.String</value>
+          <value>ForPeriod,System.String</value>
+          <value>FromDate,System.String</value>
+          <value>H,System.String</value>
+          <value>M,System.String</value>
+          <value>OnDate,System.String</value>
+          <value>PageNumbers,System.String</value>
+          <value>PrintOnDate,System.String</value>
+          <value>ReviewedBy,System.String</value>
+          <value>Statement,System.String</value>
+          <value>Sum,System.String</value>
+          <value>ToDate,System.String</value>
+          <value>DebitLocal,System.String</value>
+          <value>CreditLocal,System.String</value>
+          <value>Branch,System.String</value>
+          <value>Currency,System.String</value>
+          <value>Date,System.String</value>
+          <value>AccountName,System.String</value>
+          <value>FiscalPeriod,System.String</value>
+          <value>JournalNumber,System.String</value>
+          <value>AccountCode,System.String</value>
+          <value>JournalType,System.String</value>
+          <value>EntryStatus,System.String</value>
+          <value>EntryStatus,System.String</value>
+          <value>Total,System.String</value>
+          <value>GeneralTotal,System.String</value>
+          <value>ParentAccCode,System.String</value>
+          <value>ParentAccount,System.String</value>
+          <value>AccountCode,System.String</value>
+          <value>Account,System.String</value>
+          <value>OpenBalanceDebit,System.String</value>
+          <value>OpenBalanceCredit,System.String</value>
+          <value>DebitBalance,System.String</value>
+          <value>CredittBalance,System.String</value>
+          <value>AccountGroup,System.String</value>
+          <value>FromEntryNo,System.String</value>
+          <value>ToEntryNo,System.String</value>
+          <value>AccountLevel,System.String</value>
+          <value>lblAccount,System.String</value>
+          <value>EntryRef,System.String</value>
+          <value>PreviousBalance,System.String</value>
+          <value>BeneficiaryType,System.String</value>
+          <value>Beneficiary,System.String</value>
+          <value>Amount,System.String</value>
+          <value>CashAmount,System.String</value>
+          <value>CostCenterName,System.String</value>
+          <value>NetProfitOrLoss,System.String</value>
+          <value>AccountType,System.String</value>
+          <value>EntryDate,System.String</value>
+          <value>VoucherType,System.String</value>
+          <value>MainAccount,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>5fd8b61f20dc413882b11c636a1fab1f</Key>
+        <Name>Common_Keywords</Name>
+        <NameInSource>MS SQL</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_lang,,22,10</value>
+        </Parameters>
+        <SqlCommand>exec SP_Common_Keywords @lang</SqlCommand>
+      </Common_Keywords>
+      <Budget_KeyWords Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Budget_KeyWords</Alias>
+        <Columns isList="true" count="8">
+          <value>AccountName,System.String</value>
+          <value>Assets,System.String</value>
+          <value>AssetsTotal,System.String</value>
+          <value>Liabilities,System.String</value>
+          <value>LiabilitiesTotal,System.String</value>
+          <value>NetProfitOrLoss,System.String</value>
+          <value>Path,System.String</value>
+          <value>Budget,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>e1b08e8a0398410cb0338bc1fdb77623</Key>
+        <Name>Budget_KeyWords</Name>
+        <NameInSource>MS SQL</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_lang,,22,10</value>
+        </Parameters>
+        <SqlCommand> exec SP_Budget_KeyWords @lang</SqlCommand>
+      </Budget_KeyWords>
+      <Budget Ref="7" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Budget</Alias>
+        <Columns isList="true" count="13">
+          <value>AccountName,System.String</value>
+          <value>Budget,System.Int32</value>
+          <value>Code,System.String</value>
+          <value>Id,System.String</value>
+          <value>NameAr,System.String</value>
+          <value>NameEn,System.String</value>
+          <value>ParentId,System.String</value>
+          <value>Path,System.String</value>
+          <value>credit,System.Decimal</value>
+          <value>debit,System.Decimal</value>
+          <value>level,System.Int32</value>
+          <value>parentAccCredit,System.Decimal</value>
+          <value>parentAccDebit,System.Decimal</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>62279b2957a140d8bf95cc1f5efd3dfd</Key>
+        <Name>Budget</Name>
+        <NameInSource>MS SQL</NameInSource>
+        <Parameters isList="true" count="7">
+          <value>_x0040_fromDate,,4,0</value>
+          <value>_x0040_toDate,,4,0</value>
+          <value>_x0040_entriesStatusId,,8,0</value>
+          <value>_x0040_level,,8,0</value>
+          <value>_x0040_userId,,22,50</value>
+          <value>_x0040_lang,,22,10</value>
+          <value>_x0040_companyId,,8,0</value>
+        </Parameters>
+        <SqlCommand>SP_Budget</SqlCommand>
+        <Type>StoredProcedure</Type>
+      </Budget>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="1">
+      <value>Name=download, Alias=download, Content=P79dVkHEkws4uYtBd8Hx4DDCJh1_x002B_mj9BTZyRr7sI73146R_x002B_N1IpFO7_x002F_pdvOqMhbH0uqgCgX7Bs1IxVDHVYOzHmqgKVMvVX09GMxiVqTpClhi0VxD8no18JJroJhMGq5Kxt90kvfRlucg49o7WaTktUy3Wu3fDUNMFZ2T26rLhGI_x002B_M_x002F_85h5jiO0d09_x002F_aYWDOwWAYvN4K6hTLoe25iL4lojIrI2LJGjXZBFAGekxtLlDpXnvrhTPOj3DsM3Vp5gXpBvIEAePtCQbHk85uQ5JKZIRtmQIrBaK6au5cblJGGMx3cngMq_x002F_9bkNrw4DWkBTLItE37CCkCr27flDmdXbZOCIXkr_x002B_L_x002B_TAT2njpWMnjLYDfooe9wNESkvCENV4VPlAZuBxX9bixvTFiRqoJ2OuyK5Dq6sKZ0SlmHPbK0n91_x002B_TuhMWv3fga2OZLr982p_x002F_oMvLErNH2xksE0IvVFBs417sMjwhMNNE3HkEVeUoeGBTtfQfxuS2aDhBU_x002B_c4jc2Of3uX6_x002F_mtMOpv5h42ZEvYwYss41I3Akhh5GXerKEGvL9LkBVpSg0znEiMPCbvSOaVy1DbIBqzF8f3i6XP6NhQ9Sc0CE3gu_x002B_BKgrqnDEHantKd1eDf43t_x002F_xbGiOsuYREmdfgvF17eWwhJ_x002B_MniRdjyqpVSbGwdidZaHbDoI7bzfj_x002F_kR9N5vy82fhUERL2OQug0j77Z6l0VIY75GKOlO84Q9jQsyMu4IQErvvvKd5zNBXUID6pLTfdIaQyo3Xh7ZwD0k0Blf42YbMzd_x002F_AROsrTKZXi0pcAfXsY_x002F_hn4GNTIEcfW01pJ0l4gf1dGsRrE_x002F_wVH6_x002F_KLEdsUdt4axZXXeFn_x002B_66HFBzbX5KhBEdY7IFUVZsi_x002F_9Kpd3L_x002B_7BCnfjKxepDRoe2JtrSdGH7HaQscbZnwUlx2q4qDdInCMLOeg5HBnv9BDKOdfC3u8b8Elix6sZZtfcL3BqQTIORurVyum47J_x002B_c47_x002B_oPGCxxRPAv5QVq83T_x002B_M391eXE5HYtLLn61DvtKxTMLmhhLDQn6dD7LJUhxg498UY8mQ7SBiYvzoroQ7WkDZXwxMy3GngxtKNdsgmOyZCOxJZQ7qmEkSKXolJhRkql07EIh0q2NWsD0TNjPXfLIa0z_x002B_1xOHcTXTV_x002F_8afstyve5pbXOJ_x002F_jM0B4144cP7exbpasp2yNrCdhLi4xQcEPfU_x002F_o2L_x002B_JhEsbkv7juITT23FGtSTdNsG_x002F_wEXOXOhXeqfBQBg5ujHr3hlAigJQo5r4Z4LRbHgaXqnLgZ6fEDkYhihlLtv</value>
+    </Resources>
+    <Variables isList="true" count="11">
+      <value>,arStartDate,arStartDate,,System.DateTime,,False,False,False,False</value>
+      <value>,arEndDate,arEndDate,,System.DateTime,,False,False,False,False</value>
+      <value>,CompanyName,CompanyName,,System.String,,False,False,False,False</value>
+      <value>,PrintDate_Param,PrintDate_Param,,System.String,,False,False,False,False</value>
+      <value>,AccountName,AccountName,,System.String,,False,False,False,False</value>
+      <value>,Acc_Code_Param,Acc_Code_Param,,System.String,,False,False,False,False</value>
+      <value>,result,result,,System.String,,False,False,False,False</value>
+      <value>,ENTRY_CREDIT,ENTRY_CREDIT,,System.Double,,False,False,False,False</value>
+      <value>,ENTRY_DEBIT,ENTRY_DEBIT,,System.Double,,False,False,False,False</value>
+      <value>,STARTDATE,STARTDATE,,System.String,,False,False,False,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_DateTimeType_x003E_DateAndTime_x003C__x002F_DateTimeType_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_</value>
+      <value>,ENDDATE,ENDDATE,,System.String,,False,False,False,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_DateTimeType_x003E_DateAndTime_x003C__x002F_DateTimeType_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>b0e11eb5d22643168a2ad0b99059a842</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="8" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="16">
+        <PageHeaderBand1 Ref="9" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,4,190.3,30</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text83 Ref="10" type="Text" isKey="true">
+              <Border>None;Black;2;Solid;False;4;Black;True</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>36,8,97,20.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>de46a1318b6b40c3a888ef140a4ddcb8</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text83</Name>
+              <Page isRef="8" />
+              <Parent isRef="9" />
+              <Text>{Budget_KeyWords.Budget} {Common_Keywords.ForPeriod}
+{Common_Keywords.FromDate} {DayOfWeek(DateTime.Parse(ToString(fromDate)), "ar-EG") }  {Arabic(ToString(Day(DateTime.Parse(ToString(fromDate))))) } {MonthName(DateTime.Parse(ToString(fromDate)), "ar-EG") } 
+ {Arabic(ToString(Year(DateTime.Parse(ToString(fromDate))))) } {Common_Keywords.M}{Common_Keywords.ToDate} {DayOfWeek(DateTime.Parse(ToString(toDate)), "ar-EG") }  {Arabic(ToString(Day(DateTime.Parse(ToString(toDate))))) } {MonthName(DateTime.Parse(ToString(toDate)), "ar-EG") } {Arabic(ToString(Year(DateTime.Parse(ToString(toDate))))) } {Common_Keywords.M}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text83>
+            <Text1 Ref="11" type="Text" isKey="true">
+              <AllowHtmlTags>True</AllowHtmlTags>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>138,4,48,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="8" />
+              <Parent isRef="9" />
+              <Text>{Common_Keywords.CompanyName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text1>
+            <Text2 Ref="12" type="Text" isKey="true">
+              <AllowHtmlTags>True</AllowHtmlTags>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>136,8,48,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <Guid>a832baab8a8748d4bb046b410d112ce7</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="8" />
+              <Parent isRef="9" />
+              <Text>{Company_Info.CompanyName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+        </PageHeaderBand1>
+        <PageFooterBand1 Ref="13" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,332.52,190.3,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+        </PageFooterBand1>
+        <PageFooterBand2 Ref="14" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,322.52,190.3,2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageFooterBand2</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+        </PageFooterBand2>
+        <Text84 Ref="15" type="Text" isKey="true">
+          <Border>None;[0:0:39];2;Solid;False;4;Black;True</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>243,257,31.5,5.1</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,11,Bold</Font>
+          <Guid>ad31e48f158a47acad9fe6daf7636f86</Guid>
+          <HorAlignment>Right</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text84</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <Text>{Common_Keywords.PrintOnDate}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>DataColumn</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text84>
+        <Text9 Ref="16" type="Text" isKey="true">
+          <Border>None;[0:0:39];2;Solid;False;4;Black;True</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>222,257.3,21.5,5.1</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,11,Bold</Font>
+          <Guid>15bd12fc7e504db08db9e509db3f0d5b</Guid>
+          <HorAlignment>Right</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text9</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <Text>{Arabic(Today.ToString("yyyy/MM/dd"))}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text9>
+        <Text15 Ref="17" type="Text" isKey="true">
+          <Border>None;[0:0:39];2;Solid;False;4;Black;True</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>202,257.3,19.5,5.1</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,11,Bold</Font>
+          <Guid>3e3821c8ed5c44849f6d400851483b01</Guid>
+          <HorAlignment>Right</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text15</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <Text>{Common_Keywords.M}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>DataColumn</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text15>
+        <Header Ref="18" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,42,190.3,12</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text8 Ref="19" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>66,0,124,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>1c3522b7512a4a37a6585118768cddc3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="8" />
+              <Parent isRef="18" />
+              <Text>{Common_Keywords.Statement}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text4 Ref="20" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>0,0,66,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>33d0b02a162e4cbfae407454892681f7</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="8" />
+              <Parent isRef="18" />
+              <Text>{Common_Keywords.Balance}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>Header</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <PrintIfEmpty>True</PrintIfEmpty>
+        </Header>
+        <DataBand2 Ref="21" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,62,190.3,12</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text3 Ref="22" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>[242:242:242]</Brush>
+              <ClientRectangle>0,0,190,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>f6dcc6c834d549439c11657ee3415c8a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="8" />
+              <Parent isRef="21" />
+              <Text>{Budget_KeyWords.Assets}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>GetIncomeListReport</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand2</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <PrintIfDetailEmpty>True</PrintIfDetailEmpty>
+          <Sort isList="true" count="0" />
+        </DataBand2>
+        <DataBand3 Ref="23" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,82,190.3,12</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text29 Ref="24" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>66,0,86,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>78ca40ecbec14e73a8ae07768d7d6ba2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="8" />
+              <Parent isRef="23" />
+              <Text>{Common_Keywords.lblAccount}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text5 Ref="25" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>152,0,38,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>cc32fd0cbf7e436eabbdcd087f80680b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="8" />
+              <Parent isRef="23" />
+              <Text>{Common_Keywords.AccountCode}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>GetIncomeListReport</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand3</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <PrintIfDetailEmpty>True</PrintIfDetailEmpty>
+          <Sort isList="true" count="0" />
+        </DataBand3>
+        <DataBand4 Ref="26" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,102,190.3,12.7</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text7 Ref="27" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>66,0,86,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>843e7a7555eb4718b97fb08e296ac00b</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="8" />
+              <Parent isRef="26" />
+              <Text>{Budget.Path}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text17 Ref="28" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,66,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>131f9b47cfa4471e8ff0438a61874c00</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="8" />
+              <Parent isRef="26" />
+              <Text>{(Budget.debit)-(Budget.credit)}
+</Text>
+              <TextBrush>[31:56:100]</TextBrush>
+              <TextFormat Ref="29" type="NumberFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>٬</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits, DecimalSeparator</State>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text10 Ref="30" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>152,0,38,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>9dd43d62c3674d619f3b58f217189bf4</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="8" />
+              <Parent isRef="26" />
+              <Text>{Budget.Code}</Text>
+              <TextBrush>[31:56:100]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Budget</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="1">
+            <value>Budget,EqualTo,_x0031_,,Numeric</value>
+          </Filters>
+          <Name>DataBand4</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <PrintIfDetailEmpty>True</PrintIfDetailEmpty>
+          <Sort isList="true" count="0" />
+        </DataBand4>
+        <FooterBand1 Ref="31" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,122.7,190.3,12</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text11 Ref="32" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>66,0.1,124,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>90cd58f65bf94bdaa860bbe99f205717</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="8" />
+              <Parent isRef="31" />
+              <Text>{Budget_KeyWords.AssetsTotal}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text23 Ref="33" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>0,0.1,66,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>1dbe286543c44ddcb9b6260320926e89</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="8" />
+              <Parent isRef="31" />
+              <Text>{((SumIf(DataBand4,Budget.parentAccDebit,Budget.Budget == 1) - SumIf(DataBand4,Budget.parentAccCredit,Budget.Budget == 1)))}
+
+</Text>
+              <TextBrush>[31:56:100]</TextBrush>
+              <TextFormat Ref="34" type="NumberFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>٬</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits, DecimalSeparator</State>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>FooterBand1</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+        </FooterBand1>
+        <DataBand6 Ref="35" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,142.7,190.3,11.2</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text12 Ref="36" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>[242:242:242]</Brush>
+              <ClientRectangle>0,0.1,190,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>93beed364b004d489994e6c10b8f2a12</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="8" />
+              <Parent isRef="35" />
+              <Text>{Budget_KeyWords.Liabilities}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand6</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <PrintIfDetailEmpty>True</PrintIfDetailEmpty>
+          <Sort isList="true" count="0" />
+        </DataBand6>
+        <DataBand7 Ref="37" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,161.9,190.3,12</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text6 Ref="38" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>66,0.1,90,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>21851439fffb4bb0aa62c94ef724473e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="8" />
+              <Parent isRef="37" />
+              <Text>{Common_Keywords.lblAccount}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text14 Ref="39" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>156,0.1,34,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>b975b2d954a94b9ca5024e62e8b2e2f2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="8" />
+              <Parent isRef="37" />
+              <Text>{Common_Keywords.AccountCode}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>GetIncomeListReport</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand7</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <PrintIfDetailEmpty>True</PrintIfDetailEmpty>
+          <Sort isList="true" count="0" />
+        </DataBand7>
+        <DataBand8 Ref="40" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,181.9,190.3,11.2</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text13 Ref="41" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>66,0.1,90,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>ef5b6f2a662e41a5bd37817879026077</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="8" />
+              <Parent isRef="40" />
+              <Text>{Budget.Path}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text32 Ref="42" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.1,66,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>2e801b49cd074cdf82a1df971e8ebca1</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="8" />
+              <Parent isRef="40" />
+              <Text>{((Budget.credit)-(Budget.debit))}
+</Text>
+              <TextBrush>[31:56:100]</TextBrush>
+              <TextFormat Ref="43" type="NumberFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>٬</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits, DecimalSeparator</State>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text32>
+            <Text20 Ref="44" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>156,0.1,34,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>975b8262b1914c4dbd99dcee0c2e7a27</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="8" />
+              <Parent isRef="40" />
+              <Text>{Budget.Id}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Budget</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="1">
+            <value>Budget,EqualTo,_x0032_,,Numeric</value>
+          </Filters>
+          <Name>DataBand8</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <PrintIfDetailEmpty>True</PrintIfDetailEmpty>
+          <Sort isList="true" count="0" />
+        </DataBand8>
+        <DataBand10 Ref="45" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,201.1,190.3,13.2</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text22 Ref="46" type="Text" isKey="true">
+              <AllowHtmlTags>True</AllowHtmlTags>
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>66,0.5,124,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>17b2773c998d4d3e9b963d1138967f10</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="8" />
+              <Parent isRef="45" />
+              <Text>{Budget_KeyWords.NetProfitOrLoss}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text41 Ref="47" type="Text" isKey="true">
+              <AllowHtmlTags>True</AllowHtmlTags>
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.5,66,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>dfa423d0c60f4cfaaf1dd1e9892d5944</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="8" />
+              <Parent isRef="45" />
+              <Text>{Profit_Loss_Net.ProfitLossNet}</Text>
+              <TextBrush>[31:56:100]</TextBrush>
+              <TextFormat Ref="48" type="NumberFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>٬</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits, DecimalSeparator</State>
+              </TextFormat>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text41>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>SP_Budget_By_Type</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Guid>6e936eef73ae47db8790d43eb41258b8</Guid>
+          <Name>DataBand10</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <PrintIfDetailEmpty>True</PrintIfDetailEmpty>
+          <Sort isList="true" count="0" />
+        </DataBand10>
+        <DataBand13 Ref="49" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,222.3,190.3,8</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text34 Ref="50" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>66,-0.3,124,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <Guid>0a01a31d054946b6921885a549beb50b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="8" />
+              <Parent isRef="49" />
+              <Text>{Budget_KeyWords.LiabilitiesTotal}</Text>
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text34>
+            <Text35 Ref="51" type="Text" isKey="true">
+              <Border>All;[0:0:0];1;Solid;False;0;[0:0:0]</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>0,-0.3,66,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <GetValueEvent>TotalLiabilities=5</GetValueEvent>
+              <Guid>345f25d4b5c04c92a40ebcda3890bc34</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="8" />
+              <Parent isRef="49" />
+              <Text>{((SumIf(DataBand8,Budget.parentAccCredit,Budget.Budget == 2) - SumIf(DataBand8,Budget.parentAccDebit,Budget.Budget == 2))) + Profit_Loss_Net.ProfitLossNet}</Text>
+              <TextBrush>[31:56:100]</TextBrush>
+              <TextFormat Ref="52" type="NumberFormat" isKey="true">
+                <DecimalDigits>2</DecimalDigits>
+                <GroupSeparator>٬</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <State>DecimalDigits, DecimalSeparator</State>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text35>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="1">
+            <value>_x007B_Budget.Budget_x003D__x003D_2_x007D_</value>
+          </Filters>
+          <Name>DataBand13</Name>
+          <Page isRef="8" />
+          <Parent isRef="8" />
+          <Sort isList="true" count="0" />
+        </DataBand13>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>b0689e8e5d0e40a99f5ea891c7c4a20a</Guid>
+      <Margins>9.9,9.9,9.9,9.9</Margins>
+      <Name>Page1</Name>
+      <PageHeight>296.9</PageHeight>
+      <PageWidth>210.1</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>9/5/2020 10:10:17 AM</ReportChanged>
+  <ReportCreated>2/6/2020 11:25:18 AM</ReportCreated>
+  <ReportFile>تقرير الميزانية.mrt</ReportFile>
+  <ReportGuid>c4f13d1438c4429c9830b555095c0629</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Millimeters</ReportUnit>
+  <ReportVersion>2020.5.2.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="12">
+    <Blue_x0020_Steel_Report_Title1 Ref="53" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item48 Ref="54" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>ReportTitle</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item48>
+      </Conditions>
+      <Font>Arial,14,Bold</Font>
+      <Name>Blue Steel_Report_Title1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[79:129:189]</TextBrush>
+    </Blue_x0020_Steel_Report_Title1>
+    <Blue_x0020_Steel_Report_Title2 Ref="55" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item50 Ref="56" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>ReportTitle</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item50>
+      </Conditions>
+      <Font>Arial,10,Bold</Font>
+      <Name>Blue Steel_Report_Title2</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[79:129:189]</TextBrush>
+    </Blue_x0020_Steel_Report_Title2>
+    <Blue_x0020_Steel_Report_Summary Ref="57" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item52 Ref="58" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>ReportSummary</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item52>
+      </Conditions>
+      <Font>Arial,10,Bold</Font>
+      <Name>Blue Steel_Report_Summary</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[79:129:189]</TextBrush>
+    </Blue_x0020_Steel_Report_Summary>
+    <Blue_x0020_Steel_Page_Header Ref="59" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item54 Ref="60" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>PageHeader</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item54>
+      </Conditions>
+      <Font>Arial,10</Font>
+      <Name>Blue Steel_Page_Header</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>Black</TextBrush>
+    </Blue_x0020_Steel_Page_Header>
+    <Blue_x0020_Steel_Page_Footer Ref="61" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item56 Ref="62" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>PageFooter</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item56>
+      </Conditions>
+      <Font>Arial,10</Font>
+      <Name>Blue Steel_Page_Footer</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>Black</TextBrush>
+    </Blue_x0020_Steel_Page_Footer>
+    <Blue_x0020_Steel_Group_Header1 Ref="63" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>Top, Bottom;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item58 Ref="64" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>GroupHeader</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item58>
+      </Conditions>
+      <Font>Arial,13,Bold</Font>
+      <Name>Blue Steel_Group_Header1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[79:129:189]</TextBrush>
+    </Blue_x0020_Steel_Group_Header1>
+    <Blue_x0020_Steel_Group_Footer1 Ref="65" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>Top, Bottom;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item60 Ref="66" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>GroupFooter</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item60>
+      </Conditions>
+      <Font>Arial,9.75,Bold,Point,False,204</Font>
+      <Name>Blue Steel_Group_Footer1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[79:129:189]</TextBrush>
+    </Blue_x0020_Steel_Group_Footer1>
+    <Blue_x0020_Steel_Header1 Ref="67" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>Top, Bottom;[0:0:39];2;Solid;False;4;Black;True</Border>
+      <Brush>[79:129:189]</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item62 Ref="68" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>Header</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item62>
+      </Conditions>
+      <Font>Arial,9.75,Bold,Point,False,204</Font>
+      <Name>Blue Steel_Header1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>White</TextBrush>
+    </Blue_x0020_Steel_Header1>
+    <Blue_x0020_Steel_Data1 Ref="69" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item64 Ref="70" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>Data</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item64>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Blue Steel_Data1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Blue_x0020_Steel_Data1>
+    <Blue_x0020_Steel_Data1_Odd_x0020_Style Ref="71" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>[255:255:255]</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item66 Ref="72" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>DataOddStyle</Placement>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item66>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Blue Steel_Data1_Odd Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Blue_x0020_Steel_Data1_Odd_x0020_Style>
+    <Blue_x0020_Steel_Data1_Even_x0020_Style Ref="73" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+      <Brush>[216:216:216]</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item68 Ref="74" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>DataEvenStyle</Placement>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item68>
+      </Conditions>
+      <Font>Arial,8</Font>
+      <Name>Blue Steel_Data1_Even Style</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>[0:0:0]</TextBrush>
+    </Blue_x0020_Steel_Data1_Even_x0020_Style>
+    <Blue_x0020_Steel_Footer1 Ref="75" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>Top, Bottom;[0:0:39];2;Solid;False;4;Black</Border>
+      <Brush>White</Brush>
+      <CollectionName>Blue Steel</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item70 Ref="76" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>Footer</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item70>
+      </Conditions>
+      <Font>Arial,8.25,Bold,Point,False,204</Font>
+      <Name>Blue Steel_Footer1</Name>
+      <NegativeTextBrush>Red</NegativeTextBrush>
+      <TextBrush>Black</TextBrush>
+    </Blue_x0020_Steel_Footer1>
+  </Styles>
+</StiSerializer>

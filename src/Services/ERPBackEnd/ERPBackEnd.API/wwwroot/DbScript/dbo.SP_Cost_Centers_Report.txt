@@ -1,0 +1,67 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Cost_Centers_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE   [dbo].[SP_Cost_Centers_Report];
+
+
+exec('Create procedure [dbo].[SP_Cost_Centers_Report]
+@costCenterId bigint=null, 
+@fromDate Date = null,
+@toDate Date = null,
+@branchId  NVARCHAR(250) = NULL,
+@entriesStatusId int =null,
+@lang as VARCHAR(10),
+@selectedEntriesStatusName  NVARCHAR(100) =null,
+@selectedBranchName as NVARCHAR(100) = NULL,
+@selectedCostCenterName as NVARCHAR(100) = NULL
+
+as
+if(@branchId = '''')
+begin 
+set @branchId=null
+end
+if(@entriesStatusId = 0 or @entriesStatusId=3)
+begin 
+set @entriesStatusId=null
+end
+if(@costCenterId = 0)
+begin 
+set @costCenterId=null
+end
+BEGIN
+select
+d.CostCenterId as CostCenterId,
+m.Date as EntryDate,
+m.Code EntryCode,
+case when @lang =''en-us'' then acc.NameEn else acc.NameAr end as AccountName,
+case when @lang =''en-us'' then cost.NameEn else cost.NameAr end as CostCenterName,
+case when @lang =''en-us'' then b.NameEn else b.NameAr end as BranchName,
+
+case when (m.PostType=3 or m.PostType is null ) 
+then (case when @lang =''en-us'' then  ''All'' else N''غير مرحل''end)
+when (m.PostType=1) then (case when @lang =''ar'' then  N''مرحل'' else ''Posted''end)
+when (m.PostType=2 ) then (case when @lang =''ar'' then  N''غير مرحل'' else ''Unposted''end) end  as PostType,
+
+       d.JEDetailCredit as JEDetailCredit
+      ,d.JEDetailDebit as JEDetailDebit
+      ,d.JEDetailCreditLocal as JEDetailCreditLocal
+      ,d.JEDetailDebitLocal as JEDetailDebitLocal,
+	    d.TransactionFactor as TransactionFactor
+	  ,d.EntryRowNumber as EntryRowNumber
+from 
+
+JournalEntriesDetails as d  
+join  CostCenters as cost on d.CostCenterId = cost.Id
+join JournalEntriesMasters as m on d.JournalEntriesMasterId = m.Id
+join Accounts as acc on acc.id = d.AccountId
+join Branches as b on m.BranchId=b.Id
+ Where
+	 d.IsDeleted=0 and m.IsDeleted=0
+	  and
+	  (m.Date >= @fromDate or @fromDate is null)
+	  and (m.Date <=@toDate or @toDate is null)
+	  and (m.BranchId IN (SELECT * FROM fnSplitString(@branchId,'','')) or @branchId is null) 
+	 and
+	 (d.CostCenterId = @costCenterId or @costCenterId is null)
+	 and 
+	 (m.PostType =@entriesStatusId or @entriesStatusId is null)
+ order by M.Code
+
+END')

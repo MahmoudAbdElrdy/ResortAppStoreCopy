@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>ResortAppStore.Services.ERPBackEnd.Application</AssemblyName>
+    <RootNamespace>ResortAppStore.Services.ERPBackEnd.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ERPBackEnd.Domain\ERPBackEnd.Domain.csproj" />
+    <ProjectReference Include="..\ERPBackEnd.Infrastructure\ERPBackEnd.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configuration\Countries\Repository\" />
+    <Folder Include="Reports\Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+</Project>

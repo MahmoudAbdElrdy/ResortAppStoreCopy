@@ -1,0 +1,78 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Reports_Keywords') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Reports_Keywords];
+
+
+exec('Create procedure [dbo].[SP_Reports_Keywords]
+@lang as VARCHAR(10) 
+as
+begin
+select 
+case when @lang =''en-us'' then ''Jouranl Entries Report''
+else N''تقرير دفتر اليومية'' end as JouranlEntriesReport,
+case when @lang =''en-us'' then ''Jouranl Entries Based On The Date Report''
+else N''تقرير دفتر اليومية حسب التاريخ'' end as JouranlEntriesBasedOnDateReport,
+case when @lang =''en-us'' then ''Jouranl Entries Based On The Code Report''
+else N''تقرير دفتر اليومية حسب القيد'' end as JouranlEntriesBasedOnTheCodeReport,
+case when @lang =''en-us'' then ''Accounts Balance  Report''
+else N''تقرير أرصدة الحسابات'' end as AccountsBalanceReport,
+case when @lang =''en-us'' then ''Trail Balance  Report''
+else N''تقرير ميزان المراجعة'' end as TrailBalanceReport,
+case when @lang =''en-us'' then ''Jouranl Entry''
+else N''قيد اليومية'' end as JouranlEntry,
+case when @lang =''en-us'' then ''Bill Ages Report''
+else N''تقرير أعمار الفواتير'' end as BillAges ,
+case when @lang =''en-us'' then ''Items Analysis List Report''
+else N''تقرير القائمة التحليلية للأصناف '' end as ItemsAnalysisListReport ,
+case when @lang =''en-us'' then ''Detailed report on the analytical list of items''
+else N''تقرير القائمة التحليلية للأصناف تفصيلى'' end as ItemsAnalysisListDetailsReport,
+case when @lang =''en-us'' then ''Customers Balance Report''
+else N''تقرير أرصدة العملاء'' end as CustomersBalanceReport,
+case when @lang =''en-us'' then ''Suppliers Balance Report''
+else N''تقرير أرصدة الموردين'' end as SuppliersBalanceReport, 
+case when @lang =''en-us'' then ''Detailed Suppliers Balance Report''
+else N''تقرير أرصدة الموردين  التفصيلى'' end as DetailedSuppliersBalanceReport ,
+case when @lang =''en-us'' then ''Commercial Movement of Purchases Report''
+else N''تقرير الحركة التجارية للمشتريات'' end as CommercialMovementOfPurchasesReport ,
+case when @lang =''en-us'' then ''Detailed Commercial Movement of Purchases Report''
+else N''تقرير الحركة التجارية للمشتريات تفصيلى'' end as DetailedCommercialMovementOfPurchasesReport,
+case when @lang =''en-us'' then ''Detailed Customer Account Report''
+else N''تقرير حساب عميل تفصيلى'' end as DetailedCustomerAccountReport,
+case when @lang =''en-us'' then ''Item Movement Report''
+else N''تقرير حركة الصنف''end as ItemMovementReport,
+case when @lang =''en-us'' then ''Commercial Movement of Sales Report''
+else N''تقرير الحركة التجارية للمبيعات'' end as CommercialMovementOfSalesReport ,
+case when @lang =''en-us'' then ''Commercial Movement of Sales Details Report''
+else N''تقرير الحركة التجارية للمبيعات تفصيلي'' end as CommercialMovementOfDetailsSalesReport,
+case when @lang =''en-us'' then ''Analysis Sales Report''
+else N''تقرير المبيعات التحليلي'' end as AnalysisSalesReport,
+case when @lang =''en-us'' then ''Statistics Sales Report''
+else N''تقرير المبيعات الاحصائي'' end as StatisticsSalesReport,
+case when @lang =''en-us'' then ''Details Analysis Sales Report''
+else N''تقرير المبيعات التحليلي التفصيلي'' end as DetailsAnalysisSalesReport,
+case when @lang =''en-us'' then ''Detailed Customer Account Report''
+else N''تقرير حساب عميل تفصيلى'' end as DetailedCustomerAccountReport,
+case when @lang =''en-us'' then ''Item Movement General Report''
+else N''تقرير حركة الصنف العام'' end as ItemMovementGeneralReport,
+case when @lang =''en-us'' then ''Item Movement Detailed Report''
+else N''تقرير حركة الصنف التفصيلي'' end as ItemMovementDetailedReport,
+case when @lang =''en-us'' then ''Inventory Report''
+else N''تقرير جرد المستودع'' end as InventoryReport
+,
+case when @lang =''en-us'' then ''Items Profits Report''
+else N''تقرير أرباح الأصناف'' end as ItemsProfitsReport,
+case when @lang =''en-us'' then ''Detailed Items Profits Report''
+else N''  تقرير أرباح الأصناف تفصيلى'' end as DetailedItemsProfitsReport,
+case when @lang =''en-us'' then ''Bill Report''
+else N''تقرير الفاتورة'' end as BillReport,
+case when @lang =''en-us'' then ''Detailed Linked References Report''
+else N''تقرير المراجع المترابطة التفصيلي'' end as DetailedLinkedReferencesReport,
+case when @lang =''en-us'' then ''Total Linked References Report''
+else N''تقرير المراجع المترابطة الإجمالي'' end as TotalLinkedReferencesReport,
+case when @lang =''en-us'' then ''Items List  Report''
+else N''تقرير قائمة الأصنناف '' end as ItemsListReport,
+case when @lang =''en-us'' then ''Items Balances Report''
+else N''تقرير أرصدة الأصنناف '' end as ItemsBalancesReport,
+case when @lang =''en-us'' then ''Inventory With Determinants Report''
+else N''تقرير جرد المستودع بالمحددات'' end as InventoryDeterminantsReport
+
+
+end')

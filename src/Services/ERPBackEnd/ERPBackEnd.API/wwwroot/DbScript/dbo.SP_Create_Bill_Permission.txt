@@ -1,0 +1,21 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Create_Bill_Permission') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Create_Bill_Permission];
+
+exec('Create PROCEDURE [dbo].[SP_Create_Bill_Permission] 
+	@RoleId nvarchar(255),
+	@TypeId bigint
+
+AS
+BEGIN
+declare @jsonString nvarchar(255) = ''"isAdd":true,"isUpdate":true,"isDelete":true,"isShow":true,"isPrint":true''
+
+DECLARE @perm nvarchar(255) = CONCAT(''{{'', @jsonString, ''}}'');
+
+	Insert into BillsRolesPermissions(BillTypeId, IsUserChecked, PermissionsJson, RoleId, CreatedAt, IsDeleted, IsActive) 
+	Values (@TypeId, 1,@perm, @RoleId, GetDate(), 0, 1)
+	if(@RoleId <>1)
+	begin
+	Insert into BillsRolesPermissions(BillTypeId, IsUserChecked, PermissionsJson, RoleId, CreatedAt, IsDeleted, IsActive) 
+	Values (@TypeId, 1, @perm, 1, GetDate(), 0,1)
+	end
+	
+END')

@@ -1,0 +1,57 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_Installments_Paid') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_Installments_Paid];
+
+exec('
+create PROCEDURE [dbo].SP_Get_Installments_Paid
+
+    @branchId BIGINT = NULL,
+    @companyId BIGINT=null,
+	@fiscalPeriodId BIGINT=null,
+	@billKind int = null,
+	@customerId bigint = null,
+	@supplierId bigint = null
+
+
+	AS
+BEGIN
+
+SELECT b.Id,  b.Code,
+b.BillTypeId,
+b.Date as BillDate,
+bt.NameAr as BillTypeAr,
+bt.NameEn as BillTypeEn ,
+b.Date as BillDate,
+b.TotalBeforeTax  * b.CurrencyValue as TotalBeforeTax,
+b.Total * b.CurrencyValue as Total,
+b.Net * b.CurrencyValue as Net,
+b.Paid * b.CurrencyValue as Paid,
+b.Remaining * b.CurrencyValue as Remaining ,
+bt.kind as BillKindId,
+ case when bt.kind=1 then N''Sales Bill''
+ when  bt.kind=2 then N''Purchases Bill''
+ when  bt.kind=3 then N''Sales Returns Bill'' 
+ when  bt.kind=4 then N''Purchases Returns Bill'' 
+ when  bt.kind=5 then N''First Period Goods Bill'' end as BillKindEn,
+ case when bt.kind=1 then N''فاتورة مبيعات''
+ when  bt.kind=2 then N''فاتورة مشتريات''
+ when  bt.kind=3 then N''فاتورة مردودات مبيعات'' 
+ when  bt.kind=4 then N''فاتورة مردودات مشتريات'' 
+ when  bt.kind=5 then N''فاتورة بضاعة أول المدة'' end as BillKindAr,b.PayWay as PayWay,
+ case when b.PayWay = 3 then  N''تقسيط'' when b.PayWay = 2 then  N''أجل'' end  as PayWayAr,
+ case when b.PayWay = 3 then  N''Installment''  when b.PayWay = 2 then  N''Credit'' end  as PayWayEn,b.InstallmentCount as InstallmentCount,
+ install.[Date] as InstallmentDate , install.[Day] as InstallmentDay,install.[Period] as InstallmentPeriod,install.[Value] * b.CurrencyValue as InstallmentValue,
+ install.Paid * b.CurrencyValue as PaidInstallment , install.Remaining * b.CurrencyValue as RemainingInstallment
+from BillInstallmentDetail as install join Bills as b on install.BillId = b.Id
+join BillTypes as bt on b.BillTypeId = bt.Id
+
+where b.IsDeleted <> 1 and install.[State] = 1 and b.PayWay = 3
+      and b.CompanyId = @companyId
+	  and b.BranchId = @branchId
+	  and (b.FiscalPeriodId = @fiscalPeriodId)
+	  and (bt.Kind =@billKind or @billKind is null )
+	  and (b.CustomerId = @customerId or @customerId is null )
+	  and (b.SupplierId =@SupplierId or @SupplierId is null)
+
+
+End
+')
+

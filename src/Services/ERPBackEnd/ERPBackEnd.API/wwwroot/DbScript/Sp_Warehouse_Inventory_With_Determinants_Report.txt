@@ -1,0 +1,80 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('Sp_Warehouse_Inventory_With_Determinants_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[Sp_Warehouse_Inventory_With_Determinants_Report];
+
+exec('
+
+
+create PROCEDURE [dbo].[Sp_Warehouse_Inventory_With_Determinants_Report]
+    @fromDate DateTime,
+    @toDate DateTime,
+    @branchId bigint,
+    @companyId bigint,
+    @storeId bigint,
+    @itemGroupId bigint,
+    @itemId bigint,
+    @currencyId bigint,
+    @userId bigint,
+    @lang nvarchar(255)
+AS
+BEGIN
+    SELECT ILD.Id,
+           U.Id AS UnitId,
+           IC.Code as ItemCode, 
+           IC.Id AS ItemId,
+		    case when @lang=''en-us''then  IC.NameEn else  IC.NameAr end AS ItemName,
+			case when @lang=''en-us''then  IL.NameEn else   IL.NameAr end AS InventoryListName,
+           ILD.Quantity,
+           ILD.QuantityComputer,
+           ILD.PriceComputer,
+           case when @lang=''en-us''then U.NameEn else U.NameAr end AS UnitName,
+           case when @lang=''en-us''then SC.NameEn else SC.NameAr end AS StoreName,
+           MIA.Date AS ManualInventoryApprovalsDate,
+		       CASE 
+    WHEN determainant.DeterminantData IS NOT NULL AND determainant.DeterminantData <> '''' THEN
+        dbo.fn_Get_Bill_Item_Determinants(determainant.DeterminantData,@lang)
+    ELSE 
+        ''-''
+END AS Determainants
+
+
+    FROM InventoryLists IL
+    INNER JOIN InventoryListsDetails ILD ON IL.Id = ILD.WarehouseListId
+    INNER JOIN ManualInventoryApprovals MIA ON IL.Id = MIA.Id
+    INNER JOIN ItemCards IC ON ILD.ItemId = IC.Id
+	left join BillItems as bi on bi.ItemId = IC.Id
+    left join BillDynamicDeterminants as determainant on bi.Id = determainant.BillItemId
+    INNER JOIN StoreCards SC ON IL.StoreId = SC.Id
+    INNER JOIN Units U ON IC.CompanyId = U.Id
+    WHERE (@fromDate IS NULL OR MIA.Date >= @fromDate)
+        AND (@toDate IS NULL OR MIA.Date <= @toDate)
+        AND (@currencyId IS NULL OR IL.CurrencyId = @currencyId)
+        AND (IL.StoreId = @storeId OR @storeId IS NULL)
+        AND (ILD.ItemId = @itemId OR @itemId IS NULL)
+        AND (ILD.ItemGroupId = @itemGroupId OR @itemGroupId IS NULL)
+        AND (IL.BranchId IN (SELECT * FROM fnSplitString(@branchId, '','')) OR @branchId IS NULL)
+        AND (IL.CompanyId = @companyId)
+        AND IL.BranchId IN
+        (
+            SELECT BranchId
+            FROM UsersCompaniesBranches
+            WHERE UsersCompanyId IN
+            (
+                SELECT Id
+                FROM UsersCompanies
+                WHERE (CompanyId = @companyId OR @companyId IS NULL)
+                    AND (UserId = @userId OR @userId IS NULL)
+                    AND (UsersCompanies.IsDeleted = 0)
+            )
+        )
+END
+
+
+
+
+
+
+
+
+
+
+')
+   

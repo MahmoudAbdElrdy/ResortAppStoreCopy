@@ -1,0 +1,294 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Accounts_Balance_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Accounts_Balance_Report];
+
+
+
+exec('Create PROCEDURE [dbo].[SP_Accounts_Balance_Report]
+    @fromDate DATE = NULL,
+    @toDate DATE = NULL,
+    @branchId BIGINT = NULL,
+	@accountGroupId BIGINT = NULL,
+    @parentAccountId BIGINT = NULL,
+	@currencyId BIGINT = NULL,
+    @fromEntryNo NVARCHAR(50) = NULL,
+    @toEntryNo NVARCHAR(50) = NULL,
+    @companyId BIGINT = NULL,
+    @userId NVARCHAR(50) = NULL,
+    @entriesStatusId INT = NULL,
+    @lang VARCHAR(10) = ''en-us'',
+	@selectedCurrencyName NVARCHAR(1000) =null,
+    @selectedEntriesStatusName  NVARCHAR(100) =null,
+    @selectedBranchName as NVARCHAR(100) = NULL,
+	@selectedAccountGroupName NVARCHAR(100) = NULL,
+    @selectedMainAccountName NVARCHAR(100) = NULL
+
+
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@currencyId = 0)
+BEGIN
+    SET @currencyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+IF (@parentAccountId = 0)
+BEGIN
+    SET @parentAccountId = NULL
+END
+IF (@accountGroupId = 0)
+BEGIN
+    SET @accountGroupId = NULL
+END
+
+IF (@fromEntryNo = '''')
+BEGIN
+    SET @fromEntryNo = NULL
+END
+
+IF (@toEntryNo = '''')
+BEGIN
+    SET @toEntryNo = NULL
+END
+
+
+
+
+IF (@entriesStatusId = 0 OR @entriesStatusId = 3)
+BEGIN
+    SET @entriesStatusId = NULL
+ENd
+BEGIN
+    SET NOCOUNT ON;
+    --DECLARE @isMultiCurrency bit;
+  --  SET @isMultiCurrency = (SELECT GC.Value FROM GeneralConfigurations AS GC WHERE GC.id = 2);    -- Create a table variable to store the hash table including data between @fromDate and @toDate
+    DECLARE @AccountSummaryBetweenDate TABLE (
+        AccountId BIGINT,
+        TotalDebit DECIMAL(18, 2),
+        TotalCredit DECIMAL(18, 2),
+		TotalDebitLocal DECIMAL(18, 2),
+        TotalCreditLocal DECIMAL(18, 2)
+    );
+	
+
+    INSERT INTO @AccountSummaryBetweenDate (AccountId, TotalDebit, TotalCredit,TotalDebitLocal,TotalCreditLocal)
+    SELECT
+        acc.Id AS AccountId,
+        SUM(isnull(details.JEDetailDebit,0)) AS TotalDebit,
+        SUM(isnull(details.JEDetailCredit,0)) AS TotalCredit,
+		SUM(isnull(details.JEDetailDebitLocal,0)) AS TotalDebitLocal,
+        SUM(isnull(details.JEDetailCreditLocal,0)) AS TotalCreditLocal
+    FROM
+        JournalEntriesMasters AS master
+        JOIN JournalEntriesDetails AS details ON master.Id = details.JournalEntriesMasterId
+        Right Join Accounts AS acc ON acc.Id = details.AccountId
+	
+    WHERE
+	(master.IsDeleted=0 and details.IsDeleted=0 )
+	and
+        (master.Date between @fromDate AND  @toDate)
+        AND (@branchId IS NULL OR master.BranchId = @branchId)
+             AND (@parentAccountId IS NULL OR  acc.id  IN (
+            SELECT id
+            FROM Accounts
+            WHERE SUBSTRING(TreeId, 1, 9 + ((select sub_acc.levelId from accounts sub_acc where sub_acc.id =@parentAccountId) * 9)) = (select TreeId from accounts where id =@parentAccountId)
+                AND IsLeafAccount =1
+        ) )
+		AND (@accountGroupId IS NULL OR acc.AccountGroupId = @accountGroupId)
+        AND (@fromEntryNo IS NULL OR Master.Code >= @fromEntryNo)
+        AND (@currencyId IS NULL OR details.CurrencyId = @currencyId)
+        AND (@toEntryNo IS NULL OR Master.Code <= @toEntryNo)
+        AND (@companyId IS NULL OR master.CompanyId = @companyId)
+        AND (isnull(master.PostType,2) = @entriesStatusId OR @entriesStatusId IS NULL)
+        AND (Master.CompanyId = @companyId)
+        AND Master.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId = (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+        )
+    )
+        -- AND (@lang IS NULL OR ...) -- You can add an additional condition for language if necessary
+    GROUP BY
+        acc.Id;
+	
+
+    -- Create another table variable to store the hash table including all data <= @fromDate
+    DECLARE @AccountSummaryOpenBalance TABLE (
+        AccountId BIGINT,
+        TotalDebit DECIMAL(18, 2),
+        TotalCredit DECIMAL(18, 2),
+		TotalDebitLocal DECIMAL(18, 2),
+		TotalCreditLocal DECIMAL(18, 2)
+    );
+
+    INSERT INTO @AccountSummaryOpenBalance (AccountId, TotalDebit, TotalCredit,TotalDebitLocal,TotalCreditLocal)
+    SELECT
+        acc.Id AS AccountId,
+        SUM(isnull(details.JEDetailDebit,0)) AS TotalDebit,
+        SUM(isnull(details.JEDetailCredit,0)) AS TotalCredit,
+		SUM(isnull(details.JEDetailDebitLocal,0)) AS TotalDebitLocal,
+        SUM(isnull(details.JEDetailCreditLocal,0)) AS TotalCreditLocal
+    FROM
+        JournalEntriesMasters AS master
+        JOIN JournalEntriesDetails AS details ON master.Id = details.JournalEntriesMasterId
+        right join Accounts AS acc ON acc.Id = details.AccountId
+
+	
+    WHERE
+	(master.IsDeleted=0 and details.IsDeleted=0 )
+	and
+       (@fromDate is null or  master.Date <= @fromDate ) -- Include all data <= @fromDate
+        AND (@branchId IS NULL OR master.BranchId = @branchId)
+        AND (@parentAccountId IS NULL OR  acc.id  IN (
+            SELECT id
+            FROM Accounts
+            WHERE SUBSTRING(TreeId, 1, 9 + ((select sub_acc.levelId from accounts sub_acc where sub_acc.id =@parentAccountId) * 9)) = (select TreeId from accounts where id =@parentAccountId)
+                AND IsLeafAccount =1
+        ) )
+		AND (@accountGroupId IS NULL OR acc.AccountGroupId = @accountGroupId)
+		AND (@currencyId IS NULL OR details.CurrencyId = @currencyId)
+        AND (@fromEntryNo IS NULL OR Master.Code >= @fromEntryNo)
+        AND (@toEntryNo IS NULL OR Master.Code <= @toEntryNo)
+        AND (@companyId IS NULL OR master.CompanyId = @companyId)
+        AND (isnull(master.PostType,2) = @entriesStatusId OR @entriesStatusId IS NULL)
+        AND (Master.CompanyId = @companyId)
+        AND Master.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId = (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+        )
+    )
+        -- AND (@lang IS NULL OR ...) -- You can add an additional condition for language if necessary
+    GROUP BY
+        acc.Id;
+
+		 -- Create another table variable to store the hash table including all data <= @fromDate
+    DECLARE @AccountDetails TABLE (
+	    ParentAccountId BIGINT,
+	    ParentAccountCode nvarchar(200),
+		ParentAccountNameAr nvarchar(200),
+		ParentAccountNameEn nvarchar(200),
+		ChildAccountId BIGINT,
+		ChildAccountCode nvarchar(200),
+		ChildAccountNameAr nvarchar(200),
+		ChildAccountNameEn nvarchar(200),
+		AccGroupId BIGINT,
+		AccGroupCode nvarchar(200),
+		AccGroupNameAr nvarchar(200),
+		AccGroupNameEn nvarchar(200)
+
+
+        
+    );
+
+    INSERT INTO @AccountDetails (
+	ParentAccountId,
+	ParentAccountCode,
+	ParentAccountNameAr ,
+	ParentAccountNameEn,
+	ChildAccountId,
+	ChildAccountCode,
+	ChildAccountNameAr,
+	ChildAccountNameEn,
+	AccGroupId,
+	AccGroupCode,
+	AccGroupNameAr,
+	AccGroupNameEn
+
+	)
+	SELECT
+    parent.Id AS ParentAccountId,
+	parent.Code AS ParentAccountCode,
+    parent.NameAr AS ParentAccountNameAr,
+    parent.NameEn AS ParentAccountNameEn,
+    child.Id AS ChildAccountId,
+	child.Code AS CodeAccountId,
+    child.NameAr AS ChildAccountNameAr,
+    child.NameEn AS ChildAccountNameEn,
+	acc_group.Id As AccGroupId,
+    acc_group.Code AS AccGroupCode,
+	acc_group.NameAr AS AccGroupNameAr,
+	acc_group.NameAr AS AccGroupNameEn
+
+FROM
+    Accounts AS child
+  JOIN
+    Accounts AS parent ON child.ParentId = parent.Id
+	 left join AccountGroups AS  acc_group ON  acc_group.Id = child.AccountGroupId and acc_group.IsDeleted=0
+	
+
+WHERE
+( parent.IsDeleted=0 and child.IsDeleted=0)
+and
+   (@parentAccountId is null or  child.id  IN (
+            SELECT id
+            FROM Accounts
+            WHERE SUBSTRING(TreeId, 1, 9 + ((select sub_acc.levelId from accounts sub_acc where sub_acc.id =@parentAccountId) * 9)) = (select TreeId from accounts where id =@parentAccountId)  
+			and child.IsLeafAccount=1
+        )) and (@accountGroupId is null or child.AccountGroupId = @accountGroupId ) and child.IsLeafAccount=1
+
+	order by 
+	parent.TreeId
+
+
+	
+If @currencyId is not null 
+    SELECT
+	   
+       isNull( acc.ParentAccountCode,''-'') AS ParentAccountCode,
+       case when @lang=''en-us''then  isNull(acc.ParentAccountNameEn,''-'')
+	   else isNull(acc.ParentAccountNameAr,''-'')end AS ParentAccountName,
+	   acc.ChildAccountCode AS AccountCode,
+	  
+       case when @lang =''en-us'' then isNull(acc.ChildAccountNameEn,''-'') else isNull(acc.ChildAccountNameAr,''-'') end AS AccountName,
+       ISNULL(summaryOpenBalance.TotalDebit, 0) AS OpenBalanceDebit,
+       ISNULL(summaryOpenBalance.TotalCredit, 0) AS OpenBalanceCredit,
+       ISNULL(summaryBetweenDate.TotalDebit, 0) AS TotalDebit,
+       ISNULL(summaryBetweenDate.TotalCredit, 0) AS TotalCredit,
+       (ISNULL(summaryBetweenDate.TotalDebit, 0) + ISNULL(summaryOpenBalance.TotalDebit, 0)) AS CurrentDebitBalance,
+       (ISNULL(summaryBetweenDate.TotalCredit, 0) + ISNULL(summaryOpenBalance.TotalCredit, 0)) AS CurrentCreditBalance,
+	   case when @lang=''en-us''then  isNull(acc.AccGroupNameEn,''-'') else isNull(acc.AccGroupNameAr,''-'')  end as AccountGroupName
+
+		
+        FROM            @AccountDetails Acc LEFT OUTER JOIN
+                         @AccountSummaryOpenBalance SummaryOpenBalance ON Acc.ChildAccountId = SummaryOpenBalance.AccountId LEFT OUTER JOIN
+                         @AccountSummaryBetweenDate summaryBetweenDate ON Acc.ChildAccountId = summaryBetweenDate.AccountId
+
+    order by acc.ChildAccountCode
+else
+
+    SELECT
+	   
+       isNull( acc.ParentAccountCode,''-'') AS ParentAccountCode,
+       case when @lang=''en-us''then  isNull(acc.ParentAccountNameEn,''-'')
+	   else isNull(acc.ParentAccountNameAr,''-'')end AS ParentAccountName,
+	   acc.ChildAccountCode AS AccountCode,
+	  
+       case when @lang =''en-us'' then isNull(acc.ChildAccountNameEn,''-'') else isNull(acc.ChildAccountNameAr,''-'') end AS AccountName,
+       ISNULL(summaryOpenBalance.TotalDebitLocal, 0) AS OpenBalanceDebit,
+       ISNULL(summaryOpenBalance.TotalCreditLocal, 0) AS OpenBalanceCredit,
+       ISNULL(summaryBetweenDate.TotalDebitLocal, 0) AS TotalDebit,
+       ISNULL(summaryBetweenDate.TotalCreditLocal, 0) AS TotalCredit,
+       (ISNULL(summaryBetweenDate.TotalCreditLocal, 0) + ISNULL(summaryOpenBalance.TotalDebitLocal, 0)) AS CurrentDebitBalance,
+       (ISNULL(summaryBetweenDate.TotalCreditLocal, 0) + ISNULL(summaryOpenBalance.TotalCreditLocal, 0)) AS CurrentCreditBalance,
+	   case when @lang=''en-us''then  isNull(acc.AccGroupNameEn,''-'') else isNull(acc.AccGroupNameAr,''-'')  end as AccountGroupName
+
+		
+        FROM            @AccountDetails Acc LEFT OUTER JOIN
+                         @AccountSummaryOpenBalance SummaryOpenBalance ON Acc.ChildAccountId = SummaryOpenBalance.AccountId LEFT OUTER JOIN
+                         @AccountSummaryBetweenDate summaryBetweenDate ON Acc.ChildAccountId = summaryBetweenDate.AccountId
+
+    order by acc.ChildAccountCode
+	   
+END;')

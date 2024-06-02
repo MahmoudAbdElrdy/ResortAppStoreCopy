@@ -1,0 +1,3 @@
+﻿<cac:TaxTotal>
+		<cbc:TaxAmount currencyID="@CurrencyCode">@TotalTaxAmount</cbc:TaxAmount>
+</cac:TaxTotal>

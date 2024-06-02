@@ -1,0 +1,52 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_account_transaction') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_account_transaction];
+
+
+
+exec('CREATE FUNCTION [dbo].[fn_account_transaction]
+(
+@FromDate DATETIME = NULL,
+@ToDate DATETIME,
+@AccountId INT
+)
+RETURNS  numeric(18,3)
+AS
+BEGIN
+DECLARE @IsLeafAccount BIT;
+DECLARE @TreeId VARCHAR(100);
+DECLARE @LevelId INT;
+
+
+SELECT @IsLeafAccount = IsLeafAccount, @TreeId = Treeid, @LevelId = LevelId
+FROM Accounts
+WHERE id = @AccountId;
+DECLARE @retval NUMERIC(18, 3)  
+IF @IsLeafAccount = 0
+BEGIN
+   
+    SELECT   @retval=   SUM(ISNULL(JEDetailCredit, 0))
+        FROM JournalEntriesDetails as jd
+		join JournalEntriesMasters as jm on jm.Id=jd.JournalEntriesMasterId
+        WHERE AccountId IN (
+            SELECT id
+            FROM Accounts
+            WHERE SUBSTRING(TreeId, 1, 9 + (@LevelId * 9)) = @TreeId
+                AND id <> @AccountId
+        )
+		and (@FromDate is null or jm.date<=@FromDate)
+    
+END
+ELSE
+BEGIN
+    
+        SELECT   @retval= SUM(isnull(JEDetailCredit,0)) 
+        FROM JournalEntriesDetails as jd
+		join JournalEntriesMasters as jm on jm.Id=jd.JournalEntriesMasterId
+        WHERE AccountId =@AccountId 
+		and (@FromDate is null or jm.date<=@FromDate)
+		and (jd.IsDeleted=0 and  jm.IsDeleted=0 )
+    
+END;
+return @retval 
+END')
+
+

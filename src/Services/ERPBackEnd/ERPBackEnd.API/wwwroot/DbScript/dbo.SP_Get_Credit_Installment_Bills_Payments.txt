@@ -1,0 +1,169 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_Credit_Installment_Bills_Payments') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_Credit_Installment_Bills_Payments];
+
+
+
+exec('
+create PROCEDURE [dbo].SP_Get_Credit_Installment_Bills_Payments
+
+   @branchId BIGINT = NULL,
+    @companyId BIGINT=null,
+	@fiscalPeriodId BIGINT=null,
+	@billKind int = null,
+	@customerId bigint = null,
+	@supplierId bigint = null,
+	@voucherTypeId bigint = null
+
+
+	AS
+BEGIN
+
+DECLARE @billTypeIds VARCHAR(MAX) = NULL
+DECLARE @accountingEffectForBills INT = NULL
+DECLARE @warehouseEffectForBills INT = NULL
+
+
+IF (@voucherTypeId > 0)
+BEGIN
+    SELECT 
+	
+	@billTypeIds = BillTypeIds,
+	@accountingEffectForBills = AccountingEffectForBills,
+    @warehouseEffectForBills = WarehouseEffectForBills
+    FROM VoucherTypes
+    WHERE Id = @voucherTypeId
+END
+
+
+IF (@billTypeIds IS NULL OR LEN(@billTypeIds) = 0)
+BEGIN
+    SET @billTypeIds = null
+END
+
+
+IF (@accountingEffectForBills = 2)
+BEGIN
+    SET @accountingEffectForBills = 1
+END
+
+IF (@accountingEffectForBills = 3)
+BEGIN
+    SET @accountingEffectForBills  = NULL
+END
+
+IF (@warehouseEffectForBills = 2)
+BEGIN
+    SET @warehouseEffectForBills = 1
+END
+
+IF (@warehouseEffectForBills = 3)
+BEGIN
+    SET @warehouseEffectForBills = NULL
+END
+
+
+SELECT b.Id as BillId,  b.Code,
+b.BillTypeId,
+b.Date as BillDate,
+bt.NameAr as BillTypeAr,
+bt.NameEn as BillTypeEn ,
+b.TotalBeforeTax  * b.CurrencyValue as TotalBeforeTax,
+b.Total * b.CurrencyValue as Total,
+b.Net * b.CurrencyValue as Net,
+b.Paid * b.CurrencyValue as Paid,
+b.Remaining * b.CurrencyValue as Remaining ,
+bt.kind as BillKindId,
+ case when bt.kind=1 then N''Sales Bill''
+ when  bt.kind=2 then N''Purchases Bill''
+ when  bt.kind=3 then N''Sales Returns Bill'' 
+ when  bt.kind=4 then N''Purchases Returns Bill'' 
+ when  bt.kind=5 then N''First Period Goods Bill'' end as BillKindEn,
+ case when bt.kind=1 then N''فاتورة مبيعات''
+ when  bt.kind=2 then N''فاتورة مشتريات''
+ when  bt.kind=3 then N''فاتورة مردودات مبيعات'' 
+ when  bt.kind=4 then N''فاتورة مردودات مشتريات'' 
+ when  bt.kind=5 then N''فاتورة بضاعة أول المدة'' end as BillKindAr,
+ ISNULL(b.Delay,0) as Delay
+ ,'''' as InstallmentDate  
+ ,'''' as InstallmentPeriod
+,'''' as InstallmentValue,
+'''' as InstallmentCount
+, Null as BillInstallmentId
+,'''' as PaidInstallment
+,'''' as RemainingInstallment
+,2 as PayWay, N''أجل'' as PayWayAr,
+N''Credit''  as PayWayEn
+   
+from Bills as b join BillTypes as bt on b.BillTypeId = bt.Id
+
+where b.IsDeleted <> 1 and b.Remaining > 0
+
+      and b.CompanyId = @companyId
+	  and b.BranchId = @branchId
+	  and (b.FiscalPeriodId = @fiscalPeriodId)
+	  and ( b.PayWay  = 2 )
+	  and (bt.Kind =@billKind or @billKind is null )
+	  and (b.CustomerId = @customerId or @customerId is null )
+	  and (b.SupplierId =@SupplierId or @SupplierId is null)
+	  and (b.BillTypeId in (SELECT * FROM fnSplitString(@billTypeIds,'','') ) or @billTypeIds is null)
+	  and (b.IsGenerateEntry = @accountingEffectForBills or @accountingEffectForBills is null)
+	  and (b.PostToWarehouses = @warehouseEffectForBills or @warehouseEffectForBills is null)
+	  and DATEADD(day, ISNULL(b.Delay,0), b.[Date]) <= GETDATE()
+
+
+union all 
+
+SELECT b.Id as BillId,  b.Code,
+b.BillTypeId,
+b.Date as BillDate,
+bt.NameAr as BillTypeAr,
+bt.NameEn as BillTypeEn ,
+b.TotalBeforeTax  * b.CurrencyValue as TotalBeforeTax,
+b.Total * b.CurrencyValue as Total,
+b.Net * b.CurrencyValue as Net,
+b.Paid * b.CurrencyValue as Paid,
+b.Remaining * b.CurrencyValue as Remaining ,
+bt.kind as BillKindId,
+ case when bt.kind=1 then N''Sales Bill''
+ when  bt.kind=2 then N''Purchases Bill''
+ when  bt.kind=3 then N''Sales Returns Bill'' 
+ when  bt.kind=4 then N''Purchases Returns Bill'' 
+ when  bt.kind=5 then N''First Period Goods Bill'' end as BillKindEn,
+ case when bt.kind=1 then N''فاتورة مبيعات''
+ when  bt.kind=2 then N''فاتورة مشتريات''
+ when  bt.kind=3 then N''فاتورة مردودات مبيعات'' 
+ when  bt.kind=4 then N''فاتورة مردودات مشتريات'' 
+ when  bt.kind=5 then N''فاتورة بضاعة أول المدة'' end as BillKindAr
+ ,ISNULL(b.Delay,0) as Delay
+ ,install.Date as InstallmentDate  
+ ,install.[Period] as InstallmentPeriod
+,install.[Value] * b.CurrencyValue as InstallmentValue,
+b.InstallmentCount as InstallmentCount
+,install.Id as BillInstallmentId
+,install.Paid *  b.CurrencyValue as PaidInstallment
+,install.Remaining *  b.CurrencyValue as RemainingInstallment
+,3 as PayWay,N''تقسيط''  as PayWayAr,
+N''Installment'' as PayWayEn
+
+   
+from Bills as b join BillTypes as bt on b.BillTypeId = bt.Id
+
+ join BillInstallmentDetail as install on b.Id = install.BillId  and install.State = 0 and install.Date <= GETDATE() 
+
+
+where b.IsDeleted <> 1 and b.Remaining > 0
+
+      and b.CompanyId = @companyId
+	  and b.BranchId = @branchId
+	  and (b.FiscalPeriodId = @fiscalPeriodId)
+	  and ( b.PayWay =3)
+	  and (bt.Kind =@billKind or @billKind is null )
+	  and (b.CustomerId = @customerId or @customerId is null )
+	  and (b.SupplierId =@SupplierId or @SupplierId is null)
+	  and (b.BillTypeId in (SELECT * FROM fnSplitString(@billTypeIds,'','')) or @billTypeIds is null)
+	  and (b.IsGenerateEntry = @accountingEffectForBills or @accountingEffectForBills is null)
+	  and (b.PostToWarehouses = @warehouseEffectForBills or @warehouseEffectForBills is null)
+
+
+End 
+')
+

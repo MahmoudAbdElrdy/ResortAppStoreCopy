@@ -1,0 +1,44 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Trail_Balance_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Trail_Balance_Report];
+
+
+exec('Create procedure [dbo].[SP_Trail_Balance_Report]
+@fromDate dateTime ,
+@toDate datetime =null,
+@entriesStatusId INT = NULL,
+@levelId int,
+@branchId BIGINT = NULL,
+@companyId BIGINT = NULL,
+@userId NVARCHAR(50) = NULL,
+@lang VARCHAR(10) = ''en-us'',
+@selectedEntriesStatusName  NVARCHAR(100) =null,
+@selectedBranchName as NVARCHAR(100) = NULL
+
+
+
+As 
+
+IF (@entriesStatusId = 0 OR @entriesStatusId = 3)
+BEGIN
+    SET @entriesStatusId = NULL
+ENd
+begin
+
+
+Select id,Code,
+LevelId,
+case when @lang=''en-us'' then NameEn else NameAr end as AccountName,
+isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,Null,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)as OpeningCredit,
+isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,Null,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0) as OpeningDebit,
+isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)as Credit,
+isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0) as Debit,
+(isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,Null,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)+
+isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)) as CurrentCredit,
+(isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,Null,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)+
+isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)) as CurrentDebit
+
+from Accounts 
+  where LevelId<=(@levelId-1) 
+  And (Accounts.IsDeleted=0)
+
+order by treeid 
+end')

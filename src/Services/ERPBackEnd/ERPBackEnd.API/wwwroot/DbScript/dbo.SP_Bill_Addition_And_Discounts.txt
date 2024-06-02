@@ -1,0 +1,26 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Bill_Addition_And_Discounts') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Bill_Addition_And_Discounts];
+
+
+exec('
+Create PROCEDURE [dbo].[SP_Bill_Addition_And_Discounts]
+@id bigint,
+@lang VARCHAR(10) = ''en-us''
+
+AS
+BEGIN
+select b.AdditionRatio,b.AdditionValue , b.DiscountRatio,b.DiscountValue,
+case when @lang=''en-us'' then cur.NameEn else cur.NameAr end as CurrencyName,
+case when @lang=''en-us'' then p.NameEn else p.NameAr end as ProjectName,
+case when @lang=''en-us'' then c.NameEn else c.NameAr end as CostCenterName,
+ISNULL(b.CurrencyValue,0) as CurrencyValue
+
+from BillAdditionAndDiscounts as b
+left join Currencies as cur on b.CurrencyId = cur.Id
+left join Projects as p on b.ProjectId = p.Id
+left join CostCenters as c on b.CostCenterId = c.Id
+
+where b.BillId = @id and b.IsDeleted != 1
+
+END')
+
+

@@ -1,0 +1,32 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('SP_Get_Reserved_Tables_By_Floor_Id') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_Reserved_Tables_By_Floor_Id];
+
+exec('
+
+Create PROCEDURE [dbo].[SP_Get_Reserved_Tables_By_Floor_Id]
+  @floorId BIGINT,
+ @companyId BIGINT,
+ @branchId BIGINT
+
+
+AS
+
+
+BEGIN
+
+ select t.Id as Id, t.NameAr as TableNameAr,t.NameEn as TableNameEn,t.NumberOfSeats as NumberOfSeats,b.Id as BillId,b.BillTypeId as BillTypeId from POSTables as t join POSBills as b on t.Id = b.POSTableId
+
+ where t.IsDeleted <> 1 and b.IsDeleted != 1 and t.Status =2
+ and t.FloorId = @floorId
+ and (b.Paid is null or b.Paid = 0)
+ and b.CompanyId = @companyId and b.BranchId = @branchId
+
+    
+
+END
+
+
+
+
+
+
+')

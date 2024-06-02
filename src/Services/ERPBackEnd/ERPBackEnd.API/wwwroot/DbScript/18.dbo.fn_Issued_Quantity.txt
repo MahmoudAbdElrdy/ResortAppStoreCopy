@@ -1,0 +1,43 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Issued_Quantity') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_Issued_Quantity];
+
+
+exec('Create function [dbo].[fn_Issued_Quantity]
+(
+@itemCardId BigInt,
+@storeId BigInt,
+@fiscalPeriodId BigInt = null,
+@fromDate Date = null,
+@companyId bigint =null,
+@branchId as NVARCHAR(250) = NULL,
+@billDate DateTime = null
+)
+returns @ResultTable table 
+(
+    TotalIssuedQuantity float,
+    TotalConvertedIssuedQuantity float
+)
+as
+begin
+
+
+INSERT INTO @ResultTable (TotalIssuedQuantity, TotalConvertedIssuedQuantity)
+
+select Sum(Isnull(bitem.IssuedQuantity,0)) AS TotalIssuedQuantity , Sum(Isnull(bitem.ConvertedIssuedQuantity,0))  AS TotalConvertedIssuedQuantity
+from 
+BillItems as bitem join Bills as b on bitem.BillId = b.Id
+join BillTypes as bt on b.BillTypeId = bt.Id
+where b.IsDeleted <> 1 and bitem.IsDeleted <> 1 and bt.Kind in (1,4,6,8) and b.PostToWarehouses = 1 
+and bitem.ItemId = @ItemCardId and bitem.StoreId = @StoreId
+and ( b.FiscalPeriodId = @fiscalPeriodId or @fiscalPeriodId is null ) and (b.[Date] < @fromDate or @fromDate is null )
+and (b.CompanyId = @companyId or @companyId is null)
+and (b.BranchId IN (SELECT * FROM fnSplitString(@branchId,'','')) or @branchId is null)
+and (b.date < @billDate or @billDate is null)
+    RETURN;
+
+
+ 
+
+end'
+
+)
+

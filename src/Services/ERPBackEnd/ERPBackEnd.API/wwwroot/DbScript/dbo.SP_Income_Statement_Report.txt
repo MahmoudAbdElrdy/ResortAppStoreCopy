@@ -1,0 +1,75 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Income_Statement_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Income_Statement_Report];
+
+
+exec('Create procedure [dbo].[SP_Income_Statement_Report]
+@fromDate dateTime ,
+@toDate datetime =null,
+@entriesStatusId INT = NULL,
+@levelId int,
+@branchId BIGINT = NULL,
+@companyId BIGINT = NULL,
+@userId NVARCHAR(50) = NULL,
+@lang VARCHAR(10) = ''en-us'',
+@selectedEntriesStatusName  NVARCHAR(100) =null,
+@selectedBranchName as NVARCHAR(100) = NULL
+
+
+
+As 
+
+IF (@entriesStatusId = 0 OR @entriesStatusId = 3)
+BEGIN
+    SET @entriesStatusId = NULL
+ENd
+begin
+
+
+Select Acc.id,Acc.Code,
+
+ AccClass.Code as  AccountClassCode,
+  Case when @lang=''ar'' then  Acc.NameAr else Acc.NameEn end as AccountName,
+  Case when @lang=''ar'' then  AccClass.NameAr else AccClass.NameEn end as AccClassName,
+  Acc.AccountGroupId,
+  case when AccClass.Type =1 then
+  (case when @lang=''ar''then N''الإيرادات'' else ''Revenues'' end) 
+   when   AccClass.Type =2 then
+  (case when @lang=''ar''then N''المصروفات'' else ''Expenses'' end) end as AccountTypeName,
+
+   case when AccClass.Type = 1  then  (
+   isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)-
+   isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)
+
+   ) else  (
+   (isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)-
+   isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)
+
+   )*-1) end as AccountBalance,
+
+      case when AccClass.Type = 1  and acc.LevelId=0 then  (
+   isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)-
+   isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)
+
+   ) when AccClass.Type = 2  and acc.LevelId=0 then (
+   (isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)-
+   isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)
+
+   )*-1) 
+   else  0 end as AccountGroupValue,
+
+   
+      case when  acc.LevelId=0 then  (
+   isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)-
+   isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Acc.Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)
+
+   )else  0 end as AccountTotalValue
+
+
+from  
+ AccountClassifications as  AccClass
+join  Accounts as Acc on  AccClass.id = Acc.AccountClassificationIdOfIncomeStatement
+
+  where LevelId<=(@levelId-1) and acc.AccountType =1 
+         and (acc.IsDeleted=0 and AccClass.IsDeleted=0 )
+
+order by treeid 
+end')

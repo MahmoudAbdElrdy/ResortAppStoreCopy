@@ -1,0 +1,11 @@
+﻿<p>Hello {user},</p>
+
+<p>This email was sent to you upon your request to go application your User Name: admin and PassWord:123456 </p>
+<p>You can go from <a href="{link}">here</a></p>
+<br />
+<p>Regards,</p>
+<p>
+  Resort Team
+  <br/>
+  Resort Solutions 
+</p>

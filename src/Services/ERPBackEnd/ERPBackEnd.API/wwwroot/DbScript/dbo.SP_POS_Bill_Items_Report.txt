@@ -1,0 +1,64 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_POS_Bill_Items_Report') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_POS_Bill_Items_Report];
+
+
+exec('
+Create PROCEDURE [dbo].[SP_POS_Bill_Items_Report]
+@id bigint,
+@lang VARCHAR(10) = ''en-us''
+
+AS
+
+DECLARE @billTypeId BIGINT
+SELECT @billTypeId = BillTypeId FROM POSBills where id = @id
+
+DECLARE @printItemsImages bit
+DECLARE @printItemsSpecifiers bit
+
+SELECT @printItemsImages = PrintItemsImages , @printItemsSpecifiers = PrintItemsSpecifiers FROM POSBillTypes where id = @billTypeId
+
+BEGIN
+
+select bt.Kind, b.Code as BillCode,b.Date as BillDate, case when @lang=''en-us'' then item.NameEn else item.NameAr end as ItemName,bi.Notes,
+ case when @lang=''en-us'' then un.NameEn else un.NameAr end as UnitName,
+ case when bt.Kind = 1 then Isnull(bi.IssuedQuantity,0) when bt.Kind = 2 then isnull(bi.AddedQuantity,0) end as Quantity,
+  case when @lang=''en-us'' then bran.NameEn else bran.NameAr end  as BranchName ,
+isnull(bi.Price,0)  as Price,
+isNull(bi.TotalBeforeTax,0) as TotalBeforeTax, 
+IsNull(bi.TotalTax,0) as TotalTax,
+ 
+IsNull(bi.DiscountRatio,0)  as DiscountRatio,
+ IsNull(bi.DiscountValue,0) as DiscountValue,
+IsNull(bi.Total,0)  as Total,bi.Notes,
+case when @lang=''en-us'' then store.NameEn else store.NameAr end as StoreName,
+
+case when @lang=''en-us'' then costcenter.NameEn else costcenter.NameAr end as CostCenterName,
+IsNull(bi.UnitTransactionFactor,0) as UnitTransactionFactor,
+  IsNull(bi.IssuedQuantity,0) as IssuedQuantity,IsNull(bi.AddedQuantity,0) as AddedQuantity,
+  IsNull(bi.ConvertedIssuedQuantity,0) as ConvertedIssuedQuantity,IsNull(bi.ConvertedAddedQuantity,0) as ConvertedAddedQuantity
+  ,case when @lang =''en-us'' then curr.NameEn else curr.NameAr end  as CurrencyName,IsNull(b.CurrencyValue,0) as CurrencyValue,
+  bt.Id as BillTypeId,case when @lang =''en-us'' then bt.NameEn else bt.NameAr end  as BillTypeName,
+  case when  @printItemsImages = 1 then item.ImageData  end as ItemImage ,
+   
+    CASE 
+    WHEN @printItemsSpecifiers = 1 AND determainant.DeterminantData IS NOT NULL AND determainant.DeterminantData <> '''' THEN
+        dbo.fn_Get_Bill_Item_Determinants(determainant.DeterminantData,@lang)
+    ELSE 
+        ''''
+END AS Determainants
+
+  from POSBillItems as bi join POSBills as b on bi.BillId = b.Id join POSBillTypes as bt on b.BillTypeId = bt.Id
+  join Branches as bran on b.BranchId = bran.Id 
+join ItemCards as item on bi.ItemId = item.Id
+left join ItemGroupsCards as itemgroup on item.ItemGroupId = itemgroup.Id
+left join POSBillDynamicDeterminants as determainant on bi.Id = determainant.BillItemId
+left join Units as un on bi.UnitId = un.Id
+left join StoreCards as store on bi.StoreId = store.Id
+left join CostCenters as costcenter on bi.CostCenterId = costcenter.Id
+left join Currencies as curr on b.CurrencyId = curr.Id
+where b.Id = @id and bi.IsDeleted != 1
+
+
+
+END')
+
+

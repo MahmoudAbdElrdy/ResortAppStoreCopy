@@ -1,0 +1,219 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<AssemblyName>ResortAppStore.Services.ERPBackEnd.API</AssemblyName>
+		<RootNamespace>ResortAppStore.Services.ERPBackEnd.API</RootNamespace>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>d9b41362-c4b7-4048-b1d7-b39ceedb05ab</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..\..\..</DockerfileContext>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="wwwroot\Uploads\ItemGroupCards\**" />
+		<Content Remove="wwwroot\Uploads\ItemGroupCards\**" />
+		<EmbeddedResource Remove="wwwroot\Uploads\ItemGroupCards\**" />
+		<None Remove="wwwroot\Uploads\ItemGroupCards\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="Controllers\MainController.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="EntityFrameworkCore.UseRowNumberForPaging" Version="0.4.0" />
+		<PackageReference Include="IdentityServer4" Version="4.1.2" />
+		<PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.2" />
+		<PackageReference Include="IdentityServer4.EntityFramework.Storage" Version="4.1.2" />
+		<PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
+		<PackageReference Include="Boxed.AspNetCore" Version="8.1.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+		<PackageReference Include="BarCode" Version="2023.4.1" />
+		<PackageReference Include="FluentValidation" Version="11.5.1" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.1" />
+		<PackageReference Include="MailKit" Version="3.6.0" />
+		<PackageReference Include="MediatR" Version="10.0.1" />
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Authorization" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.3" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.3" />
+		<PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+		<PackageReference Include="Microsoft.SqlServer.TransactSql.ScriptDom" Version="150.4897.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts" Version="6.0.0-preview.6.21362.1" />
+		<PackageReference Include="MimeKit" Version="3.6.1" />
+		<PackageReference Include="morelinq" Version="3.4.1" />
+		<PackageReference Include="Stimulsoft.Reports.Engine.NetCore" Version="2020.5.2" />
+		<PackageReference Include="Stimulsoft.Reports.Web.NetCore" Version="2020.5.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+		<PackageReference Include="System.DirectoryServices" Version="7.0.1" />
+		<PackageReference Include="System.DirectoryServices.AccountManagement" Version="7.0.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.28.0" />
+		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.2" />
+		<PackageReference Include="Unifonic.API.NetStandard2.0" Version="1.0.0" />
+		<PackageReference Include="Unifonic.SMS.NetCore" Version="1.0.2" />
+		<PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2" />
+		<PackageReference Include="Refit" Version="7.0.0" />
+		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
+
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\Uploads\Company\" />
+		<Folder Include="wwwroot\Uploads\ItemGroupsCard\" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="wwwroot\DbScript\1-dbo.fnSplitString.txt" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\openssl-1.0.2j-fips-x86_64.zip" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\CA.pl" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\CA.sh" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\c_hash" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\c_info" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\c_issuer" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\c_name" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\c_rehash" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\fipsld" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\fips_standalone_sha1.exe" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\openssl.cnf" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\openssl.exe" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\PrivateKey.pem" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\bin\tsget" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\aes.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\asn1.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\asn1t.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\asn1_mac.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\bio.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\blowfish.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\bn.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\buffer.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\camellia.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\cast.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\cmac.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\cms.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\comp.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\conf.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\conf_api.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\crypto.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\des.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\des_old.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\dh.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\dsa.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\dso.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\dtls1.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ebcdic.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ec.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ecdh.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ecdsa.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\engine.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\err.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\evp.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\e_os2.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\fips.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\fipssyms.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\fips_rand.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\hmac.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\idea.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\krb5_asn.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\kssl.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\lhash.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\md4.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\md5.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\mdc2.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\modes.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\objects.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\obj_mac.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ocsp.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\opensslconf.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\opensslv.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ossl_typ.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\pem.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\pem2.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\pkcs12.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\pkcs7.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\pqueue.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\rand.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\rc2.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\rc4.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ripemd.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\rsa.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\safestack.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\seed.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\sha.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\srp.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\srtp.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ssl.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ssl2.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ssl23.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ssl3.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\stack.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\symhacks.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\tls1.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ts.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\txt_db.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ui.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\ui_compat.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\whrlpool.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\x509.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\x509v3.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\include\openssl\x509_vfy.h" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\lib\fipscanister.o" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\lib\fipscanister.o.sha1" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\lib\fips_premain.c" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\lib\fips_premain.c.sha1" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\lib\libcrypto.a" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\lib\libssl.a" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\lib\pkgconfig\libcrypto.pc" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\lib\pkgconfig\libssl.pc" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\lib\pkgconfig\openssl.pc" />
+		<None Include="wwwroot\SaudiaEInvoices\OpenSSL\OpenSSL\README" />
+		<None Include="wwwroot\SaudiaEInvoices\PrintTempelate\creditNoteTempelate.mrt" />
+		<None Include="wwwroot\SaudiaEInvoices\PrintTempelate\debitNoteTempelate.mrt" />
+		<None Include="wwwroot\SaudiaEInvoices\PrintTempelate\invoiceTempelate.mrt" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ERPBackEnd.Application\ERPBackEnd.Application.csproj" />
+	</ItemGroup>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties />
+		</VisualStudio>
+	</ProjectExtensions>
+</Project>

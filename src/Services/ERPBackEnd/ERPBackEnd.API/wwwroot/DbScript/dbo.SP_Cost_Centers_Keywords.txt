@@ -1,0 +1,22 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Cost_Centers_Keywords') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Cost_Centers_Keywords];
+
+
+
+
+exec('Create procedure [dbo].[SP_Cost_Centers_Keywords]
+@lang as NVARCHAR(10) 
+as
+begin
+select 
+
+case when @lang =''en-us'' then ''Cost Centers Report''
+else N''تقرير مراكز التكلفة'' end
+as CostCentersReport,
+case when @lang =''en-us'' then ''Cost Center''
+else N'' مركز التكلفة'' end
+as CostCenter,
+case when @lang =''en-us'' then ''Entry Status''
+else N''حالة القيد'' end
+as EntryStatus
+
+end')

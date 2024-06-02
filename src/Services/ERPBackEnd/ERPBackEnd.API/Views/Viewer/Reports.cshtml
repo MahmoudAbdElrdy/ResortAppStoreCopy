@@ -1,0 +1,44 @@
+﻿@using Stimulsoft.Report.Mvc;
+@using Stimulsoft.Report.Web;
+
+@{
+    ViewBag.Title = "عرض التقرير";
+    Layout = null;
+
+}
+
+@*@Html.Stimulsoft().StiMvcViewer("StiMvcViewer1", new StiMvcViewerOptions()*@
+@Html.StiNetCoreViewer("StiMvcViewer1", new StiNetCoreViewerOptions()
+{
+    Actions =
+    {
+        GetReport = "GetReport",
+        ViewerEvent = "ViewerEvent",
+        DesignReport = "Design",
+        
+        //EmailReport = "Email",
+        //ExportReport = "Export",
+        //PrintReport = "Print",
+
+    },
+    Appearance =
+    {
+        //BackgroundColor = System.Drawing.Color.FromArgb(0xe8, 0xe8, 0xe8),
+        ScrollbarsMode = true
+    },
+    Toolbar =
+    {
+        DisplayMode = StiToolbarDisplayMode.Separated,
+        ShowDesignButton = true
+    },
+    Server=
+    {
+        RequestTimeout = 190
+    }
+   
+    
+
+    //Width = Unit.Percentage(100),
+    //Height = Unit.Percentage(100)
+}
+)

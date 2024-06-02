@@ -1,0 +1,39 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_entry_credit_for_subaccount') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION [dbo].[fn_entry_credit_for_subaccount];
+
+
+
+
+exec('CREATE function [dbo].[fn_entry_credit_for_subaccount]
+
+(	
+	@STARTDATE Datetime=null,
+	@ENDDATE Datetime,
+	@AccountId int 
+)
+returns float as
+
+begin
+return
+(
+select sum(ed.JEDetailCreditLocal) as ENTRY_Credit  
+
+  From JournalEntriesDetails as ed with(nolock)
+inner join JournalEntriesMasters as em with(nolock) on (ed.JournalEntriesMasterId = em.Id)
+ join Accounts As Acc with(nolock) on (ed.AccountId = Acc.Id )
+ join Accounts As Parent with(nolock) on (Acc.ParentId = Parent.Id)
+Where 
+(ed.IsDeleted=0 and em.IsDeleted=0 )
+And
+ Parent.Id in (SELECT Id from dbo.fn_getaccountchild(@AccountId)
+) 
+and
+
+(((cast( em.Date as date) >=cast( @STARTDATE as Date)) or @STARTDATE is null ) 
+and cast( em.Date as date) <= cast( @ENDDATE as Date) ) 
+
+ )
+end')
+
+
+
+

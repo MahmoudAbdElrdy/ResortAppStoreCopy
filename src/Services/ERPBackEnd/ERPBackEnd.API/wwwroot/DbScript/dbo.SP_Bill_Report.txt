@@ -1,0 +1,81 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Bill_Report') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Bill_Report];
+
+
+exec('
+Create PROCEDURE [dbo].[SP_Bill_Report]
+@id bigint,
+@lang VARCHAR(10) = ''en-us''
+
+AS
+BEGIN
+
+select bt.Kind,  b.Code as BillCode,Cast(b.Date as date) as BillDate , case when @lang=''en-us'' then bran.NameEn else bran.NameAr end  as BranchName , case when @lang =''en-us'' then bt.NameEn else bt.NameAr end as BillTypeName,
+case when @lang=''en-us'' then( case when b.CustomerId > 0 then ''Customer'' when b.SupplierId > 0 then ''Supplier'' end ) else (case when b.CustomerId > 0 then N''عميل'' when b.SupplierId > 0 then N''مورد'' end) end as BeneficiaryType,
+case when @lang=''en-us'' then( case when b.CustomerId > 0 then cust.NameEn when b.SupplierId > 0 then sup.NameEn end ) else (case when b.CustomerId > 0 then cust.NameAr when b.SupplierId > 0 then sup.NameAr end) end as BeneficiaryName,
+
+case when @lang=''en-us'' then  sup.NameEn else sup.NameAr end as SupplierName,b.SupplierReference,case when @lang=''en-us'' then cust.NameEn else cust.NameAr end as CustomerName,b.PayWay as PayWay,
+ case when @lang=''en-us'' then( case when b.PayWay=1 then N''Cash''
+ when  b.PayWay=2 then N''Credit''
+ when  b.PayWay=3 then N''Installment''  
+  end)
+ else
+ (case when b.PayWay=1 then N''نقدي''
+ when  b.PayWay=2 then N''أجل''
+ when  b.PayWay=3 then N''تقسيط''
+end) end as PayWayName,
+
+
+case when b.ShipMethod=1 then N''FOB''
+when  b.ShipMethod=2 then N''EX_Work''
+when  b.ShipMethod=3 then N''CF'' 
+when  b.ShipMethod=4 then N''CIF''  
+end as ShipMethodName,
+
+
+ case when @lang=''en-us'' then( case when b.ShipKind=1 then N''All''
+ when  b.ShipKind=2 then N''Part''
+
+  end)
+ else
+ (case when b.ShipKind=1 then N''كلى''
+ when  b.ShipKind=2 then N''جزئي''
+
+end) end as ShipKindName,case when @lang =''en-us'' then saleperson.NameEn else saleperson.NameAr end as SalePersonName,
+case when @lang =''en-us'' then store.NameEn else store.NameAr end as StoreName,
+case when @lang =''en-us'' then SecondStore.NameEn else SecondStore.NameAr end as SecondStoreName,
+
+Cast(b.DeliveryDate as date) as  DeliveryDate,
+case when @lang =''en-us'' then curr.NameEn else curr.NameAr end as CurrencyName,
+case when @lang =''en-us'' then proj.NameEn else proj.NameAr end as ProjectName,
+case when @lang =''en-us'' then costcenter.NameEn else costcenter.NameAr end as CostCenterName,
+case when @lang =''en-us'' then inputcostcenter.NameEn else inputcostcenter.NameAr end as InputCostCenterName,
+case when @lang =''en-us'' then outputcostcenter.NameEn else outputcostcenter.NameAr end as OutputCostCenterName
+,b.Notes,b.ReferenceId,b.ReferenceNo,
+
+ISNull(b.TotalBeforeTax,0)  as TotalBeforeTax , 
+ISNull(b.Total,0) as Total,
+IsNull(b.Net,0) as Net,
+b.Paid as Paid,IsNull(b.CurrencyValue,0) as CurrencyValue,
+IsNull(b.Remaining,0)  as Remaining,
+b.Delay
+
+ 
+from Bills as b join BillTypes as bt on b.BillTypeId = bt.Id
+join Branches as bran on b.BranchId = bran.Id 
+left join SupplierCards as sup on b.SupplierId = sup.Id
+left join CustomerCards as cust on b.CustomerId = cust.Id
+left join SalesPersonCards as saleperson on b.SalesPersonId = saleperson.Id
+left join StoreCards as store on b.StoreId = store.Id
+left join StoreCards as SecondStore on b.SecondStoreId = SecondStore.Id
+left join Currencies as curr on b.CurrencyId = curr.Id
+left join Projects as proj on b.ProjectId = proj.Id
+left join CostCenters as costcenter on b.CostCenterId = costcenter.Id
+left join CostCenters as inputcostcenter on b.InputCostCenterId = inputcostcenter.Id
+left join CostCenters as outputcostcenter on b.OutputCostCenterId = outputcostcenter.Id
+
+where b.Id = @id
+
+
+END')
+
+

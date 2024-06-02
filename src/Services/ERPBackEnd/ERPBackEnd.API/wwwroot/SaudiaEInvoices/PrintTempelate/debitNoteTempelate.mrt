@@ -1,0 +1,2076 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <MS_x0020_SQL Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>MS SQL</Alias>
+        <ConnectionStringEncrypted>4FrRSEgI0wVpFSGlYUkl69EgacnGA5OZaBmlgGJY4P/zOvUCRgUBzWJJOclhTCC7w2zPoU9NWZnzTaHw6hThf/RU2wLFSpOZ+2HVyelMohvZVP3CxRYB3WdHTZzqBGXnkGD3</ConnectionStringEncrypted>
+        <Key>761513ba88e14012b10f6810d2ab96c1</Key>
+        <Name>MS SQL</Name>
+      </MS_x0020_SQL>
+    </Databases>
+    <DataSources isList="true" count="3">
+      <CompanyInfo Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>CompanyInfo</Alias>
+        <Columns isList="true" count="37">
+          <value>GUID,System.Guid</value>
+          <value>ID,System.Int32</value>
+          <value>Name,System.String</value>
+          <value>Address,System.String</value>
+          <value>Tel,System.String</value>
+          <value>StartDate,System.DateTime</value>
+          <value>LatinName,System.String</value>
+          <value>Code,System.String</value>
+          <value>Phone2,System.String</value>
+          <value>Fax,System.String</value>
+          <value>POBox,System.String</value>
+          <value>ZipCode,System.String</value>
+          <value>EMail,System.String</value>
+          <value>WebSite,System.String</value>
+          <value>city,System.String</value>
+          <value>Picture,System.Byte[]</value>
+          <value>HeaderType,System.String</value>
+          <value>DetailType,System.String</value>
+          <value>FooterType,System.String</value>
+          <value>AgreeNo,System.String</value>
+          <value>LatinAddress,System.String</value>
+          <value>Mobile,System.String</value>
+          <value>Mobile2,System.String</value>
+          <value>TaxNo,System.String</value>
+          <value>ActivityCode,System.String</value>
+          <value>Picture2,System.Byte[]</value>
+          <value>CountryCode,System.String</value>
+          <value>CityName,System.String</value>
+          <value>Province,System.String</value>
+          <value>District,System.String</value>
+          <value>StreetName,System.String</value>
+          <value>AdditionalStreetName,System.String</value>
+          <value>AdditionalNumber,System.String</value>
+          <value>SchemaldType,System.String</value>
+          <value>SchemaldValue,System.String</value>
+          <value>TaxName,System.String</value>
+          <value>BuildingNumber,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>235abfa1f3364466b3edd5c68c38dcdf</Key>
+        <Name>CompanyInfo</Name>
+        <NameInSource>MS SQL</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>Select * From Company</SqlCommand>
+      </CompanyInfo>
+      <BillMaster Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>BillMaster</Alias>
+        <Columns isList="true" count="254">
+          <value>Guid,System.Guid</value>
+          <value>TypeGuid,System.Guid</value>
+          <value>Type,System.Int32</value>
+          <value>Number,System.Int32</value>
+          <value>UserNumber,System.Int32</value>
+          <value>BillNo,System.String</value>
+          <value>CustGuid,System.Guid</value>
+          <value>CEntry,System.Int32</value>
+          <value>AccCustCode,System.String</value>
+          <value>AccCustName,System.String</value>
+          <value>AccCustLatinName,System.String</value>
+          <value>AccCustCodeName,System.String</value>
+          <value>AccCustGUID,System.Guid</value>
+          <value>AccCustKind,System.Int32</value>
+          <value>AccCustTaxNo,System.String</value>
+          <value>CostGuid,System.Guid</value>
+          <value>CustNumber,System.Int32</value>
+          <value>CustName,System.String</value>
+          <value>Phone,System.String</value>
+          <value>Fax,System.String</value>
+          <value>Address,System.String</value>
+          <value>Mobile,System.String</value>
+          <value>Email,System.String</value>
+          <value>Side,System.String</value>
+          <value>Date,System.DateTime</value>
+          <value>CurrencyPtr,System.Int32</value>
+          <value>CurrencyVal,System.Double</value>
+          <value>Notes,System.String</value>
+          <value>Total,System.Double</value>
+          <value>Paid,System.Double</value>
+          <value>DelegateGuid,System.Guid</value>
+          <value>Remain,System.Double</value>
+          <value>AccPaidNumber,System.Int32</value>
+          <value>AccPaidGuid,System.Guid</value>
+          <value>CashPaid,System.Double</value>
+          <value>PeriodGuid,System.Guid</value>
+          <value>CashierGuid,System.Guid</value>
+          <value>Flag,System.Int32</value>
+          <value>AccPaidCode,System.String</value>
+          <value>AccPaidName,System.String</value>
+          <value>AccPaidLatinName,System.String</value>
+          <value>AccPaidCodeName,System.String</value>
+          <value>AccRemianNumber,System.Int32</value>
+          <value>AccRemainGuid,System.Guid</value>
+          <value>AccRemainCode,System.String</value>
+          <value>AccRemainName,System.String</value>
+          <value>AccRemainLatinName,System.String</value>
+          <value>AccRemainCodeName,System.String</value>
+          <value>Period,System.Double</value>
+          <value>EnGuid,System.Guid</value>
+          <value>PayType,System.Int32</value>
+          <value>TotalDiscValue,System.Double</value>
+          <value>AccDiscValue,System.Int32</value>
+          <value>NotesDiscValue,System.String</value>
+          <value>Reference,System.String</value>
+          <value>RefNumber,System.String</value>
+          <value>RefDate,System.DateTime</value>
+          <value>RefGUID,System.Guid</value>
+          <value>RefTGUID,System.Guid</value>
+          <value>TotalDiscPer,System.Double</value>
+          <value>AccDiscPer,System.Int32</value>
+          <value>NotesDiscPer,System.String</value>
+          <value>TotalExtra,System.Double</value>
+          <value>AccExtra,System.Int32</value>
+          <value>NotesExtra,System.String</value>
+          <value>IsPosted,System.Int32</value>
+          <value>StoreNumber,System.Int32</value>
+          <value>AccBillNumber,System.Int32</value>
+          <value>StoreGUID,System.Guid</value>
+          <value>AccBillGuid,System.Guid</value>
+          <value>TransOrderGUID,System.Guid</value>
+          <value>TransOrderPtr,System.String</value>
+          <value>PaymentGuid,System.Guid</value>
+          <value>Remark,System.String</value>
+          <value>OrderNumber,System.String</value>
+          <value>CostPtr,System.Int32</value>
+          <value>SalesManPtr,System.Int32</value>
+          <value>Branch,System.Int32</value>
+          <value>CarGuid,System.Guid</value>
+          <value>TrailerGuid,System.Guid</value>
+          <value>Code,System.String</value>
+          <value>VersionNumber,System.Int32</value>
+          <value>VersionFromGuid,System.Guid</value>
+          <value>CheckTypeGuid,System.Guid</value>
+          <value>PrStepGuid,System.Guid</value>
+          <value>DriverGuid,System.Guid</value>
+          <value>Field1,System.String</value>
+          <value>Field2,System.String</value>
+          <value>Field3,System.String</value>
+          <value>Field4,System.String</value>
+          <value>BtNumber,System.Int32</value>
+          <value>BtKind,System.String</value>
+          <value>KindId,System.Int32</value>
+          <value>BtName,System.String</value>
+          <value>BtLatinName,System.String</value>
+          <value>BtNotPosted,System.Boolean</value>
+          <value>BtAutoPosted,System.Boolean</value>
+          <value>BtPOBill,System.Boolean</value>
+          <value>BtInvBill,System.Boolean</value>
+          <value>BtStkTrans,System.Boolean</value>
+          <value>BtCustomsClearanceBill,System.Boolean</value>
+          <value>RelateWithCustomsTransaction,System.Boolean</value>
+          <value>BtGroupGUID,System.Guid</value>
+          <value>btNotEntry,System.Boolean</value>
+          <value>btAutoEntry,System.Boolean</value>
+          <value>Disc,System.Double</value>
+          <value>Extra,System.Double</value>
+          <value>empCode,System.String</value>
+          <value>empName,System.String</value>
+          <value>empLatinName,System.String</value>
+          <value>EmpCodeName,System.String</value>
+          <value>StCode,System.String</value>
+          <value>StName,System.String</value>
+          <value>StLatinName,System.String</value>
+          <value>StNameCode,System.String</value>
+          <value>AccBillCode,System.String</value>
+          <value>AccBillName,System.String</value>
+          <value>AccBillLatinName,System.String</value>
+          <value>AccBillCodeName,System.String</value>
+          <value>ClientGUID,System.Guid</value>
+          <value>ClientCode,System.String</value>
+          <value>ClientName,System.String</value>
+          <value>ClientLatinName,System.String</value>
+          <value>FinalTotal,System.Double</value>
+          <value>OrderTotalDisc,System.Int32</value>
+          <value>OrderTotalperdisc,System.Int32</value>
+          <value>ordertotalextra,System.Int32</value>
+          <value>TotalPaid,System.Double</value>
+          <value>BillExtra,System.Double</value>
+          <value>Granting,System.Double</value>
+          <value>TranBillGuid,System.Guid</value>
+          <value>CustomsTransactionGuid,System.Guid</value>
+          <value>CustomsTransactionProcGuid,System.Guid</value>
+          <value>RefRefNumber,System.String</value>
+          <value>Direct,System.Int32</value>
+          <value>coNumber,System.Int32</value>
+          <value>coCode,System.String</value>
+          <value>coName,System.String</value>
+          <value>coLatinName,System.String</value>
+          <value>ppCode,System.String</value>
+          <value>ppName,System.String</value>
+          <value>ppLatinName,System.String</value>
+          <value>caCode,System.String</value>
+          <value>caName,System.String</value>
+          <value>caLatinName,System.String</value>
+          <value>brCode,System.String</value>
+          <value>brName,System.String</value>
+          <value>brLatinName,System.String</value>
+          <value>usCode,System.String</value>
+          <value>usName,System.String</value>
+          <value>usLatinName,System.String</value>
+          <value>ReserveGuid,System.Guid</value>
+          <value>rcode,System.String</value>
+          <value>GenEntry,System.Int32</value>
+          <value>crCode,System.String</value>
+          <value>crName,System.String</value>
+          <value>crLatinName,System.String</value>
+          <value>CarCode,System.String</value>
+          <value>CarName,System.String</value>
+          <value>CarLatinName,System.String</value>
+          <value>TrailerCode,System.String</value>
+          <value>TrailerName,System.String</value>
+          <value>TrailerLatinName,System.String</value>
+          <value>DriverCode,System.String</value>
+          <value>DriverName,System.String</value>
+          <value>DriverLatinName,System.String</value>
+          <value>psCode,System.String</value>
+          <value>psName,System.String</value>
+          <value>psLatinName,System.String</value>
+          <value>CmbFld1,System.String</value>
+          <value>CmbFld2,System.String</value>
+          <value>CmbFld3,System.String</value>
+          <value>CmbFld4,System.String</value>
+          <value>CmbFld5,System.String</value>
+          <value>CmbFld6,System.String</value>
+          <value>Date1,System.DateTime</value>
+          <value>Date2,System.DateTime</value>
+          <value>TxtFld1,System.String</value>
+          <value>TxtFld2,System.String</value>
+          <value>TxtFld3,System.String</value>
+          <value>TxtFld4,System.String</value>
+          <value>Num1,System.Double</value>
+          <value>Num2,System.Double</value>
+          <value>Num3,System.Double</value>
+          <value>Num4,System.Double</value>
+          <value>ParentTypeGuid,System.Guid</value>
+          <value>ParentGuid,System.Guid</value>
+          <value>PersonGuid,System.Guid</value>
+          <value>PersonCode,System.String</value>
+          <value>PersonName,System.String</value>
+          <value>PersonLatinName,System.String</value>
+          <value>PersonPassportCode,System.String</value>
+          <value>PersonCardNotes,System.String</value>
+          <value>CompanyGuid,System.Guid</value>
+          <value>CompanyCode,System.String</value>
+          <value>CompanyName,System.String</value>
+          <value>CompanyLatinName,System.String</value>
+          <value>CompanyRecordCode,System.String</value>
+          <value>CompanyTaxNo,System.String</value>
+          <value>CompanyCardNotes,System.String</value>
+          <value>IDCardNo,System.String</value>
+          <value>IsMultiRef,System.Boolean</value>
+          <value>CashAccGuid,System.Guid</value>
+          <value>CstKind,System.Int32</value>
+          <value>NationGuid,System.Guid</value>
+          <value>NationName,System.String</value>
+          <value>NationLatinName,System.String</value>
+          <value>TaxManually,System.Boolean</value>
+          <value>TaxManuallyPercent,System.Double</value>
+          <value>ManuallyTax,System.Boolean</value>
+          <value>ManuallyTaxType,System.Byte</value>
+          <value>AddTax,System.Double</value>
+          <value>FunTax,System.Double</value>
+          <value>TotalBeforeTax,System.Double</value>
+          <value>ManuallyTaxValue,System.Double</value>
+          <value>FinalAfterTax,System.Double</value>
+          <value>CustTaxNo,System.String</value>
+          <value>ClientTaxNo,System.String</value>
+          <value>Status,System.Int32</value>
+          <value>DCGuid,System.Guid</value>
+          <value>IsExternal,System.Boolean</value>
+          <value>MemberGuid,System.Guid</value>
+          <value>mCode,System.String</value>
+          <value>mName,System.String</value>
+          <value>mLatinName,System.String</value>
+          <value>mNation,System.String</value>
+          <value>mWork,System.String</value>
+          <value>mgCode,System.String</value>
+          <value>mgName,System.String</value>
+          <value>mgLatinName,System.String</value>
+          <value>CalcPaidInBillPay,System.Boolean</value>
+          <value>PolicyGuid,System.Guid</value>
+          <value>ShippingKind,System.Byte</value>
+          <value>SupplyDate,System.DateTime</value>
+          <value>Rsd_NotificationID,System.String</value>
+          <value>ElectBill,System.Boolean</value>
+          <value>Synced,System.Boolean</value>
+          <value>SyncedDate,System.DateTime</value>
+          <value>Synced2,System.Boolean</value>
+          <value>SyncedDate2,System.DateTime</value>
+          <value>ExtID,System.String</value>
+          <value>Qr,System.String</value>
+          <value>InvoiceHash,System.String</value>
+          <value>CountryCode,System.String</value>
+          <value>TaxName,System.String</value>
+          <value>BuildingNumber,System.String</value>
+          <value>CityName,System.String</value>
+          <value>District,System.String</value>
+          <value>PostalCode,System.String</value>
+          <value>StreetName,System.String</value>
+          <value>BuyerCountryCode,System.String</value>
+          <value>SchemaldType,System.String</value>
+          <value>SchemaldValue,System.String</value>
+          <value>CurrencyIsoCode,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>a9ad4de9048f4995ba70c822233ce8af</Key>
+        <Name>BillMaster</Name>
+        <NameInSource>MS SQL</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_invoiceGuid,,12,255</value>
+        </Parameters>
+        <SqlCommand>select * From vwBill Where Guid=@invoiceGuid</SqlCommand>
+      </BillMaster>
+      <BillItems Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>BillItems</Alias>
+        <Columns isList="true" count="294">
+          <value>Guid,System.Guid</value>
+          <value>ParentGuid,System.Guid</value>
+          <value>Type,System.Int32</value>
+          <value>TypeGUID,System.Guid</value>
+          <value>Date,System.DateTime</value>
+          <value>IsPosted,System.Int32</value>
+          <value>KindID,System.Int32</value>
+          <value>Parent,System.Int32</value>
+          <value>Number,System.Int32</value>
+          <value>Qty,System.Double</value>
+          <value>UnitName,System.String</value>
+          <value>UnitID,System.Int32</value>
+          <value>UnitVal,System.Double</value>
+          <value>Price,System.Double</value>
+          <value>CostPrice,System.Double</value>
+          <value>stCostPrice,System.Double</value>
+          <value>CurrencyPtr,System.Int32</value>
+          <value>CurrencyVal,System.Double</value>
+          <value>Notes,System.String</value>
+          <value>Barcode,System.String</value>
+          <value>CostPtr,System.Double</value>
+          <value>MatNumber,System.Int32</value>
+          <value>StoreNumber,System.Int32</value>
+          <value>MatGuid,System.Guid</value>
+          <value>MatType,System.Int32</value>
+          <value>Flag,System.Int32</value>
+          <value>ExpireDate,System.DateTime</value>
+          <value>Ref,System.String</value>
+          <value>RefNo,System.String</value>
+          <value>RefGuid,System.Guid</value>
+          <value>RefTGuid,System.Guid</value>
+          <value>Disc,System.Double</value>
+          <value>Disc2,System.Double</value>
+          <value>Disc3,System.Double</value>
+          <value>AllItemDisc,System.Double</value>
+          <value>Total,System.Double</value>
+          <value>StoreGuid,System.Guid</value>
+          <value>stName,System.String</value>
+          <value>stCode,System.String</value>
+          <value>stLatinName,System.String</value>
+          <value>stCodeName,System.String</value>
+          <value>Width,System.Double</value>
+          <value>Length,System.Double</value>
+          <value>Height,System.Double</value>
+          <value>Cnt,System.Double</value>
+          <value>Desc,System.String</value>
+          <value>ParentMat,System.Guid</value>
+          <value>CostGuid,System.Guid</value>
+          <value>CoCode,System.String</value>
+          <value>CoName,System.String</value>
+          <value>CoLatinName,System.String</value>
+          <value>FreeQty,System.Double</value>
+          <value>BQty,System.Double</value>
+          <value>BPrice,System.Double</value>
+          <value>Extra,System.Double</value>
+          <value>SendItemGuid,System.Guid</value>
+          <value>CustomerPrice,System.Double</value>
+          <value>pmtName,System.String</value>
+          <value>pmtCode,System.String</value>
+          <value>pmtlatinName,System.String</value>
+          <value>Location,System.String</value>
+          <value>mtCode,System.String</value>
+          <value>mtName,System.String</value>
+          <value>mtLatinName,System.String</value>
+          <value>mtNameCode,System.String</value>
+          <value>Serial,System.Boolean</value>
+          <value>WarrPeriod,System.Int32</value>
+          <value>WarrType,System.String</value>
+          <value>mtMaxQty,System.Double</value>
+          <value>mtMinQty,System.Double</value>
+          <value>DescGuid,System.Guid</value>
+          <value>dsCode,System.String</value>
+          <value>dsName,System.String</value>
+          <value>dsLatinName,System.String</value>
+          <value>ItemGroupGUID,System.Guid</value>
+          <value>DriverGuid,System.Guid</value>
+          <value>DriverCode,System.String</value>
+          <value>DriverName,System.String</value>
+          <value>DriverLatinName,System.String</value>
+          <value>CarGuid,System.Guid</value>
+          <value>CarCode,System.String</value>
+          <value>CarName,System.String</value>
+          <value>CarLatinName,System.String</value>
+          <value>TrailerGuid,System.Guid</value>
+          <value>TrailerCode,System.String</value>
+          <value>TrailerName,System.String</value>
+          <value>TrailerLatinName,System.String</value>
+          <value>muBarcode,System.String</value>
+          <value>SalePrice,System.Double</value>
+          <value>ItemCount,System.Double</value>
+          <value>AssetBuyVal,System.Double</value>
+          <value>AssetBookVal,System.Double</value>
+          <value>LessSalePrice,System.Double</value>
+          <value>MatGroupGuid,System.Guid</value>
+          <value>GroupCode,System.String</value>
+          <value>GroupName,System.String</value>
+          <value>GroupLatinName,System.String</value>
+          <value>WeightBefor,System.Double</value>
+          <value>WeightAfter,System.Double</value>
+          <value>InUnit,System.String</value>
+          <value>LengthRate,System.Double</value>
+          <value>WidthRate,System.Double</value>
+          <value>HeightRate,System.Double</value>
+          <value>stMaxQty,System.Double</value>
+          <value>stMinQty,System.Double</value>
+          <value>stBalance,System.Double</value>
+          <value>mtBalance,System.Double</value>
+          <value>Taxable,System.Boolean</value>
+          <value>AddTaxRate,System.Double</value>
+          <value>FunTaxRate,System.Double</value>
+          <value>AddTax,System.Double</value>
+          <value>FunTax,System.Double</value>
+          <value>TotalBeforeTax,System.Double</value>
+          <value>TotalAfterTax,System.Double</value>
+          <value>DiscAfterTax,System.Double</value>
+          <value>BatchNo,System.String</value>
+          <value>Notes2,System.String</value>
+          <value>mtKind,System.Int32</value>
+          <value>IsBatchNo,System.Boolean</value>
+          <value>ImageGuid,System.Guid</value>
+          <value>FileGuid,System.Guid</value>
+          <value>ShipmentQty,System.Double</value>
+          <value>ParentItemGuid,System.Guid</value>
+          <value>ImageGuidBatchNo,System.Guid</value>
+          <value>FileGuidBatchNo,System.Guid</value>
+          <value>WithDefinition,System.Boolean</value>
+          <value>PriceByOffer,System.Boolean</value>
+          <value>ItemOfferGuid,System.Guid</value>
+          <value>mtFlag,System.Int32</value>
+          <value>MatWeight,System.Double</value>
+          <value>Weight,System.Double</value>
+          <value>StandardVal,System.Double</value>
+          <value>DiscQuota,System.Double</value>
+          <value>ExtraQuota,System.Double</value>
+          <value>DiscExtraDistWayName,System.String</value>
+          <value>DiscExtraDistWayLatinName,System.String</value>
+          <value>BillNo,System.String</value>
+          <value>PayType,System.Int32</value>
+          <value>DelegateGuid,System.Guid</value>
+          <value>EmpCode,System.String</value>
+          <value>EmpName,System.String</value>
+          <value>EmpLatinName,System.String</value>
+          <value>CustGuid,System.Guid</value>
+          <value>CustName,System.String</value>
+          <value>Phone,System.String</value>
+          <value>Fax,System.String</value>
+          <value>Address,System.String</value>
+          <value>AccCustGuid,System.Guid</value>
+          <value>AccCustCode,System.String</value>
+          <value>AccCustName,System.String</value>
+          <value>AccCustLatinName,System.String</value>
+          <value>AccCustKind,System.Int32</value>
+          <value>BtNotPosted,System.Boolean</value>
+          <value>BtNumber,System.Int32</value>
+          <value>BtName,System.String</value>
+          <value>BtLatinName,System.String</value>
+          <value>Branch,System.Int32</value>
+          <value>Period,System.Double</value>
+          <value>BrCode,System.String</value>
+          <value>BrName,System.String</value>
+          <value>BrLatinName,System.String</value>
+          <value>UserNumber,System.Int32</value>
+          <value>usCode,System.String</value>
+          <value>usName,System.String</value>
+          <value>usLatinName,System.String</value>
+          <value>btGroupGUID,System.Guid</value>
+          <value>EnGuid,System.Guid</value>
+          <value>CEntry,System.Int32</value>
+          <value>AccBillCode,System.String</value>
+          <value>AccBillName,System.String</value>
+          <value>AccBillLatinName,System.String</value>
+          <value>bTotal,System.Double</value>
+          <value>bTotalBeforeTax,System.Double</value>
+          <value>bAddTax,System.Double</value>
+          <value>bFunTax,System.Double</value>
+          <value>bFinalTotal,System.Double</value>
+          <value>bTaxManually,System.Boolean</value>
+          <value>bTaxManuallyPercent,System.Double</value>
+          <value>ManuallyTaxValue,System.Double</value>
+          <value>bFinalAfterTax,System.Double</value>
+          <value>bDisc,System.Double</value>
+          <value>bExtra,System.Double</value>
+          <value>bNumber,System.Int32</value>
+          <value>bStoreGuid,System.Guid</value>
+          <value>bstName,System.String</value>
+          <value>bstCode,System.String</value>
+          <value>bstLatinName,System.String</value>
+          <value>Reference,System.String</value>
+          <value>RefNumber,System.String</value>
+          <value>RefDate,System.DateTime</value>
+          <value>bRefGuid,System.Guid</value>
+          <value>bRefTGuid,System.Guid</value>
+          <value>Direct,System.Int32</value>
+          <value>bCostGuid,System.Guid</value>
+          <value>bCoCode,System.String</value>
+          <value>bCoName,System.String</value>
+          <value>bCoLatinName,System.String</value>
+          <value>bNotes,System.String</value>
+          <value>BDriverGuid,System.Guid</value>
+          <value>BDriverCode,System.String</value>
+          <value>ADriverName,System.String</value>
+          <value>BDriverLatinName,System.String</value>
+          <value>bCarGuid,System.Guid</value>
+          <value>bCarCode,System.String</value>
+          <value>bCarName,System.String</value>
+          <value>bCarLatinName,System.String</value>
+          <value>bTrailerGuid,System.Guid</value>
+          <value>bTrailerCode,System.String</value>
+          <value>bTrailerName,System.String</value>
+          <value>bTrailerLatinName,System.String</value>
+          <value>Field1,System.String</value>
+          <value>Field2,System.String</value>
+          <value>Field3,System.String</value>
+          <value>Field4,System.String</value>
+          <value>mtNumber,System.Int32</value>
+          <value>mtDescription,System.String</value>
+          <value>mtBarcode,System.String</value>
+          <value>mtModel,System.String</value>
+          <value>mtFirstCostPrice,System.Double</value>
+          <value>mtCostPrice,System.Double</value>
+          <value>mttransPrice,System.Double</value>
+          <value>mtCalcWay,System.Int32</value>
+          <value>mtUnit1,System.String</value>
+          <value>mtUnit1Sell,System.Double</value>
+          <value>mtUnit1LessSell,System.Double</value>
+          <value>mtLocation,System.String</value>
+          <value>mtFirstBalance,System.Double</value>
+          <value>mtGroupNumber,System.Int32</value>
+          <value>mtMatEqualNumber,System.Int32</value>
+          <value>mtGroupGuid,System.Guid</value>
+          <value>mtMatEqualGuid,System.Guid</value>
+          <value>mtDefUnit,System.Int32</value>
+          <value>mtReorderQty,System.Double</value>
+          <value>mtAccGuid,System.Guid</value>
+          <value>mtFld1,System.String</value>
+          <value>mtFld2,System.String</value>
+          <value>mtFld3,System.String</value>
+          <value>mtFld4,System.String</value>
+          <value>mtFld5,System.String</value>
+          <value>mtFld6,System.String</value>
+          <value>mtSerial,System.Boolean</value>
+          <value>mtWithDesc,System.Boolean</value>
+          <value>mtLastBuyPrice,System.Double</value>
+          <value>mtLessBuyPrice,System.Double</value>
+          <value>mtCustomerPrice,System.Double</value>
+          <value>mtViewWay,System.Int32</value>
+          <value>mtPictureGUID,System.Guid</value>
+          <value>mtCustName,System.String</value>
+          <value>mtPhone,System.String</value>
+          <value>mtFax,System.String</value>
+          <value>mtAddress,System.String</value>
+          <value>mtBuyDiscRate,System.Double</value>
+          <value>mtBuyDiscVal,System.Double</value>
+          <value>mtSaleDiscRate,System.Double</value>
+          <value>mtSaleDiscVal,System.Double</value>
+          <value>mtDiscAffectCost,System.Int32</value>
+          <value>GroupGUID,System.Guid</value>
+          <value>Producer,System.String</value>
+          <value>CashComm,System.Double</value>
+          <value>LaterComm,System.Double</value>
+          <value>CommType,System.Int32</value>
+          <value>grCode,System.String</value>
+          <value>grName,System.String</value>
+          <value>grLatinName,System.String</value>
+          <value>mdBarcode,System.String</value>
+          <value>BillCode,System.String</value>
+          <value>BillItemDesc,System.String</value>
+          <value>VersionNumber,System.Int32</value>
+          <value>AccBillGuid,System.Guid</value>
+          <value>bParentGuid,System.Guid</value>
+          <value>bParentTypeGuid,System.Guid</value>
+          <value>PersonGuid,System.Guid</value>
+          <value>PersonCode,System.String</value>
+          <value>PersonName,System.String</value>
+          <value>PersonLatinName,System.String</value>
+          <value>CompanyGuid,System.Guid</value>
+          <value>CompanyCode,System.String</value>
+          <value>CompanyName,System.String</value>
+          <value>CompanyLatinName,System.String</value>
+          <value>mtNum1,System.Double</value>
+          <value>mtNum2,System.Double</value>
+          <value>ShortageQty,System.Double</value>
+          <value>MemberGuid,System.Guid</value>
+          <value>mCode,System.String</value>
+          <value>mName,System.String</value>
+          <value>mLatinName,System.String</value>
+          <value>mNation,System.String</value>
+          <value>mWork,System.String</value>
+          <value>mgCode,System.String</value>
+          <value>mgName,System.String</value>
+          <value>mgLatinName,System.String</value>
+          <value>Paid,System.Double</value>
+          <value>CashPaid,System.Double</value>
+          <value>CalcPaidInBillPay,System.Boolean</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>388a3a3b21d545c88dbe8f3a616b6047</Key>
+        <Name>BillItems</Name>
+        <NameInSource>MS SQL</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_invoiceGuid,,12,255</value>
+        </Parameters>
+        <SqlCommand>Select * From vwBillItems Where ParentGuid=@invoiceGuid</SqlCommand>
+      </BillItems>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="10">
+      <value>,totalQtySale,totalQtySale,,System.Decimal,,False,False,False,False,,_x0039_9d2b0e85a7f455bad30055c591b1bc6</value>
+      <value>,totalValueSale,totalValueSale,,System.Decimal,,False,False,False,False,,_x0038_1806c288e6d400dbfbf1bced5f38549</value>
+      <value>,saleAvgPrice,saleAvgPrice,,System.Decimal,,False,False,False,False,,_x0036_e76f996e99645bbaf507d53f63c322e</value>
+      <value>,totalQtyBuy,totalQtyBuy,,System.Decimal,,False,False,False,False,,b3c85fcb9029455fa19304fd488565c0</value>
+      <value>,totalValueBuy,totalValueBuy,,System.Decimal,,False,False,False,False,,a6297b8129254426b486414fa3698dfc</value>
+      <value>,purAvgPrice,purAvgPrice,,System.Decimal,,False,False,False,False,,c78d3ab91ecc40efb5a705d0ee4dc710</value>
+      <value>,haml,haml,,System.Decimal,,False,False,False,False,,_x0033_5d909e9c44d498ea7fd5848e089f51e</value>
+      <value>,kashf,kashf,,System.Decimal,,False,False,False,False,,_x0032_e48491f22d1444ab81fd78af1ae4f19</value>
+      <value>,STARTDATE,STARTDATE,,System.String,,False,False,False,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_DateTimeType_x003E_DateAndTime_x003C__x002F_DateTimeType_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_CheckedStates_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_</value>
+      <value>,ENDDATE,ENDDATE,,System.String,,False,False,False,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_DateTimeType_x003E_DateAndTime_x003C__x002F_DateTimeType_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_CheckedStates_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>be9e10eeaca04edb96537a3a1b89e3f8</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="6" type="Page" isKey="true">
+      <Border>None;[0:0:0];2;Solid;False;4;[0:0:0]</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="4">
+        <PageHeaderBand1 Ref="7" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,4,204,172</ClientRectangle>
+          <Components isList="true" count="51">
+            <Text1 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>82,2,38,16</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,16,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>إشعار مدين
+Debit Note</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text2 Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>130,2,74,8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>الرقم التسلسلي: {BillMaster.BillNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text2>
+            <Text3 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>124,10,80,8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>التاريخ والوقت:{BillMaster.Date.ToString("dd-MM-yyyy HH:mm:ss")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text3>
+            <BarCode1 Ref="11" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <AutoScale>True</AutoScale>
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="12" type="Stimulsoft.Report.BarCodes.StiQRCodeBarCodeType" isKey="true">
+                <BodyBrush>EmptyBrush</BodyBrush>
+                <EyeBallBrush>EmptyBrush</EyeBallBrush>
+                <EyeFrameBrush>EmptyBrush</EyeFrameBrush>
+              </BarCodeType>
+              <ClientRectangle>76,18,50,38</ClientRectangle>
+              <Code>{BillMaster.Qr}</Code>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode1</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <ShowQuietZones>False</ShowQuietZones>
+            </BarCode1>
+            <Text4 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>134,18,70,8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>تاريخ التوريد:{BillMaster.Date.ToString("dd-MM-yyyy")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text4>
+            <Text5 Ref="14" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,2,80,8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Invoice Reference Number:{BillMaster.BillNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text5>
+            <Text6 Ref="15" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,10,80,8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Bill Date and Time:{BillMaster.Date.ToString("dd-MM-yyyy HH:mm:ss")}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text6>
+            <Text7 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,16,60,8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Supply Date:{BillMaster.Date.ToString("dd-MM-yyyy")}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text7>
+            <Text8 Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>128,24,76,24</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>اسم البائع:
+{CompanyInfo.TaxName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text8>
+            <Text9 Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,24,76,24</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Seller Name:
+{CompanyInfo.LatinName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text9>
+            <Text10 Ref="19" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>128,48,76,16</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>الرقم الضريبي:
+{CompanyInfo.TaxNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text10>
+            <Text11 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,48,76,16</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Tax Number:
+{CompanyInfo.TaxNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text11>
+            <Text12 Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>150,70,54,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>رقم المعرف الاضافي للبائع:
+{CompanyInfo.SchemaldValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text12>
+            <Text13 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>64,70,84,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>نوع المعرف الاضافي-Additional Seller Id Type
+{IIF(CompanyInfo.SchemaldType=="CRN","السجل التجاري" ,"")}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text13>
+            <Text14 Ref="23" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,70,58,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Additional Seller Id:
+{CompanyInfo.SchemaldValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text14>
+            <Text15 Ref="24" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>162,90,42,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>اسم الشارع - Street Name
+{CompanyInfo.StreetName}
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text15>
+            <Text16 Ref="25" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>140,90,22,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>المدينة - City
+{CompanyInfo.city}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text16>
+            <Text17 Ref="26" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>102,90,38,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>رقم المبنى - Building No
+{CompanyInfo.BuildingNumber}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text17>
+            <Text18 Ref="27" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>62,90,40,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>رمز الدولة-Country Code
+{CompanyInfo.CountryCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text18>
+            <Text19 Ref="28" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>38,90,24,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>الحي-District
+{CompanyInfo.District}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text19>
+            <Text20 Ref="29" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,90,38,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>الرمز البريدي-PostalCode
+{CompanyInfo.ZipCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text20>
+            <Text21 Ref="30" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>166,114,38,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>اسم المشتري:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text21>
+            <Text22 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>58,114,106,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>{BillMaster.TaxName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text22>
+            <Text23 Ref="32" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,114,56,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Buyer Name:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text23>
+            <Text24 Ref="33" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>162,140,42,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>اسم الشارع - Street Name
+{BillMaster.StreetName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text24>
+            <Text25 Ref="34" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>140,140,22,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>المدينة - City
+{BillMaster.CityName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text25>
+            <Text26 Ref="35" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>102,140,38,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>رقم المبنى - Building No
+{BillMaster.BuildingNumber}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text26>
+            <Text27 Ref="36" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>62,140,40,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>رمز الدولة-Country Code
+{BillMaster.BuyerCountryCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text27>
+            <Text28 Ref="37" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>38,140,24,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>الحي-District
+{BillMaster.District}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text28>
+            <Text29 Ref="38" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,140,38,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>الرمز البريدي-PostalCode
+{BillMaster.PostalCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text29>
+            <Text54 Ref="39" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>168,108,34,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text54</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>بيانات المشتري</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text54>
+            <Text55 Ref="40" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>170,64,34,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text55</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>بيانات البائع</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text55>
+            <Text56 Ref="41" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>166,120,38,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text56</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>الرقم الضريبي:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text56>
+            <Text57 Ref="42" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>58,120,106,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text57</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>{BillMaster.CustTaxNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>DataColumn</Type>
+            </Text57>
+            <Text58 Ref="43" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,120,56,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text58</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Tax Number:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text58>
+            <Text60 Ref="44" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>166,126,38,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text60</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>السجل التجاري:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text60>
+            <Text61 Ref="45" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>58,126,106,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text61</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>{BillMaster.SchemaldValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text61>
+            <Text62 Ref="46" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,126,56,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,14,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text62</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Additinal Buyer Id:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text62>
+            <Text63 Ref="47" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>170,134,34,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text63</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>عنوان المشتري</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text63>
+            <Text64 Ref="48" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,134,34,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text64</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Buyer Addresss</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text64>
+            <Text65 Ref="49" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>170,84,34,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text65</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>عنوان البائع</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text65>
+            <Text66 Ref="50" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,84,34,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text66</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Seller Address</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text66>
+            <Text67 Ref="51" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>162,166,42,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text67</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>بيانات السلع والخدمات</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text67>
+            <Text68 Ref="52" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,166,44,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text68</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Porducts Or Services</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text68>
+            <Text73 Ref="53" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>184,156,18,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text73</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>السبب:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text73>
+            <Text74 Ref="54" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18,156,166,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text74</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>{BillMaster.Notes}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text74>
+            <Text75 Ref="55" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,156,18,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text75</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Reason:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text75>
+            <Text76 Ref="56" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,108,34,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text76</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Buyer</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text76>
+            <HorizontalLinePrimitive1 Ref="57" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,104,204,0.254</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="58" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Expressions isList="true" count="0" />
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <StartCap Ref="59" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+            <HorizontalLinePrimitive2 Ref="60" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,154,204,0.254</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="61" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Expressions isList="true" count="0" />
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <StartCap Ref="62" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+            <HorizontalLinePrimitive3 Ref="63" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,164,204,0.254</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="64" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Expressions isList="true" count="0" />
+              <Name>HorizontalLinePrimitive3</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <StartCap Ref="65" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </PageHeaderBand1>
+        <HeaderBand1 Ref="66" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,184,204,10</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text31 Ref="67" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>162,0,42,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="6" />
+              <Parent isRef="66" />
+              <Text>وصف السلعة او الخدمة
+Product Or Service Desc</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text31>
+            <Text32 Ref="68" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>144,0,18,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="6" />
+              <Parent isRef="66" />
+              <Text>السعر
+Price</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text32>
+            <Text33 Ref="69" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>126,0,18,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="6" />
+              <Parent isRef="66" />
+              <Text>الكمية
+Qty</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text33>
+            <Text34 Ref="70" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>106,0,20,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="6" />
+              <Parent isRef="66" />
+              <Text>نسبة الضريبة
+VAT Rate</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text34>
+            <Text35 Ref="71" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>42,0,22,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="6" />
+              <Parent isRef="66" />
+              <Text>مبلغ الضريبة
+VAT Amount</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text35>
+            <Text37 Ref="72" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>0,0,42,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="6" />
+              <Parent isRef="66" />
+              <Text>الاجمالي شامل الضريبة
+Subtotal Inclusive VAT</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text37>
+            <Text36 Ref="73" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[216:216:216]</Brush>
+              <ClientRectangle>64,0,42,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="6" />
+              <Parent isRef="66" />
+              <Text>الاجمالي غير شامل الضريبة
+Subtotal exclusive VAT</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text36>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>HeaderBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </HeaderBand1>
+        <DataBand1 Ref="74" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,202,204,12</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text38 Ref="75" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>162,0,42,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="6" />
+              <Parent isRef="74" />
+              <Text>{BillItems.mtName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text38>
+            <Text30 Ref="76" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>144,0,18,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="6" />
+              <Parent isRef="74" />
+              <Text>{BillItems.Price} {BillMaster.CurrencyIsoCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text30>
+            <Text39 Ref="77" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>126,0,18,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="6" />
+              <Parent isRef="74" />
+              <Text>{BillItems.Qty}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text39>
+            <Text40 Ref="78" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>106,0,20,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="6" />
+              <Parent isRef="74" />
+              <Text>{BillItems.AddTaxRate}%</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text40>
+            <Text41 Ref="79" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>42,0,22,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="6" />
+              <Parent isRef="74" />
+              <Text>{BillItems.AddTax} {BillMaster.CurrencyIsoCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text41>
+            <Text43 Ref="80" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,42,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text43</Name>
+              <Page isRef="6" />
+              <Parent isRef="74" />
+              <Text>{BillItems.TotalAfterTax} {BillMaster.CurrencyIsoCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text43>
+            <Text42 Ref="81" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>64,0,42,12</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="6" />
+              <Parent isRef="74" />
+              <Text>{BillItems.TotalBeforeTax} {BillMaster.CurrencyIsoCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text42>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>BillItems</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <FooterBand1 Ref="82" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,222,204,74</ClientRectangle>
+          <Components isList="true" count="17">
+            <Text44 Ref="83" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>164,12,40,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text44</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>اجمالي الخصم
+Total Discount Amount</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text44>
+            <Text45 Ref="84" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>116,12,48,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>المبلغ الخاضع للضريبة
+Invoice Total Exclusive VAT</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text45>
+            <Text46 Ref="85" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>82,12,34,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text46</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>اجمالي الضريبة المضافة
+VAT Total Amount</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text46>
+            <Text47 Ref="86" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>34,12,48,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text47</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>إجمالي قيمة الفاتورة
+Invoice Total Inclusive VAT</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text47>
+            <Text48 Ref="87" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,12,34,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text48</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>المبلغ المستحق
+Payable Amount</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text48>
+            <Text49 Ref="88" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>164,22,40,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text49</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>{Sum(DataBand1,BillItems.Disc)} {BillMaster.CurrencyIsoCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text49>
+            <Text50 Ref="89" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>116,22,48,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>{Sum(DataBand1,BillItems.TotalBeforeTax)} {BillMaster.CurrencyIsoCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text50>
+            <Text51 Ref="90" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>82,22,34,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text51</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>{Sum(DataBand1,BillItems.AddTax)} {BillMaster.CurrencyIsoCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text51>
+            <Text52 Ref="91" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>34,22,48,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text52</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>{Sum(DataBand1,BillItems.TotalAfterTax)} {BillMaster.CurrencyIsoCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text52>
+            <Text53 Ref="92" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,22,34,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text53</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>{Sum(DataBand1,BillItems.TotalAfterTax)} {BillMaster.CurrencyIsoCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text53>
+            <Text59 Ref="93" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>166,2,38,8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text59</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>إجماليات الفاتورة:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text59>
+            <Text69 Ref="94" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>180,56,22,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text69</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>طريقة الدفع:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text69>
+            <Text70 Ref="95" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>106,56,74,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text70</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>نقداً</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text70>
+            <Text71 Ref="96" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,56,34,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold| Underline</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text71</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>Payment Method:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text71>
+            <Text72 Ref="97" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>36,56,70,6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text72</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>Cash</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text72>
+            <Text77 Ref="98" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,36,168,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text77</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>فقط {ToCurrencyWordsAr(Sum( DataBand1,BillItems.TotalAfterTax),"ريال","هلله")} لا غير</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text77>
+            <Text78 Ref="99" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>168,36,36,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Calibri,12,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text78</Name>
+              <Page isRef="6" />
+              <Parent isRef="82" />
+              <Text>المبلغ المستحق
+Payable Amount</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text78>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>FooterBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </FooterBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>7e5baf2b03ab414696defdd543a9f59f</Guid>
+      <Margins>3,3,3,3</Margins>
+      <Name>Page1</Name>
+      <PageHeight>297</PageHeight>
+      <PageWidth>210</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>1/8/2023 11:05:53 AM</ReportChanged>
+  <ReportCreated>5/4/2020 11:46:57 PM</ReportCreated>
+  <ReportFile>D:\SaudiaEInvoiceOutput\debitNoteTempelate.mrt</ReportFile>
+  <ReportGuid>30c4eacaaeea44b7ae65826e11e1325b</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Millimeters</ReportUnit>
+  <ReportVersion>2022.4.4.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

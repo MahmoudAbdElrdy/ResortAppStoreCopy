@@ -1,0 +1,139 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Item_Movement_Details_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Item_Movement_Details_Report];
+
+
+exec('
+create PROCEDURE [dbo].[SP_Item_Movement_Details_Report]
+@fromDate date = NULL,
+@toDate  date = NULL,
+@itemId  bigint = NULL,
+@storeId  bigint = NULL,
+@branchId bigint = NULL,
+@companyId bigint = NULL,
+@currencyId bigint = NULL,
+@billTypeId  int = NULL,
+@itemGroupId bigint = NULL,
+@salesAndSalesReturnbillKindId int = NULL,
+@selectedItemName as NVARCHAR(100) = NULL,
+@selectedStoreName NVARCHAR(100) = NULL,
+@selectedBranchName as NVARCHAR(100) = NULL,
+@selectedBillTypeName as NVARCHAR(100) = NULL,
+@selectedCurrencyName as NVARCHAR(100) = NULL,
+@selectedItemGroupName NVARCHAR(100) = NULL,
+@selectedSalesAndSalesReturnBillKindName as NVARCHAR(100) = NULL,
+@lang VARCHAR(10) = ''en-us'',
+@userId NVARCHAR(50)=null
+
+
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@storeId = 0)
+BEGIN
+    SET @storeId = NULL
+END
+IF (@itemId = 0)
+BEGIN
+    SET @itemId = NULL
+END
+IF (@itemGroupId = 0)
+BEGIN
+    SET @itemGroupId = NULL
+END
+IF (@currencyId = 0)
+BEGIN
+    SET @currencyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+
+IF (@salesAndSalesReturnbillKindId = 0)
+BEGIN
+    SET @salesAndSalesReturnbillKindId = NULL
+END
+
+IF (@billTypeId = 0)
+BEGIN
+    SET @billTypeId = NULL
+END
+
+
+BEGIN
+
+
+select
+ itrans.CurrencyId,
+ itrans.CompanyId,
+ itrans.BranchId,
+ itrans.billId ,
+ itrans.StoreId,
+ itrans.item_Code as ItemCode,
+ case when @lang=''en-us'' then( case when itrans.ItemType=1 then N''Store''
+ when itrans.ItemType=2 then N''Service'' end)
+ else
+ (case when itrans.ItemType=1 then N''مستودع''
+ when  itrans.ItemType=2 then N''خدمة'' end) end as ItemTypeName,
+ IsNull(case when @lang=''ar'' then itrans.Item_NameAr else itrans.Item_NameEn end,''-'') as ItemName,
+ Cast(IsNull(itrans.AddedQuantity,0)as numeric(9,2)) as AddedQuantity,
+ Cast(IsNull(itrans.IssuedQuantity,0)as numeric(9,2)) as IssuedQuantity,
+ Cast(IsNull(itrans.ConvertedAddedQuantity,0)as numeric(9,2)) as ConvertedAddedQuantity,
+ Cast(IsNull(itrans.ConvertedIssuedQuantity,0)as numeric(9,2)) as ConvertedIssuedQuantity,
+ (CAST(IsNull(itrans.IssuedQuantity,0)-IsNull(itrans.AddedQuantity,0)as numeric(9,2))) as CurrentQuantity,
+ (CAST((IsNull(itrans.AddedQuantity,0)+IsNull(itrans.IssuedQuantity,0))as numeric(9,2)))as BillQantity,
+ (CAST(((IsNull(itrans.IssuedQuantity,0)+IsNull(itrans.AddedQuantity,0))* IsNull(itrans.Price,0))as numeric(9,2))) as TotalPriceItems,
+ (CAST(((IsNull(itrans.AddedQuantity,0)+IsNull(itrans.IssuedQuantity,0)*IsNull(itrans.Price,0))+IsNull(itrans.TotalTax,0))as  numeric(9,2))) as TotalAfterTax,
+ (Cast(IsNull(itrans.Price,0)as  numeric(9,2))) as ItemPrice,
+ (CAST(itrans.TotalBeforeTax as numeric(9,2))) as TotalBeforeTax,
+ CAST(IsNull(itrans.TotalTax,0)as numeric(9,2)) as TotalTax,
+ CAST(IsNull(itrans.DiscountValue,0)as numeric(9,2)) as DiscountValue,
+ CAST(IsNull(itrans.AdditionValue,0)as  numeric(9,2)) as  AdditionValue,
+ CAST(itrans.Total as numeric(9,2)) as Total ,
+ case when @lang=''ar'' then itrans.Unit_NameAr else itrans.Unit_NameEn end as UnitName,
+ case when @lang=''ar'' then itrans.MainUnit_NameAr else itrans.MainUnit_NameEn end as MainUnitName,
+ case when @lang=''ar'' then itrans.Store_NameAr else itrans.Store_NameEn end as StoreName,
+ itrans.Bill_Code,
+ itrans.Bill_Date,
+ case when @lang=''ar'' then itrans.BillTypesNameAr else itrans.BillTypesNameEn end as DocumentName,
+ (select [dbo].[fn_Get_Item_Quantity_Balance](itrans.Bill_Date,itrans.ItemId,itrans.storeId)) as PreviousQuantity
+
+  from  vm_item_transactions as itrans
+
+where
+
+  (@fromDate IS NULL OR itrans.Bill_Date >= @fromDate)
+   AND (@toDate IS NULL OR itrans.Bill_Date <= @toDate)
+   AND (@currencyId IS NULL OR itrans.CurrencyId = @currencyId)
+   AND (itrans.storeId =@storeId or @storeId is null)
+   AND (itrans.Item_Id =@itemId or @itemId is null)
+   AND (itrans.ItemGroupId =@itemGroupId or @itemGroupId is null)
+   AND (itrans.branchId IN (SELECT * FROM fnSplitString(@branchId,'','')) or @branchId is null) 
+   AND (@salesAndSalesReturnbillKindId IS NULL OR itrans.BillKind = @salesAndSalesReturnbillKindId)
+   AND (@billTypeId IS NULL OR itrans.BillTypeId = @billTypeId)
+   AND (itrans.CompanyId = @companyId)
+   AND itrans.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			And (UsersCompanies.IsDeleted=0)
+        )
+    )
+
+	order by itrans.item_Code, itrans.Bill_Date
+
+END
+
+
+
+
+
+
+
+
+')

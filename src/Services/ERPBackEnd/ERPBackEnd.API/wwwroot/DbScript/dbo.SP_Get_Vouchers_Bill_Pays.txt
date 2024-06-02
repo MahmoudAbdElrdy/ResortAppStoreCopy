@@ -1,0 +1,25 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_Vouchers_Bill_Pays') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_Vouchers_Bill_Pays];
+
+
+
+exec('
+create PROCEDURE [dbo].SP_Get_Vouchers_Bill_Pays
+@voucherId BIGINT
+AS
+BEGIN
+
+select     
+p.BillId as BillId,b.Code,bt.NameAr as BillTypeAr,bt.NameEn as BillTypeEn ,p.Id as BillPayId, p.Net , p.Paid,p.Remaining,p.Amount,p.BillInstallmentId,p.InstallmentValue,p.PaidInstallment
+,p.PayWay,p.RemainingInstallment,b.Date as BillDate,b.Delay as Delay,
+ case when b.PayWay = 3 then  N''تقسيط''
+ when b.PayWay = 2 then  N''أجل''  end  as PayWayAr
+ ,case when b.PayWay = 3 then  N''Installment'' when b.PayWay = 2 then  N''Credit'' end  as PayWayEn
+ ,b.InstallmentCount , b.PaymentDate as  InstallmentDate
+		
+from BillPays as p join Bills as b on p.BillId = b.Id
+join BillTypes as bt on b.BillTypeId = bt.Id 
+where p.IsDeleted <> 1  and p.VoucherId = @voucherId
+     
+End
+')
+

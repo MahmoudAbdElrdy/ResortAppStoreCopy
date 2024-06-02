@@ -1,0 +1,107 @@
+[
+    {
+        "RoleId": "1",
+        "PermissionId": 1,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 2,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 3,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 4,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 5,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 6,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 7,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 8,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 9,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 10,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 11,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 12,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 13,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 14,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 15,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 16,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 17,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 18,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 19,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 20,
+        "IsChecked": false
+    },
+    {
+        "RoleId": "1",
+        "PermissionId": 21,
+        "IsChecked": false
+    }
+]

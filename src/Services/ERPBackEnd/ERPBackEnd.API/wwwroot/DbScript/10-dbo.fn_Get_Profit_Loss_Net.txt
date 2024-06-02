@@ -1,0 +1,26 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Get_Profit_Loss_Net') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_Get_Profit_Loss_Net];
+
+
+exec('Create function [dbo].[fn_Get_Profit_Loss_Net]
+(
+@fromDate Date=null,
+@toDate Date=null
+)
+returns float as
+begin
+return
+(
+SELECT
+                    
+				isnull(dbo.fn_Get_Revenues_Total(@fromDate,@toDate),0) - isnull(dbo.fn_Get_Expenses_Total(@fromDate,@toDate),0)	
+					 
+			--		  FROM    ACCOUNTS join AccountClassifications on ACCOUNTS.AccountClassificationIdOfIncomeStatement=AccountClassifications.Id
+
+   --         WHERE   
+			--isnull(ACCOUNTS.ParentId,0)=0  and
+			
+			--ACCOUNTS.AccountType=1 and  ACCOUNTS.AccountClassificationIdOfIncomeStatement>0  and  AccountClassifications.Type=1
+			--group by AccountClassifications.Type
+)          
+end')
+

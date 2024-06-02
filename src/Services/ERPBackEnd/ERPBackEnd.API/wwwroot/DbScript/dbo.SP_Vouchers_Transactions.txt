@@ -1,0 +1,155 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Vouchers_Transactions') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Vouchers_Transactions];
+
+
+
+exec('Create procedure [dbo].[SP_Vouchers_Transactions]
+@fromDate Date = null,
+@toDate Date = null,
+@voucherKindId int=null,
+@currencyId as bigint=null,
+@branchId as NVARCHAR(50) = NULL,
+@lang as NVARCHAR(10) ,
+@accountId BIGINT = NULL,
+@companyId BIGINT=null,
+@userId NVARCHAR(50)=null,
+@entriesStatusId INT = NULL,
+@selectedCurrencyName NVARCHAR(100) =null,
+@selectedVoucherKindName  NVARCHAR(100) =null,
+@selectedBranchName as NVARCHAR(100) = NULL
+
+as
+
+
+if(@voucherKindId = 0)
+begin 
+set @voucherKindId=null
+end
+
+
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+IF (@accountId = 0)
+BEGIN
+    SET @accountId = NULL
+END
+
+
+IF (@currencyId = 0)
+BEGIN
+    SET @currencyId = NULL
+END
+
+
+
+BEGIN
+select 
+
+
+v.Id,
+v.Code,
+v.VoucherTypeId,
+v.VoucherTotal,
+v.VoucherTotalLocal,
+v.VoucherDate,
+sum(vd.Debit+vd.Credit) as VoucherDetailTotal ,
+sum(vd.DebitLocal+vd.CreditLocal) as VoucherDetailLocalTotal ,
+case when @lang =''en-us'' then vt.NameEn
+else vt.NameAr end as VoucherName,
+
+
+case
+when vt.VoucherKindId=1 and @lang =''en-us'' then ''Deposit''
+when vt.VoucherKindId=2 and @lang =''en-us'' then ''Withdraw''
+when vt.VoucherKindId=1 and @lang =''ar'' then N''قبض''
+when vt.VoucherKindId=2 and @lang =''ar'' then N''صرف''
+end as VoucherKind,
+case
+when vd.BeneficiaryTypeId=1 and @lang =''en-us'' then ''Customer''
+when vd.BeneficiaryTypeId=2 and @lang =''en-us'' then ''Supplier''
+when vd.BeneficiaryTypeId=4 and @lang =''en-us'' then ''Account''
+when vd.BeneficiaryTypeId=1 and @lang =''ar'' then N''عميل''
+when vd.BeneficiaryTypeId=2 and @lang =''ar'' then N''مورد''
+when vd.BeneficiaryTypeId=4 and @lang =''ar'' then N''حساب''
+end as BeneficiaryType,
+case when vd.BeneficiaryTypeId=1 then (case when @lang =''en-us'' then  ctr.NameEn else ctr.NameAr end )
+when vd.BeneficiaryTypeId=2 then (case when @lang =''en-us'' then  sup.NameEn else sup.NameAr end )
+when vd.BeneficiaryTypeId=4 then (case when @lang =''en-us'' then  acc_beneficiary.NameEn else acc_beneficiary.NameAr end )
+
+end as beneficiaryAccountName,
+
+case when @lang =''en-us'' then acc.NameEn
+else acc.NameAr end as CashAccountName,
+--case when @lang =''en-us'' then acc_beneficiary.NameEn
+--else acc_beneficiary.NameAr end as beneficiaryAccountName,
+case when @lang =''en-us'' then com.NameEn
+else com.NameAr end as CompanyName,
+
+case when @lang =''en-us'' then bran.NameEn
+else bran.NameAr end as BranchName,
+
+
+case when @lang =''en-us'' then co.NameEn
+else co.NameAr end as CostCenterName,
+
+
+case when @lang =''en-us'' then cu.NameEn
+else cu.NameAr end as CurrencyName,
+(select 
+case when @lang =''en-us'' then NameEn
+else  NameAr end 
+from Currencies where Id=vd.CurrencyId
+) as CurrencyDetailName
+
+--case when @lang =''en-us'' then cur_vd.NameEn
+--else cur_vd.NameAr end as CurrencyDetailName
+
+
+from Vouchers as v join VoucherTypes as vt on v.VoucherTypeId = vt.Id
+left join VoucherDetails as vd on v.Id= vd.VoucherId
+left join Accounts as acc_beneficiary on vd.BeneficiaryAccountId=acc_beneficiary.Id
+left join Accounts as acc on v.CashAccountId=acc.Id
+left join Companies as com on v.CompanyId=com.Id
+left join Branches as bran on v.BranchId=bran.Id
+left join CostCenters as co on v.CostCenterId=co.Id
+left join Currencies as cu on v.CurrencyId=cu.Id
+--left join Currencies as cur_vd on vd.CurrencyId=cu.Id
+left join CustomerCards as  ctr on vd.BeneficiaryId = ctr.Id
+left join SupplierCards as  sup on vd.BeneficiaryId = sup.Id
+
+
+ Where
+	  (v.IsDeleted=0 or v.IsDeleted is null)
+	 and
+	 (vt.VoucherKindId = @voucherKindId or @voucherKindId is null and vt.IsDeleted=0 )
+	 and
+	 (v.BranchId IN (SELECT * FROM fnSplitString(@branchId,'','')) or @branchId is null and bran.IsDeleted=0  ) 
+	 and
+	 (v.CurrencyId  = @currencyId   or @currencyId is null and cu.IsDeleted=0)
+	and 
+	(v.VoucherDate >= @fromDate or @fromDate is null)
+	and (v.VoucherDate <=@toDate or @toDate is null)
+	
+    AND (@accountId IS NULL OR vd.BeneficiaryAccountId = @accountId)
+    AND v.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+        )
+    )
+	group by v.Id ,vd.BeneficiaryTypeId,vd.CurrencyId,sup.NameAr,sup.NameEn,ctr.NameAr,ctr.NameEn, v.Code,VoucherId,com.NameAr,cu.NameEn,cu.NameAr,co.NameEn,co.NameAr,com.NameEn,vt.NameEn,bran.NameEn,bran.NameAr,acc_beneficiary.NameAr,acc_beneficiary.NameEn,acc.NameAr,acc.NameEn,vt.VoucherKindId,vt.NameAr,v.VoucherTypeId,v.VoucherTotal,v.VoucherTotalLocal,v.VoucherDate
+	order by v.VoucherTypeId
+	
+	
+
+
+End')

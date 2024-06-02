@@ -1,0 +1,185 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Bills_Details_With_Determinants') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Bills_Details_With_Determinants];
+
+
+exec('
+Create PROCEDURE [dbo].[SP_Bills_Details_With_Determinants]
+    @fromDate DATE = NULL,
+    @toDate DATE = NULL,
+	@companyId BIGINT = NULL,
+    @branchId as NVARCHAR(250) = NULL,
+	@projectId as NVARCHAR(250) = NULL,
+	@storeId BIGINT = NULL,
+	@itemGroupId  BIGINT = NULL,
+	@itemId BIGINT = NULL,
+	@customerId BIGINT = NULL,
+	@supplierId BIGINT = NULL,
+	@salesPersonId BIGINT = NULL,
+	@costCenterId BIGINT = NULL,
+	@payWay as NVARCHAR(250) = NULL,
+	@accountingEffect as NVARCHAR(250) = NULL,
+	@warehouseEffect as NVARCHAR(250) = NULL,
+	@billTypeIds  as NVARCHAR(250) = NULL,
+	@currencyId BIGINT = NULL,
+	@greaterThan float  = NULL,
+	@lessThan float  = NULL,
+	@lang VARCHAR(10) = ''en-us'',
+	@userId NVARCHAR(50)=null,
+	@fiscalPeriodId BIGINT = NULL
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = ''null'')
+BEGIN
+    SET @branchId = NULL
+END
+
+IF (@projectId = ''null'')
+BEGIN
+    SET @projectId = NULL
+END
+
+IF (@itemGroupId = 0)
+BEGIN
+    SET @itemGroupId = NULL
+END
+
+IF (@itemId = 0)
+BEGIN
+    SET @itemId = NULL
+END
+
+IF (@storeId = 0)
+BEGIN
+    SET @storeId = NULL
+END
+
+
+IF (@customerId = 0)
+BEGIN
+    SET @customerId = NULL
+END
+
+IF (@supplierId = 0)
+BEGIN
+    SET @supplierId = NULL
+END
+
+IF (@salesPersonId = 0)
+BEGIN
+    SET @salesPersonId = NULL
+END
+
+IF (@costCenterId = 0)
+BEGIN
+    SET @costCenterId = NULL
+END
+
+IF (@payWay = ''null'')
+BEGIN
+    SET @payWay = NULL
+END
+
+IF (@accountingEffect = ''null'')
+BEGIN
+    SET @accountingEffect = NULL
+END
+
+IF (@warehouseEffect = ''null'')
+BEGIN
+    SET @warehouseEffect = NULL
+END
+
+
+IF (@currencyId = 0)
+BEGIN
+    SET @currencyId = NULL
+END
+
+IF (@greaterThan = 0)
+BEGIN
+    SET @greaterThan = NULL
+END
+
+IF (@lessThan = 0)
+BEGIN
+    SET @lessThan = NULL
+END
+
+IF (@userId = 0)
+BEGIN
+    SET @userId = NULL
+END
+
+
+
+BEGIN
+
+
+select bt.Kind, b.Code as BillCode,b.Date as BillDate, case when @lang=''en-us'' then item.NameEn else item.NameAr end as ItemName,bi.ItemDescription,
+ case when @lang=''en-us'' then un.NameEn else un.NameAr end as UnitName,
+ case when bt.Kind = 2  or bt.Kind = 3 or bt.Kind = 5 then Isnull(bi.AddedQuantity,0) when bt.Kind = 1 or bt.Kind = 4 then isnull(bi.IssuedQuantity,0) end as Quantity,
+  case when @lang=''en-us'' then bran.NameEn else bran.NameAr end  as BranchName ,
+ case when @currencyId > 0 then   isnull(bi.Price,0) else  isnull(bi.Price,0) * isnull(b.CurrencyValue,0) end as Price,
+ Case when @currencyId > 0 then IsNull(bi.TotalBeforeTax,0) else IsNull(bi.TotalBeforeTax,0) * isnull(b.CurrencyValue,0) end as TotalBeforeTax, 
+ case when @currencyId > 0 then IsNull(bi.TotalTax,0) else  IsNull(bi.TotalTax,0) * isnull(b.CurrencyValue,0) end as TotalTax,
+  case when @currencyId > 0 then IsNull(bi.AdditionValue,0) else IsNull(bi.AdditionValue,0) * isnull(b.CurrencyValue,0) end as AdditionValue,
+ case when @currencyId > 0 then IsNull(bi.AdditionRatio,0) else IsNull(bi.AdditionRatio,0) * isnull(b.CurrencyValue,0) end as AdditionRatio,
+  case when @currencyId > 0 then IsNull(bi.DiscountRatio,0) else IsNull(bi.DiscountRatio,0) * isnull(b.CurrencyValue,0) end as DiscountRatio,
+ case when @currencyId > 0 then  IsNull(bi.DiscountValue,0) else IsNull(bi.DiscountValue,0) * isnull(b.CurrencyValue,0) end as DiscountValue,
+ case when @currencyId > 0 then  IsNull(bi.Total,0) else IsNull(bi.Total,0) * isnull(b.CurrencyValue,0) end as Total,bi.Notes,
+ case when @lang=''en-us'' then store.NameEn else store.NameAr end as StoreName, case when @lang=''en-us'' then costcenter.NameEn else costcenter.NameAr end as CostcenterName,
+  case when @lang=''en-us'' then Proj.NameEn else Proj.NameAr end as ProjectName,IsNull(bi.UnitTransactionFactor,0) as UnitTransactionFactor,
+  case when @currencyId > 0 then  IsNull(bi.TotalCostPrice,0) else IsNull(bi.TotalCostPrice,0)  * isnull(b.CurrencyValue,0) end as TotalCostPrice 
+  ,IsNull(bi.IssuedQuantity,0) as IssuedQuantity,IsNull(bi.AddedQuantity,0) as AddedQuantity,
+  IsNull(bi.ConvertedIssuedQuantity,0) as ConvertedIssuedQuantity,IsNull(bi.ConvertedAddedQuantity,0) as ConvertedAddedQuantity
+  ,case when @lang =''en-us'' then curr.NameEn else curr.NameAr end  as CurrencyName,IsNull(b.CurrencyValue,0) as CurrencyValue,
+  bt.Id as BillTypeId,case when @lang =''en-us'' then bt.NameEn else bt.NameAr end  as BillTypeName,entry.Id as JournalEntryId,
+        CASE 
+    WHEN  determainant.DeterminantData IS NOT NULL AND determainant.DeterminantData <> '''' THEN
+        dbo.fn_Get_Bill_Item_Determinants(determainant.DeterminantData,@lang)
+    ELSE 
+        ''-''
+END AS Determainants
+
+  from BillItems as bi 
+  join Bills as b on bi.BillId = b.Id 
+  join BillTypes as bt on b.BillTypeId = bt.Id
+  join Branches as bran on b.BranchId = bran.Id 
+  join ItemCards as item on bi.ItemId = item.Id
+left join BillDynamicDeterminants as determainant on bi.Id = determainant.BillItemId
+left join ItemGroupsCards as itemgroup on item.ItemGroupId = itemgroup.Id
+left join Units as un on bi.UnitId = un.Id
+left join StoreCards as store on bi.StoreId = store.Id
+left join CostCenters as costcenter on bi.CostCenterId = costcenter.Id
+left join Projects as Proj on bi.ProjectId = Proj.Id
+left join Currencies as curr on b.CurrencyId = curr.Id
+left join JournalEntriesMasters as entry on b.Id = entry.ParentTypeId and ( entry.ParentType = 4 or entry.ParentType = 5 or entry.ParentType = 6 or entry.ParentType = 7)  and (entry.IsDeleted<>1)
+
+ Where
+( b.IsDeleted<>1  )
+and (b.Date >= @fromDate or @fromDate is null)
+and (b.Date <=@toDate or @toDate is null)
+and (b.BranchId IN (SELECT * FROM fnSplitString(@branchId,'','')) or @branchId is null) 
+and (b.CompanyId =@companyId or @companyId is null)
+and	 (bi.ProjectId IN (SELECT * FROM fnSplitString(@projectId,'','')) or @projectId is null) 
+and (bi.storeId =@storeId or @storeId is null)
+and (b.CustomerId =@customerId or @customerId is null)
+and (b.SupplierId =@supplierId or @supplierId is null)
+and (b.SalesPersonId =@salesPersonId or @salesPersonId is null)
+and (bi.CostCenterId =@costCenterId or @costCenterId is null)
+and	 (b.PayWay IN (SELECT * FROM fnSplitString(@payWay,'','')) or @payWay is null) 
+and	 (bt.AccountingEffect IN (SELECT * FROM fnSplitString(@accountingEffect,'','')) or @accountingEffect is null) 
+and	 (bt.WarehouseEffect IN (SELECT * FROM fnSplitString(@warehouseEffect,'','')) or @warehouseEffect is null) 
+and	 (b.billTypeId IN (SELECT * FROM fnSplitString(@billTypeIds,'','')) or @billTypeIds is null) 
+and (b.CurrencyId =@currencyId or @currencyId is null)
+and (bi.Total * b.CurrencyValue > @greaterThan or @greaterThan is null)
+and (bi.Total * b.CurrencyValue   < @lessThan or @lessThan is null)
+and (bi.ItemId =@itemId or @itemId is null)
+and (itemgroup.Id =@itemGroupId or @itemGroupId is null)
+and (b.CreatedBy =@userId or @userId is null)
+and (b.FiscalPeriodId =@fiscalPeriodId or @fiscalPeriodId is null)
+
+
+END')

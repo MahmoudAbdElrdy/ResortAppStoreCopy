@@ -1,0 +1,54 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_Income_Statement_Totals') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Get_Income_Statement_Totals];
+
+
+
+exec('Create procedure [dbo].[SP_Get_Income_Statement_Totals]
+@fromDate Date=null,
+@toDate Date=null,
+@lang Nvarchar(10) =''ar''
+
+
+as
+
+
+begin
+
+        select
+  Acc.Code as  AccountCode,
+  AccClass.Code as  AccountClassCode,
+  Case when @lang=''ar'' then  Acc.NameAr else Acc.NameEn end as AccountName,
+  Case when @lang=''ar'' then  AccClass.NameAr else AccClass.NameEn end as AccClassName,
+  Acc.AccountGroupId,
+  case when Acc.AccountType =1 then
+  (case when @lang=''ar''then N''إيراد'' else ''Revenue'' end) 
+   when   Acc.AccountType =2 then
+  (case when @lang=''ar''then N''مصروف'' else ''Expenses'' end) end as AccountTypeName,
+  
+  case when Acc.AccountType=1 then ((Jd.JEDetailCreditLocal-jd.JEDetailDebitLocal))
+       when Acc.AccountType=2 then ((jd.JEDetailCreditLocal-jd.JEDetailDebitLocal))
+	   end as AccountValue,
+  case when Acc.AccountType=1 then ((Jd.JEDetailCreditLocal-jd.JEDetailDebitLocal))
+       when Acc.AccountType=2 then ((jd.JEDetailCreditLocal-jd.JEDetailDebitLocal)*-1)
+	   end as AccountBalance
+
+
+
+ From AccountClassifications as  AccClass
+join  Accounts as Acc on  AccClass.id = Acc.AccountClassificationIdOfIncomeStatement
+join JournalEntriesDetails Jd on jd.AccountId = Acc.Id
+join JournalEntriesMasters Jm on jm.id = Jd.JournalEntriesMasterId
+
+
+Where
+( Jd.IsDeleted = 0 AND Jm.IsDeleted = 0 )
+ And
+ (jm.Date >= @fromDate or @fromDate is null)
+ And
+ (jm.Date <=@toDate or @toDate is null)
+Group by  Acc.Code ,Acc.AccountType,AccClass.Code,AccClass.NameAr,jd.JEDetailDebitLocal,jd.JEDetailCreditLocal, Acc.AccountGroupId,AccClass.NameEn ,Acc.NameAr,Acc.NameEn
+
+Order by Acc.AccountType
+
+          
+end')
+

@@ -1,0 +1,28 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_General_Ledger_Keywords') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_General_Ledger_Keywords];
+
+
+exec('Create procedure [dbo].[SP_General_Ledger_Keywords]
+@lang as NVARCHAR(10) 
+as
+begin
+select 
+
+case when @lang =''en-us'' then ''General Ledger Report''
+else N''تقرير الأستاذ العام'' end
+as GeneralLedgerReport,
+
+case when @lang =''en-us'' then ''Entry No''
+else N''رقم القيد'' end
+as EntryNo,
+
+case when @lang =''en-us'' then ''Entry Code''
+else N''كود القيد'' end
+as EntryCode,
+case when @lang =''en-us'' then ''Entry Type''
+else N''نوع القيد'' end
+as EntryType,
+case when @lang =''en-us'' then ''Entry Status''
+else N''حالة القيد'' end
+as EntryStatus
+
+end')

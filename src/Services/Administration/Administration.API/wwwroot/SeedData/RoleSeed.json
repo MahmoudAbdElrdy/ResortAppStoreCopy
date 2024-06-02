@@ -1,0 +1,23 @@
+﻿[
+  {
+    "Name_En": "Test",
+    "Name_AR": "تست",
+    "RoleDescription": "SuperAdmin"
+  },
+  {
+    "Name_En": "Menna",
+    "Name_AR": "منة",
+    "RoleDescription": "SuperAdmin"
+  },
+  {
+    "Name_En": "Radwan",
+    "Name_AR": "رضوان",
+    "RoleDescription": "SuperAdmin"
+  },
+  {
+    "Name_En": "Ahmed",
+    "Name_AR": "احمد",
+    "RoleDescription": "SuperAdmin"
+  }
+
+]

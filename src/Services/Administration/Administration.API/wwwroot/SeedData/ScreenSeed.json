@@ -1,0 +1,57 @@
+[
+  {
+    "Id": 1,
+    "ScreenNameAr": "الدول",
+    "ScreenNameEn": "Country",
+    
+   
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 2,
+    "ScreenNameAr": "الانشطة",
+    "ScreenNameEn": "Business",
+    
+   
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 3,
+    "ScreenNameAr": "المستخدمين",
+    "ScreenNameEn": "User",
+    
+   
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 4,
+    "ScreenNameAr": "العملاء",
+    "ScreenNameEn": "Customer",
+    
+   
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 5,
+    "ScreenNameAr": "العملات",
+    "ScreenNameEn": "Currency",
+    
+   
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  
+  {
+    "Id": 6,
+    "ScreenNameAr": "الأدوار",
+    "ScreenNameEn": "Role",
+    
+   
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+]

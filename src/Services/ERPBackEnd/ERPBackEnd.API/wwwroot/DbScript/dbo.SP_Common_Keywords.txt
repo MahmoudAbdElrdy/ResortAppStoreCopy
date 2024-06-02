@@ -1,0 +1,609 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Common_Keywords') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Common_Keywords];
+
+
+exec('create procedure [dbo].[SP_Common_Keywords]
+@lang as VARCHAR(10) 
+as
+begin
+select 
+case when @lang =''en-us'' then ''Company Name''
+else N''أسم الشركة'' end as CompanyName,
+case when @lang =''en-us'' then ''Page Numbers''
+else N''أرقام الصفحات'' end
+as PageNumbers,
+
+case when @lang =''en-us'' then ''Sum''
+else N''المجموع'' end
+as Sum,
+
+case when @lang=''en-us'' then ''Gregorian''
+else N'' ميلادى '' end as M,
+
+case when @lang=''en-us'' then ''Hijri''
+else N'' هجرى'' end as H,
+
+case when @lang =''en-us'' then ''Print In Date''
+else N'' تاريخ الطباعة'' end
+as PrintOnDate,
+
+case when @lang =''en-us'' then ''In Date''
+else N'' بتاريخ'' end
+as OnDate,
+
+case when @lang =''en-us'' then ''From Date''
+else N'' من تاريخ'' end
+as FromDate,
+
+case when @lang=''en-us'' then ''To Date''
+else N'' الى تاريخ '' end as ToDate,
+
+case when @lang=''en-us'' then ''Statement''
+else N''البيان'' end as Statement, 
+case when @lang=''en-us'' then ''Debit''
+else N''مدين'' end as Debit,
+case when @lang=''en-us'' then ''Credit''
+else N''دائن'' end as Credit,
+case when @lang=''en-us'' then ''Debit Local''
+else N''مدين محلى'' end as DebitLocal,
+case when @lang=''en-us'' then ''Credit Local''
+else N''دائن محلى'' end as CreditLocal,
+case when @lang=''en-us'' then ''Balance''
+else N''الرصيد'' end as Balance,
+
+case when @lang=''en-us'' then ''For Period''
+else N''للفترة'' end as ForPeriod,
+
+case when @lang =''en-us'' then ''ReviewedBy''
+else N'' روجعت من قبل'' end
+as ReviewedBy,
+case when @lang =''en-us'' then ''Branch''
+else N''الفرع'' end
+as Branch,
+case when @lang =''en-us'' then ''Currency''
+else N''العملة'' end
+as Currency,
+case when @lang =''en-us'' then ''Date''
+else N''التاريخ'' end
+as Date,
+case when @lang =''en-us'' then ''Account Name''
+else N''أسم الحساب'' end
+as AccountName,
+case when @lang =''en-us'' then ''Fiscal Period''
+else N''الفترة المحاسبية'' end
+as FiscalPeriod,
+case when @lang =''en-us'' then ''Journal Number''
+else N''رقم القيد'' end
+as JournalNumber,
+
+case when @lang =''en-us'' then ''Account Code''
+else N''رقم الحساب'' end
+as AccountCode,
+case when @lang =''en-us'' then ''Journal''
+else N'' اليومية'' end
+as JournalType,
+case when @lang =''en-us'' then ''Entry Status''
+else N''حالة القيد'' end
+as EntryStatus,
+case when @lang =''en-us'' then ''Journal''
+else N'' القيد'' end
+as EntryStatus,
+case when @lang =''en-us'' then ''Total''
+else N'' الإجمالي'' end
+as Total,
+case when @lang =''en-us'' then ''General Total''
+else N'' الإجمالي العام'' end
+as GeneralTotal,
+case when @lang =''en-us'' then ''Parent Account Code ''
+else N''رقم الحساب الرئيسي'' end
+as ParentAccCode,
+case when @lang =''en-us'' then ''Parent Account''
+else N'' الحساب الرئيسي'' end
+as ParentAccount,
+case when @lang =''en-us'' then ''Account Code''
+else N'' رقم الحساب الفرعي'' end
+as AccountCode,
+
+case when @lang =''en-us'' then ''Account''
+else N'' الحساب الفرعي'' end
+as Account,
+
+case when @lang =''en-us'' then ''Open Balance Debit''
+else N''  رصيد أول المدة مدين'' end
+as OpenBalanceDebit,
+case when @lang =''en-us'' then ''Open Balance Credit''
+else N''  رصيد أول المدة دائن'' end
+as OpenBalanceCredit,
+case when @lang =''en-us'' then ''Credit''
+else N'' دائن'' end
+as Credit,
+case when @lang =''en-us'' then ''Debit''
+else N'' مدين'' end
+as Debit,
+case when @lang =''en-us'' then ''Debit Balance''
+else N'' مدين حالي'' end
+as DebitBalance,
+case when @lang =''en-us'' then ''Credit Balance''
+else N'' دائن حالي'' end
+as CredittBalance,
+case when @lang =''en-us'' then ''Account Group''
+else N''مجموعة الحساب '' end
+as AccountGroup,
+case when @lang =''en-us'' then ''From Entry No''
+else N'' من رقم القيد '' end
+as FromEntryNo,
+case when @lang =''en-us'' then ''To Entry No''
+else N''  إلى رقم القيد '' end
+as ToEntryNo,
+case when @lang =''en-us'' then ''Account Level''
+else N''  المستوى '' end
+as AccountLevel,
+case when @lang =''en-us'' then ''Account''
+else N''  الحساب '' end
+as lblAccount,
+case when @lang =''en-us'' then ''Entry Ref.''
+else N''  مرجع القيد '' end
+as EntryRef,
+case when @lang =''en-us'' then ''Previous Balance''
+else N'' الرصيد السابق '' end
+as PreviousBalance,
+case when @lang =''en-us'' then ''Beneficiary Type''
+else N'' نوع الجهة '' end
+as BeneficiaryType,
+case when @lang =''en-us'' then ''Beneficiary''
+else N''  الجهة '' end
+as Beneficiary,
+case when @lang =''en-us'' then ''Amount''
+else N''القيمة '' end
+as Amount,
+case when @lang =''en-us'' then ''Cash Account''
+else N''حساب النقدية '' end
+as CashAmount,
+case when @lang =''en-us'' then ''Cost Center''
+else N'' مركز التكلفة'' end
+as CostCenterName,
+case when @lang =''en-us'' then ''Net profit or loss''
+else N'' صافي الربح والخسارة '' end
+as NetProfitOrLoss,
+case when @lang =''en-us'' then ''Account Type''
+else N'' نوع الحساب  '' end
+as AccountType,
+case when @lang =''en-us'' then ''Entry Date''
+else N'' تاريخ القيد  '' end
+as EntryDate,
+case when @lang =''en-us'' then ''Voucher Type''
+else N''نوع السند'' end
+as VoucherType,
+case when @lang =''en-us'' then ''Main Account''
+else N''الحساب الرئيسي'' end
+as MainAccount,
+case when @lang =''en-us'' then ''Code''
+else N''التسلسل'' end
+as Code,
+case when @lang =''en-us'' then ''Due Date''
+else N''تاريخ الأستحقاق'' end
+as DueDate,
+case when @lang =''en-us'' then ''Amount''
+else N''الأجمالى'' end
+as Amount,
+case when @lang =''en-us'' then ''Amount Local''
+else N''الأجمالى محلى'' end
+as AmountLocal,
+case when @lang =''en-us'' then ''Currency Value''
+else N''قيمة التعادل'' end
+as CurrencyValue,
+case when @lang =''en-us'' then ''Bank Account''
+else N''حساب البنك'' end
+as BankAccount,
+case when @lang =''en-us'' then ''Status''
+else N''الحالة'' end
+as Status,
+case when @lang =''en-us'' then ''Beneficiary Type''
+else N''نوع الجهة'' end
+as BeneficiaryType,
+case when @lang =''en-us'' then ''Beneficiary''
+else N'' الجهة'' end
+as Beneficiary,
+
+case when @lang =''en-us'' then ''Incoming Cheques Report''
+else N''تقرير الشيكات الواردة'' end
+as IncomingChequesReport,
+
+case when @lang =''en-us'' then ''Issuing Cheques Report''
+else N''تقرير الشيكات الصادرة'' end
+as IssuingChequesReport,
+
+
+case when @lang =''en-us'' then ''Notes''
+else N''ملاحظات'' end
+as Notes,
+case when @lang =''en-us'' then ''Description''
+else N''الوصف'' end
+as Description,
+case when @lang =''en-us'' then ''Bill Number''
+else N''رقم الفاتورة'' end
+as BillNumber,
+case when @lang =''en-us'' then ''Customer''
+else N''العميل'' end
+as Customer,
+case when @lang =''en-us'' then ''Bill Type''
+else N''نمط الفاتورة''end
+as BillType,
+case when @lang =''en-us'' then ''Bill Kind''
+else N''نوع الفاتورة'' end
+as BillKind,
+case when @lang =''en-us'' then ''Total After Taxes''
+else N''الإجمالي بعد الضريبة'' end
+as TotalAfterTaxes,
+case when @lang =''en-us'' then ''Net''
+else N''الصافي'' end
+as Net,
+case when @lang =''en-us'' then ''Bill Age''
+else N''عمر الفاتورة'' end
+as BillAge,
+case when @lang =''en-us'' then ''Paid''
+else N''المدفوع'' end
+as Paid,
+case when @lang =''en-us'' then ''Remaining''
+else N''المتبقى'' end
+as Remaining,
+case when @lang =''en-us'' then ''Item''
+else N''الصنف'' end
+as Item,
+case when @lang =''en-us'' then ''Store''
+else N''المستودع'' end
+as Store,
+case when @lang =''en-us'' then ''Sales Person''
+else N''مندوب المبيعات'' end
+as SalesPerson,
+
+case when @lang =''en-us'' then ''Voucher Code''
+else N''كود السند'' end
+as VoucherCode,
+
+case when @lang =''en-us'' then ''Bill Code''
+else N''كود الفاتورة'' end
+as BillCode,
+
+case when @lang =''en-us'' then ''Quantity''
+else N''الكمية'' end
+as Quantity,
+
+
+case when @lang =''en-us'' then ''Price''
+else N''السعر'' end
+as Price,
+
+
+case when @lang =''en-us'' then ''Reference''
+else N''المرجع'' end
+as Reference,
+
+case when @lang =''en-us'' then ''ReferenceType''
+else N''نوع المرجع'' end
+as ReferenceType,
+
+case when @lang =''en-us'' then ''ReferenceNumber''
+else N''رقم المرجع'' end
+as ReferenceNumber,
+
+case when @lang =''en-us'' then ''Total Before Tax''
+else N''الاجمالى قبل الضريبة'' end
+as TotalBeforeTax,
+case when @lang =''en-us'' then ''Total Tax''
+else N''أجمالى الضريبة'' end
+as TotalTax,
+case when @lang =''en-us'' then ''Addition Value''
+else N''قيمة الأضافة'' end
+as AdditionValue,
+case when @lang =''en-us'' then ''Addition Ratio''
+else N''نسبة الأضافة'' end
+as AdditionRatio,
+case when @lang =''en-us'' then ''Discount Value''
+else N''قيمة الخصم'' end
+as DiscountValue,
+case when @lang =''en-us'' then ''Discount Ratio''
+else N''نسبة الخصم'' end
+as DiscountRatio,
+case when @lang =''en-us'' then ''From Customer''
+else N''من العميل'' end
+as FromCustomer,
+case when @lang =''en-us'' then ''To Customer''
+else N''إلي العميل'' end
+as ToCustomer,
+case when @lang =''en-us'' then ''Customer Number''
+else N''رقم العميل'' end
+as CustomerNumber,
+
+case when @lang =''en-us'' then ''Customer Group''
+else N''مجموعة العملاء'' end
+as CustomerNumber,
+
+case when @lang =''en-us'' then ''Document Number''
+else N''رقم المستند'' end
+as DocumentNumber,
+
+case when @lang =''en-us'' then ''Document Name''
+else N'' المستند'' end
+as DocumentName,
+
+case when @lang =''en-us'' then ''Document Date''
+else N'' تاريخ المستند'' end
+as DocumentDate,
+
+
+case when @lang =''en-us'' then ''Project''
+else N''المشروع'' end
+as Project,
+
+case when @lang =''en-us'' then ''Pay Way''
+else N''طريقة الدفع'' end
+as PayWay,
+
+case when @lang =''en-us'' then ''Item Group''
+else N''مجموعة الأصناف'' end
+as ItemGroup,
+
+
+case when @lang =''en-us'' then ''Supplier''
+else N'' المورد'' end
+as Supplier,
+
+case when @lang =''en-us'' then ''From Supplier''
+else N''من المورد'' end
+as FromSupplier,
+case when @lang =''en-us'' then ''To Supplier''
+else N''إلي المورد'' end
+as ToSupplier,
+case when @lang =''en-us'' then ''Supplier Number''
+else N''رقم المورد'' end
+as SupplierNumber,
+
+case when @lang =''en-us'' then ''Supplier Group''
+else N''مجموعة الموردين'' end
+as SupplierNumber,
+case when @lang =''en-us'' then ''Item''
+else N''الوحدة'' end
+as Item,
+case when @lang =''en-us'' then ''Quantity''
+else N''الكمية'' end
+as Quantity,
+case when @lang =''en-us'' then ''Tax''
+else N''الضريبة'' end
+as Tax,
+case when @lang =''en-us'' then ''Added Quantity''
+else N''الكمية المضافة'' end
+as AddedQuantity,
+case when @lang =''en-us'' then ''Issued Quantity''
+else N''الكمية الصادرة'' end
+as IssuedQuantity,
+case when @lang =''en-us'' then ''Current Quantity''
+else N''الكمية الحالية'' end
+as CurrentQuantity,
+case when @lang =''en-us'' then ''Item Code''
+else N''كود الصنف'' end
+as ItemCode,
+case when @lang =''en-us'' then ''Store Name''
+else N''المستودع'' end
+as StoreName,
+case when @lang =''en-us'' then ''Item Type''
+else N''نوع الصنف'' end
+as ItemType,
+case when @lang =''en-us'' then ''Unit''
+else N''الوحدة'' end
+as Unit,
+case when @lang =''en-us'' then ''Store Code''
+else N''رقم المستودع'' end
+as StoreCode,
+case when @lang =''en-us'' then ''Main Unit''
+else N''الوحدة الاساسية'' end
+as MainUnit,
+case when @lang =''en-us'' then ''Added Converted Quantity''
+else N''الكمية المضافة بالوحدة الأساسية '' end
+as AddedConvertedQuantity,
+case when @lang =''en-us'' then ''Issued Converted Quantity''
+else N''الكميةالصادرة بالوحدة الأساسية'' end
+as IssuedConvertedQuantity,
+
+case when @lang =''en-us'' then ''Previous In Quantity''
+else N''الكمية المضافة السابقة'' end
+as PreviousAddedQuantity,
+case when @lang =''en-us'' then ''Previous Out Quantity''
+else N''الكمية الصادرة السابقة'' end
+as PreviousIssuedQuantity,
+case when @lang =''en-us'' then ''Previous Quantity''
+else N''الرصيد السابق'' end
+as PreviousBalance,
+case when @lang =''en-us'' then ''Current Balance''
+else N''الرصيد الحالي'' end
+as CurrentBalance,
+case when @lang =''en-us'' then ''Balance''
+else N''رصيد الحركة'' end
+as Balance,
+case when @lang =''en-us'' then ''Bill Cost''
+else N''تكلفة الفاتورة'' end
+as BillCost,
+case when @lang =''en-us'' then ''Bill Net''
+else N''صافى الفاتورة'' end
+as BillNet,
+case when @lang =''en-us'' then ''Cost Price''
+else N''سعر التكلفة'' end
+as CostPrice,
+case when @lang =''en-us'' then ''Sales Cost Price''
+else N'' سعر تكلفة المبيعات'' end
+as SalesCostPrice,
+case when @lang =''en-us'' then ''Delay (days)''
+else N'' المهلة(أيام)'' end
+as Delay,
+case when @lang =''en-us'' then ''Ship Method''
+else N''طريقة الشحن'' end
+as ShipMethod,
+case when @lang =''en-us'' then ''Ship Kind''
+else N''نوع الشحن'' end
+as ShipKind,
+case when @lang =''en-us'' then ''Representative''
+else N''المندوب'' end
+as Representative,
+case when @lang =''en-us'' then ''Default Currency''
+else N''العملة الأفتراضية'' end
+as DefaultCurrency,
+case when @lang =''en-us'' then ''Currency Value''
+else N''معامل التحويل'' end
+as CurrencyValue,
+case when @lang =''en-us'' then ''Image''
+else N''الصورة'' end
+as Image,
+case when @lang =''en-us'' then ''RefNo''
+else N''رقم المرجع'' end
+as RefNo,
+case when @lang =''en-us'' then ''Ref Date''
+else N''تاريخ المرجع'' end
+as RefDate,
+case when @lang =''en-us'' then ''Acctaul Qautity in Reference''
+else N''الكمية الفعلية في المرجع'' end
+as AcctaulQautityReference,
+case when @lang =''en-us'' then ''Acctaul Qautity in Document''
+else N''الكمية الفعلية في المستند'' end
+as AcctauQautityDocument,
+case when @lang =''en-us'' then ''Price in Reference''
+else N'' السعر في المرجع'' end
+as PriceReference,
+case when @lang =''en-us'' then ''Difference in Quantities''
+else N'' الفرق في الكميات'' end
+as QuantityDifferences,
+case when @lang =''en-us'' then ''Reference value''
+else N''قيمة  المرجع'' end
+as ReferenceValue,
+case when @lang =''en-us'' then ''Document value''
+else N''قيمة المستند'' end
+as DocumentValue,
+case when @lang =''en-us'' then ''Value difference''
+else N''فرق القيمة'' end
+as ValueDifference,
+case when @lang =''en-us'' then ''Discount''
+else N''الخصم'' end
+as Discount,
+case when @lang =''en-us'' then ''Price after discount or addition''
+else N''السعر بعد الخصم أو الإضافة'' end
+as PriceAfterDiscountOrAddition,
+case when @lang =''en-us'' then ''Total after Discount or addition''
+else N''الإجمالي بعد الخصم أو الإضافة في المرجع'' end
+as TotalAfterDiscountOrAdditionRef,
+case when @lang =''en-us'' then ''Total after Discount or addition''
+else N''الإجمالي بعد الخصم أو في الإضافة في المستند'' end
+as TotalAfterDiscountOrAdditionDoc,
+case when @lang =''en-us'' then ''Discount in ref''
+else N''الخصم في المرجع'' end
+as DiscountRef,
+case when @lang =''en-us'' then ''Addation in ref''
+else N''الإضافة في المرجع'' end
+as AdditionRef,
+case when @lang =''en-us'' then ''Price after discount and addition in reference''
+else N''السعر بعد الخصم والإضافة في المرجع'' end
+as PriceAfterDiscountAdditionReference,
+case when @lang =''en-us'' then ''The name of the store in the document''
+else N''اسم المستودع في المستند'' end
+as StoreDcumentName,
+case when @lang =''en-us'' then ''Document Type'' 
+else N''نوع المستند'' end
+as DcumentType,
+case when @lang =''en-us'' then ''Ref Type'' 
+else N''نوع المرجع'' end
+as RefType,
+case when @lang =''en-us'' then ''Bill Data''
+else N''بيانات الفاتورة'' end
+as BillData,
+case when @lang =''en-us'' then ''Items''
+else N''الاصناف'' end
+as Items,
+case when @lang =''en-us'' then ''Additions And Discounts on Bill''
+else N''الاضافات و الخصومات على الفاتورة'' end
+as AdditionsAndDiscountsOnBill,
+case when @lang =''en-us'' then ''Item Determinants''
+else N''محددات الصنف'' end
+as ItemDeterminants,
+case when @lang =''en-us'' then ''Item Price in Reference''
+else N''سعر الصنف في المرجع'' end
+as ItemPriceReference,
+case when @lang =''en-us'' then ''Item Price in Document''
+else N''سعر الصنف في المستند'' end
+as ItemPriceDocument,
+case when @lang =''en-us'' then ''Item Price Difference''
+else N''فرق سعر الصنف '' end
+as ItemPriceDifference,
+case when @lang =''en-us'' then ''The Name of the Store in the Reference''
+else N''اسم المستودع في المستند'' end
+as RefStoreName,
+case when @lang =''en-us'' then ''Barcode''
+else N'' الباركود'' end
+as BarCode,
+case when @lang =''en-us'' then ''Item Group Code''
+else N''كود مجموعة الأصناف'' end
+as ItemGroupCode,
+case when @lang =''en-us'' then ''Model''
+else N''موديل'' end
+as Model,
+case when @lang =''en-us'' then ''Manufacturer''
+else N''المصنع'' end
+as Manufacturer,
+case when @lang =''en-us'' then ''MaxLimit''
+else N''الحد الأقصى'' end
+as MaxLimit,
+case when @lang =''en-us'' then ''MinLimit''
+else N''الحد الأدنى'' end
+as MinLimit,
+case when @lang =''en-us'' then ''ReorderLimit''
+else N''حد إعادة الطلب'' end
+as ReorderLimit,
+case when @lang =''en-us'' then ''Initial Balance''
+else N''الرصيد الإفتتاحي'' end
+as InitialBalance,
+case when @lang =''en-us'' then ''Phone Number''
+else N'' رقم الهاتف'' end
+as PhoneNumber,
+case when @lang =''en-us'' then ''Email''
+else N''البريد الإلكتروني'' end
+as Email,
+case when @lang =''en-us'' then ''Computer Qauntity''
+else N''الكمية الدفترية'' end
+as ComputerQauntity,
+case when @lang =''en-us'' then ''Actual Qauntity''
+else N''الكمية الفعلية'' end
+as ActualQauntity,
+case when @lang =''en-us'' then ''Inventory List''
+else N''قائمة الجرد'' end
+as InventoryList,
+case when @lang =''en-us'' then ''System Date''
+else N''تاريخ النظام'' end
+as SystemDate,
+case when @lang =''en-us'' then ''Shift Type''
+else N''نوع الوردية'' end
+as ShiftType,
+case when @lang =''en-us'' then ''Shift Detail Name''
+else N''أسم تفاصيل الوردية'' end
+as ShiftDetailName,
+case when @lang =''en-us'' then ''Point Of Sale Name''
+else N''أسم نقطة البيع'' end
+as PointOfSaleName,
+
+case when @lang =''en-us'' then ''Payment Methods''
+else N''طرق الدفع'' end
+as PaymentMethods
+
+
+
+
+
+
+
+
+
+
+
+
+
+end
+
+
+
+')
+

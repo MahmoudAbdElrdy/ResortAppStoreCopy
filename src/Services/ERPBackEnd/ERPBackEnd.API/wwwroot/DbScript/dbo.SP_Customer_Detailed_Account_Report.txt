@@ -1,0 +1,111 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('SP_Customer_Detailed_Account_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Customer_Detailed_Account_Report];
+
+exec('
+
+create PROCEDURE [dbo].[SP_Customer_Detailed_Account_Report]
+    @fromDate DATE = NULL,
+    @toDate DATE = NULL,
+    @branchId BIGINT = NULL,
+	@currencyId BIGINT = NULL,
+	@fromCustomerId BIGINT = NULL,
+    @toCustomerId BIGINT = NULL,
+	@customerGroupId BIGINT = NULL,
+    @billKindId int =null,
+	@billTypeId bigint =null,
+    @companyId BIGINT=null,
+    @userId NVARCHAR(50)=null,
+	@lang VARCHAR(10) = ''en-us'',
+	@selectedBranchName as NVARCHAR(250) = NULL,
+	@selectedCustomerGroupName NVARCHAR(250)  = NULL,
+	@selectedCurrencyName as NVARCHAR(250) = NULL,
+	@selectedFromCustomerName as NVARCHAR(250) = NULL,
+	@selectedToCustomerName as NVARCHAR(250) = NULL
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+
+IF (@customerGroupId = 0)
+BEGIN
+    SET @customerGroupId = NULL
+END
+
+IF (@toCustomerId = 0)
+BEGIN
+    SET @toCustomerId = NULL
+END
+IF (@fromCustomerId = 0)
+BEGIN
+    SET @fromCustomerId = NULL
+END
+
+
+IF (@billKindId = 0)
+BEGIN
+    SET @billKindId = NULL
+END
+
+IF (@billTypeId = 0)
+BEGIN
+    SET @billTypeId = NULL
+END
+
+
+BEGIN
+
+
+select
+ cb.DocumentId,
+ cb.CurrencyId,
+ cb.CompanyId,
+ cb.BranchId,
+ cb.billid ,
+ cb.DocumentCode,
+ cb.DocumentDate,
+ case when @lang=''ar'' then cb.DocumentNameAr else cb.DocumentNameEn end as DocumentName, 
+ cb.CustomerId,
+ cb.CustomerCode ,
+ Cast(Case when @currencyId is not null then isNull(cb.Debit,0) else isNull(cb.DebitLocal,0) end as numeric(9,2)) as Debit,
+ Cast(Case when @currencyId is not null then isNull(cb.Credit,0) else isNull(cb.CreditLocal,0) end as numeric(9,2)) as Credit,
+ case when @lang=''ar'' then cb.CustomerNameAr else cb.CustomerNameAr end as CustomerName,
+ (select [dbo].[fn_Get_Previous_balance_By_Customer_Id](cb.DocumentDate,cb.CustomerId,@companyId ,@currencyId)) +  isNull(cu.InitialBalance,0) as PerviousBalance
+
+ from  VM_Customers_Balance as cb
+  join CustomerCards as  cu on cu.id = cb.CustomerId
+  join CustomerGroups as cg on cg.Id = cu.CustomerGroupId
+
+
+where
+
+  (@fromDate IS NULL OR cb.DocumentDate >= @fromDate)
+   AND (@toDate IS NULL OR cb.DocumentDate <= @toDate)
+   And (@branchId IS NULL OR cb.BranchId = @branchId)
+   AND (@fromCustomerId IS NULL OR cb.CustomerId = @fromCustomerId)
+   AND (@customerGroupId IS NULL OR cu.CustomerGroupId = @customerGroupId)
+  AND (@billKindId IS NULL OR cb.BillKind = @billKindId)
+  AND (@billTypeId IS NULL OR cb.BillTypeId = @billTypeId)
+   AND (cb.CompanyId = @companyId)
+    AND cb.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			And (UsersCompanies.IsDeleted=0)
+        )
+    )
+	order by cb.DocumentDate
+
+END
+
+
+
+
+')

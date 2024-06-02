@@ -1,0 +1,123 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_Vouchers_Transactions_By_Id') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_Vouchers_Transactions_By_Id];
+
+
+exec('Create procedure [dbo].[SP_Get_Vouchers_Transactions_By_Id]
+@id Nvarchar(50),
+@lang as NVARCHAR(10) ,
+@companyId BIGINT=null,
+@userId NVARCHAR(50)=null
+
+
+as
+
+
+
+
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+
+
+
+
+
+
+BEGIN
+select 
+
+v.Id,
+v.VoucherTypeId,
+v.VoucherTotal,
+v.VoucherTotalLocal,
+v.VoucherDate,
+sum(vd.Debit+vd.Credit) as VoucherDetailTotal ,
+sum(vd.DebitLocal+vd.CreditLocal) as VoucherDetailLocalTotal ,
+case when @lang =''en-us'' then vt.NameEn
+else vt.NameAr end as VoucherName,
+
+
+case
+when vt.VoucherKindId=1 and @lang =''en-us'' then ''Deposit''
+when vt.VoucherKindId=2 and @lang =''en-us'' then ''Withdraw''
+when vt.VoucherKindId=1 and @lang =''ar'' then N''قبض''
+when vt.VoucherKindId=2 and @lang =''ar'' then N''صرف''
+end as VoucherKind,
+case
+when vd.BeneficiaryTypeId=1 and @lang =''en-us'' then ''Customer''
+when vd.BeneficiaryTypeId=2 and @lang =''en-us'' then ''Supplier''
+when vd.BeneficiaryTypeId=4 and @lang =''en-us'' then ''Account''
+when vd.BeneficiaryTypeId=1 and @lang =''ar'' then N''عميل''
+when vd.BeneficiaryTypeId=2 and @lang =''ar'' then N''مورد''
+when vd.BeneficiaryTypeId=4 and @lang =''ar'' then N''حساب''
+end as BeneficiaryType,
+case when vd.BeneficiaryTypeId=1 then (case when @lang =''en-us'' then  ctr.NameEn else ctr.NameAr end )
+when vd.BeneficiaryTypeId=2 then (case when @lang =''en-us'' then  sup.NameEn else sup.NameAr end )
+when vd.BeneficiaryTypeId=4 then (case when @lang =''en-us'' then  acc_beneficiary.NameEn else acc_beneficiary.NameAr end )
+
+end as beneficiaryAccountName,
+
+case when @lang =''en-us'' then acc.NameEn
+else acc.NameAr end as CashAccountName,
+--case when @lang =''en-us'' then acc_beneficiary.NameEn
+--else acc_beneficiary.NameAr end as beneficiaryAccountName,
+case when @lang =''en-us'' then com.NameEn
+else com.NameAr end as CompanyName,
+
+case when @lang =''en-us'' then bran.NameEn
+else bran.NameAr end as BranchName,
+
+
+case when @lang =''en-us'' then co.NameEn
+else co.NameAr end as CostCenterName,
+
+
+case when @lang =''en-us'' then cu.NameEn
+else cu.NameAr end as CurrencyName,
+(select 
+case when @lang =''en-us'' then NameEn
+else  NameAr end 
+from Currencies where Id=vd.CurrencyId
+) as CurrencyDetailName
+
+--case when @lang =''en-us'' then cur_vd.NameEn
+--else cur_vd.NameAr end as CurrencyDetailName
+
+
+from Vouchers as v join VoucherTypes as vt on v.VoucherTypeId = vt.Id
+left join VoucherDetails as vd on v.Id= vd.VoucherId
+left join Accounts as acc_beneficiary on vd.BeneficiaryAccountId=acc_beneficiary.Id
+left join Accounts as acc on v.CashAccountId=acc.Id
+left join Companies as com on v.CompanyId=com.Id
+left join Branches as bran on v.BranchId=bran.Id
+left join CostCenters as co on v.CostCenterId=co.Id
+left join Currencies as cu on v.CurrencyId=cu.Id
+--left join Currencies as cur_vd on vd.CurrencyId=cu.Id
+left join CustomerCards as  ctr on vd.BeneficiaryId = ctr.Id
+left join SupplierCards as  sup on vd.BeneficiaryId = sup.Id
+
+
+ Where
+	  (v.IsDeleted=0 or v.IsDeleted is null)
+	
+	 AND (v.Id=@id)
+
+	
+ 
+    AND v.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId = (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+        )
+    )
+	group by v.Id ,vd.BeneficiaryTypeId,vd.CurrencyId,sup.NameAr,sup.NameEn,ctr.NameAr,ctr.NameEn, v.Code,VoucherId,com.NameAr,cu.NameEn,cu.NameAr,co.NameEn,co.NameAr,com.NameEn,vt.NameAr,vt.NameEn,bran.NameEn,bran.NameAr,acc_beneficiary.NameAr,acc_beneficiary.NameEn,acc.NameAr,acc.NameEn,vt.VoucherKindId,v.VoucherTypeId,v.VoucherTotal,v.VoucherTotalLocal,v.VoucherDate
+	order by v.VoucherDate , v.Code
+	
+	
+
+
+End')

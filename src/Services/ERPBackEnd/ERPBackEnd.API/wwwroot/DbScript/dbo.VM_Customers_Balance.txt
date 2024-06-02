@@ -1,0 +1,237 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.VM_Customers_Balance') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P',N'V')) DROP View [dbo].[VM_Customers_Balance];
+
+
+
+
+exec('CREATE VIEW [dbo].[VM_Customers_Balance]
+As
+SELECT b.id                                          AS DocumentId,
+       b.companyid,
+       b.currencyid,
+       b.branchid,
+       b.code                                        AS DocumentCode,
+       b.date                                        AS DocumentDate,
+       bt.namear                                     AS DocumentNameAr,
+       bt.nameen                                     AS DocumentNameEn,
+       cu.id                                         AS CustomerId,
+       cu.code                                       AS CustomerCode,
+       cu.namear                                     AS CustomerNameAr,
+       cu.nameen                                     AS CustomerNameEn,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS Debit,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS DebitLocal,
+       0                                             AS Credit,
+       0                                             AS CreditLocal,
+       bt.kind                                       AS BillKind,
+       bt.id                                         AS BillTypeId,
+       NULL                                          AS VoucherTypeId,
+       b.id                                          AS billId
+FROM   bills AS b
+       JOIN billtypes AS bt
+         ON b.billtypeid = bt.id
+            AND b.isdeleted <> 1
+       LEFT OUTER JOIN customercards AS cu
+                    ON cu.id = b.customerid
+WHERE  ( bt.kind = 1 )
+       AND ( bt.isgeneratevoucherifpaywayiscash = 1 )
+UNION
+SELECT b.id                                          AS DocumentId,
+       b.companyid,
+       b.currencyid,
+       b.branchid,
+       b.code                                        AS DocumentCode,
+       b.date                                        AS DocumentDate,
+       bt.namear                                     AS DocumentNameAr,
+       bt.nameen                                     AS DocumentNameEn,
+       cu.id                                         AS CustomerId,
+       cu.code                                       AS CustomerCode,
+       cu.namear                                     AS CustomerNameAr,
+       cu.nameen                                     AS CustomerNameEn,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS Debit,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS DebitLocal,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS Credit,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS CreditLocal,
+       bt.kind                                       AS BillKind,
+       bt.id                                         AS BillTypeId,
+       NULL                                          AS VoucherTypeId,
+       b.id                                          AS billId
+FROM   bills AS b
+       JOIN billtypes AS bt
+         ON b.billtypeid = bt.id
+            AND b.isdeleted <> 1
+       LEFT OUTER JOIN customercards AS cu
+                    ON cu.id = b.customerid
+WHERE  ( bt.kind = 1 )
+       AND ( bt.isgeneratevoucherifpaywayiscash <> 1 )
+UNION
+SELECT b.id                                          AS DocumentId,
+       b.companyid,
+       b.currencyid,
+       b.branchid,
+       b.code                                        AS DocumentCode,
+       b.date                                        AS DocumentDate,
+       bt.namear                                     AS DocumentNameAr,
+       bt.nameen                                     AS DocumentNameEn,
+       cu.id                                         AS CustomerId,
+       cu.code                                       AS CustomerCode,
+       cu.namear                                     AS CustomerNameAr,
+       cu.nameen                                     AS CustomerNameEn,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS Debit,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS DebitLocal,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS Credit,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS CreditLocal,
+       bt.kind                                       AS BillKind,
+       bt.id                                         AS BillTypeId,
+       NULL                                          AS VoucherTypeId,
+       b.id                                          AS billId
+FROM   bills AS b
+       JOIN billtypes AS bt
+         ON b.billtypeid = bt.id
+            AND b.isdeleted <> 1
+       LEFT OUTER JOIN customercards AS cu
+                    ON cu.id = b.customerid
+WHERE  ( bt.kind = 3 )
+       AND ( bt.isgeneratevoucherifpaywayiscash <> 1 )
+UNION
+SELECT b.id                                          AS DocumentId,
+       b.companyid,
+       b.branchid,
+       b.currencyid,
+       b.code                                        AS DocumentCode,
+       b.date                                        AS DocumentDate,
+       bt.namear                                     AS DocumentNameAr,
+       bt.nameen                                     AS DocumentNameEn,
+       cu.id                                         AS CustomerId,
+       cu.code                                       AS CustomerCode,
+       cu.namear                                     AS CustomerNameAr,
+       cu.nameen                                     AS CustomerNameEn,
+       0                                             AS Debit,
+       0                                             AS DebitLocal,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS Credit,
+       Isnull(b.net, 0) * Isnull(b.currencyvalue, 0) AS CreditLocal,
+       bt.kind                                       AS BillKind,
+       bt.id                                         AS BillTypeId,
+       NULL                                          AS VoucherTypeId,
+       b.id                                          AS billId
+FROM   bills AS b
+       LEFT OUTER JOIN billtypes AS bt
+                    ON b.billtypeid = bt.id
+                       AND b.isdeleted <> 1
+       LEFT OUTER JOIN customercards AS cu
+                    ON cu.id = b.customerid
+WHERE  ( bt.kind = 3 )
+       AND ( bt.isgeneratevoucherifpaywayiscash = 1 )
+UNION
+SELECT v.id            AS DocumentId,
+       v.companyid,
+       v.currencyid,
+       v.branchid,
+       v.code          AS DocumentCode,
+       v.voucherdate   AS DocumentDate,
+       vt.namear       AS DocumentNameAr,
+       vt.nameen       AS DocumentNameEn,
+       cu.id           AS CustomerId,
+       cu.code         AS CustomerCode,
+       cu.namear       AS CustomerNameAr,
+       cu.nameen       AS CustomerNameEn,
+       vd.debit,
+       vd.debitlocal,
+       vd.credit,
+       vd.creditlocal,
+       NULL            AS BillKind,
+       NULL            AS BillTypeId,
+       v.vouchertypeid AS VoucherTypeId,
+       NULL            AS billId
+FROM   vouchers AS v
+       INNER JOIN vouchertypes AS vt
+               ON v.vouchertypeid = vt.id
+       INNER JOIN voucherdetails AS vd
+               ON vd.voucherid = v.id
+       INNER JOIN customercards AS cu
+               ON cu.id = vd.beneficiaryid
+                  AND vd.beneficiarytypeid = 1
+UNION
+SELECT icm.id             AS DocumentId,
+       icm.companyid,
+       icm.branchid,
+       icm.currencyid,
+       icm.code           AS DocumentCode,
+       icm.duedate        AS DocumentDate,
+       N''شيك صادر'' AS DocumentNameAr,
+       N''Issuing Cheque''  AS DocumentNameEn,
+       cu.id              AS CustomerId,
+       cu.code            AS CustomerCode,
+       cu.namear          AS CustomerNameAr,
+       cu.nameen          AS CustomerNameEn,
+       icd.amount         AS Debit,
+       icm.amountlocal    AS DebitLocal,
+       0                  AS Credit,
+       0                  AS CreditLocal,
+       NULL               AS BillKind,
+       NULL               AS BillTypeId,
+       NULL               AS billId,
+       NULL               AS VoucherTypeId
+FROM   issuingchequemasters AS icm
+       INNER JOIN issuingchequedetails AS icd
+               ON icd.issuingchequeid = icm.id
+                  AND icm.status = 2
+       INNER JOIN customercards AS cu
+               ON cu.id = icd.beneficiaryid
+UNION
+SELECT icm.id             AS DocumentId,
+       icm.companyid,
+       icm.branchid,
+       icm.currencyid,
+       icm.code           AS DocumentCode,
+       icm.duedate        AS DocumentDate,
+       N''شيك صادر'' AS DocumentNameAr,
+       N''Issuing Cheque''  AS DocumentNameEn,
+       cu.id              AS CustomerId,
+       cu.code            AS CustomerCode,
+       cu.namear          AS CustomerNameAr,
+       cu.nameen          AS CustomerNameEn,
+       icd.amount         AS Debit,
+       icm.amountlocal    AS DebitLocal,
+       0                  AS Credit,
+       0                  AS CreditLocal,
+       NULL               AS BillKind,
+       NULL               AS BillTypeId,
+       NULL               AS billId,
+       NULL               AS VoucherTypeId
+FROM   issuingchequemasters AS icm
+       INNER JOIN issuingchequedetails AS icd
+               ON icd.issuingchequeid = icm.id
+                  AND icm.status = 2
+       INNER JOIN customercards AS cu
+               ON cu.id = icd.beneficiaryid
+UNION
+SELECT icm.id              AS DocumentId,
+       icm.currencyid,
+       icm.companyid,
+       icm.branchid,
+       icm.code            AS DocumentCode,
+       icm.duedate         AS DocumentDate,
+       N''شيك وارد '' AS DocumentNameAr,
+       N''Incoming Cheque''  AS DocumentNameEn,
+       cu.id               AS CustomerId,
+       cu.code             AS CustomerCode,
+       cu.namear           AS CustomerNameAr,
+       cu.nameen           AS CustomerNameEn,
+       0                   AS Debit,
+       0                   AS DebitLocal,
+       icd.amount          AS Credit,
+       icm.amountlocal     AS CreditLocal,
+       NULL                AS BillKind,
+       NULL                AS BillTypeId,
+       NULL                AS billId,
+       NULL                AS VoucherTypeId
+FROM   incomingchequemasters AS icm
+       INNER JOIN incomingchequedetails AS icd
+               ON icd.incomingchequeid = icm.id
+                  AND icm.status = 2
+       INNER JOIN customercards AS cu
+               ON cu.id = icd.beneficiaryid 
+
+
+
+
+')

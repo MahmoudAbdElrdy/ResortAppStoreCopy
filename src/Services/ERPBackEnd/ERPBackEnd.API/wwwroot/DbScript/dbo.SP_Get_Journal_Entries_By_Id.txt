@@ -1,0 +1,94 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_Journal_Entries_By_Id') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_Journal_Entries_By_Id];
+
+
+
+exec('CREATE PROCEDURE [dbo].[SP_Get_Journal_Entries_By_Id]
+    @id Nvarchar(50),
+    @branchId BIGINT = NULL,
+    @companyId BIGINT=null,
+    @userId NVARCHAR(50)=null,
+	@lang VARCHAR(10) = ''ar''
+
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+
+
+
+
+
+
+
+
+SELECT
+    Master.Id AS MasterId,
+    Cast(Master.Date as date) as Date,
+    CASE
+        WHEN @lang = ''ar'' THEN Journal.NameAr
+        ELSE Journal.NameEn
+    END AS JournalName,
+    Master.Code AS JournalCode,
+	Detail.AccountId As AccountId,
+    Account.Code AS AccountCode,
+    CASE
+        WHEN @lang = ''ar'' THEN Account.NameAr
+        ELSE Account.NameEn
+    END AS AccountName,
+    CASE
+        WHEN @lang = ''ar'' THEN Currency.NameAr
+        ELSE Currency.NameEn END AS CurrencyName,
+    
+
+case when (master.PostType=1 ) then (case when @lang =''ar'' then  N''مرحل'' else ''Posted''end)
+when (master.PostType=2 or master.PostType is null   ) then (case when @lang =''ar'' then  N''غير مرحل'' else ''Unposted''end) end  as PostType,
+    Detail.TransactionFactor,
+    Detail.JEDetailDebit,
+    Detail.JEDetailCredit,
+    Detail.JEDetailDebitLocal,
+    Detail.JEDetailCreditLocal,
+    Detail.Notes AS DetailNotes,
+    CASE
+        WHEN @lang = ''ar'' THEN CostCenter.NameAr
+        ELSE CostCenter.NameEn
+    END AS CostCenterName,
+    Branch.Id AS BranchId,
+    CASE
+        WHEN @lang = ''ar'' THEN Branch.NameAr
+        ELSE Branch.NameEn 
+    END AS BranchName
+FROM JournalEntriesMasters AS Master
+JOIN JournalEntriesDetails AS Detail ON Master.Id = Detail.JournalEntriesMasterId
+INNER JOIN Branches AS Branch ON Master.BranchId = Branch.Id
+LEFT JOIN Journals AS Journal ON Master.JournalId = Journal.Id
+LEFT JOIN Currencies AS Currency ON Detail.CurrencyId = Currency.Id
+LEFT JOIN Accounts AS Account ON Account.Id = Detail.AccountId
+LEFT JOIN CostCenters AS CostCenter ON Detail.CostCenterId = CostCenter.Id
+WHERE 
+    (Detail.IsDeleted=0
+	and Master.IsDeleted=0
+	--and Branch.IsDeleted=0
+	--and Journal.IsDeleted=0
+	--and Currency.IsDeleted=0
+	--and CostCenter.IsDeleted=0
+    )
+	AND ( Master.Id = @id)
+	AND (@branchId IS NULL OR Master.BranchId = @branchId)
+
+    AND (Master.CompanyId = @companyId)
+    AND Master.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId = (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			And (UsersCompanies.IsDeleted=0)
+        )
+    )')

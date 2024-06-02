@@ -1,0 +1,38 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Incoming_Cheque_Details') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Incoming_Cheque_Details];
+
+
+exec('Create procedure [dbo].[SP_Incoming_Cheque_Details]
+@id bigint,
+@lang varchar(10)
+
+as
+begin
+select chequedetails.Amount as Amount 
+,case 
+ when @lang=''en-us'' and chequedetails.BeneficiaryTypeId = 1 then ''Client''  
+ when @lang=''ar'' and chequedetails.BeneficiaryTypeId = 1 then N''عميل''
+ when @lang=''en-us'' and chequedetails.BeneficiaryTypeId = 2 then ''Supplier''  
+ when @lang=''ar'' and chequedetails.BeneficiaryTypeId = 2 then N''مورد''  
+ when @lang=''en-us'' and chequedetails.BeneficiaryTypeId = 3 then ''Employee''  
+ when @lang=''ar'' and chequedetails.BeneficiaryTypeId = 3 then N''مؤظف''  
+ when @lang=''en-us'' and chequedetails.BeneficiaryTypeId = 4 then ''Account''  
+ when @lang=''ar'' and chequedetails.BeneficiaryTypeId = 4 then ''حساب'' 
+ else '' ''
+ end as BeneficiaryTypeName,
+ case when chequedetails.BeneficiaryTypeId=1 then (case when @lang =''en-us'' then  ctr.NameEn else ctr.NameAr end )
+when chequedetails.BeneficiaryTypeId=2 then (case when @lang =''en-us'' then  sup.NameEn else sup.NameAr end )
+when chequedetails.BeneficiaryTypeId=4 then (case when @lang =''en-us'' then  acc_beneficiary.NameEn else acc_beneficiary.NameAr end )
+end as beneficiaryName
+,case when @lang=''en-us'' then acc.NameEn else acc.NameAr end as AccountName
+,case when @lang=''en-us'' then curr.NameEn else curr.NameAr end as CurrencyName,
+chequedetails.TransactionFactor as TransactionFactor,chequedetails.CurrencyLocal as CurrencyLocal
+ from IncomingChequeDetails as chequedetails
+left join Accounts as acc on chequedetails.AccountId = acc.Id
+left join Currencies as curr on chequedetails.CurrencyId = curr.Id
+left join CustomerCards as  ctr on chequedetails.BeneficiaryId = ctr.Id
+left join SupplierCards as  sup on chequedetails.BeneficiaryId = sup.Id
+left join Accounts as acc_beneficiary on chequedetails.BeneficiaryId=acc_beneficiary.Id
+
+where chequedetails.IncomingChequeId = @id and chequedetails.IsDeleted != 1
+
+end')

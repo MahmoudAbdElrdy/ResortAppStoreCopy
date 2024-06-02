@@ -1,0 +1,97 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_EInvoices') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_EInvoices];
+
+exec('Create procedure [dbo].[SP_EInvoices]
+@billId bigint
+
+as
+begin
+
+	
+
+select  c.CompanyType as IssuerType, c.TaxNumber AS IssuerId, c.NameAr AS IssuerName,
+0 AS BranchId,
+''EG'' AS IssuerCountryCoder, c.Governorate AS IssuerGovernorate, c.RegionCity AS IssuerRegionCity, 
+                  c.Street AS IssuerStreet, c.BuildingNumber AS IssuerBuildingNumber, c.ZipCode AS IssuerPostalCode, 
+				  c.Floor AS IssuerFloorNo, c.Room AS IssuerRoom, c.LandMark AS IssuerLandMark, 
+                  c.AdditionalInformation AS IssuerAdditionalInformation,
+				  
+                  cust.CustomerType  AS ReceiverType,
+				  CASE WHEN cust.CustomerType = ''P'' THEN cust.IdNumber ELSE IsNull(Replace(cust.TaxNumber,''-'',''''),'''')
+				  END AS ReceiverId, 
+                  cust.NameAr  AS ReceiverName,
+				  cust.CountryCode as ReceiverCountryCode,
+				  cust.Governorate as ReceiverGovernorate,
+				  cust.RegionCity as ReceiverRegionCity,
+				  cust.BuildingNo as ReceiverBuildingNumber,
+				  cust.Street as ReceiverStreet,
+				  cust.PostalCode as ReceiverPostalCode,
+				  cust.Floor as ReceiverFloorNo,
+				  cust.Room as ReceiverRoom,
+				  cust.AdditionalInformation as ReceiverAdditionalInformation,
+				  cust.LandMark as ReceiverLandMark,
+				  case when bt.Kind = 1 then ''I'' when bt.Kind = 3 then ''C'' when bt.Kind = 4 then ''D'' End as DocumentType,
+				  ''1.0'' AS DocumentTypeVersion, b.Date AS DateTimeIssued,c.Activity as ActivityCode,
+				  b.Id as InternalId,
+				   IsNull(b.PurchaseOrderReference, '''')  AS PurchaseOrderReference,
+				  IsNull(b.PurchaseOrderDescription,'''') AS PurchaseOrderDescription,
+			      IsNull(b.SalesOrderReference,'''') AS SalesOrderReference,
+				   IsNull(b.SalesOrderDescription,'''') AS SalesOrderDescription,
+				   IsNull(b.ProformaInvoiceNumber,'''') AS ProformaInvoiceNumber, 
+				   IsNull(b.BankName,'''') AS PaymentBankName,  
+				   IsNull(b.BankAddress,'''') AS PaymentBankAddress, 
+                   IsNull(b.BankAccountNo,'''') AS PaymentBankAccountNo, 
+				   IsNull(b.BankAccountIBAN,'''') AS PaymentBankAccountIBAN,
+				    IsNull(b.SwiftCode,'''') AS PaymentSwiftCode, 
+				   IsNull(b.PaymentTerms,'''') AS PaymentTerms, 
+				   IsNull(b.Approach,'''') AS DeliveryApproach,
+				    IsNull(b.Packaging,'''') AS DeliveryPackaging,
+					b.DeliveryDate AS DeliveryDateValidity, 
+				   IsNull(b.ExportPort,'''') AS DeliveryExportPort, 
+                   IsNull(b.CountryOfOrigin,'''') AS DeliveryCountryOfOrigin,
+				    IsNull(b.DeliveryTerms,'''') AS DeliveryTerms,
+					 SUM(IsNull(bi.SalesTotal,0)) AS TotalSalesAmount,
+				  SUM(IsNull(bi.DiscAmount,0)) AS TotalDiscountAmount, SUM(IsNull(bi.NetTotal,0)) AS NetAmount,
+				  SUM(IsNull(bi.NetTotal,0)) + SUM(IsNull(bi.AddTax,0)) - SUM(IsNull(vdisc.Disc, 0))  AS TotalAmount
+				  ,b.IsUploaded, SUM(IsNull(bi.AddTax,0)) AS AddTax, b.Code as BillCode,
+				  SUM(ISNULL(vdisc.Disc, 0)) AS ExtraDiscountAmount, SUM(ISNULL(bi.DiscAmount, 0)) AS TotalItemsDiscountAmount,
+				 SUM(IsNull(bi.NetTotal,0)) *  SUM(ISNULL(vdisc.DiscRatio, 0)) as DiscountUnderTax
+                 ,b.SubmissionNotes,
+				 b.NetWeight as NetWeight ,
+                 b.GrossWeight as GrossWeight,
+				 bt.TaxType , bt.SubTaxType,bt.DiscountUnderTax as IsDiscountUnderTax,bt.SubTaxTypeOfDiscountUnderTax
+				  from Bills as b 
+Inner join BillTypes as bt on b.BillTypeId = bt.Id
+Inner join Companies AS c ON b.CompanyId = c.Id
+left outer join CustomerCards as cust on b.CustomerId = cust.Id
+Inner join VW_EInvoice_Lines as bi ON b.Id = bi.BillId
+LEFT OUTER JOIN VW_Bill_Discounts_Additions as VDisc  ON b.Id = VDisc.BillId
+
+Group by c.CompanyType,c.TaxNumber,c.NameAr,c.Governorate, c.RegionCity, 
+                  c.Street , c.BuildingNumber , c.ZipCode , 
+				c.Floor, c.Room , c.LandMark , 
+                  c.AdditionalInformation ,cust.CustomerType,cust.IdNumber,cust.TaxNumber,cust.NameAr,cust.CountryCode,
+				  cust.Governorate,cust.RegionCity,cust.BuildingNo,cust.Street,cust.PostalCode,cust.Floor,cust.Room,
+				  cust.AdditionalInformation,cust.LandMark,bt.Kind,b.Date,c.Activity,b.Id,b.PurchaseOrderReference,
+				    b.PurchaseOrderDescription,
+			    b.SalesOrderReference,
+				  b.SalesOrderDescription,
+				   b.ProformaInvoiceNumber, 
+				   b.BankName, 
+				   b.BankAddress, 
+                   b.BankAccountNo, 
+				   b.BankAccountIBAN,
+b.SwiftCode, 
+				   b.PaymentTerms, 
+				   b.Approach,
+				    b.Packaging,
+					b.DeliveryDate, 
+				   b.ExportPort, 
+                   b.CountryOfOrigin,
+				    b.DeliveryTerms,b.IsUploaded,b.Code,b.SubmissionNotes,b.NetWeight,b.GrossWeight,
+					bt.TaxType,bt.SubTaxType,bt.DiscountUnderTax,bt.SubTaxTypeOfDiscountUnderTax
+
+
+
+	
+
+end')

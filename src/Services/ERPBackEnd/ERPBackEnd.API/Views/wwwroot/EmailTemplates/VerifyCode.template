@@ -1,0 +1,13 @@
+﻿<p>Hello {user},</p>
+<p>Your code: {code}</p>
+
+<p>This email was sent to you upon your request verify  your code! </p>
+<p> You can verify from <a href="{link}">here</a></p>
+<p>If you didn't request to verify your code just ignore this mail</p>
+<br />
+<p>Regards,</p>
+<p>
+  Resort Team
+  <br/>
+  Resort Solutions
+</p>

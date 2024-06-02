@@ -1,0 +1,74 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Calculate_POS_Bill_Cash_Payment_Total') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_Calculate_POS_Bill_Cash_Payment_Total];
+
+
+exec('Create function [dbo].[fn_Calculate_POS_Bill_Cash_Payment_Total]
+(
+    @fromUserId NVARCHAR(450),
+    @fromPointOfSaleId BIGINT = NULL,
+    @fromShiftId BIGINT = NULL,
+    @companyId BIGINT,
+    @branchId BIGINT,
+    @fiscalPeriodId BIGINT
+)
+
+RETURNS FLOAT
+AS
+BEGIN
+    DECLARE @Total FLOAT;
+
+    -- Calculate total from POSBillPaymentDetails
+    SELECT 
+        @Total = ISNULL(SUM(CASE WHEN bt.Kind = 1 THEN ISNULL(bp.Amount * b.CurrencyValue, 0) ELSE 0 END) - 
+                       SUM(CASE WHEN bt.Kind = 2 THEN ISNULL(bp.Amount * b.CurrencyValue, 0) ELSE 0 END), 0)
+    FROM 
+        POSBillPaymentDetails AS bp
+    JOIN 
+        PaymentMethods AS p ON bp.PaymentMethodId = p.Id AND p.IsCash = 1
+    JOIN 
+        POSBills AS b ON bp.BillId = b.Id
+    JOIN 
+        POSBillTypes AS bt ON b.BillTypeId = bt.Id
+    WHERE 
+        bp.IsDeleted != 1  
+        AND (b.IsLocked = 0 OR b.IsLocked IS NULL)
+        AND b.CompanyId = @companyId 
+        AND b.BranchId = @branchId 
+        AND b.FiscalPeriodId = @fiscalPeriodId
+        AND (@fromUserId IS NULL OR b.CreatedBy = @fromUserId)
+        AND (@fromPointOfSaleId IS NULL OR b.PointOfSaleId = @fromPointOfSaleId)
+        AND (@fromShiftId IS NULL OR b.ShiftId = @fromShiftId);
+
+    -- Add total from CashTransfers where user is sender
+    SET @Total = @Total - 
+    ISNULL((SELECT SUM(ISNULL(t.Amount, 0)) 
+            FROM CashTransfers AS t
+            WHERE t.IsDeleted != 1  
+              AND (t.IsLocked = 0 OR t.IsLocked IS NULL)
+              AND t.CompanyId = @companyId 
+              AND t.BranchId = @branchId 
+              AND t.FiscalPeriodId = @fiscalPeriodId
+              AND (@fromUserId IS NULL OR t.FromUserId = @fromUserId)
+              AND (@fromPointOfSaleId IS NULL OR t.FromPointOfSaleId = @fromPointOfSaleId)
+              AND (@fromShiftId IS NULL OR t.FromShiftDetailId = @fromShiftId)), 0);
+
+    -- Add total from CashTransfers where user is receiver
+    SET @Total = @Total + 
+    ISNULL((SELECT SUM(ISNULL(t.Amount, 0)) 
+            FROM CashTransfers AS t
+            WHERE t.IsDeleted != 1  
+              AND (t.IsLocked = 0 OR t.IsLocked IS NULL)
+              AND t.CompanyId = @companyId 
+              AND t.BranchId = @branchId 
+              AND t.FiscalPeriodId = @fiscalPeriodId
+              AND (@fromUserId IS NULL OR t.ToUserId = @fromUserId)
+              AND (@fromPointOfSaleId IS NULL OR t.ToPointOfSaleId = @fromPointOfSaleId)
+              AND (@fromShiftId IS NULL OR t.ToShiftDetailId = @fromShiftId)), 0);
+
+    RETURN @Total;
+
+ 
+
+end'
+
+)
+

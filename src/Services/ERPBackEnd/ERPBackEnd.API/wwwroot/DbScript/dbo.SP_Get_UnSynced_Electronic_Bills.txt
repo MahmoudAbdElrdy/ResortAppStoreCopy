@@ -1,0 +1,70 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_UnSynced_Electronic_Bills') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_UnSynced_Electronic_Bills];
+
+
+exec('
+
+
+
+
+Create PROCEDURE [dbo].[SP_Get_UnSynced_Electronic_Bills] 
+
+    @branchId BIGINT = NULL,
+    @companyId BIGINT=null,
+	@fiscalPeriodId BIGINT=null
+ 
+
+AS
+BEGIN
+
+	
+
+SELECT
+b.Id,
+b.BranchId,
+b.CompanyId ,
+b.Code,
+b.BillTypeId,
+b.Date as BillDate,
+bt.NameAr as BillTypeAr,
+bt.NameEn as BillTypeEn ,
+b.Date as BillDate,
+b.TotalBeforeTax * b.CurrencyValue as TotalBeforeTax,
+b.Total * b.CurrencyValue as Total,
+b.Net * b.CurrencyValue as Net,
+b.Paid * b.CurrencyValue as Paid,
+b.Remaining * b.CurrencyValue as Remaining, 
+b.FiscalPeriodId,
+bt.kind as BillKindId,
+ case 
+ when bt.kind=1 then N''Sales Bill''
+ when  bt.kind=3 then N''Sales Returns Bill''  
+ end as BillKindEn,
+ case
+ when bt.kind=1 then N''فاتورة مبيعات''
+ when  bt.kind=3 then N''فاتورة مردودات مبيعات''  
+ end as BillKindAr
+
+FROM Bills as  b
+  join BillTypes as bt  on  bt.id = b.billtypeId
+where  b.IsDeleted <> 1 and bt.IsElectronicBill = 1 and (b.Synced = 0 or b.Synced is null)
+      and b.CompanyId = @companyId
+	  and b.BranchId = @branchId
+	  and (b.FiscalPeriodId = @fiscalPeriodId)
+
+     
+    
+
+
+
+
+
+
+END
+
+
+
+
+
+
+
+')

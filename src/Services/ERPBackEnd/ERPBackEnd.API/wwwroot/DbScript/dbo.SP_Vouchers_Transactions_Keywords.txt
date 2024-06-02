@@ -1,0 +1,45 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Vouchers_Transactions_Keywords') AND type IN (N'F', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Vouchers_Transactions_Keywords];
+
+
+exec('Create procedure [dbo].[SP_Vouchers_Transactions_Keywords]
+@lang as NVARCHAR(10) 
+as
+begin
+select 
+
+case when @lang =''en-us'' then ''Voucher Transactions''
+else N''حركة السندات'' end
+as VoucherTransactions,
+
+case when @lang =''en-us'' then ''Branch''
+else N''الفرع'' end
+as Branch,
+
+case when @lang =''en-us'' then ''Voucher Kind''
+else N''نوع السند'' end
+as VoucherKind,
+
+case when @lang =''en-us'' then ''Voucher''
+else N''نمط السند'' end
+as Voucher,
+
+case when @lang =''en-us'' then ''Voucher Number''
+else N''رقم السند'' end
+as VoucherNumber,
+
+case when @lang =''en-us'' then ''Voucher Date''
+else N''تاريخ السند'' end
+as VoucherDate,
+
+case when @lang =''en-us'' then ''Voucher Total''
+else N''قيمة السند'' end
+as VoucherTotal,
+case when @lang =''en-us'' then ''Currency''
+else N''العملة'' end
+as Currency,
+
+case when @lang =''en-us'' then ''Voucher Total Local''
+else N''قيمة السند محلى'' end
+as VoucherTotalLocal
+end')
+

@@ -1,0 +1,12 @@
+﻿<p>Hello {user},</p>
+<p>Your ID: {userId}</p>
+
+<p>We just need to verify your email address before you can access CIS</p>
+<p>Verify your email address <a href="{link}">here</a></p>
+<br />
+<p>Regards,</p>
+<p>
+  Resort Team
+  <br/>
+  Resort Solutions
+</p>

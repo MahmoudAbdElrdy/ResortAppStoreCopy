@@ -1,0 +1,57 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Item_Balances') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Item_Balances];
+
+
+
+
+exec('Create procedure [dbo].[SP_Item_Balances]
+    @itemCardId BIGINT,
+    @storeId BIGINT,
+    @fiscalPeriodId BIGINT = NULL,
+    @companyId BIGINT = NULL,
+    @branchId NVARCHAR(250) = NULL,
+    @billDate DateTime = NULL
+as
+begin
+  DECLARE @fromDate Date = null;
+  if @fiscalPeriodId > 0
+  begin
+    SET @fromDate = (SELECT FromDate FROM FiscalPeriods WHERE Id = @fiscalPeriodId);
+    END
+    SELECT 
+        (
+            SELECT isnull(TotalConvertedAddedQuantity,0) 
+            FROM [dbo].[fn_First_Period_Quantity](@itemCardId, @storeId, NULL, @fromDate, @companyId, @branchId,@billDate)
+        ) +
+        (
+            SELECT isnull(TotalConvertedAddedQuantity,0)
+            FROM [dbo].[fn_Added_Quantity](@itemCardId, @storeId, NULL, @fromDate, @companyId, @branchId,@billDate)
+        ) +
+        (
+            SELECT isnull(TotalConvertedAddedQuantity,0) 
+            FROM [dbo].[fn_Added_Quantity_Second_store](@itemCardId, @storeId, NULL, @fromDate, @companyId, @branchId,@billDate)
+        ) -
+        (
+            SELECT isnull(TotalConvertedIssuedQuantity,0)
+            FROM [dbo].[fn_Issued_Quantity](@itemCardId, @storeId, NULL, @fromDate, @companyId, @branchId,@billDate)
+        ) AS ConvertedPreviousBalance,
+        
+        (
+            SELECT isnull(TotalConvertedAddedQuantity,0)
+            FROM [dbo].[fn_First_Period_Quantity](@itemCardId, @storeId, @fiscalPeriodId, NULL, @companyId, @branchId,@billDate)
+        ) AS ConvertedFirstPeriodQuantity,
+        
+        (
+            SELECT isnull(TotalConvertedAddedQuantity,0)
+            FROM [dbo].[fn_Added_Quantity](@itemCardId, @storeId, @fiscalPeriodId, NULL, @companyId, @branchId,@billDate)
+        ) +
+        (
+            SELECT isnull(TotalConvertedAddedQuantity,0) 
+            FROM [dbo].[fn_Added_Quantity_Second_store](@itemCardId, @storeId, @fiscalPeriodId, NULL, @companyId, @branchId,@billDate)
+        ) AS ConvertedAddedQuantity,
+        
+        (
+            SELECt isnull(TotalConvertedIssuedQuantity,0)
+            FROM [dbo].[fn_Issued_Quantity](@itemCardId, @storeId, @fiscalPeriodId, NULL, @companyId, @branchId,@billDate)
+        ) AS ConvertedIssuedQuantity;
+
+end')

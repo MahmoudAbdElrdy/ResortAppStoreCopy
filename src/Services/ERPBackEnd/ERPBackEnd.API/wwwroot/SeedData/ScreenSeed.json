@@ -1,0 +1,765 @@
+[
+  {
+    "Id": 1,
+    "ScreenNameAr": "الدول",
+    "ScreenNameEn": "Country",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Country"
+  },
+  {
+    "Id": 2,
+    "ScreenNameAr": "الانشطة",
+    "ScreenNameEn": "Business",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Business"
+  },
+  {
+    "Id": 3,
+    "ScreenNameAr": "المستخدمين",
+    "ScreenNameEn": "User",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "User"
+  },
+  {
+    "Id": 4,
+    "ScreenNameAr": "العملاء",
+    "ScreenNameEn": "Customer",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Customer"
+  },
+  {
+    "Id": 5,
+    "ScreenNameAr": "العملات",
+    "ScreenNameEn": "Currency",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Currency"
+  },
+  {
+    "Id": 6,
+    "ScreenNameAr": "الأدوار",
+    "ScreenNameEn": "Role",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Role"
+  },
+  {
+    "Id": 7,
+    "ScreenNameAr": "الشركات",
+    "ScreenNameEn": "Company",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Company"
+  },
+  {
+    "Id": 8,
+    "ScreenNameAr": "الفروع",
+    "ScreenNameEn": "Branch",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Branch"
+  },
+  {
+    "Id": 9,
+    "ScreenNameAr": "اليوميات",
+    "ScreenNameEn": "Journal",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Journal"
+  },
+  {
+    "Id": 10,
+    "ScreenNameAr": "الفترات المحاسبية",
+    "ScreenNameEn": "Fiscal Period",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "FiscalPeriod"
+  },
+  {
+    "Id": 11,
+    "ScreenNameAr": " الدليل المحاسبي",
+    "ScreenNameEn": "Accounting Guide ",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "AccountingGuide"
+  },
+  {
+    "Id": 12,
+    "ScreenNameAr": "مجموعة الحسابات",
+    "ScreenNameEn": "Account Group",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "AccountGroup"
+  },
+  {
+    "Id": 13,
+    "ScreenNameAr": "مركز التكلفة",
+    "ScreenNameEn": "Cost Center",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "CostCenter"
+  },
+  {
+    "Id": 14,
+    "ScreenNameAr": "تصنيف الحساب",
+    "ScreenNameEn": "Account Classification",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "AccountClassification"
+  },
+  {
+    "Id": 15,
+    "ScreenNameAr": " الحساب",
+    "ScreenNameEn": "Account",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Account"
+  },
+  {
+    "Id": 16,
+    "ScreenNameAr": "أنماط السندات",
+    "ScreenNameEn": "Voucher Types",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "VoucherType"
+  },
+  {
+    "Id": 17,
+    "ScreenNameAr": "إعدادات الحسابات",
+    "ScreenNameEn": "Accouting Configuration",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "AccoutingConfiguration"
+  },
+  {
+    "Id": 18,
+    "ScreenNameAr": "قيود محاسبية",
+    "ScreenNameEn": "Journal Entry",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "JournalEntry"
+  },
+  {
+    "Id": 19,
+    "ScreenNameAr": "قيود محاسبية مرحلة",
+    "ScreenNameEn": "Journal Entry Post",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "JournalEntryPost"
+  },
+  {
+    "Id": 20,
+    "ScreenNameAr": "أغلاق الفترة المحاسبية",
+    "ScreenNameEn": "Close Fiscal Period",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "CloseFiscalPeriod"
+  },
+
+  {
+    "Id": 21,
+    "ScreenNameAr": "السندات",
+    "ScreenNameEn": "Voucher",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Voucher"
+  },
+  {
+    "Id": 22,
+    "ScreenNameAr": "الشيكات الواردة",
+    "ScreenNameEn": "Incoming Cheque",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "IncomingCheque"
+  },
+  {
+    "Id": 23,
+    "ScreenNameAr": "الشيكات الصادرة",
+    "ScreenNameEn": "Issuing Cheque",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "IssuingCheque"
+  },
+  {
+    "Id": 24,
+    "ScreenNameAr": "تقرير الميزانية",
+    "ScreenNameEn": "Budget Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Report"
+  },
+  {
+    "Id": 25,
+    "ScreenNameAr": "تقرير قائمة الدخل",
+    "ScreenNameEn": "Income Statement Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Report"
+  },
+  {
+    "Id": 26,
+    "ScreenNameAr": "تقرير حركات السندات",
+    "ScreenNameEn": "Voucher Transactions Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Report"
+  },
+  {
+    "Id": 27,
+    "ScreenNameAr": "تقرير الأستاذ العام",
+    "ScreenNameEn": "General Ledger Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Report"
+  },
+  {
+    "Id": 28,
+    "ScreenNameAr": "تقرير القيود اليومية",
+    "ScreenNameEn": "Journal Entries Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Report"
+  },
+  {
+    "Id": 29,
+    "ScreenNameAr": "تقرير مراكز التكلفة",
+    "ScreenNameEn": "Cost Centers Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Report"
+  },
+  {
+    "Id": 30,
+    "ScreenNameAr": "تقرير أرصدة الحسابات",
+    "ScreenNameEn": "Accounts Balance Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Report"
+  },
+  {
+    "Id": 31,
+    "ScreenNameAr": "تقرير ميزان المراجعة",
+    "ScreenNameEn": "Trial Balance Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Report"
+  },
+  {
+    "Id": 32,
+    "ScreenNameAr": "الفترات",
+    "ScreenNameEn": "Periods",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "Period"
+  },
+  {
+    "Id": 33,
+    "ScreenNameAr": "الوحدات",
+    "ScreenNameEn": "Units",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Unit"
+  },
+  {
+    "Id": 34,
+    "ScreenNameAr": "الضرائب",
+    "ScreenNameEn": "Taxes",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Tax"
+  },
+  {
+    "Id": 35,
+    "ScreenNameAr": "بطاقة المستودع",
+    "ScreenNameEn": "Store Card",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "StoreCard"
+  },
+  {
+    "Id": 36,
+    "ScreenNameAr": "طرق الدفع",
+    "ScreenNameEn": "Payment Methods",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "PaymentMethod"
+  },
+  {
+    "Id": 37,
+    "ScreenNameAr": "بطاقة العميل",
+    "ScreenNameEn": "Customer Card",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "CustomerCard"
+  },
+  {
+    "Id": 38,
+    "ScreenNameAr": "بطاقة المورد",
+    "ScreenNameEn": "Supplier Card",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "SupplierCard"
+  },
+  {
+    "Id": 39,
+    "ScreenNameAr": "بطاقة الصنف",
+    "ScreenNameEn": "Item Card",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "ItemCard"
+  },
+  {
+    "Id": 40,
+    "ScreenNameAr": "بطاقة مجموعة الصنف",
+    "ScreenNameEn": "Item Group Card",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "ItemGroupsCard"
+  },
+  {
+    "Id": 41,
+    "ScreenNameAr": "أنماط الفواتير (مستودعات)",
+    "ScreenNameEn": "Bill Types (Warehouses)",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "BillType"
+  },
+  {
+    "Id": 42,
+    "ScreenNameAr": "بطاقة مندوب",
+    "ScreenNameEn": "SalesPersonCard",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "SalesPersonCard"
+  },
+  {
+    "Id": 43,
+    "ScreenNameAr": "الفواتير(مستودعات)",
+    "ScreenNameEn": "Bills (Warehouses)",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Bill"
+  },
+  {
+    "Id": 44,
+    "ScreenNameAr": "عمولات المناديب",
+    "ScreenNameEn": "SalesPersonCommission",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "SalesPersonCommission"
+  },
+  {
+    "Id": 45,
+    "ScreenNameAr": "الاشتراكات",
+    "ScreenNameEn": "Subscription",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Subscription"
+  },
+  {
+    "Id": 46,
+    "ScreenNameAr": "توليد قيود السندات",
+    "ScreenNameEn": "Generate Entry Vouchers",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "Voucher"
+  },
+  {
+    "Id": 47,
+    "ScreenNameAr": "المحددات",
+    "ScreenNameEn": "Determinants",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Determinants"
+  },
+  {
+    "Id": 48,
+    "ScreenNameAr": "اغلاق الفترة المحاسبية",
+    "ScreenNameEn": "Close Accounting Period",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 5,
+    "Name": "AccountingPeriod"
+  },
+  {
+    "Id": 49,
+    "ScreenNameAr": "توليد قيود الفواتير",
+    "ScreenNameEn": "Generate Entry Bills",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Bill"
+  },
+  {
+    "Id": 50,
+    "ScreenNameAr": "تقرير القائمة التحليلية للأصناف",
+    "ScreenNameEn": "Items Analysis List Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+  },
+  {
+    "Id": 51,
+    "ScreenNameAr": "المشروع",
+    "ScreenNameEn": "Project",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Project"
+  },
+  {
+    "Id": 52,
+    "ScreenNameAr": "تقرير جرد البضاعة",
+    "ScreenNameEn": "Stocktaking Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Report"
+  },
+  {
+    "Id": 53,
+    "ScreenNameAr": "مجموعة العملاء",
+    "ScreenNameEn": "Customers Group",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "CustomerGroup"
+  },
+  {
+    "Id": 54,
+    "ScreenNameAr": "مجموعة الموردين",
+    "ScreenNameEn": "Suppliers Group",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "SupplierGroup"
+  },
+  {
+    "Id": 55,
+    "ScreenNameAr": "تقرير أرصدة الموردين",
+    "ScreenNameEn": "Suppliers Balances Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Beneficiaries"
+  },
+  {
+    "Id": 56,
+    "ScreenNameAr": "تقرير أرصدة العملاء",
+    "ScreenNameEn": "Customer Balance Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+
+  },
+  {
+    "Id": 57,
+    "ScreenNameAr": "الجهات",
+    "ScreenNameEn": "Beneficiaries",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "Beneficiaries"
+  },
+  {
+    "Id": 58,
+    "ScreenNameAr": "تقرير الحركة التجارية للمشتريات",
+    "ScreenNameEn": "Commercial Movement of Purchases Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+
+  },
+  {
+    "Id": 59,
+    "ScreenNameAr": "مجموعات المتلقين",
+    "ScreenNameEn": "BeneficiariesGroup",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "BeneficiariesGroup"
+  },
+
+  {
+    "Id": 60,
+    "ScreenNameAr": "تقرير حساب عميل تفصيلي ",
+    "ScreenNameEn": "Customer Detailed Account Report ",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+  },
+
+  {
+    "Id": 61,
+    "ScreenNameAr": "إعدادات المستودعات",
+    "ScreenNameEn": "Warehouses Configuration",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "WarehousesConfiguration"
+  },
+  {
+    "Id": 62,
+    "ScreenNameAr": "تقرير حركة الصنف",
+    "ScreenNameEn": "Item Movement Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+  },
+  {
+    "Id": 63,
+    "ScreenNameAr": "الحركة التجارية للمبيعات",
+    "ScreenNameEn": "Sales Commercial Movement",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+  },
+  {
+    "Id": 64,
+    "ScreenNameAr": "تقرير المبيعات التحليلي",
+    "ScreenNameEn": "Sales Analysis Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+  },
+  {
+    "Id": 65,
+    "ScreenNameAr": "تقرير المبيعات الاحصائي",
+    "ScreenNameEn": "Sales Statistics Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+  },
+  {
+    "Id": 66,
+    "ScreenNameAr": "الجرد ",
+    "ScreenNameEn": "warehouse List",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "WarehouseLists"
+  },
+  {
+    "Id": 67,
+    "ScreenNameAr": "ترحيل الفواتير الى المستودعات",
+    "ScreenNameEn": "Post Bills To Warehouses",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Bill"
+  },
+  {
+    "Id": 68,
+    "ScreenNameAr": "اعتماد الجرد اليدوى",
+    "ScreenNameEn": "Manual Inventory Approval",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "ManualInventoryApproval"
+  },
+  {
+    "Id": 69,
+    "ScreenNameAr": "تقرير جرد المستودعات",
+    "ScreenNameEn": "Inventory List Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+  },
+  {
+    "Id": 70,
+    "ScreenNameAr": "تقرير أرباح الأصناف",
+    "ScreenNameEn": "Items Profits Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+  },
+  {
+    "Id": 71,
+    "ScreenNameAr": "إعدادات التنبيهات الإدارية",
+    "ScreenNameEn": "Notifications Configurations",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "NotificationsConfigurations"
+  },
+
+  {
+    "Id": 72,
+    "ScreenNameAr": "قوائم الاسعار",
+    "ScreenNameEn": "Price Lists",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "PriceList"
+  },
+  {
+    "Id": 73,
+    "ScreenNameAr": "تقرير المراجع المرتبطة",
+    "ScreenNameEn": "Linked References Report",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 6,
+    "Name": "Report"
+  },
+  {
+    "Id": 74,
+    "ScreenNameAr": "إدارة التنبيهات",
+    "ScreenNameEn": "Notifications Management",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 0,
+    "Name": "NotificationsManagement"
+  },
+  {
+    "Id": 75,
+    "ScreenNameAr": "اعدادات نقاط البيع",
+    "ScreenNameEn": "Point of Sale Setttings ",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "PointofSaleSetttings"
+  },
+  {
+    "Id": 76,
+    "ScreenNameAr": " نقاط البيع",
+    "ScreenNameEn": "Point of Sale ",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "PointOfSaleCard"
+  },
+  {
+    "Id": 77,
+    "ScreenNameAr": "الطوابق",
+    "ScreenNameEn": "Floors ",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "Floors"
+  },
+
+  {
+    "Id": 78,
+    "ScreenNameAr": "الطاولات",
+    "ScreenNameEn": "Point of Sale Tables ",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "POSTables"
+  },
+  {
+    "Id": 79,
+    "ScreenNameAr": "أنماط الفواتير ( نقاط البيع )",
+    "ScreenNameEn": "Bill Types ( Point Of Sales )",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "POSBillType"
+  },
+  {
+    "Id": 80,
+    "ScreenNameAr": "فواتير نقاط البيع",
+    "ScreenNameEn": "Point of Sales Bill",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "POSBill"
+  },
+  {
+    "Id": 81,
+    "ScreenNameAr": "الورديات",
+    "ScreenNameEn": "Shifts ",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "Shifts"
+  },
+  {
+    "Id": 82,
+    "ScreenNameAr": "التحويل النقدى",
+    "ScreenNameEn": "Cash Transfer",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "CashTransfer"
+  },
+  {
+    "Id": 83,
+    "ScreenNameAr": "تسليم الصندوق",
+    "ScreenNameEn": "POS Delivery",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "POSDelivery"
+  },
+  {
+    "Id": 84,
+    "ScreenNameAr": " تجميع فواتير نقاط البيع",
+    "ScreenNameEn": "POS Bills Collection",
+    "IsDeleted": "false",
+    "IsActive": "true",
+    "ModuleType": 1,
+    "Name": "POSBillsCollection"
+  }
+]

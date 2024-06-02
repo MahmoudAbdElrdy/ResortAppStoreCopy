@@ -1,0 +1,29 @@
+﻿@using Stimulsoft.Report.Mvc;
+
+
+@{
+    ViewBag.Title = "تصميم التقرير";
+    Layout = null;
+
+}
+
+@*@Html.Stimulsoft().StiMvcDesigner("StiMvcDesigner1", new StiMvcDesignerOptions()*@
+
+@Html.StiNetCoreDesigner("StiMvcDesigner1", new StiNetCoreDesignerOptions()
+{
+    Actions =
+    {
+        GetReport = "GetReport",
+        PreviewReport = "PreviewReport",
+        SaveReport = "SaveReport",
+        DesignerEvent = "DesignerEvent",
+        SaveReportAs= "SaveAsReport",
+        Exit = "ExitDesigner",
+        
+    },
+    FileMenu =
+    {
+        ShowExit = true
+
+    }
+})

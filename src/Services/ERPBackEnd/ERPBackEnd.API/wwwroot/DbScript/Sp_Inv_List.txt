@@ -1,0 +1,94 @@
+﻿
+if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.Sp_Inv_List') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[Sp_Inv_List];
+
+exec('
+
+
+create PROCEDURE [dbo].[Sp_Inv_List] 
+	@fromDate DateTime,
+	@toDate DateTime,
+	@branchId bigint,
+	@companyId bigint,
+	@storeId bigint,
+	@itemGroupId bigint,
+	@itemId bigint,
+	@warehouseEffect nvarchar(255),
+	@currencyId bigint,
+	@userId bigint,
+	@lang nvarchar(255)
+AS
+BEGIN
+	SELECT
+		f.ItemId,
+		f.ItemName,
+		f.StoreId,
+		f.StoreName,
+		f.MainUnitId,
+		f.UnitName,
+		f.CostPrice,
+		f.billItemId,
+		CASE 
+			WHEN determainant.DeterminantData IS NOT NULL AND determainant.DeterminantData <> '''' THEN
+				dbo.fn_Get_Bill_Item_Determinants(determainant.DeterminantData, @lang)
+			ELSE 
+				''''
+		END AS Determainants,
+		SUM(PreviousInQty) AS PreviousInQty,
+		SUM(f.PreviousOutQty) AS PreviousOutQty,
+		SUM(PreviousInQty) - SUM(f.PreviousOutQty) AS PreviousBalance,
+		SUM(f.InQty) AS InQty,
+		SUM(f.OutQty) AS OutQty,
+		SUM(f.InQty) - SUM(f.OutQty) AS Balance,
+		SUM(PreviousInQty) - SUM(f.PreviousOutQty) + SUM(f.InQty) - SUM(f.OutQty) AS CurrentBalance
+	FROM (
+		SELECT 
+			CASE WHEN c.ItemId IS NULL THEN p.PreviousItemId ELSE c.ItemId END AS ItemId,
+			CASE WHEN c.ItemName IS NULL THEN p.PreviousItemName ELSE c.ItemName END AS ItemName,
+			CASE WHEN c.StoreId IS NULL THEN p.PreviousStoreId ELSE c.StoreId END AS StoreId,
+			CASE WHEN c.StoreName IS NULL THEN p.PreviousStoreName ELSE c.StoreName END AS StoreName,
+			CASE WHEN c.MainUnitId IS NULL THEN p.PreviousUnitId ELSE c.MainUnitId END AS MainUnitId,
+			CASE WHEN c.UnitName IS NULL THEN p.PreviousUnitName ELSE c.UnitName END AS UnitName,
+			CASE WHEN c.CostPrice IS NULL THEN p.PreviousCostPrice ELSE c.CostPrice END AS CostPrice,
+			ISNULL(c.InQty, 0) AS InQty,
+			ISNULL(c.OutQty, 0) AS OutQty,
+			ISNULL(p.PreviousInQty, 0) AS PreviousInQty,
+			ISNULL(p.PreviousOutQty, 0) AS PreviousOutQty,
+			c.billItemId
+		FROM (
+			SELECT * 
+			FROM fn_Get_Item_Movement(@lang, @warehouseEffect) m 
+			WHERE m.Date >= @fromDate AND m.Date < @ToDate
+		) c
+		FULL JOIN (
+			SELECT 
+				o.OutQty AS PreviousOutQty,
+				o.InQty AS PreviousInQty,
+				o.ItemId AS PreviousItemId,
+				o.ItemName AS PreviousItemName,
+				o.StoreId AS PreviousStoreId,
+				o.StoreName AS PreviousStoreName,
+				o.MainUnitId AS PreviousUnitId,
+				o.UnitName AS PreviousUnitName,
+				o.CostPrice AS PreviousCostPrice,
+				o.billItemId
+			FROM fn_Get_Item_Movement(@lang, @warehouseEffect) o
+			WHERE o.Date < @fromDate
+		) p 
+		ON c.ItemId = p.PreviousItemId AND c.StoreId = p.PreviousStoreId
+	) f
+	LEFT JOIN BillDynamicDeterminants AS determainant ON f.billItemId = determainant.BillItemId
+	WHERE (f.StoreId = @storeId OR ISNULL(@storeId, 0) = 0) AND (f.ItemId = @itemId OR ISNULL(@itemId, 0) = 0)
+	GROUP BY 
+		f.ItemId,
+		f.ItemName,
+		f.StoreId,
+		f.StoreName,
+		f.MainUnitId,
+		f.UnitName,
+		f.CostPrice,
+		f.billItemId,
+		determainant.DeterminantData
+END
+
+
+')

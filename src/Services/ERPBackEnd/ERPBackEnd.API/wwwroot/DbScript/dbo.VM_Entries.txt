@@ -1,0 +1,20 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('VM_Entries') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P',N'V')) DROP View [dbo].[VM_Entries];
+
+
+
+
+exec('CREATE VIEW [dbo].[VM_Entries]
+AS
+SELECT        Master.Id AS MasterId, Master.Code AS MasterCode, Master.Date, Journal.NameEn AS JournalName, Master.Notes AS MasterNotes, Account.Code AS AccountCode, Account.NameAr AS AccountNameAr, 
+                         Account.NameEn AS AccountNameEn, Currency.NameAr AS CurrencyNameAr, Currency.NameEn AS CurrencyNameEn, CostCenter.NameAr AS CostCenterNameAr, CostCenter.NameEn AS CostCenterNameEn, 
+                         Detail.TransactionFactor, Detail.JEDetailCredit, Detail.JEDetailDebit, Detail.JEDetailCreditLocal, Detail.JEDetailDebitLocal, Detail.Notes AS DetailNotes, CostCenter.Code AS CostCenterCodel
+FROM            dbo.JournalEntriesMasters AS Master INNER JOIN
+                         dbo.JournalEntriesDetails AS Detail ON Master.Id = Detail.JournalEntriesMasterId INNER JOIN
+                         dbo.Accounts AS Account ON Detail.AccountId = Account.Id INNER JOIN
+                         dbo.Currencies AS Currency ON Detail.CurrencyId = Currency.Id LEFT OUTER JOIN
+                         dbo.Journals AS Journal ON Master.JournalId = Journal.Id LEFT OUTER JOIN
+                         dbo.CostCenters AS CostCenter ON Detail.CostCenterId = CostCenter.Id
+
+
+
+')

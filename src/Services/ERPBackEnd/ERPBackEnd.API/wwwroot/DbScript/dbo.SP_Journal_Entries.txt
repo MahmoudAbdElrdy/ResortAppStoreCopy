@@ -1,0 +1,143 @@
+﻿
+if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Journal_Entries') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Journal_Entries];
+
+
+
+exec('Create PROCEDURE [dbo].[SP_Journal_Entries]
+    @fromDate DATE = NULL,
+    @toDate DATE = NULL,
+    @branchId BIGINT = NULL,
+    @accountId BIGINT = NULL,
+    @journalId BIGINT = NULL,
+    @currencyId BIGINT = NULL,
+    @fromEntryNo NVARCHAR(50) = NULL,
+    @toEntryNo NVARCHAR(50) = NULL,
+    @companyId BIGINT=null,
+    @userId NVARCHAR(50)=null,
+    @entriesStatusId INT = NULL,
+	@lang VARCHAR(10) = ''en-us'',
+	@selectedCurrencyName NVARCHAR(250) =null,
+    @selectedEntriesStatusName  NVARCHAR(250) =null,
+    @selectedleafAccountName NVARCHAR(100) =null,
+	@selectedBranchName as NVARCHAR(250) = NULL,
+    @selectedJournalName as NVARCHAR(250) = NULL
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+IF (@accountId = 0)
+BEGIN
+    SET @accountId = NULL
+END
+IF (@journalId = 0)
+BEGIN
+    SET @journalId = NULL
+END
+
+IF (@currencyId = 0)
+BEGIN
+    SET @currencyId = NULL
+END
+
+IF (@fromEntryNo = '''')
+BEGIN
+    SET @fromEntryNo = NULL
+END
+
+IF (@toEntryNo = '''')
+BEGIN
+    SET @toEntryNo = NULL
+END
+
+
+
+
+IF (@entriesStatusId = 0 OR @entriesStatusId = 3)
+BEGIN
+    SET @entriesStatusId = NULL
+END
+
+
+
+SELECT
+    Master.Id AS MasterId,
+    Master.Code AS MasterCode,
+    Cast(Master.Date as date) as Date,
+    CASE
+        WHEN @lang = ''ar'' THEN Journal.NameAr
+        ELSE Journal.NameEn
+    END AS JournalName,
+    Master.Code AS JournalCode,
+	Detail.AccountId As AccountId,
+    Account.Code AS AccountCode,
+    CASE
+        WHEN @lang = ''ar'' THEN Account.NameAr
+        ELSE Account.NameEn
+    END AS AccountName,
+    CASE
+        WHEN @lang = ''ar'' THEN Currency.NameAr
+        ELSE Currency.NameEn END AS CurrencyName,
+    
+
+case when (master.PostType=1 ) then (case when @lang =''ar'' then  N''مرحل'' else ''Posted''end)
+when (master.PostType=2 or master.PostType is null   ) then (case when @lang =''ar'' then  N''غير مرحل'' else ''Unposted''end) end  as PostType,
+    Detail.TransactionFactor,
+    Detail.JEDetailDebit,
+    Detail.JEDetailCredit,
+    Detail.JEDetailDebitLocal,
+    Detail.JEDetailCreditLocal,
+    Detail.Notes AS DetailNotes,
+    CASE
+        WHEN @lang = ''ar'' THEN CostCenter.NameAr
+        ELSE CostCenter.NameEn
+    END AS CostCenterName,
+    Branch.Id AS BranchId,
+    CASE
+        WHEN @lang = ''ar'' THEN Branch.NameAr
+        ELSE Branch.NameEn 
+    END AS BranchName
+FROM JournalEntriesMasters AS Master
+JOIN JournalEntriesDetails AS Detail ON Master.Id = Detail.JournalEntriesMasterId
+INNER JOIN Branches AS Branch ON Master.BranchId = Branch.Id
+LEFT JOIN Journals AS Journal ON Master.JournalId = Journal.Id
+LEFT JOIN Currencies AS Currency ON Detail.CurrencyId = Currency.Id
+LEFT JOIN Accounts AS Account ON Account.Id = Detail.AccountId
+LEFT JOIN CostCenters AS CostCenter ON Detail.CostCenterId = CostCenter.Id
+WHERE 
+    (
+    Detail.IsDeleted=0
+	and Master.IsDeleted=0
+
+    )
+	and
+    (@fromDate IS NULL OR Master.Date >= @fromDate)
+    AND (@toDate IS NULL OR Master.Date <= @toDate)
+    AND (@branchId IS NULL OR Master.BranchId = @branchId)
+	  AND (@branchId IS NULL OR Master.BranchId = @branchId)
+  AND (@accountId IS NULL OR Detail.JournalEntriesMasterId in (select JournalEntriesMasterId FROM JournalEntriesMasters AS Master
+JOIN JournalEntriesDetails AS Detail ON Master.Id = Detail.JournalEntriesMasterId
+where AccountId=@accountId))
+    AND (@journalId IS NULL OR Master.JournalId = @journalId)
+	 AND (@currencyId IS NULL OR Detail.CurrencyId = @currencyId)
+    AND (@fromEntryNo IS NULL OR Master.Code >= @fromEntryNo )
+    AND (@toEntryNo IS NULL OR Master.Code <= @toEntryNo)
+    AND (master.PostType = @entriesStatusId OR @entriesStatusId IS NULL)
+    AND (Master.CompanyId = @companyId)
+    AND Master.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId = (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			And (UsersCompanies.IsDeleted=0)
+        )
+    )
+
+	')

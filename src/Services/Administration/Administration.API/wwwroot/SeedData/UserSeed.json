@@ -1,0 +1,51 @@
+﻿[
+  {
+    "UserName": "SystemAdmin",
+    "Email": "SuperAdmin@gmail.com",
+    "PhoneNumber": "+966508064123",
+    "Name": "مسئول النظام",
+    "image": "wwwroot/Uploads/DefaultImages/superadmin.png",
+    "state": 0,
+    "roleId": 1,
+    "CreatedBy": null,
+    "SkeletonId": 1,
+    "IsManager": true,
+    "IsEmployee" :  true
+  },
+  {
+    "UserName": "User1",
+    "Email": "user1@gmail.com",
+    "PhoneNumber": "+966508064124",
+    "image": "wwwroot/Uploads/DefaultImages/user1.png",
+    "state": 0,
+    "roleId": 1,
+    "CreatedBy": 1,
+    "SkeletonId": 2,
+    "IsManager": false,
+    "IsEmployee": true
+  },
+  {
+    "UserName": "User2",
+    "Email": "user2@gmail.com",
+    "PhoneNumber": "+966508064125",
+    "image": "wwwroot/Uploads/DefaultImages/user2.png",
+    "state": 0,
+    "roleId": null,
+    "CreatedBy": 1,
+    "SkeletonId": 3,
+    "IsManager": true,
+    "IsEmployee": false
+  },
+  {
+    "UserName": "User3",
+    "Email": "user3@gmail.com",
+    "PhoneNumber": "+966508064126",
+    "image": "wwwroot/Uploads/DefaultImages/user2.png",
+    "state": 0,
+    "roleId": null,
+    "CreatedBy": 1,
+    "SkeletonId": 4,
+    "IsManager": true,
+    "IsEmployee": false
+  }
+]

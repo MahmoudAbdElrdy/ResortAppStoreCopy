@@ -1,0 +1,25 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('VW_Bill_Discounts_Addition') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P',N'V')) DROP View [dbo].[VW_Bill_Discounts_Addition];
+
+
+
+
+exec('CREATE VIEW [dbo].[VW_Bill_Discounts_Addition]
+AS
+SELECT
+	BillId,
+	SUM( AddDisc.DiscountValue * b.CurrencyValue) AS Disc,
+	SUM( AddDisc.AdditionValue * b.CurrencyValue) AS [Addition],
+	SUM( AddDisc.DiscountRatio) AS DiscRatio,
+	SUM( AddDisc.AdditionRatio) AS [AdditionRatio],
+	Sum( AddDisc.DiscountValue * AddDisc.CurrencyValue / b.CurrencyValue) As BillCurrencyDisc,
+	Sum( AddDisc.AdditionValue * AddDisc.CurrencyValue / b.CurrencyValue) As BillCurrencyAddition,
+	Sum( AddDisc.DiscountValue * AddDisc.CurrencyValue) As MainCurrencyDisc,
+	Sum( AddDisc.AdditionValue * AddDisc.CurrencyValue) As MainCurrencyAddition
+FROM
+	BillAdditionAndDiscounts as AddDisc Inner Join Bills As b On B.Id = AddDisc.BillId
+GROUP BY
+	BillId
+
+
+
+')

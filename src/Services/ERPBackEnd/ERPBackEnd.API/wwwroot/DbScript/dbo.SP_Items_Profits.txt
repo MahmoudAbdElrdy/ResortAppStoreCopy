@@ -1,0 +1,269 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Items_Profits') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Items_Profits];
+
+
+exec('
+Create PROCEDURE [dbo].[SP_Items_Profits]
+    @fromDate DATE = NULL,
+    @toDate DATE = NULL,
+	@companyId BIGINT = NULL,
+    @branchId as NVARCHAR(250) = NULL,
+	@projectId as NVARCHAR(250) = NULL,
+	@storeId BIGINT = NULL,
+	@customerId BIGINT = NULL,
+	@salesPersonId BIGINT = NULL,
+	@costCenterId BIGINT = NULL,
+	@payWay as NVARCHAR(250) = NULL,
+	@accountingEffect as NVARCHAR(250) = NULL,
+	@warehouseEffect as NVARCHAR(250) = NULL,
+	@billTypeIds  as NVARCHAR(250) = NULL,
+	@currencyId BIGINT = NULL,
+	@lang VARCHAR(10) = ''en-us'',
+	@userId NVARCHAR(50)=null,
+    @fiscalPeriodId BIGINT = NULL,
+	@costPriceType int,
+	@referenceId BIGINT = null,
+	@referenceNo BIGINT = null,
+	@fromBillNo nvarchar(250) = null,
+	@toBillNo nvarchar(250) = null
+
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+
+IF (@branchId = ''null'')
+BEGIN
+    SET @branchId = NULL
+END
+
+IF (@projectId = ''null'')
+BEGIN
+    SET @projectId = NULL
+END
+
+IF (@payWay = ''null'')
+BEGIN
+    SET @payWay = NULL
+END
+
+IF (@accountingEffect = ''null'')
+BEGIN
+    SET @accountingEffect = NULL
+END
+
+IF (@warehouseEffect = ''null'')
+BEGIN
+    SET @warehouseEffect = NULL
+END
+
+IF (@storeId = 0)
+BEGIN
+    SET @storeId = NULL
+END
+
+
+IF (@customerId = 0)
+BEGIN
+    SET @customerId = NULL
+END
+
+IF (@salesPersonId = 0)
+BEGIN
+    SET @salesPersonId = NULL
+END
+
+IF (@costCenterId = 0)
+BEGIN
+    SET @costCenterId = NULL
+END
+
+
+IF (@currencyId = 0)
+BEGIN
+    SET @currencyId = NULL
+END
+
+
+IF (@userId = 0)
+BEGIN
+    SET @userId = NULL
+END
+
+
+
+
+IF (@referenceId = 0)
+BEGIN
+    SET @referenceId = NULL
+END
+
+IF (@referenceNo = 0)
+BEGIN
+    SET @referenceNo = NULL
+END
+
+IF (@fromBillNo = 0)
+BEGIN
+    SET @fromBillNo = NULL
+END
+
+IF (@toBillNo = 0)
+BEGIN
+    SET @toBillNo = NULL
+END
+
+BEGIN
+
+
+
+
+select bt.Kind,  b.Code as BillCode,Cast(b.Date as date) as BillDate ,
+case 
+    when  bt.Kind = 1 then N''مبيعات''
+	
+    when   bt.Kind = 3 then N''مرتجع مبيعات''
+
+	
+	end as 
+
+BillkindName,
+case when @lang=''en-us'' then bran.NameEn else bran.NameAr end  as BranchName , case when @lang =''en-us'' then bt.NameEn else bt.NameAr end as BillTypeName,
+case when @lang=''en-us'' then cust.NameEn else cust.NameAr end as CustomerName,b.PayWay as PayWay,
+ case when @lang=''en-us'' then( case when b.PayWay=1 then N''Cash''
+ when  b.PayWay=2 then N''Credit''
+ when  b.PayWay=3 then N''Installment''  
+  end)
+ else
+ (case when b.PayWay=1 then N''نقدي''
+ when  b.PayWay=2 then N''أجل''
+ when  b.PayWay=3 then N''تقسيط''
+end) end as PayWayName,
+
+
+case when b.ShipMethod=1 then N''FOB''
+when  b.ShipMethod=2 then N''EX_Work''
+when  b.ShipMethod=3 then N''CF'' 
+when  b.ShipMethod=4 then N''CIF''  
+end as ShipMethodName,
+
+
+ case when @lang=''en-us'' then( case when b.ShipKind=1 then N''All''
+ when  b.ShipKind=2 then N''Part''
+
+  end)
+ else
+ (case when b.ShipKind=1 then N''كلى''
+ when  b.ShipKind=2 then N''جزئي''
+
+end) end as ShipKindName,case when @lang =''en-us'' then saleperson.NameEn else saleperson.NameAr end as SalePersonName ,IsNull(b.CurrencyValue,0) as CurrencyValue
+,case when @lang =''en-us'' then store.NameEn else store.NameAr end as StoreName,Cast(b.DeliveryDate as date) as  DeliveryDate
+,case when @lang =''en-us'' then curr.NameEn else curr.NameAr end as CurrencyName,
+case when @lang =''en-us'' then proj.NameEn else proj.NameAr end as ProjectName,case when @lang =''en-us'' then costcenter.NameEn else costcenter.NameAr end as CostCenterName,b.Notes,
+
+case 
+      when  bt.Kind = 1 then
+         case
+	      when  @currencyId > 0 then IsNull(b.TotalBeforeTax,0)
+	      else b.TotalBeforeTax * IsNull(b.CurrencyValue,0)
+		  
+		  END
+		when  bt.Kind = 3 then
+		 -
+		 case
+		 
+	      when  @currencyId > 0 then IsNull(b.TotalBeforeTax,0)
+	      else  b.TotalBeforeTax * IsNull(b.CurrencyValue,0)
+		  
+		  END
+END as TotalBeforeTax, 
+
+case 
+      when  bt.Kind = 1 then
+         case
+	      when  @currencyId > 0 then IsNull(b.TotalBeforeTax,0)  +  ISNULL(b.TotalAddition,0) -  ISNULL(b.TotalDiscount,0)
+	      else (IsNull(b.TotalBeforeTax,0) * IsNull(b.CurrencyValue,0)) + ((ISNULL(b.TotalAddition,0) - ISNULL(b.TotalDiscount,0)) * IsNull(b.CurrencyValue,0))
+		  
+		  END
+		when  bt.Kind = 3 then
+		-
+		 case
+	      when  @currencyId > 0 then IsNull(b.TotalBeforeTax,0)  +  ISNULL(b.TotalAddition,0) -  ISNULL(b.TotalDiscount,0)
+	      else  (IsNull(b.TotalBeforeTax,0) * IsNull(b.CurrencyValue,0)) + ((ISNULL(b.TotalAddition,0) - ISNULL(b.TotalDiscount,0)) * IsNull(b.CurrencyValue,0))
+		  
+		  
+		  END
+END as Net, 
+
+b.Delay,entry.Id as JournalEntryId,
+
+    CASE 
+           WHEN bt.Kind = 1 THEN 
+            Case 
+                WHEN @currencyId > 0 AND @costPriceType = 1 THEN
+                    ISNULL(b.TotalCostPrice, 0)
+                WHEN @currencyId is NULL AND @costPriceType = 1 THEN
+                    ISNULL(b.TotalCostPrice, 0) * IsNull(b.CurrencyValue,0) 
+                WHEN @currencyId > 0 AND @costPriceType = 2 THEN
+                   ISNULL(b.TotalCostPriceForWarehouse, 0)
+                WHEN @currencyId is NULL AND @costPriceType = 2 THEN
+                    ISNULL(b.TotalCostPriceForWarehouse, 0) * IsNull(b.CurrencyValue,0) 
+		    END
+			WHEN bt.Kind = 3 THEN 
+		     -
+            CASE 
+                 WHEN @currencyId > 0 AND @costPriceType = 1 THEN
+                    ISNULL(b.TotalCostPrice, 0)
+                WHEN @currencyId is NULL AND @costPriceType = 1 THEN
+                    ISNULL(b.TotalCostPrice, 0) * IsNull(b.CurrencyValue,0) 
+                WHEN @currencyId > 0 AND @costPriceType = 2 THEN
+                   ISNULL(b.TotalCostPriceForWarehouse, 0)
+                WHEN @currencyId is NULL AND @costPriceType = 2 THEN
+                    ISNULL(b.TotalCostPriceForWarehouse, 0) * IsNull(b.CurrencyValue,0) 
+            END
+    END as Cost	
+   
+    
+ 
+from Bills as b join BillTypes as bt on b.BillTypeId = bt.Id
+join Branches as bran on b.BranchId = bran.Id 
+left join CustomerCards as cust on b.CustomerId = cust.Id
+left join SalesPersonCards as saleperson on b.SalesPersonId = saleperson.Id
+left join StoreCards as store on b.StoreId = store.Id
+left join Currencies as curr on b.CurrencyId = curr.Id
+left join Projects as proj on b.ProjectId = proj.Id
+left join CostCenters as costcenter on b.CostCenterId = costcenter.Id
+left join JournalEntriesMasters as entry on b.Id = entry.ParentTypeId and ( entry.ParentType = 4 or entry.ParentType = 5)
+ Where
+( b.IsDeleted<>1  )
+and (b.Date >= @fromDate or @fromDate is null)
+and (b.Date <=@toDate or @toDate is null)
+and (b.BranchId IN (SELECT * FROM fnSplitString(@branchId,'','')) or @branchId is null) 
+and (b.CompanyId =@companyId or @companyId is null)
+and	 (b.ProjectId IN (SELECT * FROM fnSplitString(@projectId,'','')) or @projectId is null) 
+and (b.storeId =@storeId or @storeId is null)
+and (b.CustomerId =@customerId or @customerId is null)
+and (b.SalesPersonId =@salesPersonId or @salesPersonId is null)
+and (b.CostCenterId =@costCenterId or @costCenterId is null)
+and	 (b.PayWay IN (SELECT * FROM fnSplitString(@payWay,'','')) or @payWay is null) 
+and	 (bt.AccountingEffect IN (SELECT * FROM fnSplitString(@accountingEffect,'','')) or @accountingEffect is null) 
+and	 (bt.WarehouseEffect IN (SELECT * FROM fnSplitString(@warehouseEffect,'','')) or @warehouseEffect is null) 
+and	 (b.billTypeId IN (SELECT * FROM fnSplitString(@billTypeIds,'','')) or @billTypeIds is null) 
+and (b.CurrencyId =@currencyId or @currencyId is null)
+and (b.CreatedBy =@userId or @userId is null)
+and (b.FiscalPeriodId =@fiscalPeriodId or @fiscalPeriodId is null)
+and (b.ReferenceId = @referenceId or @referenceId is null)
+and (b.ReferenceNo = @referenceNo or @referenceNo is null)
+and (b.Code  > = @fromBillNo or @fromBillNo is null)
+and (b.Code  < = @toBillNo or @toBillNo is null)
+and bt.Kind in (1,3)
+and b.PostToWarehouses = 1
+
+group by bt.Kind,b.Code,b.Date,bran.NameAr,bran.NameEn,bt.NameAr,bt.NameEn,b.CustomerId,cust.NameAr,cust.NameEn
+,b.PayWay,b.ShipMethod,b.ShipKind,saleperson.NameAr,saleperson.NameEn,b.CurrencyValue,store.NameAr,store.NameEn,b.DeliveryDate,curr.NameAr,curr.NameEn,
+proj.NameAr,proj.NameEn,costcenter.NameAr,costcenter.NameEn,b.Notes,b.TotalBeforeTax,b.Total,b.Net,b.Paid,b.Remaining,b.Delay,entry.Id,b.TotalAddition,b.TotalDiscount,b.TotalCostPrice,b.TotalCostPriceForWarehouse
+
+
+END')
+
+

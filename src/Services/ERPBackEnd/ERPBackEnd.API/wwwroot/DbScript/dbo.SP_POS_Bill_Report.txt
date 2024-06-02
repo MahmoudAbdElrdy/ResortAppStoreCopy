@@ -1,0 +1,79 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_POS_Bill_Report') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_POS_Bill_Report];
+
+
+exec('
+Create PROCEDURE [dbo].[SP_POS_Bill_Report]
+@id bigint,
+@lang VARCHAR(10) = ''en-us''
+
+AS
+BEGIN
+
+select  
+ case when @lang=''en-us'' then( case when bt.kind=1 then N''Sales''
+ when  bt.Kind=2 then N''Sales Return''
+  end)
+ else
+ (case when bt.kind=1 then N''مبيعات''
+ when  bt.kind=2 then N''مرتجع مبيعات''
+end) end as BillKindName,
+
+case when @lang=''en-us'' then( case when bt.Type=1 then N''Touch''
+ when  bt.Type=2 then N''Restaurant''
+  when  bt.Type=3 then N''Manual Entry''
+
+  end)
+ else
+ (case when bt.Type=1 then N''لمس''
+ when  bt.Type=2 then N''مطعم''
+  when  bt.Type=3 then N''أدخال يدوى''
+end) end as BillTypeName
+, case when @lang=''en-us'' then bran.NameEn else bran.NameAr end  as BranchName
+, b.Code as BillCode
+
+,case when @lang=''en-us'' then cust.NameEn else cust.NameAr end  as CustomerName
+
+,b.Date as BillDate,b.SystemBillDate as SystemBillDate,
+b.DiscountRatio ,b.DiscountValue,b.AdditionRatio,b.AdditionValue,b.LoyaltyPoints,b.LoyaltyPointsValue,b.GiftCardNumber,b.GiftValue,b.Total,b.Notes,
+case when @lang =''en-us'' then curr.NameEn else curr.NameAr end as CurrencyName,b.CurrencyValue
+,case when @lang =''en-us'' then costcenter.NameEn else costcenter.NameAr end as CostCenterName
+,case when @lang =''en-us'' then ShiftDetail.NameEn else ShiftDetail.NameAr end as ShiftDetailName
+,case when @lang =''en-us'' then ShiftMaster.NameEn else ShiftMaster.NameAr end as ShiftMasterName
+,case when @lang =''en-us'' then store.NameEn else store.NameAr end as StoreName
+,case when @lang =''en-us'' then Ref.NameEn else Ref.NameAr end as ReferenceName,
+b.ReferenceNo as ReferenceNo
+,case when @lang =''en-us'' then tab.NameEn else tab.NameAr end as TableName
+,case when @lang =''en-us'' then pos.NameEn else pos.NameAr end as PointOfSaleName
+,case when @lang=''en-us'' then( case when b.Paid=1 then N''Paid'' else N''UnPaid'' end)
+
+ else
+ (case when b.Paid=1 then N''مدفوع'' else N''غير مدفوع''
+
+end) end as IsPaid,
+
+case when @lang=''en-us'' then( case when b.Synced=1 then N''Synced'' else N''UnSynced''
+
+  end)
+ else
+ (case when b.Synced=1 then N''متزامن'' else N''غير متزامن''
+
+end) end as IsSynced
+
+from POSBills as b join  POSBillTypes as bt on b.BillTypeId = bt.Id
+join Branches as bran on b.BranchId = bran.Id 
+join CustomerCards as cust on b.CustomerId = cust.Id
+left join StoreCards as store on b.StoreId = store.Id
+join Currencies as curr on b.CurrencyId = curr.Id
+left join CostCenters as costcenter on b.CostCenterId = costcenter.Id
+join ShiftDetails as ShiftDetail on b.ShiftId = ShiftDetail.Id
+join ShiftMaster as ShiftMaster on ShiftDetail.ShiftMasterId = ShiftMaster.Id
+left join POSBillTypes as Ref on b.ReferenceId = Ref.Id
+left join POSTables as tab on b.POSTableId = tab.Id
+join PointOfSaleCards as pos on b.PointOfSaleId = pos.Id
+
+where b.Id = @id
+
+
+END')
+
+

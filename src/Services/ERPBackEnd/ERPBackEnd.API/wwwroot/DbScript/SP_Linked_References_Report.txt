@@ -1,0 +1,218 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('SP_Linked_References_Report') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Linked_References_Report];
+
+exec(' 
+create PROCEDURE [dbo].[SP_Linked_References_Report]
+    @fromDate DATE = NULL,                                     --1
+    @toDate DATE = NULL,                                       --2
+	@docFromDate DATE = NULL,                                  --3
+	@docToDate DATE = NULL,									   --4
+	@docFromEntryNo NVARCHAR(50) = NULL,				       --5
+	@docToEntryNo NVARCHAR(50) = NULL,						   --6
+	@fromEntryNo NVARCHAR(50) = NULL,					       --7
+	@toEntryNo NVARCHAR(50) = NULL,							   --8
+    @branchId BIGINT = NULL,								   --9
+	@currencyId BIGINT = NULL,								   --10
+    @billTypeId BIGINT = NULL,								   --11
+	@billKindId BIGINT = NULL,								   --12
+    @companyId BIGINT=null,									   --13
+    @userId NVARCHAR(50)=null,								   --14
+	@lang VARCHAR(10) = ''en-us'',							       --15
+	@docStoreId BIGINT = NULL,								   --16
+	@refStoreId BIGINT = NULL,								   --17
+	@refItemId BIGINT = NULL,								   --18
+	@salesRefPersonId BIGINT = NULL,						   --19
+	@docBillKindId BIGINT = NULL,							   --20
+	@docBillKindName  as NVARCHAR(250) = NULL,				   --21
+	@docBillTypeId BIGINT = NULL,							   --22
+	@docBillTypeName as NVARCHAR(250) = NULL,				   --23
+	@selectedBranchName as NVARCHAR(250) = NULL,			   --24
+	@selectedBillKindName as NVARCHAR(250) = NULL,			   --25
+	@selectedBillTypeName as NVARCHAR(250) = NULL,			   --26
+	@refItemName as NVARCHAR(250) = NULL,					   --27
+	@refStoreName as NVARCHAR(250) = NULL,					   --28
+	@docStoreName as NVARCHAR(250) = NULL					   --29
+
+	 
+	
+
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@currencyId = 0)
+BEGIN
+    SET @currencyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+IF (@billTypeId = 0)
+BEGIN
+    SET @billTypeId = NULL
+END
+IF (@billKindId = 0)
+BEGIN
+    SET @billKindId = NULL
+END
+IF (@docStoreId = 0)
+BEGIN
+    SET @docStoreId = NULL
+END
+IF (@refStoreId = 0)
+BEGIN
+    SET @refStoreId = NULL
+END
+IF (@refItemId = 0)
+BEGIN
+    SET @refItemId = NULL
+END
+IF (@salesRefPersonId = 0)
+BEGIN
+    SET @salesRefPersonId = NULL
+END
+IF (@docBillKindId = 0)
+BEGIN
+    SET @docBillKindId = NULL
+END
+IF (@docBillTypeId = 0)
+BEGIN
+    SET @docBillTypeId = NULL
+END
+IF (@fromEntryNo = '''')
+BEGIN
+    SET @fromEntryNo = NULL
+END
+
+IF (@toEntryNo = '''')
+BEGIN
+    SET @toEntryNo = NULL
+END
+IF (@docFromEntryNo = '''')
+BEGIN
+    SET @docFromEntryNo = NULL
+END
+
+IF (@docToEntryNo = '''')
+BEGIN
+    SET @docToEntryNo = NULL
+END
+
+
+
+BEGIN
+
+
+
+SELECT
+  docBill.Id AS BillId,
+  docBill.CompanyId,
+  docbi.ItemId  as DocItemId,
+  docBill.BranchId,
+  docBill.BillTypeId,
+  docBill.Code,
+  RefBill.Code as RefCode,
+   RefBi.ItemId as RefItemId,
+  case when @lang=''en-us'' then( case when refBt.kind=1 then N''Sales Bill''
+ when  refBt.kind=2 then N''Purchases Bill''
+ when  refBt.kind=3 then N''Sales Returns Bill''  
+ when  refBt.kind=4 then N''Purchases Returns Bill'' 
+ when  refBt.kind=5 then N''First Period Goods Bill'' end)
+ else
+ (case when refBt.kind=1 then N''فاتورة مبيعات''
+ when  refBt.kind=2 then N''فاتورة مشتريات''
+ when  refBt.kind=3 then N''فاتورة مردودات مبيعات''  
+ when  refBt.kind=4 then N''فاتورة مردودات مشتريات''
+ when  refBt.kind=5 then N''فاتورة بضاعة أول المدة'' end) end as RefBillKindName,
+ case when @lang=''ar'' then  refBt.NameAr else refBt.NameEn end as RefBillTypeName ,  
+ case when @lang=''ar'' then  docSt.NameAr else docSt.NameEn end as DocStoreName ,
+  case when @lang=''ar'' then  refSt.NameAr else refSt.NameEn end as RefStoreName ,  
+
+ isNull(refbi.Price,0) as  RefItemPrice ,
+ isNull(docBi.Price,0) as  DocItemPrice ,
+ isNull(refbi.Price,0) -  isNull(docBi.Price,0) as ItemPriceDifference,
+  refBillIc.NameAr as RefItemName,
+  RefBill.Date AS RefBillDate,
+  RefBill.PayWay AS RefBillPayWay,
+  RefBill.ReferenceId AS RefBillReferenceId,
+  RefBill.ReferenceNo AS RefBillReferenceNo,
+  RefBill.Notes AS RefBillNotes,
+  RefBill.TotalBeforeTax AS RefBillTotalBeforeTax,
+  RefBill.Total AS RefBillTotal,
+  isNull(RefBill.Net,0) AS RefTotalAfterDiscountAndAddition,
+  RefBill.Paid AS RefBillPaid,
+  RefBill.Remaining AS RefBillRemaining,
+  RefBill.TotalAddition AS RefBillTotalAddition,
+  RefBill.TotalDiscount AS RefBillTotalDiscount,
+  RefBill.Id AS ReferenceBillId,
+  RefBill.ReferenceNo AS ReferenceBillNo,
+  Abs(isNull( refBi.AddedQuantity,0)-isNull(refbi.IssuedQuantity ,0)) as RefActualQuantity,
+  Abs(isNull( docBi.AddedQuantity,0)-isNull(docBi.IssuedQuantity ,0)) as DocBiActualQuantity,
+  (Abs(isNull( refBi.AddedQuantity,0)-isNull(refbi.IssuedQuantity ,0))) - (Abs(isNull( docBi.AddedQuantity,0)-isNull(docBi.IssuedQuantity ,0))) as DifferenceQuantity,
+  (isnull(refbi.Total,0)-isnull(docBi.Total,0))  as differenceValues,
+  case when @currencyId > 0 then  IsNull(refBi.DiscountValue,0) else IsNull(refBi.DiscountValue,0) * isnull(RefBill.CurrencyValue,0) end as DiscountValue,
+  case when @currencyId > 0 then IsNull(refBi.AdditionValue,0) else IsNull(refBi.AdditionValue,0) * isnull(RefBill.CurrencyValue,0) end as AdditionValue,
+  isnull(refbi.Total,0) as RefValue,	
+  isnull(docBi.Total,0) as DocValue,	
+  docBill.Date,
+  docBill.ReferenceId,
+  docBill.ReferenceNo,
+  docBill.Notes,
+  docBill.TotalBeforeTax,
+  docBill.Total,
+  isNull(docBill.Net,0) AS DocTotalAfterDiscountAndAddition,
+  docBill.Paid,
+  docBill.Remaining,
+  docBill.TotalAddition,
+  docBill.TotalDiscount
+ FROM Bills AS docBill
+JOIN Bills AS RefBill ON docBill.ReferenceNo = RefBill.Id AND docBill.ReferenceNo IS NOT NULL AND docBill.IsDeleted <> 1
+JOIN BillTypes AS refBt ON refBt.Id = RefBill.BillTypeId
+JOIN BillItems AS refBi ON refBi.BillId = RefBill.Id
+JOIN BillTypes AS docBt ON docBt.Id = docBill.BillTypeId
+JOIN BillItems AS docBi ON docBi.BillId = docBill.Id
+JOIN ItemCards AS refBillIc ON refBillIc.Id = refBi.ItemId and refBillIc.id = docBi.itemId
+JOIN ItemCards AS DocIc ON DocIc.Id = docBi.ItemId and DocIc.id = refBi.itemid
+join StoreCards as  docSt on docSt.id = docBill.StoreId
+join StoreCards as  refSt on refSt.id = RefBill.StoreId
+
+
+where
+RefBill.IsDeleted<>1
+  
+   AND (@fromDate IS NULL OR RefBill.Date >= @fromDate)
+   AND (@toDate IS NULL OR RefBill.Date <= @toDate)
+   AND (@docFromDate IS NULL OR docBill.Date >= @docFromDate)
+   AND (@docToDate IS NULL OR docBill.Date <= @docToDate)
+   AND (RefBill.BranchId IN (SELECT * FROM fnSplitString(@branchId,'','')) or @branchId is null) 
+   And (@billKindId is null or refBt.Kind=@billKindId)
+   AND (@billTypeId IS NULL OR RefBill.BillTypeId = @billTypeId)
+   And (@docBillKindId is null or docBt.Kind=@docBillKindId)
+   AND (@docBillTypeId IS NULL OR docBill.BillTypeId = @docBillTypeId)
+   AND (@docStoreId IS NULL OR docBill.StoreId = @docStoreId)
+   AND (@refStoreId IS NULL OR RefBill.StoreId = @refStoreId)
+   AND (@salesRefPersonId IS NULL OR RefBill.SalesPersonId = @salesRefPersonId)
+   AND (@refItemId IS NULL OR refBi.ItemId = @refItemId)
+   AND (@fromEntryNo IS NULL OR RefBill.Code >= @fromEntryNo )
+   AND (@toEntryNo IS NULL OR RefBill.Code <= @toEntryNo)
+   AND (@docFromEntryNo IS NULL OR docBill.Code >= @docFromEntryNo )
+   AND (@docToEntryNo IS NULL OR docBill.Code <= @docToEntryNo)
+   AND (RefBill.CompanyId = @companyId)
+   AND RefBill.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			And (UsersCompanies.IsDeleted=0)
+        )
+    )
+
+END
+
+
+
+')

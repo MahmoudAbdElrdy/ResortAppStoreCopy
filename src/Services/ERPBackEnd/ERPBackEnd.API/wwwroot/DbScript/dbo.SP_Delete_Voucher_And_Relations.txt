@@ -1,0 +1,15 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Delete_Voucher_And_Relations') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Delete_Voucher_And_Relations];
+
+exec('Create procedure [dbo].[SP_Delete_Voucher_And_Relations]
+@voucherId bigint
+
+as
+begin
+
+	
+	delete from VoucherDetails where VoucherId=@voucherId
+	delete from Vouchers where Id=@voucherId
+
+	
+
+end')

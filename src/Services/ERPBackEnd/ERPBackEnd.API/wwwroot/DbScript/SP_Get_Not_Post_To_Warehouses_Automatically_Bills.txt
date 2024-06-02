@@ -1,0 +1,71 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_Not_Post_To_Warehouses_Automatically_Bills') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_Not_Post_To_Warehouses_Automatically_Bills];
+
+
+exec('
+
+
+
+
+Create PROCEDURE [dbo].[SP_Get_Not_Post_To_Warehouses_Automatically_Bills] 
+
+    @branchId BIGINT = NULL,
+    @companyId BIGINT=null,
+	@fiscalPeriodId BIGINT=null
+ 
+
+AS
+BEGIN
+
+declare @noPostToTheWarehousesAutomatically as int = 2
+	
+
+SELECT
+b.Id,
+b.BranchId,
+b.CompanyId ,
+b.Code,
+b.BillTypeId,
+b.Date as BillDate,
+bt.NameAr as BillTypeAr,
+bt.NameEn as BillTypeEn ,
+b.Date as BillDate,
+b.TotalBeforeTax * b.CurrencyValue as TotalBeforeTax,
+b.Total * b.CurrencyValue as Total,
+b.Net * b.CurrencyValue as Net,
+b.Paid * b.CurrencyValue as Paid,
+b.Remaining * b.CurrencyValue as Remaining, 
+b.FiscalPeriodId,
+bt.kind as BillKindId,
+ case when bt.kind=1 then N''Sales Bill''
+ when  bt.kind=2 then N''Purchases Bill''
+ when  bt.kind=3 then N''Sales Returns Bill''  
+ when  bt.kind=4 then N''Purchases Returns Bill'' 
+ when  bt.kind=5 then N''First Period Goods Bill'' 
+ when  bt.kind=6 then N''Transferred Bill''
+ when  bt.kind=7 then N''Addon Settlement Bill''
+ when  bt.kind=8 then N''Discount Settlement Bill Bill''
+
+ end as BillKindEn,
+ case when bt.kind=1 then N''فاتورة مبيعات''
+ when  bt.kind=2 then N''فاتورة مشتريات''
+ when  bt.kind=3 then N''فاتورة مردودات مبيعات''  
+ when  bt.kind=4 then N''فاتورة مردودات مشتريات'' 
+ when  bt.kind=5 then N''فاتورة بضاعة أول المدة''
+ when  bt.kind=6 then N''فاتورة مناقلة''
+ when  bt.kind=7 then N''فاتورة تسوية اضافة''
+ when  bt.kind=8 then  N''فاتورة تسوية خصم''
+ 
+ end as BillKindAr
+
+
+
+FROM BILLS as  b
+join BillTypes as bt  on b.billtypeId  = bt.id 
+where  b.IsDeleted <> 1 and bt.WarehouseEffect =@noPostToTheWarehousesAutomatically and ( b.PostToWarehouses is null or b.PostToWarehouses = 0 )
+      and b.CompanyId = @companyId
+	  and b.BranchId = @branchId
+	  and (b.FiscalPeriodId = @fiscalPeriodId)
+
+END
+
+')

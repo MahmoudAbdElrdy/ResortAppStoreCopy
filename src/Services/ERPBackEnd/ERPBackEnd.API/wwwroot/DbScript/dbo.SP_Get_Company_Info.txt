@@ -1,0 +1,16 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_Company_Info') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Get_Company_Info];
+
+
+
+exec('Create procedure [dbo].[SP_Get_Company_Info]
+@companyId bigint,
+@lang as NVARCHAR(10) 
+as
+begin
+select *,
+case when @lang =''en-us'' then Companies.NameEn
+else Companies.NameAr end as CompanyName
+
+from Companies where Id=@companyId
+end')
+

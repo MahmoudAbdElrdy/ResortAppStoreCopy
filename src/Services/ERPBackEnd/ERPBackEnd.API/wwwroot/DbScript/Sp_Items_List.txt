@@ -1,0 +1,91 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.Sp_Items_List') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[Sp_Items_List];
+
+
+exec('
+
+
+
+
+create PROCEDURE [dbo].[Sp_Items_List] 
+    @id BIGINT = null,
+    @lang NVARCHAR(10) = ''en-us'',
+    @companyId BIGINT = NULL,
+    @userId NVARCHAR = NULL,
+    @branchId NVARCHAR(250) = NULL
+As
+begin
+select  
+      ic.Id
+      ,ic.Code
+      ,ic.Barcode
+      ,ic.BranchId
+      ,ic.CompanyId
+      ,isNull(Case When @lang = ''ar'' then ic.NameAr else ic.NameEn end,''-'') as ItmeName
+	   ,isNull(Case When @lang = ''ar'' then st.NameAr else st.NameEn end,''-'') as StoreName,
+	    case when @lang=''en-us'' then
+( case when ic.ItemType=1 then N''warehouse''
+ when  ic.ItemType=2 then N''Service''
+ end)
+ else
+ (case when ic.ItemType=1 then N''مستودعي''
+ when  ic.ItemType=2 then N''خدمي''
+   end) end as ItemTypeName
+       ,isNull(ic.ItemGroupId,''-'') as ItemGroupId
+      ,ic.ItemType
+      ,ic.CostCalculateMethod
+      ,ic.Notes
+      ,ic.Image
+      ,ic.IsActive
+      ,ic.Model
+      ,ic.Manufacturer
+      ,ic.MaxLimit
+      ,ic.MinLimit
+      ,ic.ReorderLimit
+      ,ic.Description
+      ,ic.MainUnitId
+      ,ic.SellingPrice
+      ,ic.MinSellingPrice
+      ,ic.OpeningCostPrice
+      ,ic.LifeTime
+      ,ic.LifeTimeType
+      ,ic.HeightFactor
+      ,ic.WidthFactor
+      ,ic.LengthFactor
+      ,ic.WarrantyPeriod
+      ,ic.WarrantyType
+      ,ic.itemNature
+      ,ic.SalesAccountId
+      ,ic.Attachment
+      ,ic.SalesReturnsAccountId
+      ,ic.PurchasesAccountId
+      ,ic.PurchasesReturnsAccountId
+      ,ic.SalesCostAccountId
+      ,ic.InventoryAccountId
+      ,ic.CreatedAt
+      ,ic.CreatedBy
+      ,ic.IsDeleted
+      ,ic.DeletedAt
+      ,ic.DeletedBy
+      ,ic.UpdatedAt
+      ,ic.UpdateBy
+      ,ic.TaxIds
+      ,ic.CostPrice
+      ,ic.DefaultUnitId
+      ,ic.Guid
+      ,ic.CostCenterId
+      ,ic.CalculateTaxInCumulativeManner
+      ,ic.ImageData
+      ,ic.DefaultStoreId
+
+from ItemCards  as ic
+left join StoreCards as st on st.id = ic.DefaultStoreId
+where ic.isDeleted <>1 
+
+  END
+
+
+
+')
+
+
+ 

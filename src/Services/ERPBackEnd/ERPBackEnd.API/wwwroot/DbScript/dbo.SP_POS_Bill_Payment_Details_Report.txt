@@ -1,0 +1,22 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_POS_Bill_Payment_Details_Report') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_POS_Bill_Payment_Details_Report];
+
+
+exec('
+Create PROCEDURE [dbo].[SP_POS_Bill_Payment_Details_Report]
+@id bigint,
+@lang VARCHAR(10) = ''en-us''
+
+AS
+
+BEGIN
+select p.Amount,p.CardNumber,case when @lang =''en-us'' then m.NameEn else m.NameAr end  as PaymentMethodName
+from [POSBillPaymentDetails] as p
+join PaymentMethods as m on p.PaymentMethodId = m.id
+where p.BillId = @id and p.IsDeleted != 1
+
+
+
+
+END')
+
+

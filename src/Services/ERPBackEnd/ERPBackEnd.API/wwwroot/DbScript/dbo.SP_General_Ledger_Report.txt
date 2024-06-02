@@ -1,0 +1,319 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_General_Ledger_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_General_Ledger_Report];
+
+
+
+exec('Create procedure [dbo].[SP_General_Ledger_Report]
+@fromDate Date = null,
+@toDate Date = null,
+@fromEntryNo Varchar(50) = null,
+@selectedCurrencyName NVARCHAR(250) =null,
+@selectedEntriesStatusName  NVARCHAR(250) =null,
+@toEntryNo Varchar(50) = null,
+@selectedleafAccountName NVARCHAR(100) =null,
+@currencyId as bigint=null,
+@branchId as NVARCHAR(250) = NULL,
+@branchName as NVARCHAR(250) = NULL,
+@leafAccountId nvarchar(450)=null, 
+@entriesStatusId int =null,
+@lang as VARCHAR(10) ,
+@companyId as bigint=null,
+@JournalId as bigint =null,
+@selectedJournalName as nvarchar(100)=null
+as
+
+DECLARE  @tbl Table(
+ Id Bigint,
+ Code Varchar(255),
+ EntryDate DateTime,
+ JournalName NVARCHAR(255),
+ CompanyName NVARCHAR(255),
+ BranchName NVARCHAR(255),
+ OpenBalance Numeric,
+ ParentType NVARCHAR(255),
+ ParentTypeId Bigint,
+ PostType bigint,
+ PostTypeName NVARCHAR(255),
+ IsCloseFiscalPeriod Bit,
+ FiscalPeriodName Varchar(255), 
+ AccountName NVARCHAR(255),
+ CurrencyName NVARCHAR(255),
+ CostCenterName NVARCHAR(255),
+ TransactionFactor Decimal(18,2),
+ JEDetailCredit Decimal(18,2),
+ JEDetailDebit Decimal(18,2),
+ JEDetailCreditLocal Decimal(18,2),
+ JEDetailDebitLocal Decimal(18,2),
+ EntryRowNumber Int,
+ AccountCode Varchar(255),
+ PreviuosBalance Decimal(18,2),
+ Balance Decimal(18,2));
+
+if(@fromEntryNo = 0)
+begin 
+set @fromEntryNo=null
+end
+
+if(@toEntryNo = 0)
+begin 
+set @toEntryNo=null
+end
+
+
+if(@currencyId = 0)
+begin 
+set @currencyId=null
+end
+if(@JournalId = 0)
+begin 
+set @JournalId=null
+end
+
+
+if(@branchId = '''' or @branchId=0 )
+begin 
+set @branchId=null
+end
+
+if(@leafAccountId = 0)
+begin 
+set @leafAccountId=null
+end
+if(@entriesStatusId = 0 or @entriesStatusId=3)
+begin 
+set @entriesStatusId=null
+end
+BEGIN
+
+ declare @accountId Bigint = 0;
+ declare @balance Numeric(18,4)=0;
+ declare @previousBalance Numeric(18,4)=0;
+
+ declare
+ @Id Bigint,
+ @Code Varchar(255),
+ @EntryDate DateTime,
+ @JournalName NVARCHAR(255),
+ @CompanyName NVARCHAR(255),
+ @selectedBranchName Varchar(255),
+ @OpenBalance Numeric,
+ @ParentType NVARCHAR(255),
+ @ParentTypeId Bigint,
+ @PostType bigint,
+ @PostTypeName NVARCHAR(255),
+ @IsCloseFiscalPeriod Bit,
+ @FiscalPeriodName NVARCHAR(255), 
+ @AccountName NVARCHAR(255),
+ @CurrencyName NVARCHAR(255),
+ @CostCenterName NVARCHAR(255),
+ @TransactionFactor Decimal(18,2),
+ @JEDetailCredit Decimal(18,2),
+ @JEDetailDebit Decimal(18,2),
+ @JEDetailCreditLocal Decimal(18,2),
+ @JEDetailDebitLocal Decimal(18,2),
+ @EntryRowNumber Int,
+ @AccountCode Varchar(255),
+ @EntryAccountId bigint;
+
+
+
+declare  Cursor_Entries Cursor
+
+ for
+select m.Id as Id,m.Code as Code
+,m.Date as Date,
+case when @lang =''en-us'' then j.NameEn
+else j.NameAr end as JournalName,
+case when @lang =''en-us'' then c.NameEn
+else c.NameAr end as CompanyName,
+case when @lang =''en-us'' then b.NameEn
+else b.NameAr end as BranchName,
+m.OpenBalance,
+case
+when @lang =''en-us'' and m.ParentType =1 then  ''Voucher'' 
+when @lang =''en-us'' and m.ParentType =2 then  ''Incoming Cheque'' 
+when @lang =''en-us'' and m.ParentType =3 then  ''Issuing Cheque''
+when @lang =''en-us'' and m.ParentType is NUll then  ''Entry''
+when @lang =''ar'' and m.ParentType =1 then  N''سند'' 
+when @lang =''ar'' and m.ParentType =2 then  N''شيك وارد'' 
+when @lang =''ar'' and m.ParentType =3 then  N''شيك صادر'' 
+when @lang =''ar'' and m.ParentType is NUll then  N''قيد'' 
+end as ParentType,
+m.ParentTypeId as ParentTypeId,Case when m.PostType is null then 2 else m.PostType end as PostType,
+case
+when @lang =''en-us'' and m.PostType =1 then  ''Posted'' 
+when @lang =''en-us'' and m.PostType =2 then  ''Unposted'' 
+when @lang =''en-us'' and m.PostType is NUll then  ''Unposted''
+when @lang =''ar'' and m.PostType =1 then  N''مرحل'' 
+when @lang =''ar'' and m.PostType =2 then  N''غير مرحل'' 
+when @lang =''ar'' and m.PostType is NUll then  N''غير مرحل''
+end as PostTypeName
+,m.IsCloseFiscalPeriod as IsCloseFiscalPeriod,
+case when  @lang =''en-us'' then f.NameEn
+else f.NameAr end as FiscalPeriodName , case when @lang =''en-us'' then acc.NameEn else acc.NameAr end as AccountName,
+case when  @lang =''en-us'' then curr.NameEn else curr.NameAr end as CurrencyName,
+case when @lang =''en-us'' then cost.NameEn else cost.NameAr end as CostCenterName,
+d.TransactionFactor as TransactionFactor,d.JEDetailCredit as JEDetailCredit
+      ,d.JEDetailDebit as JEDetailDebit
+      ,d.JEDetailCreditLocal as JEDetailCreditLocal
+      ,d.JEDetailDebitLocal as JEDetailDebitLocal
+	  ,d.EntryRowNumber as EntryRowNumber,acc.code as AccountCode,acc.id
+
+from JournalEntriesDetails as d 
+join JournalEntriesMasters as m on d.JournalEntriesMasterId = m.Id
+left join Journals as j on m.JournalId=j.Id
+join Branches as b on m.BranchId=b.Id
+join Companies as c on m.CompanyId=c.Id
+left join FiscalPeriods as f on m.FiscalPeriodId=f.Id
+join Accounts as acc on d.AccountId=acc.Id
+join Currencies as curr on d.CurrencyId=curr.Id
+left join CostCenters as cost on d.CostCenterId=cost.Id
+
+
+ Where
+	 ( m.IsDeleted<>1  )
+	  and
+	  (m.Date >= @fromDate or @fromDate is null)
+	  and (m.Date <=@toDate or @toDate is null)
+	  and (m.Code >= @fromEntryNo or @fromEntryNo is null)
+	  and ( m.Code <= @toEntryNo or @toEntryNo is null)
+	 and
+	  (d.CurrencyId  = @currencyId   or @currencyId is null)
+	  and
+	 (m.BranchId IN (SELECT * FROM fnSplitString(@branchId,'','')) or @branchId is null) 
+	 and
+	 (d.AccountId = @leafAccountId or @leafAccountId is null)
+	 and 
+	 (ISNULL( m.PostType,2)  =@entriesStatusId or @entriesStatusId is null)
+
+ Order by acc.code,m.Date
+
+
+open Cursor_Entries
+
+ fetch next from Cursor_Entries  into 	 
+ @Id ,
+ @Code ,
+ @EntryDate ,
+ @JournalName ,
+ @CompanyName ,
+ @BranchName ,
+ @OpenBalance ,
+ @ParentType ,
+ @ParentTypeId ,
+ @PostType ,
+ @PostTypeName,
+ @IsCloseFiscalPeriod ,
+ @FiscalPeriodName , 
+ @AccountName ,
+ @CurrencyName ,
+ @CostCenterName ,
+ @TransactionFactor ,
+ @JEDetailCredit ,
+ @JEDetailDebit ,
+ @JEDetailCreditLocal ,
+ @JEDetailDebitLocal ,
+ @EntryRowNumber ,
+ @AccountCode,
+ @EntryAccountId
+
+ while @@FETCH_STATUS=0
+ begin
+   if(@accountId<>@EntryAccountId)
+   begin 
+    set @accountId = @EntryAccountId
+    set	@previousBalance=0
+    set	@balance=0
+    select @previousBalance= dbo.fn_Get_Previous_balance_By_Account_Id(@fromDate,@EntryAccountId,@companyId,@currencyId)
+    set @balance = @previousBalance;
+   end
+   if(@currencyId is null )
+   begin 
+    set @balance = @balance + (@JEDetailDebitLocal-@JEDetailCreditLocal)
+   End
+   else
+   begin 
+    set @balance = @balance + (@JEDetailDebit-@JEDetailCredit)
+   
+   end
+
+
+   insert into @tbl values
+   (
+    @Id ,
+    @Code ,
+    @EntryDate ,
+    @JournalName ,
+    @CompanyName ,
+    @BranchName ,
+    @OpenBalance ,
+    @ParentType ,
+    @ParentTypeId ,
+    @PostType ,
+	@PostTypeName,
+    @IsCloseFiscalPeriod ,
+    @FiscalPeriodName , 
+    @AccountName ,
+    @CurrencyName ,
+    @CostCenterName ,
+    @TransactionFactor ,
+    @JEDetailCredit ,
+    @JEDetailDebit ,
+    @JEDetailCreditLocal ,
+    @JEDetailDebitLocal ,
+    @EntryRowNumber ,
+    @AccountCode,
+	@previousBalance,
+	@balance
+   )	       
+  fetch next from Cursor_Entries into
+   @Id ,
+   @Code ,
+   @EntryDate ,
+   @JournalName ,
+   @CompanyName ,
+   @BranchName ,
+   @OpenBalance ,
+   @ParentType ,
+   @ParentTypeId ,
+   @PostType ,
+   @PostTypeName,
+   @IsCloseFiscalPeriod ,
+   @FiscalPeriodName , 
+   @AccountName ,
+   @CurrencyName ,
+   @CostCenterName ,
+   @TransactionFactor ,
+   @JEDetailCredit ,
+   @JEDetailDebit ,
+   @JEDetailCreditLocal ,
+   @JEDetailDebitLocal ,
+   @EntryRowNumber ,
+   @AccountCode,
+   @EntryAccountId;
+
+   
+
+  End;
+  close Cursor_Entries
+  deallocate  Cursor_Entries
+ --select * from @tbl
+ Select Code, 
+ EntryDate, 
+ JournalName ,
+ BranchName,
+ ParentType ,
+ ParentTypeId ,
+ PostType,
+ PostTypeName,
+ FiscalPeriodName , 
+ AccountName ,
+ CostCenterName ,
+ Case when @currencyId is not null then JEDetailDebit else JEDetailDebitLocal end as JEDetailDebit,
+ Case when @currencyId is not null  then JEDetailCredit else JEDetailCreditLocal end as JEDetailCredit ,
+ AccountCode,
+ PreviuosBalance,
+ balance  
+ from @tbl
+	
+
+End')

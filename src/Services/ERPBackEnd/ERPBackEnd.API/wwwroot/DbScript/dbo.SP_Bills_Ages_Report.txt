@@ -1,0 +1,158 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Bills_Ages_Report') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Bills_Ages_Report];
+
+
+exec('
+
+
+create PROCEDURE [dbo].[SP_Bills_Ages_Report]
+    @fromDate DATE = NULL,
+    @toDate DATE = NULL,
+    @branchId BIGINT = NULL,
+    @billTypeId BIGINT = NULL,
+	@customerId BIGINT = NULL,
+    @supplierId BIGINT = NULL,
+	@billKindId BIGINT = NULL,
+    @companyId BIGINT=null,
+    @userId NVARCHAR(50)=null,
+    @isGeneratedEntry INT = NULL,
+	@lang VARCHAR(10) = ''en-us'',
+    @billTypeIds  as NVARCHAR(250) = NULL,
+	@selectedBranchName as NVARCHAR(250) = NULL,
+	@selectedCustomerName as NVARCHAR(250) = NULL,
+    @selectedSupplierName as NVARCHAR(250) = NULL,
+	@selectedBillTypeName as NVARCHAR(250) = NULL,
+	@selectedBillKindName as NVARCHAR(250) = NULL,
+    @selectedIsGenerateEntryName as NVARCHAR(250) = NULL
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+IF (@billTypeId = 0)
+BEGIN
+    SET @billTypeId = NULL
+END
+IF (@billKindId = 0)
+BEGIN
+    SET @billKindId = NULL
+END
+IF (@customerId = 0)
+BEGIN
+    SET @customerId = NULL
+END
+IF (@supplierId = 0)
+BEGIN
+    SET @supplierId = NULL
+END
+
+IF (@isGeneratedEntry is null or @isGeneratedEntry=3 )
+BEGIN
+    SET @isGeneratedEntry = Null
+END
+
+
+BEGIN
+
+
+select
+
+b.Id as BillId,
+bt.kind as  BillKind,
+b.BillTypeId,
+CASE WHEN ISNULL(b.IsGenerateEntry, 0) = 0 THEN
+    CASE WHEN @lang = ''ar'' THEN N''غير مرحل'' ELSE N''UnPosted'' END
+WHEN ISNULL(b.IsGenerateEntry, 0) = 1 THEN
+    CASE WHEN @lang = ''ar'' THEN N''مرحل'' ELSE N''Posted'' END
+END AS IsGenerateEntryStatus,
+
+case when @lang=''ar'' then  bt.NameAr else bt.NameEn end as BillTypeName ,  
+case when @lang=''ar'' then  COALESCE(cu.NameAr, sup.NameAr)  else   COALESCE(cu.NameEn, sup.NameEn) end as CustomerName ,
+case when @lang=''ar'' then  sup.NameAr else sup.NameEn end as SupplierName ,
+ case when @lang=''en-us'' then( case when bt.kind=1 then N''Sales Bill''
+ when  bt.kind=2 then N''Purchases Bill''
+ when  bt.kind=3 then N''Sales Returns Bill''  
+ when  bt.kind=4 then N''Purchases Returns Bill'' 
+ when  bt.kind=5 then N''First Period Goods Bill'' end)
+ else
+ (case when bt.kind=1 then N''فاتورة مبيعات''
+ when  bt.kind=2 then N''فاتورة مشتريات''
+ when  bt.kind=3 then N''فاتورة مردودات مبيعات''  
+ when  bt.kind=4 then N''فاتورة مردودات مشتريات''
+ when  bt.kind=5 then N''فاتورة بضاعة أول المدة'' end) end as BillKindName,
+b.Code as BillCode,
+b.Date as BillDate,
+b.TotalBeforeTax ,
+b.Total	,
+b.Net	,
+IsNull(b.Paid,0) as paid,
+b.Remaining,
+b.IsGenerateEntry,
+bt.Kind as BillTypeKindId,
+
+bItem.ItemId,	
+case when @lang=''ar'' then  item.NameAr else item.NameEn end as ItemName ,
+isnull(bItem.Price,0) as ItmePrice , 
+isnull(bItem.TotalBeforeTax,0) as  ItemTotalBeforeTax,	
+isnull(bItem.TotalTax,0) as  ItemTotalTax,
+isnull(bItem.Total,0) as ItemTotal,	
+  
+
+(SELECT DATEDIFF(DAY, b.Date , GETDATE())) AS BillAgeDays
+ from bills  as b 
+join BillItems bItem on bItem.BillId= b.Id
+left join ItemCards item on item.id = bItem.itemId
+left join BillTypes bt on b.BillTypeId = bt.id 
+left join CustomerCards  cu on b.CustomerId=cu.id
+left join  SupplierCards sup on sup.id = b.SupplierId
+left join SalesPersonCards  salesPerson on salesPerson.id = b.SalesPersonId
+
+where
+b.IsDeleted<>1
+and
+b.Total >= IsNull(b.Paid,0)
+and 
+(b.Paid is null or b.Paid = 0 )
+  and
+   (@fromDate IS NULL OR b.Date >= @fromDate)
+   AND (@toDate IS NULL OR b.Date <= @toDate)
+    AND (@branchId IS NULL OR b.BranchId = @branchId)
+	 AND (@customerId IS NULL OR b.CustomerId = @customerId)
+      AND (@supplierId IS NULL OR b.SupplierId =@supplierId )
+	And (@billKindId is null or bt.Kind=@billKindId)
+    AND (@billTypeId IS NULL OR b.BillTypeId = @billTypeId)
+    	  and(b.billTypeId IN (SELECT * FROM fnSplitString(@billTypeIds,'','')) or b.BillTypeId is null or @billTypeIds is null) 
+
+   AND (@isGeneratedEntry IS NULL OR Isnull(b.IsGenerateEntry,0) = @isGeneratedEntry )
+   AND (b.CompanyId = @companyId)
+    AND b.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			And (UsersCompanies.IsDeleted=0)
+        )
+    )
+
+END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+')

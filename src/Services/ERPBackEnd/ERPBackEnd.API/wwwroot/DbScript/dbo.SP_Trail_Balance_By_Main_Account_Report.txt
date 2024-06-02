@@ -1,0 +1,61 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Trail_Balance_By_Main_Account_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP procedure [dbo].[SP_Trail_Balance_By_Main_Account_Report];
+
+exec('
+Create procedure [dbo].[SP_Trail_Balance_By_Main_Account_Report]
+@fromDate dateTime ,
+@toDate datetime =null,
+@entriesStatusId INT = NULL,
+@mainAccountId Int = NULL,
+@levelId int,
+@branchId BIGINT = NULL,
+@companyId BIGINT = NULL,
+@userId NVARCHAR(50) = NULL,
+@lang VARCHAR(10) = ''en-us'',
+@selectedEntriesStatusName  NVARCHAR(100) =null,
+@selectedBranchName as NVARCHAR(100) = NULL
+
+
+
+As 
+
+set @levelId=@levelId-1
+declare @parentLevel as integer
+declare @parentTreeid as nvarchar(max)
+select @parentLevel =  LevelId, @parentTreeid = TreeId  from Accounts where id = @mainAccountId
+
+
+
+
+IF (@entriesStatusId = 0 OR @entriesStatusId = 3)
+BEGIN
+    SET @entriesStatusId = NULL
+ENd
+begin
+
+
+Select id,Code,
+LevelId,
+case when @lang=''en-us'' then NameEn else NameAr end as AccountName,
+isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,Null,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)as OpeningCredit,
+isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,Null,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0) as OpeningDebit,
+isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)as Credit,
+isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0) as Debit,
+(isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,Null,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)+
+isnull(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)) as CurrentCredit,
+(isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,Null,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)+
+isnull(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Id,@entriesStatusId,@branchId,@companyId,@userId,@lang),0)) as CurrentDebit
+
+from Accounts 
+  where  (Accounts.IsDeleted=0)  and  Accounts.Id IN (
+           select id from Accounts
+           where ((TreeId = @parentTreeid) or (SUBSTRING(TreeId, 1, 9 + (@parentLevel * 9))= @parentTreeid)) 
+          and (LevelId between @parentLevel and @levelId )
+              
+        )
+order by treeid 
+end
+
+
+
+
+')

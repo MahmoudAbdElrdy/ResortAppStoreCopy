@@ -1,0 +1,18 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Get_Account_Balance') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_Get_Account_Balance];
+
+
+exec('Create function [dbo].[fn_Get_Account_Balance]
+(
+@AccountId nvarchar(450)
+)
+returns float as
+begin
+return
+(
+SELECT Isnull(Sum(Isnull(JEDetailDebitLocal,0)) - Sum(isnull(JEDetailCreditLocal,0)),0) as Balance
+from JournalEntriesDetails
+WHERE   IsDeleted != 1  and AccountId = @AccountId
+			 
+)          
+end')
+

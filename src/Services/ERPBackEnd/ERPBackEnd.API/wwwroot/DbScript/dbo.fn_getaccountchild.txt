@@ -1,0 +1,7 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_getaccountchild') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_getaccountchild];
+
+
+exec('Create FUNCTION [dbo].[fn_getaccountchild]
+(@AccountId int) 
+RETURNS TABLE AS
+RETURN (WITH cte AS (SELECT ACCOUNTS.Id, ACCOUNTS.Code, ACCOUNTS.NameAr, ACCOUNTS.NameEn, ACCOUNTS.ParentId, CAST((ACCOUNTS.NameAr) AS VARCHAR(1000)) AS Path, 1 as [level] FROM ACCOUNTS WHERE ACCOUNTS.ParentId=@AccountId UNION ALL SELECT t.Id, t.Code, t.NameAr, t.NameEn, t.ParentId, CAST((a.path + ''/'' + t.NameAr) AS VARCHAR(1000)) AS Path, a.level +1 as [level] FROM ACCOUNTS AS t JOIN cte AS a ON t.ParentId = a.Id) SELECT Id FROM cte)')

@@ -1,0 +1,218 @@
+﻿[
+  {
+    "Id": 1,
+    "ScreenId": 1,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 2,
+    "ScreenId": 1,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 3,
+    "ScreenId": 1,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 4,
+    "ScreenId": 1,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 5,
+    "ScreenId": 2,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 6,
+    "ScreenId": 2,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 7,
+    "ScreenId": 2,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 8,
+    "ScreenId": 2,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 9,
+    "ScreenId": 3,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 10,
+    "ScreenId": 3,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 11,
+    "ScreenId": 3,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 12,
+    "ScreenId": 3,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 13,
+    "ScreenId": 4,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 14,
+    "ScreenId": 4,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 15,
+    "ScreenId": 4,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 16,
+    "ScreenId": 4,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 17,
+    "ScreenId": 5,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 18,
+    "ScreenId": 5,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 19,
+    "ScreenId": 5,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 20,
+    "ScreenId": 5,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 21,
+    "ScreenId": 6,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 22,
+    "ScreenId": 6,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 23,
+    "ScreenId": 6,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 24,
+    "ScreenId": 6,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+]

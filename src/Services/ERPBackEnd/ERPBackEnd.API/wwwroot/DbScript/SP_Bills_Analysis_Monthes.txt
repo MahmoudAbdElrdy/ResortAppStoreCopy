@@ -1,0 +1,195 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Bills_Analysis_Monthes') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Bills_Analysis_Monthes];
+
+exec('
+Create PROCEDURE [dbo].[SP_Bills_Analysis_Monthes]
+    @fromDate DATE = NULL,
+    @toDate DATE = NULL,
+	@companyId BIGINT = NULL,
+    @branchId as NVARCHAR(250) = NULL,
+	@projectId as NVARCHAR(250) = NULL,
+	@storeId BIGINT = NULL,
+	@customerId BIGINT = NULL,
+	@supplierId BIGINT = NULL,
+	@salesPersonId BIGINT = NULL,
+	@costCenterId BIGINT = NULL,
+	@payWay as NVARCHAR(250) = NULL,
+	@accountingEffect as NVARCHAR(250) = NULL,
+	@warehouseEffect as NVARCHAR(250) = NULL,
+	@billTypeIds  as NVARCHAR(250) = NULL,
+	@currencyId BIGINT = NULL,
+	@greaterThan float  = NULL,
+	@lessThan float  = NULL,
+	@lang VARCHAR(10) = ''en-us'',
+	@userId NVARCHAR(50)=null,
+    @fiscalPeriodId BIGINT = NULL
+
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+
+IF (@branchId = ''null'')
+BEGIN
+    SET @branchId = NULL
+END
+
+IF (@projectId = ''null'')
+BEGIN
+    SET @projectId = NULL
+END
+
+IF (@payWay = ''null'')
+BEGIN
+    SET @payWay = NULL
+END
+
+IF (@accountingEffect = ''null'')
+BEGIN
+    SET @accountingEffect = NULL
+END
+
+IF (@warehouseEffect = ''null'')
+BEGIN
+    SET @warehouseEffect = NULL
+END
+
+IF (@storeId = 0)
+BEGIN
+    SET @storeId = NULL
+END
+
+
+IF (@customerId = 0)
+BEGIN
+    SET @customerId = NULL
+END
+
+IF (@supplierId = 0)
+BEGIN
+    SET @supplierId = NULL
+END
+
+IF (@salesPersonId = 0)
+BEGIN
+    SET @salesPersonId = NULL
+END
+
+IF (@costCenterId = 0)
+BEGIN
+    SET @costCenterId = NULL
+END
+
+
+IF (@currencyId = 0)
+BEGIN
+    SET @currencyId = NULL
+END
+
+IF (@greaterThan = 0)
+BEGIN
+    SET @greaterThan = NULL
+END
+
+IF (@lessThan = 0)
+BEGIN
+    SET @lessThan = NULL
+END
+
+IF (@userId = 0)
+BEGIN
+    SET @userId = NULL
+END
+
+
+
+BEGIN
+
+
+Declare @Monthes Table( month_number int, Month_Name_Ar nvarchar(255), Month_Name_En nvarchar(255) )
+INSERT INTO @Monthes (month_number, Month_Name_Ar, Month_Name_En) VALUES
+(1, N''يناير'', ''Jan''), (2 ,N''فبراير'', ''Feb''), (3,N''مارس'', ''Mars''), (4,N''ابريل'', ''April''), (5,N''مايو'', ''May''), (6,N''يونيو'', ''June''), (7,N''يوليو'', ''Jullay''), (8,N''اغسطس'', ''Augest''), (9,N''سبتمبر'', ''Sep''), (10,N''اكتوبر'', ''Oct''), (11,N''نوفمبر'', ''Nov''), (12,N''ديسمبر'', ''Dec'');
+
+Select  data.Kind, 
+case when data.Kind = 1 then (Case When @lang = ''ar'' then N''مبيعات'' else ''Sales'' end) 
+when  data.Kind = 3 then (Case When @lang = ''ar'' then N''مردود مبيعات'' else ''Return Sales'' end ) end as KindName ,  m.month_number, case when @lang = ''ar'' then Month_Name_Ar  else Month_Name_En end as Month_Name,  ISNULL(data.Total,0) Total, ISNULL(data.TotalBeforeTax,0) as TotalBeforeTax, ISNULL( data.Net,0) as Net, ISNULL(data.CurrencyValue, 0) as CurrencyValue  From @Monthes m left join 
+(Select f.Kind,  CAST( FORMAT(f.BillDate, ''MM'') as Int) AS Month_No, sum(isnull(f.Total,0)) as Total,
+ sum(isnull(f.TotalBeforeTax,0)) as TotalBeforeTax , sum(isnull(f.CurrencyValue,0)) as CurrencyValue , sum(isnull(f.Net,0)) as Net  From   
+ (select bt.Kind, b.Code as BillCode,Cast(b.Date as date) as BillDate , case when @lang=''en-us'' then bran.NameEn else bran.NameAr end  as BranchName , case when @lang =''en-us'' then bt.NameEn else bt.NameAr end as BillTypeName,
+case when @lang=''en-us'' then( case when b.CustomerId > 0 then ''Customer'' when b.SupplierId > 0 then ''Supplier'' end ) else (case when b.CustomerId > 0 then N''عميل'' when b.SupplierId > 0 then N''مورد'' end) end as BeneficiaryType,
+case when @lang=''en-us'' then( case when b.CustomerId > 0 then cust.NameEn when b.SupplierId > 0 then sup.NameEn end ) else (case when b.CustomerId > 0 then cust.NameAr when b.SupplierId > 0 then sup.NameAr end) end as BeneficiaryName,
+
+case when @lang=''en-us'' then  sup.NameEn else sup.NameAr end as SupplierName,b.SupplierReference,case when @lang=''en-us'' then cust.NameEn else cust.NameAr end as CustomerName,b.PayWay as PayWay,
+ case when @lang=''en-us'' then( case when b.PayWay=1 then N''Cash''
+ when  b.PayWay=2 then N''Credit''
+ when  b.PayWay=3 then N''Installment''  
+  end)
+ else
+ (case when b.PayWay=1 then N''نقدي''
+ when  b.PayWay=2 then N''أجل''
+ when  b.PayWay=3 then N''تقسيط''
+end) end as PayWayName,
+
+
+case when b.ShipMethod=1 then N''FOB''
+when  b.ShipMethod=2 then N''EX_Work''
+when  b.ShipMethod=3 then N''CF'' 
+when  b.ShipMethod=4 then N''CIF''  
+end as ShipMethodName,
+
+
+ case when @lang=''en-us'' then( case when b.ShipKind=1 then N''All''
+ when  b.ShipKind=2 then N''Part''
+
+  end)
+ else
+ (case when b.ShipKind=1 then N''كلى''
+ when  b.ShipKind=2 then N''جزئي''
+
+end) end as ShipKindName,case when @lang =''en-us'' then saleperson.NameEn else saleperson.NameAr end as SalePersonName ,IsNull(b.CurrencyValue,0) as CurrencyValue
+,case when @lang =''en-us'' then store.NameEn else store.NameAr end as StoreName,Cast(b.DeliveryDate as date) as  DeliveryDate,case when @lang =''en-us'' then curr.NameEn else curr.NameAr end as CurrencyName,
+case when @lang =''en-us'' then proj.NameEn else proj.NameAr end as ProjectName,case when @lang =''en-us'' then costcenter.NameEn else costcenter.NameAr end as CostCenterName,b.Notes,
+
+case when @currencyId > 0 then IsNull(b.TotalBeforeTax,0)   else b.TotalBeforeTax * IsNull(b.CurrencyValue,0)  end as TotalBeforeTax , 
+case when @currencyId > 0 then IsNull(b.Total,0)    else b.Total * IsNull(b.CurrencyValue,0) end as Total,
+case when @currencyId > 0 then IsNull(b.Net,0)  else   b.Net * IsNull(b.CurrencyValue,0) end as Net,
+case when @currencyId > 0 then  IsNull(b.Paid,0)   else b.Paid * IsNull(b.CurrencyValue,0) end as Paid,
+case when @currencyId > 0 then  IsNull(b.Remaining,0)  else   b.Remaining * IsNull(b.CurrencyValue,0) end as Remaining ,
+b.Delay,entry.Id as JournalEntryId
+
+ 
+from Bills as b join BillTypes as bt on b.BillTypeId = bt.Id
+join Branches as bran on b.BranchId = bran.Id 
+left join SupplierCards as sup on b.SupplierId = sup.Id
+left join CustomerCards as cust on b.CustomerId = cust.Id
+left join SalesPersonCards as saleperson on b.SalesPersonId = saleperson.Id
+left join StoreCards as store on b.StoreId = store.Id
+left join Currencies as curr on b.CurrencyId = curr.Id
+left join Projects as proj on b.ProjectId = proj.Id
+left join CostCenters as costcenter on b.CostCenterId = costcenter.Id
+left join JournalEntriesMasters as entry on b.Id = entry.ParentTypeId and ( entry.ParentType = 4 or entry.ParentType = 5 or entry.ParentType = 6 or entry.ParentType = 7)
+ Where
+( b.IsDeleted<>1  )
+and (b.Date >= @fromDate or @fromDate is null)
+and (b.Date <=@toDate or @toDate is null)
+and (b.BranchId IN (SELECT * FROM fnSplitString(@branchId,'','')) or @branchId is null) 
+and (b.CompanyId =@companyId or @companyId is null)
+and	 (b.ProjectId IN (SELECT * FROM fnSplitString(@projectId,'','')) or @projectId is null) 
+and (b.storeId =@storeId or @storeId is null)
+and (b.CustomerId =@customerId or @customerId is null)
+and (b.SupplierId =@supplierId or @supplierId is null)
+and (b.SalesPersonId =@salesPersonId or @salesPersonId is null)
+and (b.CostCenterId =@costCenterId or @costCenterId is null)
+and	 (b.PayWay IN (SELECT * FROM fnSplitString(@payWay,'','')) or @payWay is null) 
+and	 (bt.AccountingEffect IN (SELECT * FROM fnSplitString(@accountingEffect,'','')) or @accountingEffect is null) 
+and	 (bt.WarehouseEffect IN (SELECT * FROM fnSplitString(@warehouseEffect,'','')) or @warehouseEffect is null) 
+and	 (b.billTypeId IN (SELECT * FROM fnSplitString(@billTypeIds,'','')) or @billTypeIds is null) 
+and (b.CurrencyId =@currencyId or @currencyId is null)
+and (b.Net * b.CurrencyValue > @greaterThan or @greaterThan is null)
+and (b.Net * b.CurrencyValue   < @lessThan or @lessThan is null)
+and (b.CreatedBy =@userId or @userId is null)
+and (b.FiscalPeriodId =@fiscalPeriodId or @fiscalPeriodId is null)) f Group by  CAST( FORMAT(f.BillDate, ''MM'') as Int) , f.Kind) as data on m.month_number = data.Month_No
+
+
+
+END')

@@ -1,0 +1,5 @@
+﻿<cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>@DebitOrCreditNoteRefernce</cbc:ID>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>

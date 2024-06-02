@@ -1,0 +1,44 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Get_Previous_balance_By_Customer_Id') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P',N'v')) DROP FUNCTION [dbo].[fn_Get_Previous_balance_By_Customer_Id];
+
+
+exec('
+Create FUNCTION [dbo].[fn_Get_Previous_balance_By_Customer_Id]
+(
+	-- Add the parameters for the function here
+@Date DATE = Null,
+@customerId INT,
+@companyId BIGINT = NULL,
+@currencyId BIGINT = Null
+)
+
+RETURNS  numeric(18,2)
+BEGIN
+	DECLARE @previousBalance NUMERIC(18, 2) =0
+IF(@currencyId is null)
+begin
+     Select @previousBalance= Sum(IsNull(cb.DebitLocal,0))-Sum(IsNull(cb.CreditLocal,0))  from  VM_Customers_Balance as cb 
+	 
+	  
+
+	  where cb.DocumentDate < @Date
+	  and @customerId  = cb.CustomerId
+	  and @companyId = cb.CompanyId
+	
+	
+	End
+	else
+	Begin
+     Select @previousBalance= Sum(IsNull(cb.Debit,0))-Sum(IsNull(cb.credit,0))  from  VM_Customers_Balance as cb  
+	
+	  
+
+	  where cb.DocumentDate < @Date
+	  and @customerId  = cb.CustomerId
+	  and @companyId = cb.CompanyId
+	  and @currencyId = cb.CurrencyId
+	 
+	
+
+	End;
+RETURN IsNull(@previousBalance,0)
+END')

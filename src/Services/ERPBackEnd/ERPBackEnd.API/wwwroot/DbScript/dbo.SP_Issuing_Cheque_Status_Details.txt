@@ -1,0 +1,28 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Issuing_Cheque_Status_Details') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Issuing_Cheque_Status_Details];
+
+
+
+
+exec('Create procedure [dbo].[SP_Issuing_Cheque_Status_Details]
+@id bigint,
+@lang varchar(10)
+
+as
+begin
+select statusdetails.Date as Date ,
+case 
+when @lang=''en-us'' and statusdetails.Status = 0 then ''registered'' 
+when @lang=''ar'' and statusdetails.Status = 0 then N''تم التسجيل'' 
+when @lang=''en-us'' and statusdetails.Status = 1 then ''edited register'' 
+when @lang=''ar'' and statusdetails.Status = 1 then N''تم تعديل التسجيل'' 
+when @lang=''en-us'' and statusdetails.Status = 2 then ''Collected'' 
+when @lang=''ar'' and statusdetails.Status = 2 then N''تم التحصيل'' 
+when @lang=''en-us'' and statusdetails.Status = 3 then ''Rejected'' 
+when @lang=''ar'' and statusdetails.Status = 3 then N''تم الرفض'' 
+end as Status
+ from IssuingChequeStatusDetails as statusdetails
+
+where statusdetails.IssuingChequeId = @id and statusdetails.IsDeleted != 1  
+
+
+end')

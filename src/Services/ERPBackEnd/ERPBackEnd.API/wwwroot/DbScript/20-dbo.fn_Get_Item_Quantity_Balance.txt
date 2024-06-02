@@ -1,0 +1,49 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Get_Item_Quantity_Balance') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_Get_Item_Quantity_Balance];
+
+
+exec('Create  FUNCTION [dbo].[fn_Get_Item_Quantity_Balance]
+(
+	-- Add the parameters for the function here
+@date DATE = Null,
+@itemId BIGINT = NULL,
+@storeId BIGINT = NULL
+
+)
+
+RETURNS  numeric(18,2)
+BEGIN
+	-- Declare the return variable here
+	DECLARE @ItemBalance NUMERIC(18, 2) =0
+
+begin
+	-- Add the T-SQL statements to compute the return value here
+
+	if(@storeId Is Not Null)
+	begin
+ Select @ItemBalance =  (Sum(itrans.ConvertedAddedQuantity) - Sum(itrans.ConvertedIssuedQuantity) )  from vm_item_transactions as itrans
+
+	  where itrans.Bill_Date < @Date
+	  and @itemId  = itrans.ItemId
+	  and @storeId =itrans.storeId
+
+    end
+	else
+	begin 
+	 Select @ItemBalance =  (Sum(itrans.ConvertedAddedQuantity) - Sum(itrans.ConvertedIssuedQuantity) )  from vm_item_transactions as itrans
+
+	  where itrans.Bill_Date < @Date
+	  and @itemId  = itrans.ItemId
+
+	end
+
+	
+	End
+
+RETURN IsNull(@ItemBalance,0)
+END
+
+
+
+
+
+')

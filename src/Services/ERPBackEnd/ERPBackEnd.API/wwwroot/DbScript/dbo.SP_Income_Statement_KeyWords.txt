@@ -1,0 +1,38 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Income_Statement_KeyWords') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Income_Statement_KeyWords];
+
+
+exec('Create procedure [dbo].[SP_Income_Statement_KeyWords]
+@lang as VARCHAR(10)
+as
+begin 
+select
+
+case when @lang =''en-us'' then ''Income Statement For The Period From The Date Of'' 
+else N''قائمة الدخل للفترة '' end as IncomeStatementForThePeriodFromTheDateOf,
+
+case when @lang=''en-us'' then ''Revenues''
+else N''الأيرادات'' end as Revenues,
+
+case when @lang=''en-us'' then ''Expenses''
+else N''المصروفات'' end as Expenses,
+
+case when @lang=''en-us'' then ''Account Name''
+else N''أسم الحساب'' end as AccountName,
+
+case when @lang=''en-us'' then ''Path''
+else N''المسار'' end as Path,
+
+case when @lang=''en-us'' then ''Classification''
+else N''تصنيف الحساب'' end as AccountClassification,
+
+case when @lang=''en-us'' then ''Revenues Total''
+else N''اجمالى الايرادات'' end as RevenuesTotal,
+
+case when @lang=''en-us'' then ''Expenses Total''
+else N''اجمالى المصروفات'' end as ExpensesTotal,
+
+case when @lang=''en-us'' then ''Net Profit Or Loss''
+else N''صافى الربح أو الخسارة'' end as NetProfitOrLoss,
+case when @lang=''en-us'' then ''Level''
+else N''المستوى '' end as LevelLabel
+end')

@@ -1,0 +1,117 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('SP_Customer_Detailed_Account_Detailes_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Customer_Detailed_Account_Detailes_Report];
+
+exec('
+
+Create PROCEDURE [dbo].[SP_Customer_Detailed_Account_Detailes_Report]
+    @fromDate DATE = NULL,
+    @toDate DATE = NULL,
+    @branchId BIGINT = NULL,
+	@currencyId BIGINT = NULL,
+	@fromCustomerId BIGINT = NULL,
+    @toCustomerId BIGINT = NULL,
+	@customerGroupId BIGINT = NULL,
+    @billKindId int =null,
+	@billTypeId bigint =null,
+    @companyId BIGINT=null,
+    @userId NVARCHAR(50)=null,
+	@lang VARCHAR(10) = ''en-us'',
+	@selectedBranchName as NVARCHAR(250) = NULL,
+	@selectedCustomerGroupName NVARCHAR(250)  = NULL,
+	@selectedCurrencyName as NVARCHAR(250) = NULL,
+	@selectedFromCustomerName as NVARCHAR(250) = NULL,
+	@selectedToCustomerName as NVARCHAR(250) = NULL
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+
+IF (@customerGroupId = 0)
+BEGIN
+    SET @customerGroupId = NULL
+END
+
+IF (@toCustomerId = 0)
+BEGIN
+    SET @toCustomerId = NULL
+END
+IF (@fromCustomerId = 0)
+BEGIN
+    SET @fromCustomerId = NULL
+END
+
+
+IF (@billKindId = 0)
+BEGIN
+    SET @billKindId = NULL
+END
+
+IF (@billTypeId = 0)
+BEGIN
+    SET @billTypeId = NULL
+END
+
+
+BEGIN
+
+
+select
+ cb.DocumentId,
+ cb.CurrencyId,
+ cb.CompanyId,
+ cb.BranchId,
+ cb.billId ,
+ IsNull(case when @lang=''ar'' then ic.NameAr else ic.NameAr end,''-'') as ItemName,
+  (CAST((IsNull(bi.AddedQuantity,0)+IsNull(bi.IssuedQuantity,0))as numeric(9,2)))as BillQantity,
+  (CAST((IsNull(bi.AddedQuantity,0)+IsNull(bi.IssuedQuantity,0)*IsNull(bi.Price,0))as numeric(9,2))) as TotalPriceItems,
+ (CAST(((IsNull(bi.AddedQuantity,0)+IsNull(bi.IssuedQuantity,0)*IsNull(bi.Price,0))+IsNull(bi.TotalTax,0))as  numeric(9,2))) as TotalAfterTax,
+ (Cast(IsNull(bi.Price,0)as  numeric(9,2))) as ItemPrice,
+  (CAST(bi.TotalBeforeTax as numeric(9,2))) as TotalBeforeTax,
+  CAST(IsNull(bi.TotalTax,0)as numeric(9,2)) as TotalTax,
+   CAST(IsNull(bi.DiscountValue,0)as numeric(9,2)) as DiscountValue,
+ CAST(IsNull(bi.AdditionValue,0)as  numeric(9,2)) as  AdditionValue,
+  CAST(bi.Total as numeric(9,2)) as Total ,
+ cb.DocumentCode,
+ cb.DocumentDate,
+ case when @lang=''ar'' then cb.DocumentNameAr else cb.DocumentNameEn end as DocumentName
+
+
+  from  VM_Customers_Balance as cb
+  join CustomerCards as  cu on cu.id = cb.CustomerId
+  join CustomerGroups as cg on cg.Id = cu.CustomerGroupId
+   join BillItems as bi on bi.BillId =cb.billId
+  join ItemCards as ic  on ic.Id = bi.ItemId
+
+where
+
+  (@fromDate IS NULL OR cb.DocumentDate >= @fromDate)
+   AND (@toDate IS NULL OR cb.DocumentDate <= @toDate)
+   And (@branchId IS NULL OR cb.BranchId = @branchId)
+   AND (@fromCustomerId IS NULL OR cb.CustomerId = @fromCustomerId)
+   AND (@customerGroupId IS NULL OR cu.CustomerGroupId = @customerGroupId)
+  AND (@billKindId IS NULL OR cb.BillKind = @billKindId)
+  AND (@billTypeId IS NULL OR cb.BillTypeId = @billTypeId)
+   AND (cb.CompanyId = @companyId)
+    AND cb.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			And (UsersCompanies.IsDeleted=0)
+        )
+    )
+
+	order by cb.DocumentDate
+
+END
+
+
+
+')

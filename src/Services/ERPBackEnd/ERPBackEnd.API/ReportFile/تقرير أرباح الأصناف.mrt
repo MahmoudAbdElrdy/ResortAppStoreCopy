@@ -1,0 +1,6085 @@
+{
+  "ReportVersion": "2020.5.2.0",
+  "ReportGuid": "cb1d3c08dd384b58ac22ce036cb0181e",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportCreated": "/Date(25200000+0300)/",
+  "ReportChanged": "/Date(25200000+0300)/",
+  "EngineVersion": "EngineV2",
+  "CalculationMode": "Interpretation",
+  "ReportUnit": "Millimeters",
+  "PreviewSettings": 268435455,
+  "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
+  "Styles": {
+    "0": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "1": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "2": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "3": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "4": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "5": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "6": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "7": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "8": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "9": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "10": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "11": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "12": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "13": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "14": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "15": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "16": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "17": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "18": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "19": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "20": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "21": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "22": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "23": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "24": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "25": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "26": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "27": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "28": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "29": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "30": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "31": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "32": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "33": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "34": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "35": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "36": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "37": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "38": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "39": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "40": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "41": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "42": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "43": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "44": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "45": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "46": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "47": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "48": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "49": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "50": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "51": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "52": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "53": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "54": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "55": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "56": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "57": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "58": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "59": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "60": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "61": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "62": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "63": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "64": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "65": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "66": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "67": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "68": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "69": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "70": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "71": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "72": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "73": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "74": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "75": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "76": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "77": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "78": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "79": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "80": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "81": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "82": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "83": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "84": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "85": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "86": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "87": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "88": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "89": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "90": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "91": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "92": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "93": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "94": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "95": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "96": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "97": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "98": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "99": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "100": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "101": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "102": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "103": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "104": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "105": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "106": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "107": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "108": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "109": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "110": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "111": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "112": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "113": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "114": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "115": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "116": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "117": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "118": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "119": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "120": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "121": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "122": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "123": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "124": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "125": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "126": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "127": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "128": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "129": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "130": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "131": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "132": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "133": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "134": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "135": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "136": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "137": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "138": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "139": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "140": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "141": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "142": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "143": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "144": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "145": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "146": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "147": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "148": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "149": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "150": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "151": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "152": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "153": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "154": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "155": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "156": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "157": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "158": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "159": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "160": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "161": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "162": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "163": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "164": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "165": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "166": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "167": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "168": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "169": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "170": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "171": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "172": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "173": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "174": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "175": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "176": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "177": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "178": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "179": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "180": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "ReportTitle",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title1",
+      "Font": ";14;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "181": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "ReportTitle",
+          "PlacementNestedLevel": 2,
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Title2",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "182": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "ReportSummary",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Report_Summary",
+      "Font": ";10;Bold;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "183": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Header",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "184": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement",
+          "Placement": "PageFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Page_Footer",
+      "Font": ";10;;",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "185": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "GroupHeader",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Header1",
+      "Font": ";13;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "186": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "GroupFooter",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Group_Footer1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:79,129,189",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "187": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Header",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Header1",
+      "Font": ";9.75;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;True;solid:Black",
+      "Brush": "solid:79,129,189",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "188": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "Data",
+          "ComponentType": "Text, Primitive, Image, CheckBox"
+        }
+      },
+      "Name": "Blue Steel_Data1",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "189": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataOddStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Odd Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:255,255,255",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "190": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "Placement, PlacementNestedLevel",
+          "OperationPlacementNestedLevel": "GreaterThanOrEqualTo",
+          "Placement": "DataEvenStyle"
+        }
+      },
+      "Name": "Blue Steel_Data1_Even Style",
+      "Border": ";0,0,39;;;;;;solid:Black",
+      "Brush": "solid:216,216,216",
+      "TextBrush": "solid:0,0,0",
+      "NegativeTextBrush": "solid:Red"
+    },
+    "191": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue Steel",
+      "Conditions": {
+        "0": {
+          "Ident": "StiStyleCondition",
+          "Type": "ComponentType, Placement, PlacementNestedLevel",
+          "Placement": "Footer",
+          "ComponentType": "Text, Primitive, Image"
+        }
+      },
+      "Name": "Blue Steel_Footer1",
+      "Font": ";8.25;Bold;",
+      "Border": "Top, Bottom;0,0,39;2;;;;;solid:Black",
+      "Brush": "solid:White",
+      "TextBrush": "solid:Black",
+      "NegativeTextBrush": "solid:Red"
+    }
+  },
+  "ReferencedAssemblies": {
+    "0": "System.Dll",
+    "1": "System.Drawing.Dll",
+    "2": "System.Windows.Forms.Dll",
+    "3": "System.Data.Dll",
+    "4": "System.Xml.Dll",
+    "5": "Stimulsoft.Controls.Dll",
+    "6": "Stimulsoft.Base.Dll",
+    "7": "Stimulsoft.Report.Dll"
+  },
+  "Dictionary": {
+    "DataSources": {
+      "0": {
+        "Ident": "StiSqlSource",
+        "Name": "Company_Info",
+        "Alias": "Company_Info",
+        "Key": "069d5c82bc0a4cca9e6c5656c4153b93",
+        "Columns": {
+          "0": {
+            "Name": "Address",
+            "Index": -1,
+            "NameInSource": "Address",
+            "Alias": "Address",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "Code",
+            "Index": -1,
+            "NameInSource": "Code",
+            "Alias": "Code",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "CountryId",
+            "Index": -1,
+            "NameInSource": "CountryId",
+            "Alias": "CountryId",
+            "Type": "System.Int64"
+          },
+          "3": {
+            "Name": "CreatedAt",
+            "Index": -1,
+            "NameInSource": "CreatedAt",
+            "Alias": "CreatedAt",
+            "Type": "System.DateTime"
+          },
+          "4": {
+            "Name": "CreatedBy",
+            "Index": -1,
+            "NameInSource": "CreatedBy",
+            "Alias": "CreatedBy",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "CurrencyId",
+            "Index": -1,
+            "NameInSource": "CurrencyId",
+            "Alias": "CurrencyId",
+            "Type": "System.Int64"
+          },
+          "6": {
+            "Name": "DeletedAt",
+            "Index": -1,
+            "NameInSource": "DeletedAt",
+            "Alias": "DeletedAt",
+            "Type": "System.DateTime"
+          },
+          "7": {
+            "Name": "DeletedBy",
+            "Index": -1,
+            "NameInSource": "DeletedBy",
+            "Alias": "DeletedBy",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "Email",
+            "Index": -1,
+            "NameInSource": "Email",
+            "Alias": "Email",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "Id",
+            "Index": -1,
+            "NameInSource": "Id",
+            "Alias": "Id",
+            "Type": "System.Int64"
+          },
+          "10": {
+            "Name": "IsActive",
+            "Index": -1,
+            "NameInSource": "IsActive",
+            "Alias": "IsActive",
+            "Type": "System.Boolean"
+          },
+          "11": {
+            "Name": "IsDeleted",
+            "Index": -1,
+            "NameInSource": "IsDeleted",
+            "Alias": "IsDeleted",
+            "Type": "System.Boolean"
+          },
+          "12": {
+            "Name": "Logo",
+            "Index": -1,
+            "NameInSource": "Logo",
+            "Alias": "Logo",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "MotherCompany",
+            "Index": -1,
+            "NameInSource": "MotherCompany",
+            "Alias": "MotherCompany",
+            "Type": "System.Boolean"
+          },
+          "14": {
+            "Name": "NameAr",
+            "Index": -1,
+            "NameInSource": "NameAr",
+            "Alias": "NameAr",
+            "Type": "System.String"
+          },
+          "15": {
+            "Name": "NameEn",
+            "Index": -1,
+            "NameInSource": "NameEn",
+            "Alias": "NameEn",
+            "Type": "System.String"
+          },
+          "16": {
+            "Name": "Notes",
+            "Index": -1,
+            "NameInSource": "Notes",
+            "Alias": "Notes",
+            "Type": "System.String"
+          },
+          "17": {
+            "Name": "PhoneNumber",
+            "Index": -1,
+            "NameInSource": "PhoneNumber",
+            "Alias": "PhoneNumber",
+            "Type": "System.String"
+          },
+          "18": {
+            "Name": "UpdateBy",
+            "Index": -1,
+            "NameInSource": "UpdateBy",
+            "Alias": "UpdateBy",
+            "Type": "System.String"
+          },
+          "19": {
+            "Name": "UpdatedAt",
+            "Index": -1,
+            "NameInSource": "UpdatedAt",
+            "Alias": "UpdatedAt",
+            "Type": "System.DateTime"
+          },
+          "20": {
+            "Name": "UseHijri",
+            "Index": -1,
+            "NameInSource": "UseHijri",
+            "Alias": "UseHijri",
+            "Type": "System.Boolean"
+          },
+          "21": {
+            "Name": "WebSite",
+            "Index": -1,
+            "NameInSource": "WebSite",
+            "Alias": "WebSite",
+            "Type": "System.String"
+          },
+          "22": {
+            "Name": "CompanyName",
+            "Index": -1,
+            "NameInSource": "CompanyName",
+            "Alias": "CompanyName",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "MS SQL",
+        "SqlCommand": "exec SP_Get_Company_Info @companyId,@lang",
+        "Parameters": {
+          "0": {
+            "Name": "@companyId",
+            "Expression": "1"
+          },
+          "1": {
+            "Name": "@lang",
+            "Type": 22,
+            "Size": 10
+          }
+        }
+      },
+      "1": {
+        "Ident": "StiSqlSource",
+        "Name": "Reports_Keywords",
+        "Alias": "Reports_Keywords",
+        "Key": "636814e0500047b58729a84f83a09750",
+        "Columns": {
+          "0": {
+            "Name": "JouranlEntriesReport",
+            "Index": -1,
+            "NameInSource": "JouranlEntriesReport",
+            "Alias": "JouranlEntriesReport",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "JouranlEntriesBasedOnDateReport",
+            "Index": -1,
+            "NameInSource": "JouranlEntriesBasedOnDateReport",
+            "Alias": "JouranlEntriesBasedOnDateReport",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "JouranlEntriesBasedOnTheCodeReport",
+            "Index": -1,
+            "NameInSource": "JouranlEntriesBasedOnTheCodeReport",
+            "Alias": "JouranlEntriesBasedOnTheCodeReport",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "AccountsBalanceReport",
+            "Index": -1,
+            "NameInSource": "AccountsBalanceReport",
+            "Alias": "AccountsBalanceReport",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "TrailBalanceReport",
+            "Index": -1,
+            "NameInSource": "TrailBalanceReport",
+            "Alias": "TrailBalanceReport",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "JouranlEntry",
+            "Index": -1,
+            "NameInSource": "JouranlEntry",
+            "Alias": "JouranlEntry",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "BillAges",
+            "Index": -1,
+            "NameInSource": "BillAges",
+            "Alias": "BillAges",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "ItemsAnalysisListReport",
+            "Index": -1,
+            "NameInSource": "ItemsAnalysisListReport",
+            "Alias": "ItemsAnalysisListReport",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "ItemsAnalysisListDetailsReport",
+            "Index": -1,
+            "NameInSource": "ItemsAnalysisListDetailsReport",
+            "Alias": "ItemsAnalysisListDetailsReport",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "CustomersBalanceReport",
+            "Index": -1,
+            "NameInSource": "CustomersBalanceReport",
+            "Alias": "CustomersBalanceReport",
+            "Type": "System.String"
+          },
+          "10": {
+            "Name": "SuppliersBalanceReport",
+            "Index": -1,
+            "NameInSource": "SuppliersBalanceReport",
+            "Alias": "SuppliersBalanceReport",
+            "Type": "System.String"
+          },
+          "11": {
+            "Name": "DetailedSuppliersBalanceReport",
+            "Index": -1,
+            "NameInSource": "DetailedSuppliersBalanceReport",
+            "Alias": "DetailedSuppliersBalanceReport",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "CommercialMovementOfPurchasesReport",
+            "Index": -1,
+            "NameInSource": "CommercialMovementOfPurchasesReport",
+            "Alias": "CommercialMovementOfPurchasesReport",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "DetailedCommercialMovementOfPurchasesReport",
+            "Index": -1,
+            "NameInSource": "DetailedCommercialMovementOfPurchasesReport",
+            "Alias": "DetailedCommercialMovementOfPurchasesReport",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "DetailedCustomerAccountReport",
+            "Index": -1,
+            "NameInSource": "DetailedCustomerAccountReport",
+            "Alias": "DetailedCustomerAccountReport",
+            "Type": "System.String"
+          },
+          "15": {
+            "Name": "ItemMovementReport",
+            "Index": -1,
+            "NameInSource": "ItemMovementReport",
+            "Alias": "ItemMovementReport",
+            "Type": "System.String"
+          },
+          "16": {
+            "Name": "CommercialMovementOfSalesReport",
+            "Index": -1,
+            "NameInSource": "CommercialMovementOfSalesReport",
+            "Alias": "CommercialMovementOfSalesReport",
+            "Type": "System.String"
+          },
+          "17": {
+            "Name": "CommercialMovementOfDetailsSalesReport",
+            "Index": -1,
+            "NameInSource": "CommercialMovementOfDetailsSalesReport",
+            "Alias": "CommercialMovementOfDetailsSalesReport",
+            "Type": "System.String"
+          },
+          "18": {
+            "Name": "AnalysisSalesReport",
+            "Index": -1,
+            "NameInSource": "AnalysisSalesReport",
+            "Alias": "AnalysisSalesReport",
+            "Type": "System.String"
+          },
+          "19": {
+            "Name": "StatisticsSalesReport",
+            "Index": -1,
+            "NameInSource": "StatisticsSalesReport",
+            "Alias": "StatisticsSalesReport",
+            "Type": "System.String"
+          },
+          "20": {
+            "Name": "DetailsAnalysisSalesReport",
+            "Index": -1,
+            "NameInSource": "DetailsAnalysisSalesReport",
+            "Alias": "DetailsAnalysisSalesReport",
+            "Type": "System.String"
+          },
+          "21": {
+            "Name": "DetailedCustomerAccountReport1",
+            "Index": -1,
+            "NameInSource": "DetailedCustomerAccountReport1",
+            "Alias": "DetailedCustomerAccountReport1",
+            "Type": "System.String"
+          },
+          "22": {
+            "Name": "ItemMovementGeneralReport",
+            "Index": -1,
+            "NameInSource": "ItemMovementGeneralReport",
+            "Alias": "ItemMovementGeneralReport",
+            "Type": "System.String"
+          },
+          "23": {
+            "Name": "ItemMovementDetailedReport",
+            "Index": -1,
+            "NameInSource": "ItemMovementDetailedReport",
+            "Alias": "ItemMovementDetailedReport",
+            "Type": "System.String"
+          },
+          "24": {
+            "Name": "InventoryReport",
+            "Index": -1,
+            "NameInSource": "InventoryReport",
+            "Alias": "InventoryReport",
+            "Type": "System.String"
+          },
+          "25": {
+            "Name": "ItemsProfitsReport",
+            "Index": -1,
+            "NameInSource": "ItemsProfitsReport",
+            "Alias": "ItemsProfitsReport",
+            "Type": "System.String"
+          },
+          "26": {
+            "Name": "DetailedItemsProfitsReport",
+            "Index": -1,
+            "NameInSource": "DetailedItemsProfitsReport",
+            "Alias": "DetailedItemsProfitsReport",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "MS SQL",
+        "Type": "StoredProcedure",
+        "SqlCommand": "SP_Reports_Keywords",
+        "Parameters": {
+          "0": {
+            "Name": "@lang",
+            "Type": 22
+          }
+        }
+      },
+      "2": {
+        "Ident": "StiSqlSource",
+        "Name": "Common_Keywords",
+        "Alias": "Common_Keywords",
+        "Key": "f94ec17728e646418d0e1d4547742118",
+        "Columns": {
+          "0": {
+            "Name": "Account",
+            "Index": -1,
+            "NameInSource": "Account",
+            "Alias": "Account",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "AccountCode",
+            "Index": -1,
+            "NameInSource": "AccountCode",
+            "Alias": "AccountCode",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "AccountCode1",
+            "Index": -1,
+            "NameInSource": "AccountCode1",
+            "Alias": "AccountCode1",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "AccountGroup",
+            "Index": -1,
+            "NameInSource": "AccountGroup",
+            "Alias": "AccountGroup",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "AccountLevel",
+            "Index": -1,
+            "NameInSource": "AccountLevel",
+            "Alias": "AccountLevel",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "AccountName",
+            "Index": -1,
+            "NameInSource": "AccountName",
+            "Alias": "AccountName",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "AccountType",
+            "Index": -1,
+            "NameInSource": "AccountType",
+            "Alias": "AccountType",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "AddedConvertedQuantity",
+            "Index": -1,
+            "NameInSource": "AddedConvertedQuantity",
+            "Alias": "AddedConvertedQuantity",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "AddedQuantity",
+            "Index": -1,
+            "NameInSource": "AddedQuantity",
+            "Alias": "AddedQuantity",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "AdditionRatio",
+            "Index": -1,
+            "NameInSource": "AdditionRatio",
+            "Alias": "AdditionRatio",
+            "Type": "System.String"
+          },
+          "10": {
+            "Name": "AdditionValue",
+            "Index": -1,
+            "NameInSource": "AdditionValue",
+            "Alias": "AdditionValue",
+            "Type": "System.String"
+          },
+          "11": {
+            "Name": "Amount",
+            "Index": -1,
+            "NameInSource": "Amount",
+            "Alias": "Amount",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "Amount1",
+            "Index": -1,
+            "NameInSource": "Amount1",
+            "Alias": "Amount1",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "AmountLocal",
+            "Index": -1,
+            "NameInSource": "AmountLocal",
+            "Alias": "AmountLocal",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "Balance",
+            "Index": -1,
+            "NameInSource": "Balance",
+            "Alias": "Balance",
+            "Type": "System.String"
+          },
+          "15": {
+            "Name": "Balance1",
+            "Index": -1,
+            "NameInSource": "Balance1",
+            "Alias": "Balance1",
+            "Type": "System.String"
+          },
+          "16": {
+            "Name": "BankAccount",
+            "Index": -1,
+            "NameInSource": "BankAccount",
+            "Alias": "BankAccount",
+            "Type": "System.String"
+          },
+          "17": {
+            "Name": "Beneficiary",
+            "Index": -1,
+            "NameInSource": "Beneficiary",
+            "Alias": "Beneficiary",
+            "Type": "System.String"
+          },
+          "18": {
+            "Name": "Beneficiary1",
+            "Index": -1,
+            "NameInSource": "Beneficiary1",
+            "Alias": "Beneficiary1",
+            "Type": "System.String"
+          },
+          "19": {
+            "Name": "BeneficiaryType",
+            "Index": -1,
+            "NameInSource": "BeneficiaryType",
+            "Alias": "BeneficiaryType",
+            "Type": "System.String"
+          },
+          "20": {
+            "Name": "BeneficiaryType1",
+            "Index": -1,
+            "NameInSource": "BeneficiaryType1",
+            "Alias": "BeneficiaryType1",
+            "Type": "System.String"
+          },
+          "21": {
+            "Name": "BillAge",
+            "Index": -1,
+            "NameInSource": "BillAge",
+            "Alias": "BillAge",
+            "Type": "System.String"
+          },
+          "22": {
+            "Name": "BillCode",
+            "Index": -1,
+            "NameInSource": "BillCode",
+            "Alias": "BillCode",
+            "Type": "System.String"
+          },
+          "23": {
+            "Name": "BillCost",
+            "Index": -1,
+            "NameInSource": "BillCost",
+            "Alias": "BillCost",
+            "Type": "System.String"
+          },
+          "24": {
+            "Name": "BillKind",
+            "Index": -1,
+            "NameInSource": "BillKind",
+            "Alias": "BillKind",
+            "Type": "System.String"
+          },
+          "25": {
+            "Name": "BillNet",
+            "Index": -1,
+            "NameInSource": "BillNet",
+            "Alias": "BillNet",
+            "Type": "System.String"
+          },
+          "26": {
+            "Name": "BillNumber",
+            "Index": -1,
+            "NameInSource": "BillNumber",
+            "Alias": "BillNumber",
+            "Type": "System.String"
+          },
+          "27": {
+            "Name": "BillType",
+            "Index": -1,
+            "NameInSource": "BillType",
+            "Alias": "BillType",
+            "Type": "System.String"
+          },
+          "28": {
+            "Name": "Branch",
+            "Index": -1,
+            "NameInSource": "Branch",
+            "Alias": "Branch",
+            "Type": "System.String"
+          },
+          "29": {
+            "Name": "CashAmount",
+            "Index": -1,
+            "NameInSource": "CashAmount",
+            "Alias": "CashAmount",
+            "Type": "System.String"
+          },
+          "30": {
+            "Name": "Code",
+            "Index": -1,
+            "NameInSource": "Code",
+            "Alias": "Code",
+            "Type": "System.String"
+          },
+          "31": {
+            "Name": "CompanyName",
+            "Index": -1,
+            "NameInSource": "CompanyName",
+            "Alias": "CompanyName",
+            "Type": "System.String"
+          },
+          "32": {
+            "Name": "CostCenterName",
+            "Index": -1,
+            "NameInSource": "CostCenterName",
+            "Alias": "CostCenterName",
+            "Type": "System.String"
+          },
+          "33": {
+            "Name": "Credit",
+            "Index": -1,
+            "NameInSource": "Credit",
+            "Alias": "Credit",
+            "Type": "System.String"
+          },
+          "34": {
+            "Name": "Credit1",
+            "Index": -1,
+            "NameInSource": "Credit1",
+            "Alias": "Credit1",
+            "Type": "System.String"
+          },
+          "35": {
+            "Name": "CreditLocal",
+            "Index": -1,
+            "NameInSource": "CreditLocal",
+            "Alias": "CreditLocal",
+            "Type": "System.String"
+          },
+          "36": {
+            "Name": "CredittBalance",
+            "Index": -1,
+            "NameInSource": "CredittBalance",
+            "Alias": "CredittBalance",
+            "Type": "System.String"
+          },
+          "37": {
+            "Name": "Currency",
+            "Index": -1,
+            "NameInSource": "Currency",
+            "Alias": "Currency",
+            "Type": "System.String"
+          },
+          "38": {
+            "Name": "CurrencyValue",
+            "Index": -1,
+            "NameInSource": "CurrencyValue",
+            "Alias": "CurrencyValue",
+            "Type": "System.String"
+          },
+          "39": {
+            "Name": "CurrentBalance",
+            "Index": -1,
+            "NameInSource": "CurrentBalance",
+            "Alias": "CurrentBalance",
+            "Type": "System.String"
+          },
+          "40": {
+            "Name": "CurrentQuantity",
+            "Index": -1,
+            "NameInSource": "CurrentQuantity",
+            "Alias": "CurrentQuantity",
+            "Type": "System.String"
+          },
+          "41": {
+            "Name": "Customer",
+            "Index": -1,
+            "NameInSource": "Customer",
+            "Alias": "Customer",
+            "Type": "System.String"
+          },
+          "42": {
+            "Name": "CustomerNumber",
+            "Index": -1,
+            "NameInSource": "CustomerNumber",
+            "Alias": "CustomerNumber",
+            "Type": "System.String"
+          },
+          "43": {
+            "Name": "CustomerNumber1",
+            "Index": -1,
+            "NameInSource": "CustomerNumber1",
+            "Alias": "CustomerNumber1",
+            "Type": "System.String"
+          },
+          "44": {
+            "Name": "Date",
+            "Index": -1,
+            "NameInSource": "Date",
+            "Alias": "Date",
+            "Type": "System.String"
+          },
+          "45": {
+            "Name": "Debit",
+            "Index": -1,
+            "NameInSource": "Debit",
+            "Alias": "Debit",
+            "Type": "System.String"
+          },
+          "46": {
+            "Name": "Debit1",
+            "Index": -1,
+            "NameInSource": "Debit1",
+            "Alias": "Debit1",
+            "Type": "System.String"
+          },
+          "47": {
+            "Name": "DebitBalance",
+            "Index": -1,
+            "NameInSource": "DebitBalance",
+            "Alias": "DebitBalance",
+            "Type": "System.String"
+          },
+          "48": {
+            "Name": "DebitLocal",
+            "Index": -1,
+            "NameInSource": "DebitLocal",
+            "Alias": "DebitLocal",
+            "Type": "System.String"
+          },
+          "49": {
+            "Name": "Description",
+            "Index": -1,
+            "NameInSource": "Description",
+            "Alias": "Description",
+            "Type": "System.String"
+          },
+          "50": {
+            "Name": "DiscountRatio",
+            "Index": -1,
+            "NameInSource": "DiscountRatio",
+            "Alias": "DiscountRatio",
+            "Type": "System.String"
+          },
+          "51": {
+            "Name": "DiscountValue",
+            "Index": -1,
+            "NameInSource": "DiscountValue",
+            "Alias": "DiscountValue",
+            "Type": "System.String"
+          },
+          "52": {
+            "Name": "DocumentDate",
+            "Index": -1,
+            "NameInSource": "DocumentDate",
+            "Alias": "DocumentDate",
+            "Type": "System.String"
+          },
+          "53": {
+            "Name": "DocumentName",
+            "Index": -1,
+            "NameInSource": "DocumentName",
+            "Alias": "DocumentName",
+            "Type": "System.String"
+          },
+          "54": {
+            "Name": "DocumentNumber",
+            "Index": -1,
+            "NameInSource": "DocumentNumber",
+            "Alias": "DocumentNumber",
+            "Type": "System.String"
+          },
+          "55": {
+            "Name": "DueDate",
+            "Index": -1,
+            "NameInSource": "DueDate",
+            "Alias": "DueDate",
+            "Type": "System.String"
+          },
+          "56": {
+            "Name": "EntryDate",
+            "Index": -1,
+            "NameInSource": "EntryDate",
+            "Alias": "EntryDate",
+            "Type": "System.String"
+          },
+          "57": {
+            "Name": "EntryRef",
+            "Index": -1,
+            "NameInSource": "EntryRef",
+            "Alias": "EntryRef",
+            "Type": "System.String"
+          },
+          "58": {
+            "Name": "EntryStatus",
+            "Index": -1,
+            "NameInSource": "EntryStatus",
+            "Alias": "EntryStatus",
+            "Type": "System.String"
+          },
+          "59": {
+            "Name": "EntryStatus1",
+            "Index": -1,
+            "NameInSource": "EntryStatus1",
+            "Alias": "EntryStatus1",
+            "Type": "System.String"
+          },
+          "60": {
+            "Name": "FiscalPeriod",
+            "Index": -1,
+            "NameInSource": "FiscalPeriod",
+            "Alias": "FiscalPeriod",
+            "Type": "System.String"
+          },
+          "61": {
+            "Name": "ForPeriod",
+            "Index": -1,
+            "NameInSource": "ForPeriod",
+            "Alias": "ForPeriod",
+            "Type": "System.String"
+          },
+          "62": {
+            "Name": "FromCustomer",
+            "Index": -1,
+            "NameInSource": "FromCustomer",
+            "Alias": "FromCustomer",
+            "Type": "System.String"
+          },
+          "63": {
+            "Name": "FromDate",
+            "Index": -1,
+            "NameInSource": "FromDate",
+            "Alias": "FromDate",
+            "Type": "System.String"
+          },
+          "64": {
+            "Name": "FromEntryNo",
+            "Index": -1,
+            "NameInSource": "FromEntryNo",
+            "Alias": "FromEntryNo",
+            "Type": "System.String"
+          },
+          "65": {
+            "Name": "FromSupplier",
+            "Index": -1,
+            "NameInSource": "FromSupplier",
+            "Alias": "FromSupplier",
+            "Type": "System.String"
+          },
+          "66": {
+            "Name": "GeneralTotal",
+            "Index": -1,
+            "NameInSource": "GeneralTotal",
+            "Alias": "GeneralTotal",
+            "Type": "System.String"
+          },
+          "67": {
+            "Name": "H",
+            "Index": -1,
+            "NameInSource": "H",
+            "Alias": "H",
+            "Type": "System.String"
+          },
+          "68": {
+            "Name": "IncomingChequesReport",
+            "Index": -1,
+            "NameInSource": "IncomingChequesReport",
+            "Alias": "IncomingChequesReport",
+            "Type": "System.String"
+          },
+          "69": {
+            "Name": "IssuedConvertedQuantity",
+            "Index": -1,
+            "NameInSource": "IssuedConvertedQuantity",
+            "Alias": "IssuedConvertedQuantity",
+            "Type": "System.String"
+          },
+          "70": {
+            "Name": "IssuedQuantity",
+            "Index": -1,
+            "NameInSource": "IssuedQuantity",
+            "Alias": "IssuedQuantity",
+            "Type": "System.String"
+          },
+          "71": {
+            "Name": "IssuingChequesReport",
+            "Index": -1,
+            "NameInSource": "IssuingChequesReport",
+            "Alias": "IssuingChequesReport",
+            "Type": "System.String"
+          },
+          "72": {
+            "Name": "Item",
+            "Index": -1,
+            "NameInSource": "Item",
+            "Alias": "Item",
+            "Type": "System.String"
+          },
+          "73": {
+            "Name": "Item1",
+            "Index": -1,
+            "NameInSource": "Item1",
+            "Alias": "Item1",
+            "Type": "System.String"
+          },
+          "74": {
+            "Name": "ItemCode",
+            "Index": -1,
+            "NameInSource": "ItemCode",
+            "Alias": "ItemCode",
+            "Type": "System.String"
+          },
+          "75": {
+            "Name": "ItemGroup",
+            "Index": -1,
+            "NameInSource": "ItemGroup",
+            "Alias": "ItemGroup",
+            "Type": "System.String"
+          },
+          "76": {
+            "Name": "ItemType",
+            "Index": -1,
+            "NameInSource": "ItemType",
+            "Alias": "ItemType",
+            "Type": "System.String"
+          },
+          "77": {
+            "Name": "JournalNumber",
+            "Index": -1,
+            "NameInSource": "JournalNumber",
+            "Alias": "JournalNumber",
+            "Type": "System.String"
+          },
+          "78": {
+            "Name": "JournalType",
+            "Index": -1,
+            "NameInSource": "JournalType",
+            "Alias": "JournalType",
+            "Type": "System.String"
+          },
+          "79": {
+            "Name": "M",
+            "Index": -1,
+            "NameInSource": "M",
+            "Alias": "M",
+            "Type": "System.String"
+          },
+          "80": {
+            "Name": "MainAccount",
+            "Index": -1,
+            "NameInSource": "MainAccount",
+            "Alias": "MainAccount",
+            "Type": "System.String"
+          },
+          "81": {
+            "Name": "MainUnit",
+            "Index": -1,
+            "NameInSource": "MainUnit",
+            "Alias": "MainUnit",
+            "Type": "System.String"
+          },
+          "82": {
+            "Name": "Net",
+            "Index": -1,
+            "NameInSource": "Net",
+            "Alias": "Net",
+            "Type": "System.String"
+          },
+          "83": {
+            "Name": "NetProfitOrLoss",
+            "Index": -1,
+            "NameInSource": "NetProfitOrLoss",
+            "Alias": "NetProfitOrLoss",
+            "Type": "System.String"
+          },
+          "84": {
+            "Name": "Notes",
+            "Index": -1,
+            "NameInSource": "Notes",
+            "Alias": "Notes",
+            "Type": "System.String"
+          },
+          "85": {
+            "Name": "OnDate",
+            "Index": -1,
+            "NameInSource": "OnDate",
+            "Alias": "OnDate",
+            "Type": "System.String"
+          },
+          "86": {
+            "Name": "OpenBalanceCredit",
+            "Index": -1,
+            "NameInSource": "OpenBalanceCredit",
+            "Alias": "OpenBalanceCredit",
+            "Type": "System.String"
+          },
+          "87": {
+            "Name": "OpenBalanceDebit",
+            "Index": -1,
+            "NameInSource": "OpenBalanceDebit",
+            "Alias": "OpenBalanceDebit",
+            "Type": "System.String"
+          },
+          "88": {
+            "Name": "PageNumbers",
+            "Index": -1,
+            "NameInSource": "PageNumbers",
+            "Alias": "PageNumbers",
+            "Type": "System.String"
+          },
+          "89": {
+            "Name": "Paid",
+            "Index": -1,
+            "NameInSource": "Paid",
+            "Alias": "Paid",
+            "Type": "System.String"
+          },
+          "90": {
+            "Name": "ParentAccCode",
+            "Index": -1,
+            "NameInSource": "ParentAccCode",
+            "Alias": "ParentAccCode",
+            "Type": "System.String"
+          },
+          "91": {
+            "Name": "ParentAccount",
+            "Index": -1,
+            "NameInSource": "ParentAccount",
+            "Alias": "ParentAccount",
+            "Type": "System.String"
+          },
+          "92": {
+            "Name": "PayWay",
+            "Index": -1,
+            "NameInSource": "PayWay",
+            "Alias": "PayWay",
+            "Type": "System.String"
+          },
+          "93": {
+            "Name": "PreviousAddedQuantity",
+            "Index": -1,
+            "NameInSource": "PreviousAddedQuantity",
+            "Alias": "PreviousAddedQuantity",
+            "Type": "System.String"
+          },
+          "94": {
+            "Name": "PreviousBalance",
+            "Index": -1,
+            "NameInSource": "PreviousBalance",
+            "Alias": "PreviousBalance",
+            "Type": "System.String"
+          },
+          "95": {
+            "Name": "PreviousBalance1",
+            "Index": -1,
+            "NameInSource": "PreviousBalance1",
+            "Alias": "PreviousBalance1",
+            "Type": "System.String"
+          },
+          "96": {
+            "Name": "PreviousIssuedQuantity",
+            "Index": -1,
+            "NameInSource": "PreviousIssuedQuantity",
+            "Alias": "PreviousIssuedQuantity",
+            "Type": "System.String"
+          },
+          "97": {
+            "Name": "Price",
+            "Index": -1,
+            "NameInSource": "Price",
+            "Alias": "Price",
+            "Type": "System.String"
+          },
+          "98": {
+            "Name": "PrintOnDate",
+            "Index": -1,
+            "NameInSource": "PrintOnDate",
+            "Alias": "PrintOnDate",
+            "Type": "System.String"
+          },
+          "99": {
+            "Name": "Project",
+            "Index": -1,
+            "NameInSource": "Project",
+            "Alias": "Project",
+            "Type": "System.String"
+          },
+          "100": {
+            "Name": "Quantity",
+            "Index": -1,
+            "NameInSource": "Quantity",
+            "Alias": "Quantity",
+            "Type": "System.String"
+          },
+          "101": {
+            "Name": "Quantity1",
+            "Index": -1,
+            "NameInSource": "Quantity1",
+            "Alias": "Quantity1",
+            "Type": "System.String"
+          },
+          "102": {
+            "Name": "Reference",
+            "Index": -1,
+            "NameInSource": "Reference",
+            "Alias": "Reference",
+            "Type": "System.String"
+          },
+          "103": {
+            "Name": "ReferenceNumber",
+            "Index": -1,
+            "NameInSource": "ReferenceNumber",
+            "Alias": "ReferenceNumber",
+            "Type": "System.String"
+          },
+          "104": {
+            "Name": "ReferenceType",
+            "Index": -1,
+            "NameInSource": "ReferenceType",
+            "Alias": "ReferenceType",
+            "Type": "System.String"
+          },
+          "105": {
+            "Name": "Remaining",
+            "Index": -1,
+            "NameInSource": "Remaining",
+            "Alias": "Remaining",
+            "Type": "System.String"
+          },
+          "106": {
+            "Name": "ReviewedBy",
+            "Index": -1,
+            "NameInSource": "ReviewedBy",
+            "Alias": "ReviewedBy",
+            "Type": "System.String"
+          },
+          "107": {
+            "Name": "SalesPerson",
+            "Index": -1,
+            "NameInSource": "SalesPerson",
+            "Alias": "SalesPerson",
+            "Type": "System.String"
+          },
+          "108": {
+            "Name": "Statement",
+            "Index": -1,
+            "NameInSource": "Statement",
+            "Alias": "Statement",
+            "Type": "System.String"
+          },
+          "109": {
+            "Name": "Status",
+            "Index": -1,
+            "NameInSource": "Status",
+            "Alias": "Status",
+            "Type": "System.String"
+          },
+          "110": {
+            "Name": "Store",
+            "Index": -1,
+            "NameInSource": "Store",
+            "Alias": "Store",
+            "Type": "System.String"
+          },
+          "111": {
+            "Name": "StoreCode",
+            "Index": -1,
+            "NameInSource": "StoreCode",
+            "Alias": "StoreCode",
+            "Type": "System.String"
+          },
+          "112": {
+            "Name": "StoreName",
+            "Index": -1,
+            "NameInSource": "StoreName",
+            "Alias": "StoreName",
+            "Type": "System.String"
+          },
+          "113": {
+            "Name": "Sum",
+            "Index": -1,
+            "NameInSource": "Sum",
+            "Alias": "Sum",
+            "Type": "System.String"
+          },
+          "114": {
+            "Name": "Supplier",
+            "Index": -1,
+            "NameInSource": "Supplier",
+            "Alias": "Supplier",
+            "Type": "System.String"
+          },
+          "115": {
+            "Name": "SupplierNumber",
+            "Index": -1,
+            "NameInSource": "SupplierNumber",
+            "Alias": "SupplierNumber",
+            "Type": "System.String"
+          },
+          "116": {
+            "Name": "SupplierNumber1",
+            "Index": -1,
+            "NameInSource": "SupplierNumber1",
+            "Alias": "SupplierNumber1",
+            "Type": "System.String"
+          },
+          "117": {
+            "Name": "Tax",
+            "Index": -1,
+            "NameInSource": "Tax",
+            "Alias": "Tax",
+            "Type": "System.String"
+          },
+          "118": {
+            "Name": "ToCustomer",
+            "Index": -1,
+            "NameInSource": "ToCustomer",
+            "Alias": "ToCustomer",
+            "Type": "System.String"
+          },
+          "119": {
+            "Name": "ToDate",
+            "Index": -1,
+            "NameInSource": "ToDate",
+            "Alias": "ToDate",
+            "Type": "System.String"
+          },
+          "120": {
+            "Name": "ToEntryNo",
+            "Index": -1,
+            "NameInSource": "ToEntryNo",
+            "Alias": "ToEntryNo",
+            "Type": "System.String"
+          },
+          "121": {
+            "Name": "ToSupplier",
+            "Index": -1,
+            "NameInSource": "ToSupplier",
+            "Alias": "ToSupplier",
+            "Type": "System.String"
+          },
+          "122": {
+            "Name": "Total",
+            "Index": -1,
+            "NameInSource": "Total",
+            "Alias": "Total",
+            "Type": "System.String"
+          },
+          "123": {
+            "Name": "TotalAfterTaxes",
+            "Index": -1,
+            "NameInSource": "TotalAfterTaxes",
+            "Alias": "TotalAfterTaxes",
+            "Type": "System.String"
+          },
+          "124": {
+            "Name": "TotalBeforeTax",
+            "Index": -1,
+            "NameInSource": "TotalBeforeTax",
+            "Alias": "TotalBeforeTax",
+            "Type": "System.String"
+          },
+          "125": {
+            "Name": "TotalTax",
+            "Index": -1,
+            "NameInSource": "TotalTax",
+            "Alias": "TotalTax",
+            "Type": "System.String"
+          },
+          "126": {
+            "Name": "Unit",
+            "Index": -1,
+            "NameInSource": "Unit",
+            "Alias": "Unit",
+            "Type": "System.String"
+          },
+          "127": {
+            "Name": "VoucherCode",
+            "Index": -1,
+            "NameInSource": "VoucherCode",
+            "Alias": "VoucherCode",
+            "Type": "System.String"
+          },
+          "128": {
+            "Name": "VoucherType",
+            "Index": -1,
+            "NameInSource": "VoucherType",
+            "Alias": "VoucherType",
+            "Type": "System.String"
+          },
+          "129": {
+            "Name": "lblAccount",
+            "Index": -1,
+            "NameInSource": "lblAccount",
+            "Alias": "lblAccount",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "MS SQL",
+        "Type": "StoredProcedure",
+        "SqlCommand": "SP_Common_Keywords",
+        "Parameters": {
+          "0": {
+            "Name": "@lang",
+            "Type": 22
+          }
+        }
+      },
+      "3": {
+        "Ident": "StiSqlSource",
+        "Name": "Items_Profits",
+        "Alias": "Items_Profits",
+        "Key": "de0c3e699d6545d5aa3c48a3a1a73af4",
+        "Columns": {
+          "0": {
+            "Name": "Kind",
+            "Index": -1,
+            "NameInSource": "Kind",
+            "Alias": "Kind",
+            "Type": "System.Int32"
+          },
+          "1": {
+            "Name": "BillCode",
+            "Index": -1,
+            "NameInSource": "BillCode",
+            "Alias": "BillCode",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "BillDate",
+            "Index": -1,
+            "NameInSource": "BillDate",
+            "Alias": "BillDate",
+            "Type": "System.DateTime"
+          },
+          "3": {
+            "Name": "BillkindName",
+            "Index": -1,
+            "NameInSource": "BillkindName",
+            "Alias": "BillkindName",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "BranchName",
+            "Index": -1,
+            "NameInSource": "BranchName",
+            "Alias": "BranchName",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "BillTypeName",
+            "Index": -1,
+            "NameInSource": "BillTypeName",
+            "Alias": "BillTypeName",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "CustomerName",
+            "Index": -1,
+            "NameInSource": "CustomerName",
+            "Alias": "CustomerName",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "PayWay",
+            "Index": -1,
+            "NameInSource": "PayWay",
+            "Alias": "PayWay",
+            "Type": "System.Int32"
+          },
+          "8": {
+            "Name": "PayWayName",
+            "Index": -1,
+            "NameInSource": "PayWayName",
+            "Alias": "PayWayName",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "ShipMethodName",
+            "Index": -1,
+            "NameInSource": "ShipMethodName",
+            "Alias": "ShipMethodName",
+            "Type": "System.String"
+          },
+          "10": {
+            "Name": "ShipKindName",
+            "Index": -1,
+            "NameInSource": "ShipKindName",
+            "Alias": "ShipKindName",
+            "Type": "System.String"
+          },
+          "11": {
+            "Name": "SalePersonName",
+            "Index": -1,
+            "NameInSource": "SalePersonName",
+            "Alias": "SalePersonName",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "CurrencyValue",
+            "Index": -1,
+            "NameInSource": "CurrencyValue",
+            "Alias": "CurrencyValue",
+            "Type": "System.Double"
+          },
+          "13": {
+            "Name": "StoreName",
+            "Index": -1,
+            "NameInSource": "StoreName",
+            "Alias": "StoreName",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "DeliveryDate",
+            "Index": -1,
+            "NameInSource": "DeliveryDate",
+            "Alias": "DeliveryDate",
+            "Type": "System.DateTime"
+          },
+          "15": {
+            "Name": "CurrencyName",
+            "Index": -1,
+            "NameInSource": "CurrencyName",
+            "Alias": "CurrencyName",
+            "Type": "System.String"
+          },
+          "16": {
+            "Name": "ProjectName",
+            "Index": -1,
+            "NameInSource": "ProjectName",
+            "Alias": "ProjectName",
+            "Type": "System.String"
+          },
+          "17": {
+            "Name": "CostCenterName",
+            "Index": -1,
+            "NameInSource": "CostCenterName",
+            "Alias": "CostCenterName",
+            "Type": "System.String"
+          },
+          "18": {
+            "Name": "Notes",
+            "Index": -1,
+            "NameInSource": "Notes",
+            "Alias": "Notes",
+            "Type": "System.String"
+          },
+          "19": {
+            "Name": "TotalBeforeTax",
+            "Index": -1,
+            "NameInSource": "TotalBeforeTax",
+            "Alias": "TotalBeforeTax",
+            "Type": "System.Double"
+          },
+          "20": {
+            "Name": "Net",
+            "Index": -1,
+            "NameInSource": "Net",
+            "Alias": "Net",
+            "Type": "System.Double"
+          },
+          "21": {
+            "Name": "Delay",
+            "Index": -1,
+            "NameInSource": "Delay",
+            "Alias": "Delay",
+            "Type": "System.Int32"
+          },
+          "22": {
+            "Name": "JournalEntryId",
+            "Index": -1,
+            "NameInSource": "JournalEntryId",
+            "Alias": "JournalEntryId",
+            "Type": "System.Int64"
+          },
+          "23": {
+            "Name": "Cost",
+            "Index": -1,
+            "NameInSource": "Cost",
+            "Alias": "Cost",
+            "Type": "System.Double"
+          }
+        },
+        "NameInSource": "MS SQL",
+        "Type": "StoredProcedure",
+        "SqlCommand": "SP_Items_Profits",
+        "Parameters": {
+          "0": {
+            "Name": "@accountingEffect",
+            "Type": 22
+          },
+          "1": {
+            "Name": "@billTypeIds",
+            "Type": 22
+          },
+          "2": {
+            "Name": "@branchId",
+            "Type": 22
+          },
+          "3": {
+            "Name": "@companyId"
+          },
+          "4": {
+            "Name": "@costCenterId"
+          },
+          "5": {
+            "Name": "@costPriceType",
+            "Type": 8
+          },
+          "6": {
+            "Name": "@currencyId"
+          },
+          "7": {
+            "Name": "@customerId"
+          },
+          "8": {
+            "Name": "@fiscalPeriodId"
+          },
+          "9": {
+            "Name": "@fromBillNo",
+            "Type": 22
+          },
+          "10": {
+            "Name": "@fromDate",
+            "Type": 4
+          },
+          "11": {
+            "Name": "@lang",
+            "Type": 22
+          },
+          "12": {
+            "Name": "@payWay",
+            "Type": 22
+          },
+          "13": {
+            "Name": "@projectId",
+            "Type": 22
+          },
+          "14": {
+            "Name": "@referenceId"
+          },
+          "15": {
+            "Name": "@referenceNo"
+          },
+          "16": {
+            "Name": "@salesPersonId"
+          },
+          "17": {
+            "Name": "@storeId"
+          },
+          "18": {
+            "Name": "@toBillNo",
+            "Type": 22
+          },
+          "19": {
+            "Name": "@toDate",
+            "Type": 4
+          },
+          "20": {
+            "Name": "@userId",
+            "Type": 22
+          },
+          "21": {
+            "Name": "@warehouseEffect",
+            "Type": 22
+          }
+        }
+      }
+    },
+    "Databases": {
+      "0": {
+        "Ident": "StiSqlDatabase",
+        "Name": "MS SQL",
+        "Alias": "MS SQL",
+        "ConnectionStringEncrypted": "9HTPC9cIAcjiX9UA9exiXtHE2SvGStmF4n/oKPC4oD/RWvvLXVmzzfNdhNRqAfZ74xRprU1ZQoXib6jEepyiv+FWU+9GXbuZ8GqcXGCEpHuLFpuDxVnTGeFhIcxx3GIb3gyVKddXQu1pG/2sauwtD8M4aYhOW/PNaQ=="
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiPage",
+      "Name": "Page1",
+      "Guid": "5ab07b40310e40e3973cf493e7a11960",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": ";;2;;;;;solid:Black",
+      "Brush": "solid:",
+      "Components": {
+        "0": {
+          "Ident": "StiPageHeaderBand",
+          "Name": "PageHeaderBand1",
+          "ClientRectangle": "0,4,292.9,54.54",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text8",
+              "Guid": "c3b836e83b2841d08927b79bc5852e4c",
+              "ClientRectangle": "0,8,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Arabic(PageNumber)} /  {Arabic(TotalPageCount)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text9",
+              "Guid": "9590e83875c04b78a5ca24a6bcfbb5c5",
+              "ClientRectangle": "26,8,32,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.PageNumbers}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "DataColumn"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text3",
+              "Guid": "4ef40fe9e2724722addb5c00db8d19ce",
+              "ClientRectangle": "219,10,72,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Company_Info.CompanyName}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Calibri;15;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "DataColumn"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text2",
+              "ClientRectangle": "219,2,72,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.CompanyName}"
+              },
+              "Font": ";16;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text1",
+              "ClientRectangle": "115.45,4,62,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Reports_Keywords.ItemsProfitsReport}"
+              },
+              "Font": ";14;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "Expression"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text20",
+              "Guid": "6dabd4d9e614481196fa3a72c0a6d78f",
+              "ClientRectangle": "248,28,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.FromDate}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "DataColumn"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text24",
+              "Guid": "b3c8583ef4d64610b0c52a85d58cba0f",
+              "ClientRectangle": "224,28,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ConvertToHijriDate(StrToDateTime(ToString(fromDate)))}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text43",
+              "Guid": "1dec9fdb6ec44b1a9f478a25daacb409",
+              "ClientRectangle": "180,26,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.Currency}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "DataColumn"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text44",
+              "Guid": "93c5c56d6e654c2cb9e9e1803e2b9499",
+              "ClientRectangle": "156,26,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ToString(selectedCurrencyName)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text47",
+              "Guid": "5b77ec42a4864dd1919cf5cec13eed68",
+              "ClientRectangle": "118,26,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.Branch}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "DataColumn"
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text48",
+              "Guid": "65f4e941044b445689e9f1e0432b60c9",
+              "ClientRectangle": "78,26,40,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ToString(selectedBranchName)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text34",
+              "Guid": "45c5194560864f3891e118cf872fb258",
+              "ClientRectangle": "248,38,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.ToDate}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "DataColumn"
+            },
+            "12": {
+              "Ident": "StiText",
+              "Name": "Text42",
+              "Guid": "adffa4b0cc7a4935b11dd47ed9ad73af",
+              "ClientRectangle": "224,38,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ConvertToHijriDate(StrToDateTime(ToString(toDate)))}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "13": {
+              "Ident": "StiText",
+              "Name": "Text21",
+              "Guid": "e191631472e44ec69ba52845cbebb0a1",
+              "ClientRectangle": "180,40,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.Store}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "DataColumn"
+            },
+            "14": {
+              "Ident": "StiText",
+              "Name": "Text22",
+              "Guid": "95e85ced2c1f4e26adea33a266131142",
+              "ClientRectangle": "156,40,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ToString(selectedStoreName)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "15": {
+              "Ident": "StiText",
+              "Name": "Text45",
+              "Guid": "b989c897b92e4a148824891778444ea7",
+              "ClientRectangle": "118,40,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.CostCenterName}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "DataColumn"
+            },
+            "16": {
+              "Ident": "StiText",
+              "Name": "Text46",
+              "Guid": "e0e1a9af6cea415095c8d37151945193",
+              "ClientRectangle": "74,40,44,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ToString(selectedCostCenterName)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "17": {
+              "Ident": "StiText",
+              "Name": "Text49",
+              "Guid": "9164af4c7690484fab3d8eec1790371c",
+              "ClientRectangle": "44,26,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.Project}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "Expression"
+            },
+            "18": {
+              "Ident": "StiText",
+              "Name": "Text50",
+              "Guid": "32db35adecc348748f80a6bf6b651daa",
+              "ClientRectangle": "20,26,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ToString(selectedProjectName)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "19": {
+              "Ident": "StiText",
+              "Name": "Text51",
+              "Guid": "ad3bb57783b04040ace80ca22f07b9ba",
+              "ClientRectangle": "44,40,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.PayWay}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:255,0,0",
+              "Type": "Expression"
+            },
+            "20": {
+              "Ident": "StiText",
+              "Name": "Text52",
+              "Guid": "4f27ad94159148b8a3afc0e7b7825bdf",
+              "ClientRectangle": "20,40,24,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ToString(selectedPayWayName)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            }
+          }
+        },
+        "1": {
+          "Ident": "StiPageHeaderBand",
+          "Name": "PageHeaderBand2",
+          "ClientRectangle": "0,66.54,292.9,8",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text17",
+              "Guid": "2b53cb76a45242538fb717fc5d3b2a67",
+              "ClientRectangle": "224,0,36,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.Customer}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text10",
+              "Guid": "aeb2003dc50245ff934c208ebaaa1877",
+              "ClientRectangle": "190,0,34,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.Store}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "DataColumn"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text13",
+              "Guid": "69c35bce888b456ca9c01875cc7d964d",
+              "ClientRectangle": "164,0,26,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.BillNumber}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text15",
+              "Guid": "dd2f76bd0cb240f399324fcfbe4b8b8a",
+              "ClientRectangle": "88,0,26,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.Date}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text36",
+              "Guid": "3f2f80e95d7d4294aaf378264ed640c4",
+              "ClientRectangle": "60,0,28,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.BillNet}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text35",
+              "Guid": "f0deb455c701477f8bf5f4853ec723a2",
+              "ClientRectangle": "260,0,34,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.Branch}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text23",
+              "Guid": "8427d00331f544d7b677daaa9dadaa7b",
+              "ClientRectangle": "30,0,30,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.BillCost}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text6",
+              "Guid": "7c1c4fcfa01c4fcda670358683ae78ff",
+              "ClientRectangle": "0,0,30,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.NetProfitOrLoss}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text12",
+              "Guid": "8fad69a54f7e4755a5b2cd557bb5d7c9",
+              "ClientRectangle": "140,0,24,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.BillKind}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text18",
+              "Guid": "8868baa485964673bd49c833b3a7e80b",
+              "ClientRectangle": "114,0,26,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.BillType}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:216,216,216",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            }
+          }
+        },
+        "2": {
+          "Ident": "StiDataBand",
+          "Name": "DataDataSource2",
+          "ClientRectangle": "0,82.54,292.9,8",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text30",
+              "Guid": "70db8559d5f549058cc475ae9734e341",
+              "ClientRectangle": "88,0,26,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.BillDate.ToString(\"yyyy/MM/dd\")}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text37",
+              "Guid": "1ae3ebda9c5841c4abcbeeb849dbe493",
+              "ClientRectangle": "60,0,28,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.Net}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text29",
+              "Guid": "e921f50810b740deb1896d0f9215d682",
+              "ClientRectangle": "164,0,26,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.BillCode}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text11",
+              "Guid": "7823ee68a47b4bf3b1a39aa49b581911",
+              "ClientRectangle": "190,0,34,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.StoreName}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "TextFormat": {
+                "Ident": "StiDateFormatService"
+              },
+              "Type": "DataColumn"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text5",
+              "Guid": "d89dffa45d5648a4816ad9a2eb3f4e96",
+              "ClientRectangle": "224,0,36,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.CustomerName}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text41",
+              "Guid": "54941a6ce90f4ce9aa434b7096526bfa",
+              "ClientRectangle": "260,0,34,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.BranchName}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text26",
+              "Guid": "df596a6ef1664cb3b2bab3e315b0568e",
+              "ClientRectangle": "30,0,30,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.Cost}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text7",
+              "Guid": "e25994e40332423694695af922bcbdd5",
+              "ClientRectangle": "0,0,30,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.Net - Items_Profits.Cost} "
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text16",
+              "Guid": "4e63b60b88974b32a08e10357663ef34",
+              "ClientRectangle": "140,0,24,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.BillKindName}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text27",
+              "Guid": "7d9c97388fba48ba9ec49cebc4f79b5b",
+              "ClientRectangle": "114,0,26,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Items_Profits.BillTypeName}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:255,255,255",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            }
+          },
+          "DataSourceName": "Items_Profits",
+          "FilterMode": "Or",
+          "EvenStyle": "Blue Steel_Data1_Even Style",
+          "OddStyle": "Blue Steel_Data1_Odd Style"
+        },
+        "3": {
+          "Ident": "StiFooterBand",
+          "Name": "FooterBand1",
+          "ClientRectangle": "0,98.54,292.9,8",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text14",
+              "Guid": "e00f067d4a30430985fb343bda97890a",
+              "ClientRectangle": "0,0,30,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Sum(Items_Profits, Items_Profits.Net) - Sum(Items_Profits, Items_Profits.Cost)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:191,191,191",
+              "TextBrush": "solid:255,0,0",
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text39",
+              "Guid": "fc3aeb638f0948a9bf6478405e97808b",
+              "ClientRectangle": "60,0,28,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Sum(Items_Profits, Items_Profits.Net)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:191,191,191",
+              "TextBrush": "solid:255,0,0",
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text40",
+              "Guid": "efb7ba468fb04bbd8bfd28cb21cf741f",
+              "ClientRectangle": "88,0,206,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.Sum}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:191,191,191",
+              "TextBrush": "solid:255,0,0",
+              "Type": "DataColumn"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text19",
+              "Guid": "bde650e759ce452cb0bbfbb7d12b882a",
+              "ClientRectangle": "30,0,30,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Sum(Items_Profits, Items_Profits.Cost)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": "All;0,0,0;;;;;;solid:0,0,0",
+              "Brush": "solid:191,191,191",
+              "TextBrush": "solid:255,0,0",
+              "Type": "Expression"
+            }
+          }
+        },
+        "4": {
+          "Ident": "StiDataBand",
+          "Name": "DataBand1",
+          "ClientRectangle": "0,114.54,292.9,14",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text25",
+              "Guid": "7d9f36aebbe4490e9ad0c0a0aa1111cd",
+              "ClientRectangle": "200,0,89.4,7.08",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Common_Keywords.PrintOnDate}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";11;Bold;",
+              "Border": "All;Transparent;;;;;;solid:0,0,0",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "DataColumn"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text4",
+              "Guid": "27c63c425a744b8e9fe59576923af12d",
+              "ClientRectangle": "146,1.3,58,6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Arabic(Today.ToString(\"yyyy/MM/dd\"))}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Calibri;13;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            }
+          }
+        }
+      },
+      "PaperSize": "A4",
+      "Orientation": "Landscape",
+      "PageWidth": 296.9,
+      "PageHeight": 210.1,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 2.0,
+        "Right": 2.0,
+        "Top": 5.0,
+        "Bottom": 5.0
+      }
+    }
+  }
+}

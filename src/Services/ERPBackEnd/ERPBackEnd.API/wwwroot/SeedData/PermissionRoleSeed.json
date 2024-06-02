@@ -1,0 +1,39 @@
+﻿[
+  {
+    "RoleId": 1,
+    "PermissionId": 21,
+    "IsActive": "true",
+    "IsChecked": "true"
+  },
+  {
+    "RoleId": 1,
+    "PermissionId": 22,
+    "IsActive": "true",
+    "IsChecked": "true"
+  },
+  {
+    "RoleId": 1,
+    "PermissionId": 23,
+    "IsActive": "true",
+    "IsChecked": "true"
+  },
+  {
+    "RoleId": 1,
+    "PermissionId": 24,
+    "IsActive": "true",
+    "IsChecked": "true"
+  },
+  {
+    "RoleId": 1,
+    "PermissionId": 25,
+    "IsActive": "true",
+    "IsChecked": "true"
+  },
+
+  {
+    "RoleId": 1,
+    "PermissionId": 181,
+    "IsActive": "true",
+    "IsChecked": "true"
+  }
+]

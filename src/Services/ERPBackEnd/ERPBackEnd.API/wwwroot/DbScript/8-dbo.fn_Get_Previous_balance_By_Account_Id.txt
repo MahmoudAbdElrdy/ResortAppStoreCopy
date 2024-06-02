@@ -1,0 +1,54 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Get_Previous_balance_By_Account_Id') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  dbo.fn_Get_Previous_balance_By_Account_Id;
+
+
+
+exec('Create FUNCTION [dbo].[fn_Get_Previous_balance_By_Account_Id]
+(
+	-- Add the parameters for the function here
+@Date DATE = Null,
+@accountId INT,
+@companyId BIGINT = NULL,
+@currencyId BIGINT = Null
+)
+
+RETURNS  numeric(18,4)
+BEGIN
+	-- Declare the return variable here
+	DECLARE @previousBalance NUMERIC(18, 4) =0
+IF(@currencyId is null)
+begin
+	-- Add the T-SQL statements to compute the return value here
+     Select @previousBalance= Sum(IsNull(jd.JEDetailDebitLocal,0))-Sum(IsNull(jd.JEDetailCreditLocal,0))  from  JournalEntriesMasters as jm 
+	  join JournalEntriesDetails as jd on jm.id = jd.JournalEntriesMasterId 
+	  
+
+	  where jm.Date < @Date
+	  and @accountId  = jd.AccountId
+	  and @companyId = jm.CompanyId
+
+	-- Return the result of the function
+	
+	End
+	else
+	Begin
+	-- Add the T-SQL statements to compute the return value here
+     Select @previousBalance= Sum(IsNull(jd.JEDetailDebit,0))-Sum(IsNull(jd.JEDetailCredit,0))  from  JournalEntriesMasters as jm 
+	  join JournalEntriesDetails as jd on jm.id = jd.JournalEntriesMasterId 
+	  
+
+	  where jm.Date < @Date
+	 and ( jd.IsDeleted=0
+	  and jm.IsDeleted=0)
+	  and @accountId  = jd.AccountId
+	  and @companyId = jm.CompanyId
+	  and @currencyId = jd.CurrencyId
+
+	-- Return the result of the function
+	
+
+	End;
+RETURN IsNull(@previousBalance,0)
+END')
+
+
+

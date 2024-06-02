@@ -1,0 +1,48 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.Sp_Items_Groups_List') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[Sp_Items_Groups_List];
+
+
+exec('
+
+create PROCEDURE [dbo].[Sp_Items_Groups_List] 
+  @id BIGINT = null,
+    @lang NVARCHAR(10) = ''en-us'',
+    @companyId BIGINT = NULL,
+    @userId NVARCHAR = NULL,
+    @branchId NVARCHAR(250) = NULL
+
+As
+Begin
+
+select  
+       igc.Id,
+
+	   Case When @lang = ''ar'' then igc.NameAr else igc.NameEn end as GroupName
+	    ,Case When @lang = ''ar'' then st.NameAr else st.NameEn end as StoreName 
+      ,igc.Code
+      ,igc.LevelId
+      ,igc.TreeId
+      ,igc.ItemType
+      ,igc.CostCalculation
+      ,igc.UnitId
+      ,igc.ParentId
+      ,igc.Notes
+      ,igc.IsActive
+      ,igc.InventoryAccountId
+      ,igc.PurchasesAccountId
+      ,igc.PurchasesReturnsAccountId
+      ,igc.SalesAccountId
+      ,igc.SalesCostAccountId
+      ,igc.SalesReturnsAccountId
+      ,igc.DefaultStoreId
+from ItemGroupsCards as igc
+ join ItemCards as ic on ic.ItemGroupId = igc.id
+ left join StoreCards as  st on st.Id = igc.DefaultStoreId
+
+  where ic.isDeleted <>1 and  igc.isDeleted <>1
+ End
+
+
+
+')
+
+

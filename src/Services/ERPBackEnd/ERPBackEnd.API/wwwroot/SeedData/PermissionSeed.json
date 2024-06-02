@@ -1,0 +1,2983 @@
+﻿[
+  {
+    "Id": 1,
+    "ScreenId": 1,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 2,
+    "ScreenId": 1,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 3,
+    "ScreenId": 1,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 4,
+    "ScreenId": 1,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 5,
+    "ScreenId": 2,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 6,
+    "ScreenId": 2,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 7,
+    "ScreenId": 2,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 8,
+    "ScreenId": 2,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 9,
+    "ScreenId": 3,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 10,
+    "ScreenId": 3,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 11,
+    "ScreenId": 3,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 12,
+    "ScreenId": 3,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 13,
+    "ScreenId": 4,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 14,
+    "ScreenId": 4,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 15,
+    "ScreenId": 4,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 16,
+    "ScreenId": 4,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 17,
+    "ScreenId": 5,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 18,
+    "ScreenId": 5,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 19,
+    "ScreenId": 5,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 20,
+    "ScreenId": 5,
+
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 21,
+    "ScreenId": 6,
+
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 22,
+    "ScreenId": 6,
+
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 23,
+    "ScreenId": 6,
+
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 24,
+    "ScreenId": 6,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 25,
+    "ScreenId": 7,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 26,
+    "ScreenId": 7,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 27,
+    "ScreenId": 7,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 28,
+    "ScreenId": 7,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 29,
+    "ScreenId": 8,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 30,
+    "ScreenId": 8,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 31,
+    "ScreenId": 8,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 32,
+    "ScreenId": 8,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 33,
+    "ScreenId": 9,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 34,
+    "ScreenId": 9,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 35,
+    "ScreenId": 9,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 36,
+    "ScreenId": 9,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 37,
+    "ScreenId": 10,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 38,
+    "ScreenId": 10,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 39,
+    "ScreenId": 10,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 40,
+    "ScreenId": 10,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 41,
+    "ScreenId": 11,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 42,
+    "ScreenId": 11,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 43,
+    "ScreenId": 11,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 44,
+    "ScreenId": 11,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  // Account Group
+  {
+    "Id": 45,
+    "ScreenId": 12,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 46,
+    "ScreenId": 12,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 47,
+    "ScreenId": 12,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 48,
+    "ScreenId": 12,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Cost Center
+  {
+    "Id": 49,
+    "ScreenId": 13,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 50,
+    "ScreenId": 13,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 51,
+    "ScreenId": 13,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 52,
+    "ScreenId": 13,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Account Classification
+  {
+    "Id": 53,
+    "ScreenId": 14,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 54,
+    "ScreenId": 14,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 55,
+    "ScreenId": 14,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 56,
+    "ScreenId": 14,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Account 
+  {
+    "Id": 57,
+    "ScreenId": 15,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 58,
+    "ScreenId": 15,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 59,
+    "ScreenId": 15,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 60,
+    "ScreenId": 15,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Voucher Types 
+  {
+    "Id": 61,
+    "ScreenId": 16,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 62,
+    "ScreenId": 16,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 63,
+    "ScreenId": 16,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 64,
+    "ScreenId": 16,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Accounting Configuration 
+  {
+    "Id": 65,
+    "ScreenId": 17,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  {
+    "Id": 66,
+    "ScreenId": 17,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Journal Entry
+  {
+    "Id": 67,
+    "ScreenId": 18,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 68,
+    "ScreenId": 18,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 69,
+    "ScreenId": 18,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 70,
+    "ScreenId": 18,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Journal Entry Post
+  {
+    "Id": 71,
+    "ScreenId": 19,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 72,
+    "ScreenId": 19,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 73,
+    "ScreenId": 19,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 74,
+    "ScreenId": 19,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Close Fiscal Period
+  //{
+  //  "Id": 75,
+  //  "ScreenId": 20,
+  //  "ActionNameAr": "اضافة",
+  //  "ActionNameEn": "Add",
+  //  "ActionName": "Add",
+  //  "IsDeleted": "false",
+  //  "IsActive": "true"
+  //},
+  {
+    "Id": 76,
+    "ScreenId": 20,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Vouchers
+  {
+    "Id": 77,
+    "ScreenId": 21,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 78,
+    "ScreenId": 21,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 79,
+    "ScreenId": 21,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 80,
+    "ScreenId": 21,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 81,
+    "ScreenId": 21,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Incoming Cheque
+  {
+    "Id": 82,
+    "ScreenId": 22,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 83,
+    "ScreenId": 22,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 84,
+    "ScreenId": 22,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 85,
+    "ScreenId": 22,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 86,
+    "ScreenId": 22,
+    "ActionNameAr": "تحصيل",
+    "ActionNameEn": "collect",
+    "ActionName": "collect",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 87,
+    "ScreenId": 22,
+    "ActionNameAr": "رفض",
+    "ActionNameEn": "Reject",
+    "ActionName": "Reject",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  // Issuing Cheque
+  {
+    "Id": 88,
+    "ScreenId": 23,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 89,
+    "ScreenId": 23,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 90,
+    "ScreenId": 23,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 91,
+    "ScreenId": 23,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 92,
+    "ScreenId": 23,
+    "ActionNameAr": "تحصيل",
+    "ActionNameEn": "collect",
+    "ActionName": "collect",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 93,
+    "ScreenId": 23,
+    "ActionNameAr": "رفض",
+    "ActionNameEn": "Reject",
+    "ActionName": "Reject",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Budget Report
+  {
+    "Id": 94,
+    "ScreenId": 24,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 95,
+    "ScreenId": 24,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //
+  //Income Statement Report
+  {
+    "Id": 96,
+    "ScreenId": 25,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 97,
+    "ScreenId": 25,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //
+  //Voucher Transactions Report
+  {
+    "Id": 98,
+    "ScreenId": 26,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 99,
+    "ScreenId": 26,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+
+  //
+  //General Ledger Report
+  {
+    "Id": 100,
+    "ScreenId": 27,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 101,
+    "ScreenId": 27,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //
+  //Journal Entries Report
+  {
+    "Id": 102,
+    "ScreenId": 28,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 103,
+    "ScreenId": 28,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //
+  //Cost Centers Report
+  {
+    "Id": 104,
+    "ScreenId": 29,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 105,
+    "ScreenId": 29,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //
+  //Accounts Balance Report
+  {
+    "Id": 106,
+    "ScreenId": 30,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 107,
+    "ScreenId": 30,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //
+  //Trial Balance Report
+  {
+    "Id": 108,
+    "ScreenId": 31,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 109,
+    "ScreenId": 31,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //
+  //Periods
+  {
+    "Id": 110,
+    "ScreenId": 32,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 111,
+    "ScreenId": 32,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 112,
+    "ScreenId": 32,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 113,
+    "ScreenId": 32,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  //Units
+  {
+    "Id": 114,
+    "ScreenId": 33,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 115,
+    "ScreenId": 33,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 116,
+    "ScreenId": 33,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 117,
+    "ScreenId": 33,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Taxes
+  {
+    "Id": 118,
+    "ScreenId": 34,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 119,
+    "ScreenId": 34,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 120,
+    "ScreenId": 34,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 121,
+    "ScreenId": 34,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Store Card
+  {
+    "Id": 122,
+    "ScreenId": 35,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 123,
+    "ScreenId": 35,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 124,
+    "ScreenId": 35,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 125,
+    "ScreenId": 35,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Payment Methods
+  {
+    "Id": 126,
+    "ScreenId": 36,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 127,
+    "ScreenId": 36,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 128,
+    "ScreenId": 36,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 129,
+    "ScreenId": 36,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Customer Card
+  {
+    "Id": 130,
+    "ScreenId": 37,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 131,
+    "ScreenId": 37,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 132,
+    "ScreenId": 37,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 133,
+    "ScreenId": 37,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Supplier Card
+  {
+    "Id": 134,
+    "ScreenId": 38,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 135,
+    "ScreenId": 38,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 136,
+    "ScreenId": 38,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 137,
+    "ScreenId": 38,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Item  Card
+  {
+    "Id": 138,
+    "ScreenId": 39,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 139,
+    "ScreenId": 39,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 140,
+    "ScreenId": 39,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 141,
+    "ScreenId": 39,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Item Group Card
+  {
+    "Id": 142,
+    "ScreenId": 40,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 143,
+    "ScreenId": 40,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 144,
+    "ScreenId": 40,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 145,
+    "ScreenId": 40,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Bill Types
+  {
+    "Id": 146,
+    "ScreenId": 41,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 147,
+    "ScreenId": 41,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 148,
+    "ScreenId": 41,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 149,
+    "ScreenId": 41,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Sales Person  Card
+  {
+    "Id": 150,
+    "ScreenId": 42,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 151,
+    "ScreenId": 42,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 152,
+    "ScreenId": 42,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 153,
+    "ScreenId": 42,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+
+  {
+    "Id": 154,
+    "ScreenId": 24,
+    "ActionNameAr": "تعيين كتقرير افتراضى",
+    "ActionNameEn": "Default",
+    "ActionName": "Default",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 155,
+    "ScreenId": 24,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 156,
+    "ScreenId": 25,
+    "ActionNameAr": "تعيين كتقرير افتراضى",
+    "ActionNameEn": "Default",
+    "ActionName": "Default",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 157,
+    "ScreenId": 25,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 158,
+    "ScreenId": 26,
+    "ActionNameAr": "تعيين كتقرير افتراضى",
+    "ActionNameEn": "Default",
+    "ActionName": "Default",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 159,
+    "ScreenId": 26,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 160,
+    "ScreenId": 27,
+    "ActionNameAr": "تعيين كتقرير افتراضى",
+    "ActionNameEn": "Default",
+    "ActionName": "Default",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 161,
+    "ScreenId": 27,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 162,
+    "ScreenId": 28,
+    "ActionNameAr": "تعيين كتقرير افتراضى",
+    "ActionNameEn": "Default",
+    "ActionName": "Default",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 163,
+    "ScreenId": 28,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 164,
+    "ScreenId": 29,
+    "ActionNameAr": "تعيين كتقرير افتراضى",
+    "ActionNameEn": "Default",
+    "ActionName": "Default",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 165,
+    "ScreenId": 29,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 166,
+    "ScreenId": 30,
+    "ActionNameAr": "تعيين كتقرير افتراضى",
+    "ActionNameEn": "Default",
+    "ActionName": "Default",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 167,
+    "ScreenId": 30,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 168,
+    "ScreenId": 31,
+    "ActionNameAr": "تعيين كتقرير افتراضى",
+    "ActionNameEn": "Default",
+    "ActionName": "Default",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 169,
+    "ScreenId": 31,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Warehouses Bill
+  {
+    "Id": 170,
+    "ScreenId": 43,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 171,
+    "ScreenId": 43,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 172,
+    "ScreenId": 43,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 173,
+    "ScreenId": 43,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 174,
+    "ScreenId": 43,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //
+  //SalesPersonCommissionCard
+  {
+    "Id": 175,
+    "ScreenId": 44,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 176,
+    "ScreenId": 44,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 177,
+    "ScreenId": 44,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 178,
+    "ScreenId": 44,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 179,
+    "ScreenId": 44,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 180,
+    "ScreenId": 18,
+    "ActionNameAr": "ترحيل",
+    "ActionNameEn": "Post",
+    "ActionName": "Post",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 181,
+    "ScreenId": 45,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "GetLastSubscription",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+
+  //
+  ,
+  {
+    "Id": 182,
+    "ScreenId": 46,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "GetNotGenerateEntryVouchers",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  {
+    "Id": 183,
+    "ScreenId": 46,
+    "ActionNameAr": "توليد القيد",
+    "ActionNameEn": "Generate Entry",
+    "ActionName": "GenerateEntry",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Determinants
+  {
+    "Id": 184,
+    "ScreenId": 47,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 185,
+    "ScreenId": 47,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 186,
+    "ScreenId": 47,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 187,
+    "ScreenId": 47,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 188,
+    "ScreenId": 3,
+    "ActionNameAr": "تغيير كلمة المرور",
+    "ActionNameEn": "Change Password",
+    "ActionName": "ChangePassword",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 189,
+    "ScreenId": 20,
+    "ActionNameAr": "اغلاق",
+    "ActionNameEn": "Close",
+    "ActionName": "close",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 190,
+    "ScreenId": 20,
+    "ActionNameAr": "فتح",
+    "ActionNameEn": "Open",
+    "ActionName": "open",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 191,
+    "ScreenId": 22,
+    "ActionNameAr": "الغاء التحصيل",
+    "ActionNameEn": "Cancel Collect",
+    "ActionName": "CancelCollect",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 192,
+    "ScreenId": 22,
+    "ActionNameAr": "الغاء الرفض",
+    "ActionNameEn": "Cancel Reject",
+    "ActionName": "CancelReject",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 193,
+    "ScreenId": 23,
+    "ActionNameAr": "الغاء التحصيل",
+    "ActionNameEn": "Cancel Collect",
+    "ActionName": "CancelCollect",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 194,
+    "ScreenId": 23,
+    "ActionNameAr": "الغاء الرفض",
+    "ActionNameEn": "Cancel Reject",
+    "ActionName": "CancelReject",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //close accounting period
+
+  {
+    "Id": 195,
+    "ScreenId": 48,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 196,
+    "ScreenId": 48,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 197,
+    "ScreenId": 48,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 198,
+    "ScreenId": 48,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  // Generate Entry Bills
+
+  {
+    "Id": 199,
+    "ScreenId": 49,
+    "ActionNameAr": "ترحيل",
+    "ActionNameEn": "Post",
+    "ActionName": "GenerateEntry",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 200,
+    "ScreenId": 49,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+
+  {
+    "Id": 201,
+    "ScreenId": 49,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 202,
+    "ScreenId": 49,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "GetNotGeneratedEntryBills",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Items Analysis List Report
+  {
+    "Id": 203,
+    "ScreenId": 50,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 204,
+    "ScreenId": 50,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  // Project
+  {
+    "Id": 205,
+    "ScreenId": 51,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 206,
+    "ScreenId": 51,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 207,
+    "ScreenId": 51,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 208,
+    "ScreenId": 51,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Stocktaking Report
+  {
+    "Id": 209,
+    "ScreenId": 52,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 210,
+    "ScreenId": 52,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+  //
+  ,
+  //Customers Groups
+  {
+    "Id": 211,
+    "ScreenId": 53,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 212,
+    "ScreenId": 53,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 213,
+    "ScreenId": 53,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 214,
+    "ScreenId": 53,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //
+
+  //Suppliers Groups
+  {
+    "Id": 215,
+    "ScreenId": 54,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 216,
+    "ScreenId": 54,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 217,
+    "ScreenId": 54,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 218,
+    "ScreenId": 54,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //
+  //Suppliers Balances Report
+  {
+    "Id": 219,
+    "ScreenId": 55,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 220,
+    "ScreenId": 55,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Customer Balance  Report
+  {
+    "Id": 221,
+    "ScreenId": 56,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 222,
+    "ScreenId": 56,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Beneficiaris
+  {
+    "Id": 223,
+    "ScreenId": 57,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 224,
+    "ScreenId": 57,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 225,
+    "ScreenId": 57,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 226,
+    "ScreenId": 57,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Commercial Movement of Purchases  Report
+  {
+    "Id": 227,
+    "ScreenId": 58,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 228,
+    "ScreenId": 58,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+
+  //
+  //BeneficiarisGroups
+  {
+    "Id": 229,
+    "ScreenId": 59,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 230,
+    "ScreenId": 59,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 231,
+    "ScreenId": 59,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 232,
+    "ScreenId": 59,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Detailed Customer Account  Report
+  {
+    "Id": 233,
+    "ScreenId": 60,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 234,
+    "ScreenId": 60,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  // Warehouses Configuration 
+  {
+    "Id": 235,
+    "ScreenId": 61,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  {
+    "Id": 236,
+    "ScreenId": 61,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //Item  Customer Account  Report
+  {
+    "Id": 237,
+    "ScreenId": 62,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 238,
+    "ScreenId": 62,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Sales Report Commercial Movement
+  {
+    "Id": 239,
+    "ScreenId": 63,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 240,
+    "ScreenId": 63,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Sales Report Sales Analysis
+  {
+    "Id": 241,
+    "ScreenId": 64,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 242,
+    "ScreenId": 64,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Sales Report Sales Statistics
+  {
+    "Id": 243,
+    "ScreenId": 65,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 244,
+    "ScreenId": 65,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 245,
+    "ScreenId": 66,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 246,
+    "ScreenId": 66,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 247,
+    "ScreenId": 66,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 248,
+    "ScreenId": 66,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  // Post Bills To Warehouses
+
+  {
+    "Id": 249,
+    "ScreenId": 67,
+    "ActionNameAr": "ترحيل",
+    "ActionNameEn": "Post",
+    "ActionName": "PostToWarehouses",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 250,
+    "ScreenId": 67,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 251,
+    "ScreenId": 67,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "GetNotPostToWarehousesAutomaticallyBills",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Manual Inventory Approval
+  {
+    "Id": 252,
+    "ScreenId": 68,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 253,
+    "ScreenId": 68,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 254,
+    "ScreenId": 68,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 255,
+    "ScreenId": 68,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 256,
+    "ScreenId": 69,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 257,
+    "ScreenId": 69,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  {
+    "Id": 258,
+    "ScreenId": 70,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 259,
+    "ScreenId": 70,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 270,
+    "ScreenId": 69,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //Notifications Configurations
+  {
+    "Id": 271,
+    "ScreenId": 71,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 272,
+    "ScreenId": 71,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 273,
+    "ScreenId": 71,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 274,
+    "ScreenId": 71,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //Price Lists
+  {
+    "Id": 275,
+    "ScreenId": 72,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 276,
+    "ScreenId": 72,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 277,
+    "ScreenId": 72,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 278,
+    "ScreenId": 72,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //linked references Report  
+  {
+    "Id": 279,
+    "ScreenId": 73,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 280,
+    "ScreenId": 73,
+    "ActionNameAr": "الغاء التقرير الأفتراضى",
+    "ActionNameEn": "Cancel",
+    "ActionName": "Cancel",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //Notifications  Management 
+  {
+    "Id": 281,
+    "ScreenId": 74,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 282,
+    "ScreenId": 74,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 283,
+    "ScreenId": 74,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 284,
+    "ScreenId": 74,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //  pos settings 
+  {
+    "Id": 285,
+    "ScreenId": 75,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 286,
+    "ScreenId": 75,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 287,
+    "ScreenId": 75,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 288,
+    "ScreenId": 75,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //  pos cards 
+  {
+    "Id": 289,
+    "ScreenId": 76,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 290,
+    "ScreenId": 76,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 291,
+    "ScreenId": 76,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 292,
+    "ScreenId": 76,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //  floors 
+  {
+    "Id": 293,
+    "ScreenId": 77,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 294,
+    "ScreenId": 77,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 295,
+    "ScreenId": 77,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 296,
+    "ScreenId": 77,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  //  posTables 
+  {
+    "Id": 297,
+    "ScreenId": 78,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 298,
+    "ScreenId": 78,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 299,
+    "ScreenId": 78,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 300,
+    "ScreenId": 78,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+
+  // POS Bill Types 
+  {
+    "Id": 301,
+    "ScreenId": 79,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 302,
+    "ScreenId": 79,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 303,
+    "ScreenId": 79,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 304,
+    "ScreenId": 79,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  //POS Bill
+  {
+    "Id": 305,
+    "ScreenId": 80,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 306,
+    "ScreenId": 80,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 307,
+    "ScreenId": 80,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 308,
+    "ScreenId": 80,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 309,
+    "ScreenId": 80,
+    "ActionNameAr": "طباعة",
+    "ActionNameEn": "Print",
+    "ActionName": "Print",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  // POS Shifts  
+  {
+    "Id": 310,
+    "ScreenId": 81,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 311,
+    "ScreenId": 81,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 312,
+    "ScreenId": 81,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 313,
+    "ScreenId": 81,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  // Cash Transfer  
+  {
+    "Id": 314,
+    "ScreenId": 82,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 315,
+    "ScreenId": 82,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 316,
+    "ScreenId": 82,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 317,
+    "ScreenId": 82,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+
+  // POS Delivery  
+  {
+    "Id": 318,
+    "ScreenId": 83,
+    "ActionNameAr": "اضافة",
+    "ActionNameEn": "Add",
+    "ActionName": "Add",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 319,
+    "ScreenId": 83,
+    "ActionNameAr": "تعديل",
+    "ActionNameEn": "Edit",
+    "ActionName": "Edit",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 320,
+    "ScreenId": 83,
+    "ActionNameAr": "حذف",
+    "ActionNameEn": "Delete",
+    "ActionName": "Delete",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 321,
+    "ScreenId": 83,
+    "ActionNameAr": "عرض",
+    "ActionNameEn": "Show",
+    "ActionName": "Show",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  },
+  {
+    "Id": 322,
+    "ScreenId": 84,
+    "ActionNameAr": "ترحيل",
+    "ActionNameEn": "Post",
+    "ActionName": "Post",
+    "IsDeleted": "false",
+    "IsActive": "true"
+  }
+
+
+]

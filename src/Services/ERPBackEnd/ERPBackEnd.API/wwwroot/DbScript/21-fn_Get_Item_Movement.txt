@@ -1,0 +1,31 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_Get_Item_Movement') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_Get_Item_Movement];
+
+exec('
+
+CREATE FUNCTION [dbo].[fn_Get_Item_Movement]
+(	
+@lang nvarchar(255)=''ar'',
+@posting nvarchar(255)
+	
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	Select 
+b.[Date], b.BillTypeId,bt.WarehouseEffect, isNull( m.CostPrice,0) as CostPrice, 
+case when @lang =''ar'' then m.NameAr else m.NameEn end as ItemName,
+Case When @lang = ''ar'' then st.NameAr else st.NameEn end as  StoreName,
+Case When @lang = ''ar'' then u.NameAr else u.NameEn end as UnitName,
+m.MainUnitId,
+bi.id as billItemId,
+bi.BillId, bi.ItemId, bi.ConvertedIssuedQuantity as OutQty, bi.ConvertedAddedQuantity as InQty, bi.StoreId 
+From BillItems as bi
+join Bills as b on bi.BillId = b.Id
+join ItemCards as m on bi.ItemId = m.Id
+join StoreCards as st on bi.StoreId = st.Id
+join Units as u on  m.MainUnitId = u.Id
+join BillTypes bt on b.BillTypeId = bt.Id
+Where bt.WarehouseEffect in (Select * from fnSplitString(@posting, '',''))
+
+)')

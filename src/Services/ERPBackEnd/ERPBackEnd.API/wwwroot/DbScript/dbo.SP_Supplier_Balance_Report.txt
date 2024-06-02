@@ -1,0 +1,114 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Supplier_Balance_Report') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Supplier_Balance_Report];
+
+exec('
+
+create PROCEDURE [dbo].[SP_Supplier_Balance_Report]
+    @fromDate DATE = NULL,
+    @toDate DATE = NULL,
+    @branchId NVARCHAR(250) = NULL,
+	@currencyId BIGINT = NULL,
+	@fromSupplierId BIGINT = NULL,
+    @toSupplierId BIGINT = NULL,
+	@supplierGroupId BIGINT = NULL,
+	@billKindId int =null,
+	@billTypeId bigint =null,
+    @companyId BIGINT=null,
+    @userId NVARCHAR(50)=null,
+	@lang VARCHAR(10) = ''en-us'',
+    @billTypeIds  as NVARCHAR(250) = NULL,
+	@voucherTypeIds  as NVARCHAR(250) = NULL,
+	@selectedBranchName as NVARCHAR(250) = NULL,
+	@selectedSupplierGroupName NVARCHAR(250)  = NULL,
+	@selectedCurrencyName as NVARCHAR(250) = NULL,
+	@selectedFromSupplierName as NVARCHAR(250) = NULL,
+	@selectedToSupplierName as NVARCHAR(250) = NULL
+AS
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = ''null'')
+BEGIN
+    SET @branchId = NULL
+END
+
+IF (@supplierGroupId = 0)
+BEGIN
+    SET @supplierGroupId = NULL
+END
+
+IF (@toSupplierId = 0)
+BEGIN
+    SET @toSupplierId = NULL
+END
+IF (@fromSupplierId = 0)
+BEGIN
+    SET @fromSupplierId = NULL
+END
+
+IF (@billKindId = 0)
+BEGIN
+    SET @billKindId = NULL
+END
+
+IF (@billTypeId = 0)
+BEGIN
+    SET @billTypeId = NULL
+END
+
+
+
+
+BEGIN
+
+select
+ cb.DocumentId,
+ cb.CurrencyId,
+ cb.CompanyId,
+ cb.BranchId,
+ cb.DocumentCode,
+ cb.DocumentDate,
+ case when @lang=''ar'' then cb.DocumentNameAr else cb.DocumentNameEn end as DocumentName, 
+ cb.SupplierId,
+ cb.SupplierCode ,
+ Case when @currencyId is not null then isNull(cb.Debit,0) else isNull(cb.DebitLocal,0) end as Debit,
+ Case when @currencyId is not null then isNull(cb.Credit,0) else isNull(cb.CreditLocal,0) end as Credit,
+ case when @lang=''ar'' then cb.SupplierNameAr else cb.SupplierNameAr end as SupplierName,
+ (select [dbo].[fn_Get_Previous_balance_By_Supplier_Id](cb.DocumentDate,cb.SupplierId,@companyId ,@currencyId)) + isNull(cu.InitialBalance,0) as PerviousBalance
+
+ from  VM_Suppliers_Balance as cb
+ join SupplierCards as  cu on cu.id = cb.SupplierId
+ join SupplierGroups as cg on cg.Id = cu.SupplierGroupId
+
+where
+
+  (@fromDate IS NULL OR cb.DocumentDate >= @fromDate)
+   AND (@toDate IS NULL OR cb.DocumentDate <= @toDate)
+   And (@branchId IS NULL OR cb.BranchId = @branchId)
+   AND (@fromSupplierId IS NULL OR cb.SupplierId = @fromSupplierId)
+   AND (@supplierGroupId IS NULL OR cu.SupplierGroupId = @supplierGroupId)
+   AND (@billKindId IS NULL OR cb.BillKind = @billKindId)
+   AND (@billTypeId IS NULL OR cb.BillTypeId = @billTypeId)
+      and(cb.billTypeId IN (SELECT * FROM fnSplitString(@billTypeIds,'','')) or cb.BillTypeId is null or @billTypeIds is null) 
+	  and(cb.VoucherTypeId IN (SELECT * FROM fnSplitString(@voucherTypeIds,'','')) or cb.VoucherTypeId is null or @voucherTypeIds is null) 
+
+
+   AND (cb.CompanyId = @companyId)
+    AND cb.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			And (UsersCompanies.IsDeleted=0)
+        )
+    )
+
+    
+
+END
+
+
+')

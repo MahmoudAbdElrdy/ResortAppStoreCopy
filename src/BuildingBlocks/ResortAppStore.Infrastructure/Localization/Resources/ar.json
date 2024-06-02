@@ -1,0 +1,10 @@
+{
+  "AddedSuccessfully": "تم الاضافة بنجاح",
+  "anErrorOccurredPleaseContactSystemAdministrator": "يوجد مشكلة من فضلك تواصل مع الادمن",
+  "PassWordNotCorrect": "الرقم السري غير صحيح",
+  "PhoneNumberFoundBefore": "رقم الجوال تم التسجيل به من فبل",
+  "ProplemSendCode": "مشكلة في ارسال الكود",
+  "userAreDeleted": "هذا المستخدم عير موجودد",
+  "userLoggedInSuccessfully": "تم الدخول بنجاح",
+  "UserNotFound": "المستخدم غير موجود"
+}

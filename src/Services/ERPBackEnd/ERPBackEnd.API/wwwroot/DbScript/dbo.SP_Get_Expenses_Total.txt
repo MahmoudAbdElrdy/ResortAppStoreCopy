@@ -1,0 +1,16 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Get_Expenses_Total') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP PROCEDURE [dbo].[SP_Get_Expenses_Total];
+
+
+exec('create procedure [dbo].[SP_Get_Expenses_Total]
+
+@fromDate Date=null,
+@toDate Date=null
+
+ as
+begin
+
+SELECT 
+   isnull(dbo.fn_Get_Expenses_Total(@fromDate,@toDate),0) as ExpensesTotal
+					 
+end')
+

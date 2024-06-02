@@ -1,0 +1,47 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_journal_entries') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION  [dbo].[fn_journal_entries];
+
+
+exec('Create function [dbo].[fn_journal_entries]
+(
+  @companyId bigint =null,
+  @branchId bigint =null,
+  @FiscalPeriodId bigint =null,
+  @journalEntryId bigint = null 
+)
+RETURNS TABLE AS
+
+return
+(
+select e.Id as Id ,e.Code as Code,e.Date as Date,j.NameAr as JournalNameAr ,j.NameEn as JournalNameEn , e.ParentType as ParentType ,e.ParentTypeId as ParentTypeId,
+case when e.PostType = 1 then ''Post'' else ''Not Post'' end as StatusEn,case when e.PostType = 1 then N''مرحل'' else N''غير مرحل'' end as StatusAr,
+e.PostType as PostType,
+case when e.ParentType = 1 then ''Voucher'' when e.ParentType = 2 then ''Register Incoming Cheque'' when e.ParentType = 8 then ''Collect Incoming Cheque''  when e.ParentType = 9
+then ''Reject Incoming Cheque''when e.ParentType = 3 then ''Register Issuing Cheque'' when e.ParentType = 10 then ''Collect Issuing Cheque'' when e.ParentType = 11 then 
+''Reject Issuing Cheque'' when e.ParentType = 4 then ''Sales Bill''when e.ParentType = 5 then ''Sales Return Bill'' when e.ParentType = 6 then ''Purchases Bill'' 
+when e.ParentType = 7 then ''Purchases Return Bill''else ''Journal Entry'' end as EntryTypeEn, case   when e.ParentType = 1 then vt.Id  when 
+e.ParentType = 4 or e.ParentType = 5 or e.ParentType = 6 or e.ParentType = 7 then bt.Id    end   as SettingId,case when e.ParentType = 1 then N''سند''
+when e.ParentType = 2 then N''تسجيل شيك وارد'' when e.ParentType = 8 then N''تحصيل شيك وارد'' when e.ParentType = 9 then N''رفض شيك وارد'' when e.ParentType = 3 then N''تسجيل شيك صادر'' 
+when e.ParentType = 10 then N''تحصيل شيك صادر'' when e.ParentType = 11 then N''رفض شيك صادر''  when e.ParentType = 4 then N''فاتورة بيع''  when e.ParentType = 5 then N''فاتورة مرتجع مبيعات''  
+when e.ParentType = 6 then N''فاتورة مشتريات''  when e.ParentType = 7 then N''فاتورة مرتجع مشتريات''  else N''قيد'' end as EntryTypeAr,  
+case   when e.ParentType = 1 then vt.NameEn  when e.ParentType = 4 or e.ParentType = 5 or e.ParentType = 6 or e.ParentType = 7 then bt.NameEn    end   as SettingEn,  
+case   when e.ParentType = 1 then vt.NameAr  when e.ParentType = 4 or e.ParentType = 5 or e.ParentType = 6 or e.ParentType = 7 then bt.NameAr   end   as SettingAr,
+case when e.ParentType = 1 then v.Code when  e.ParentType = 2 or e.ParentType = 8  or e.ParentType = 9 then incomcheq.Code when e.ParentType = 3 or e.ParentType = 10 or e.ParentType = 11 then issucheq.Code
+when  e.ParentType = 4 or e.ParentType = 5 or e.ParentType = 6 or e.ParentType = 7 then b.Code else e.Code end as ParentTypeCode
+from JournalEntriesMasters as e
+left join Journals as j on e.JournalId = j.Id
+left join Vouchers as v on e.ParentTypeId = v.Id
+left join VoucherTypes as vt on v.VoucherTypeId = vt.Id    
+left join Bills as b on e.ParentTypeId = b.Id  
+left join BillTypes as bt on b.BillTypeId = bt.Id  
+left join IncomingChequeMasters as incomcheq on e.ParentTypeId = incomcheq.Id left join IssuingChequeMasters as issucheq on e.ParentTypeId = issucheq.Id
+
+where e.IsDeleted !=1 and (e.IsCloseFiscalPeriod is null or e.IsCloseFiscalPeriod=0)  
+and (e.Id = @journalEntryId or  @journalEntryId is null)
+and  (e.CompanyId = @companyId or @companyId is null )
+and (e.BranchId =@branchId or @branchId is null)
+and (e.FiscalPeriodId =@FiscalPeriodId or @FiscalPeriodId is null)
+
+			 
+)          
+')
+

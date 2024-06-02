@@ -1,0 +1,80 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.SP_Budget') AND type IN (N'FN', N'IF', 'TF', N'FS', N'FT',N'P')) DROP PROCEDURE  [dbo].[SP_Budget];
+
+
+exec('Create procedure [dbo].[SP_Budget]
+@fromDate DATETIME=null,
+@toDate DATETIME=null, 
+@entriesStatusId as int =null,
+@companyId AS INT  =null,
+@level int = null,
+@userId NVARCHAR(50) = NULL,
+@lang as VARCHAR(10) 
+as
+
+if(@entriesStatusId = 0 or @entriesStatusId =3)
+begin 
+set @entriesStatusId=null
+end
+
+begin
+WITH  cte
+        AS (
+              -- anchor
+            SELECT  ACCOUNTS.Id,ACCOUNTS.Code, ACCOUNTS.NameAr, ACCOUNTS.NameEn,
+			 case when @lang=''en-us'' then ACCOUNTS.NameEn
+			 else ACCOUNTS.NameAr end as AccountName,
+			ACCOUNTS.ParentId,
+			case when @lang=''en-us'' then CAST((ACCOUNTS.NameEn) AS Nvarchar(1000))
+			else
+            CAST((ACCOUNTS.NameAr) AS Nvarchar(1000)) end AS "Path",
+					1 as [level],Accounts.Budget
+				
+            FROM    ACCOUNTS 
+            WHERE   
+			isnull(ACCOUNTS.ParentId,0)=0  and
+			
+			ACCOUNTS.AccountType=2 and  ACCOUNTS.Budget in (1,2) 
+            UNION ALL
+              --recursive member
+            SELECT  t.Id,t.Code, t.NameAr, t.NameEn,
+			     case when @lang=''en-us'' then t.NameEn
+		         else t.NameAr end as AccountName
+			    , t.ParentId,
+				 case when @lang=''en-us'' then 
+                    CAST((a.path + ''/'' + t.NameEn) AS Nvarchar(1000))
+					else
+				   CAST((a.path + ''/'' + t.NameAr) AS Nvarchar(1000))
+				   end
+					AS "Path",
+					a.level +1 as [level],t.Budget
+
+
+					
+            FROM    ACCOUNTS AS t 
+                    JOIN cte AS a
+                      ON t.ParentId = a.Id
+
+					  where  t.AccountType=2 and  t.Budget in (1,2) 
+
+
+           )
+SELECT *
+
+ 
+,ISNULL(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Id,@entriesStatusId,@companyId,0,@userId,@lang),0) as debit ,
+
+ISNULL(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Id,0,@entriesStatusId,@companyId,@userId,@lang),0) as credit
+,
+case when cte.level = 1 then ISNULL(dbo.fn_account_credit_transaction_by_Id(@fromDate,@toDate,Id,0,@entriesStatusId,@companyId,@userId,@lang),0)else 0 end as parentAccCredit,
+case when cte.level = 1 then ISNULL(dbo.fn_account_debit_transaction_by_Id(@fromDate,@toDate,Id,0,@entriesStatusId,@companyId,@userId,@lang),0) else 0 end  as parentAccDebit
+
+FROM cte
+where level<= isnull(@level,100)
+
+--and
+--(AccountGroupId=@entriesStatusId  or @entriesStatusId is null)
+
+order by Path asc
+
+end')
+

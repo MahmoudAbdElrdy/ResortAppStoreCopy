@@ -1,0 +1,29 @@
+﻿<cac:InvoiceLine>
+        <cbc:ID>@LineNumber</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="@UnitName">@Qty</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="@CurrencyCode">@AmountBeforeTax</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+             <cbc:TaxAmount currencyID="@CurrencyCode">@TaxAmount</cbc:TaxAmount>
+             <cbc:RoundingAmount currencyID="@CurrencyCode">@AmountWithTax</cbc:RoundingAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Name>@ItemName</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>@TaxType</cbc:ID>
+                <cbc:Percent>@TaxPercent</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="@CurrencyCode">@NetPrice</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="@UnitName">@Qty</cbc:BaseQuantity>
+            <cac:AllowanceCharge>
+               <cbc:ChargeIndicator>@IsDiscount</cbc:ChargeIndicator>
+               <cbc:AllowanceChargeReason>discount</cbc:AllowanceChargeReason>               
+               <cbc:Amount currencyID="@CurrencyCode">@DiscountAmount</cbc:Amount>
+               <cbc:BaseAmount currencyID="@CurrencyCode">@LineAmountBeforeDiscAndVat</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>

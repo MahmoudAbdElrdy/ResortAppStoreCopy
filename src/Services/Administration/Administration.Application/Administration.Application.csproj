@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>ResortAppStore.Services.Administration.Application</AssemblyName>
+    <RootNamespace>ResortAppStore.Services.Administration.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.57.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Administration.Infrastructure\Administration.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

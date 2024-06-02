@@ -1,0 +1,175 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('dbo.fn_account_credit_transaction_by_Id') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P')) DROP FUNCTION [dbo].[fn_account_credit_transaction_by_Id];
+
+
+exec('Create FUNCTION [dbo].[fn_account_credit_transaction_by_Id]
+(
+@fromDate DATETIME ,
+@toDate DATETIME = Null,
+@accountId INT,
+@branchId BIGINT = NULL,
+@entriesStatusId INT = NULL,
+@companyId BIGINT = NULL,
+@userId NVARCHAR(50) = NULL,
+@lang VARCHAR(10) = null
+)
+RETURNS  numeric(18,3)
+AS
+BEGIN
+DECLARE @IsLeafAccount BIT;
+DECLARE @TreeId VARCHAR(100);
+DECLARE @LevelId INT;
+IF (@companyId = 0)
+BEGIN
+    SET @companyId = NULL
+END
+IF (@branchId = 0)
+BEGIN
+    SET @branchId = NULL
+END
+IF (@accountId = 0)
+BEGIN
+    SET @accountId = NULL
+END
+
+
+IF (@entriesStatusId = 0 OR @entriesStatusId = 3)
+BEGIN
+    SET @entriesStatusId = NULL
+ENd
+SELECT @IsLeafAccount = IsLeafAccount, @TreeId = Treeid, @LevelId = LevelId
+FROM Accounts
+WHERE id = @accountId;
+DECLARE @retval NUMERIC(18, 3) 
+If @ToDate is null 
+begin
+IF @IsLeafAccount = 0
+BEGIN
+   
+    SELECT   @retval=   SUM(ISNULL(JEDetailCreditLocal, 0))
+        FROM JournalEntriesDetails as jd
+		join JournalEntriesMasters as jm on jm.Id=jd.JournalEntriesMasterId
+		left join Accounts as  acc on acc.Id = jd.AccountId
+
+        WHERE AccountId IN (
+            SELECT id
+            FROM Accounts
+            WHERE SUBSTRING(TreeId, 1, 9 + (@LevelId * 9)) = @TreeId
+                AND id <> @accountId 
+				And IsDeleted=0
+        )
+		and (jd.IsDeleted=0 and jm.IsDeleted=0 and acc.IsDeleted=0)
+		and ( jm.date<=@FromDate)
+        AND (@branchId IS NULL OR jm.BranchId in (@branchId))
+        AND (@companyId IS NULL OR jm.CompanyId = @companyId)
+		AND (jm.PostType = @entriesStatusId OR @entriesStatusId IS NULL)
+
+        AND jm.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			AND (IsDeleted=0)
+        )
+    )
+    
+END
+ELSE
+BEGIN
+    
+        SELECT   @retval= SUM(isnull(JEDetailCreditLocal,0))  
+        FROM JournalEntriesDetails as jd
+		join JournalEntriesMasters as jm on jm.Id=jd.JournalEntriesMasterId
+		left join Accounts as  acc on acc.Id = jd.AccountId
+        WHERE
+		 (jd.IsDeleted=0 and jm.IsDeleted=0 )
+		 and
+		AccountId =@accountId 
+
+		and (jm.date<=@FromDate)
+		 AND (@branchId IS NULL OR jm.BranchId in( @branchId))
+        AND (@companyId IS NULL OR jm.CompanyId = @companyId)
+		AND (jm.PostType = @entriesStatusId OR @entriesStatusId IS NULL)
+        AND jm.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			AND (IsDeleted=0)
+
+        )
+    )
+    
+END;
+end
+else
+begin
+IF @IsLeafAccount = 0
+BEGIN
+   
+    SELECT   @retval= SUM(ISNULL(JEDetailCreditLocal, 0))
+        FROM JournalEntriesDetails as jd
+		join JournalEntriesMasters as jm on jm.Id=jd.JournalEntriesMasterId
+		left join Accounts as  acc on acc.Id = jd.AccountId
+        WHERE AccountId IN (
+            SELECT id
+            FROM Accounts
+            WHERE SUBSTRING(TreeId, 1, 9 + (@LevelId * 9)) = @TreeId
+                AND id <> @accountId
+        )
+		and
+			(jm.IsDeleted=0 and jd.IsDeleted=0 and acc.IsDeleted =0)
+		and (jm.date between @FromDate and @ToDate)
+		  AND (@branchId IS NULL OR jm.BranchId in (@branchId))
+        AND (@companyId IS NULL OR jm.CompanyId = @companyId)
+		AND (jm.PostType = @entriesStatusId OR @entriesStatusId IS NULL)
+        AND jm.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			AND (IsDeleted=0)
+        )
+    )
+    
+END
+ELSE
+BEGIN
+    
+        SELECT   @retval= SUM(isnull(JEDetailCreditLocal,0))  
+        FROM JournalEntriesDetails as jd
+		join JournalEntriesMasters as jm on jm.Id=jd.JournalEntriesMasterId
+		left join Accounts as  acc on acc.Id = jd.AccountId
+        WHERE 
+		 (jd.IsDeleted=0 and jm.IsDeleted=0 and acc.IsDeleted =0)
+		 And
+		AccountId =@accountId 
+		and (jm.date between @FromDate and @ToDate)
+		  AND (@branchId IS NULL OR jm.BranchId in( @branchId))
+        AND (@companyId IS NULL OR jm.CompanyId = @companyId)
+		AND (jm.PostType = @entriesStatusId OR @entriesStatusId IS NULL)
+        AND jm.BranchId IN (
+        SELECT BranchId 
+        FROM UsersCompaniesBranches 
+        WHERE UsersCompanyId in (
+            SELECT Id 
+            FROM UsersCompanies 
+            WHERE (CompanyId = @companyId or @companyId is null)
+            AND ( UserId = @userId or @userId is null)
+			AND (IsDeleted=0)
+        )
+    )
+	
+    
+END;
+end;
+return @retval 
+END;')

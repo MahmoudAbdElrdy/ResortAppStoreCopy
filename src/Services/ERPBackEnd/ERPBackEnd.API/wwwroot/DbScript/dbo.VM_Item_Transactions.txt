@@ -1,0 +1,40 @@
+﻿if EXISTS (SELECT 1 FROM   sys.objects WHERE  object_id = OBJECT_ID('VM_Item_Transactions') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT',N'P',N'V')) DROP View [dbo].[VM_Item_Transactions];
+
+
+
+
+exec('CREATE VIEW [dbo].[VM_Item_Transactions]
+AS
+
+
+SELECT        bills.CompanyId, bills.BranchId, bills.CurrencyId, bills.BillTypeId, BillTypes.Kind AS BillKind, BillItems.Id AS BillItemId, BillItems.BillId, BillTypes.NameAr AS BillTypesNameAr, BillTypes.NameEn AS BillTypesNameEn, 
+                         BillItems.ItemId, BillItems.ItemDescription, BillItems.UnitId, BillItems.Price, BillItems.Total, BillItems.StoreId, BillItems.Notes, BillItems.IssuedQuantity, BillItems.TotalBeforeTax, BillItems.TotalTax, BillItems.DiscountValue, 
+                         BillItems.AdditionValue, CASE WHEN BillItems.IssuedQuantity = BillItems.AddedQuantity THEN 0 ELSE BillItems.AddedQuantity END AS AddedQuantity, 
+                         CASE WHEN BillItems.ConvertedAddedQuantity <> BillItems.ConvertedIssuedQuantity THEN BillItems.ConvertedAddedQuantity ELSE 0 END AS ConvertedAddedQuantity, BillItems.ConvertedIssuedQuantity, 
+                         ItemCards.Code AS Item_Code, ItemCards.Id AS Item_Id, ItemCards.ItemGroupId AS ItemGroupId, ItemCards.ItemType, ItemCards.NameAr AS Item_NameAr, ItemCards.NameEn AS Item_NameEn, StoreCards.Code AS Store_Code, StoreCards.NameEn AS Store_NameEn, 
+                         StoreCards.NameAr AS Store_NameAr, Units.Code AS Unit_Code, Units.NameAr AS Unit_NameAr, Units.NameEn AS Unit_NameEn, Bills.Code AS Bill_Code, Bills.Date AS Bill_Date, Units_1.NameAr AS MainUnit_NameAr, 
+                         Units_1.NameEn AS MainUnit_NameEn
+FROM            BillItems INNER JOIN
+                         ItemCards ON BillItems.ItemId = ItemCards.Id INNER JOIN
+                         StoreCards ON BillItems.StoreId = StoreCards.Id INNER JOIN
+                         Units ON BillItems.UnitId = Units.Id INNER JOIN
+                         Bills ON BillItems.BillId = Bills.Id and bills.PostToWarehouses=1 INNER JOIN
+                         BillTypes ON Bills.BillTypeId = BillTypes.Id INNER JOIN
+                         Units AS Units_1 ON ItemCards.MainUnitId = Units_1.Id
+UNION
+SELECT        bills.CompanyId, bills.BranchId, bills.CurrencyId, bills.BillTypeId, BillTypes.Kind AS BillKind, BillItems.Id AS BillItemId, BillItems.BillId, BillTypes.NameAr AS BillTypesNameAr, BillTypes.NameEn AS BillTypesNameEn, 
+                         BillItems.ItemId, BillItems.ItemDescription, BillItems.UnitId, BillItems.Price, BillItems.Total, BillItems.SecondStoreId AS StoreId, BillItems.Notes, 0 AS IssuedQuantity, BillItems.TotalBeforeTax, BillItems.TotalTax, 
+                         BillItems.DiscountValue, BillItems.AdditionValue, BillItems.AddedQuantity, BillItems.ConvertedAddedQuantity, 0 AS ConvertedIssuedQuantity, ItemCards.Code AS Item_Code, ItemCards.Id AS Item_Id, ItemCards.ItemGroupId AS ItemGroupId, ItemCards.ItemType, 
+                         ItemCards.NameAr AS Item_NameAr, ItemCards.NameEn AS Item_NameEn, StoreCards.Code AS Store_Code, StoreCards.NameEn AS Store_NameEn, StoreCards.NameAr AS Store_NameAr, Units.Code AS Unit_Code, 
+                         Units.NameAr AS Unit_NameAr, Units.NameEn AS Unit_NameEn, Bills.Code AS Bill_Code, Bills.Date AS Bill_Date, Units_1.NameAr AS MainUnit_NameAr, Units_1.NameEn AS MainUnit_NameEn
+FROM            BillItems INNER JOIN
+                         ItemCards ON BillItems.ItemId = ItemCards.Id INNER JOIN
+                         StoreCards ON BillItems.SecondStoreId = StoreCards.Id INNER JOIN
+                         Units ON BillItems.UnitId = Units.Id INNER JOIN
+                         Bills ON BillItems.BillId = Bills.Id and bills.PostToWarehouses=1 INNER JOIN
+                         BillTypes ON Bills.BillTypeId = BillTypes.Id INNER JOIN
+                         Units AS Units_1 ON ItemCards.MainUnitId = Units_1.Id
+WHERE        (BillTypes.Kind = 6)
+
+
+')

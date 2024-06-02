@@ -1,0 +1,109 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace SaudiEinvoiceService.Models
+{
+    public partial class Account
+    {
+        public Guid Guid { get; set; }
+        public int Number { get; set; }
+        public string? Name { get; set; }
+        public string? Code { get; set; }
+        public DateTime? Cdate { get; set; }
+        public int? Parent { get; set; }
+        public int? Final { get; set; }
+        public int? Nsons { get; set; }
+        public double? Debit { get; set; }
+        public double? Credit { get; set; }
+        public double? InitDebit { get; set; }
+        public double? InitCredit { get; set; }
+        public int? UseFlag { get; set; }
+        public double? MaxDebit { get; set; }
+        public string? Notes { get; set; }
+        public double? CurrencyVal { get; set; }
+        public double? CurrencyPtr { get; set; }
+        public double? Warn { get; set; }
+        public DateTime? CheckDate { get; set; }
+        public int? DebitOrCredit { get; set; }
+        public int? Type { get; set; }
+        public int? MaxType { get; set; }
+        public string? Address { get; set; }
+        public string? Phone1 { get; set; }
+        public string? Phone2 { get; set; }
+        public string? Fax { get; set; }
+        public string? Telex { get; set; }
+        public string? Mobile { get; set; }
+        public string? Email { get; set; }
+        public int Kind { get; set; }
+        public string LatinName { get; set; } = null!;
+        public double BuyVal { get; set; }
+        public double BookVal { get; set; }
+        public double DepVal { get; set; }
+        public double DepRate { get; set; }
+        public double DepAcc { get; set; }
+        public int? CalcDep { get; set; }
+        public DateTime? BuyDate { get; set; }
+        public double? MaxCrDebt { get; set; }
+        public int? DepGrpAcc { get; set; }
+        public DateTime? AssetDate { get; set; }
+        public int? Branch { get; set; }
+        public Guid? ParentGuid { get; set; }
+        public Guid? DepAccGuid { get; set; }
+        public Guid? DepGrpAccGuid { get; set; }
+        public string? TxtFld1 { get; set; }
+        public string? TxtFld2 { get; set; }
+        public string? TxtFld3 { get; set; }
+        public string? CmbFld1 { get; set; }
+        public string? CmbFld2 { get; set; }
+        public string? CmbFld3 { get; set; }
+        public string? CmbFld4 { get; set; }
+        public string? CmbFld5 { get; set; }
+        public string? CmbFld6 { get; set; }
+        public int? Flag { get; set; }
+        public string? InActCase { get; set; }
+        public Guid? CostGuid { get; set; }
+        public Guid? DelegateGuid { get; set; }
+        public int? SecretDegree { get; set; }
+        public double? OperateRate { get; set; }
+        public string? Notes2 { get; set; }
+        public int? Period { get; set; }
+        public string? Website { get; set; }
+        public Guid? EmpGuid { get; set; }
+        public Guid? CarGuid { get; set; }
+        public Guid? TrailerGuid { get; set; }
+        public Guid? WorkClassGuid { get; set; }
+        public bool? Asset { get; set; }
+        public Guid? AssetStateGuid { get; set; }
+        public DateTime? LastMatchDate { get; set; }
+        public double? UnPostedDebit { get; set; }
+        public double? UnPostedCredit { get; set; }
+        public string? Ibanno { get; set; }
+        public string? BankAccNo { get; set; }
+        public Guid? DiscGuid { get; set; }
+        public Guid? AddGuid { get; set; }
+        public string? TaxNo { get; set; }
+        public DateTime? ActDate { get; set; }
+        public double? ScrapValue { get; set; }
+        public string? CountryCode { get; set; }
+        public string? Governate { get; set; }
+        public string? RegionCity { get; set; }
+        public string? Street { get; set; }
+        public string? BuildingNumber { get; set; }
+        public string? PostalCode { get; set; }
+        public string? FloorNo { get; set; }
+        public string? LandMark { get; set; }
+        public string? AdditionalInformation { get; set; }
+        public string? Room { get; set; }
+        public string? ReceiverType { get; set; }
+        public string? Gln { get; set; }
+        public string? CityName { get; set; }
+        public string? Province { get; set; }
+        public string? District { get; set; }
+        public string? StreetName { get; set; }
+        public string? AdditionalStreetName { get; set; }
+        public string? AdditionalNumber { get; set; }
+        public string? SchemaldType { get; set; }
+        public string? SchemaldValue { get; set; }
+        public string? TaxName { get; set; }
+    }
+}
